@@ -1,0 +1,147 @@
+{
+  "shelf": "shelf/wallet-v5",
+  "kernel_wasm": "artifacts/kernel.wasm",
+  "board_wasm": "artifacts/board.wasm",
+  "wallet_wasm": "artifacts/wallet.wasm",
+  "factory_wasm": "artifacts/factory.wasm",
+  "wallet_day_seconds": 600,
+  "board": {
+    "reveal_delay_blocks": 40,
+    "min_reveal_gas_tgas": 500,
+    "reveal_bond_near": "0.05",
+    "grace_seconds": 120,
+    "stale_blocks": 200
+  },
+  "bounties": [
+    {
+      "key": "receivers",
+      "claim": "Wallet.Claim.AllowedReceiversOnly",
+      "counter_claim": "Wallet.Claim.Refute.AllowedReceiversOnly",
+      "title": "Whatever an agent sends, in any order, the wallet only ever pays allowlisted receivers",
+      "reward_near": "5",
+      "deadline_minutes": 1440,
+      "headline": true
+    },
+    {
+      "key": "slidingday",
+      "claim": "Wallet.Claim.SlidingDayCap",
+      "counter_claim": "Wallet.Claim.Refute.SlidingDayCap",
+      "title": "Within any stretch shorter than a day, the wallet pays out at most one day's cap",
+      "reward_near": "3",
+      "deadline_minutes": 1440
+    },
+    {
+      "key": "slidingtwice",
+      "claim": "Wallet.Claim.SlidingTwiceCap",
+      "counter_claim": "Wallet.Claim.Refute.SlidingTwiceCap",
+      "title": "Within any stretch shorter than a day, the wallet pays out at most twice the daily cap",
+      "reward_near": "2",
+      "escrow_near": "10",
+      "deadline_minutes": 1440
+    },
+    {
+      "key": "nonce",
+      "claim": "Wallet.Claim.NonceCountsPayments",
+      "counter_claim": "Wallet.Claim.Refute.NonceCountsPayments",
+      "title": "The nonce counts the payments the wallet made, exactly",
+      "reward_near": "2",
+      "deadline_minutes": 1440
+    },
+    {
+      "key": "pertx",
+      "claim": "Wallet.Claim.PerTxCapAlways",
+      "counter_claim": "Wallet.Claim.Refute.PerTxCapAlways",
+      "title": "Every payment the wallet ever makes is within the per-payment cap",
+      "reward_near": "1",
+      "deadline_minutes": 60,
+      "unclaimed": true
+    }
+  ],
+  "couriers": [
+    {
+      "account": "opus-agent",
+      "model": "opus",
+      "solutions": {
+        "Wallet.Claim.AllowedReceiversOnly": "evidence/agent/AllowedReceiversOnly-opus",
+        "Wallet.Claim.SlidingTwiceCap": "evidence/agent/SlidingTwiceCap-opus"
+      }
+    },
+    {
+      "account": "sonnet-agent",
+      "model": "sonnet",
+      "live_solve": "Wallet.Claim.Refute.SlidingDayCap",
+      "solutions": {
+        "Wallet.Claim.AllowedReceiversOnly": "evidence/agent/AllowedReceiversOnly-sonnet",
+        "Wallet.Claim.NonceCountsPayments": "evidence/agent/NonceCountsPayments-sonnet",
+        "Wallet.Claim.Refute.SlidingDayCap": "evidence/agent/Refute.SlidingDayCap-sonnet",
+        "Wallet.Claim.SlidingTwiceCap": "evidence/agent/SlidingTwiceCap-sonnet"
+      }
+    }
+  ],
+  "cheats": [
+    {
+      "name": "viaSorry",
+      "delta": "cheats/deltas/viaSorry.delta.ndjson",
+      "expect": "sorryAx",
+      "story": "the proof is `sorry`"
+    },
+    {
+      "name": "viaAxiom",
+      "delta": "cheats/deltas/viaAxiom.delta.ndjson",
+      "expect": "axiom_in_delta",
+      "story": "a private axiom `magic : False`"
+    },
+    {
+      "name": "fakePropext",
+      "delta": "cheats/deltas/fakePropext.delta.ndjson",
+      "expect": "redefines_base_name:propext",
+      "story": "redeclares the shelf axiom `propext` as `False`"
+    },
+    {
+      "name": "twinPropext",
+      "delta": "cheats/deltas/twinPropext.delta.ndjson",
+      "expect": "axiom_in_delta:axiom propext",
+      "story": "the same, under a fresh name spelling `propext`"
+    },
+    {
+      "name": "swapPolicy",
+      "delta": "cheats/deltas/swapPolicy.delta.ndjson",
+      "expect": "redefines_base_name:Wallet.step",
+      "story": "swaps in a different wallet `step` function"
+    },
+    {
+      "name": "weaker",
+      "delta": "cheats/deltas/weaker.delta.ndjson",
+      "expect": "statement_mismatch",
+      "story": "a true theorem with a different statement"
+    },
+    {
+      "name": "noRequests",
+      "delta": "cheats/deltas/noRequests.delta.ndjson",
+      "expect": "statement_mismatch",
+      "story": "proves it for the empty request list only"
+    },
+    {
+      "name": "illTyped",
+      "delta": "cheats/deltas/illTyped.delta.ndjson",
+      "expect": "kernel_failed",
+      "story": "a real proof with its last step forged"
+    }
+  ],
+  "wallet_v2_wasm": "artifacts/wallet-v2.wasm",
+  "fix": {
+    "claim": "Wallet.Claim.V2.SlidingDayCap",
+    "counter_claim": "Wallet.Claim.V2.Refute.SlidingDayCap",
+    "title": "v2: within any stretch shorter than a day, the wallet pays out at most one day's cap",
+    "reward_near": "3",
+    "escrow_near": "10",
+    "deadline_minutes": 1440,
+    "courier": {
+      "account": "opus-agent",
+      "model": "opus",
+      "solutions": {
+        "Wallet.Claim.V2.SlidingDayCap": "evidence/agent/V2.SlidingDayCap-opus"
+      }
+    }
+  }
+}

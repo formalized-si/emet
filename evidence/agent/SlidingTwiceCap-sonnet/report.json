@@ -1,0 +1,115 @@
+{
+  "claim": "Wallet.Claim.SlidingTwiceCap",
+  "shelf": "shelf/wallet-v4",
+  "started": "2026-11-08T22:35:15Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "claude-code",
+    "exit": 0,
+    "seconds": 292.9,
+    "final": "DONE \u2014 `Solution.proof` compiles with no errors or `sorry`, and `./measure.sh` reports OK at a 388,215-byte delta (limit 400,000).\n\nI did not run an explicit axiom check, but the file has no `sorry`, `axiom`, `omega` or `native_decide`.",
+    "cost_usd": 0.8457659000000003,
+    "turns": 62,
+    "permission_denials": 5,
+    "stderr_tail": "",
+    "model": "sonnet"
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext]\nSolution.proof : Wallet.Claim.SlidingTwiceCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec",
+    "delta_bytes": 388215,
+    "delta_sha256": "bf84af2c58a4bb54c306d7ba2fbe8d64cec891b43370f9414e604b020908cd5a",
+    "decls": 67,
+    "heaviest": [
+      {
+        "name": "Solution.step_spec",
+        "kind": "thm",
+        "bytes": 78933
+      },
+      {
+        "name": "Solution.L1",
+        "kind": "thm",
+        "bytes": 61225
+      },
+      {
+        "name": "Solution.L2",
+        "kind": "thm",
+        "bytes": 46965
+      },
+      {
+        "name": "Solution.roll_spec",
+        "kind": "thm",
+        "bytes": 14730
+      },
+      {
+        "name": "Solution.noexp",
+        "kind": "thm",
+        "bytes": 12692
+      },
+      {
+        "name": "Solution.sub_nat",
+        "kind": "thm",
+        "bytes": 12675
+      },
+      {
+        "name": "Solution.and_dec1",
+        "kind": "thm",
+        "bytes": 11304
+      },
+      {
+        "name": "Solution.sum_deny",
+        "kind": "thm",
+        "bytes": 9057
+      },
+      {
+        "name": "Prod.noConfusion",
+        "kind": "def",
+        "bytes": 8675
+      },
+      {
+        "name": "Nat.mul_comm._f",
+        "kind": "def",
+        "bytes": 8063
+      },
+      {
+        "name": "Nat.succ_mul",
+        "kind": "thm",
+        "bytes": 8051
+      },
+      {
+        "name": "Solution.dn",
+        "kind": "thm",
+        "bytes": 6679
+      },
+      {
+        "name": "Solution.add_nat",
+        "kind": "thm",
+        "bytes": 6070
+      },
+      {
+        "name": "Solution.run_cons",
+        "kind": "thm",
+        "bytes": 5351
+      },
+      {
+        "name": "Nat.add_left_cancel",
+        "kind": "thm",
+        "bytes": 5008
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

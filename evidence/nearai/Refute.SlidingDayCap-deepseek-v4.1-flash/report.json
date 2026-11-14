@@ -1,0 +1,127 @@
+{
+  "claim": "Wallet.Claim.Refute.SlidingDayCap",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-11T18:15:38Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 583.0,
+    "turns": 19,
+    "tool_calls": 21,
+    "solution_writes": 5,
+    "repair_rounds": 4,
+    "lean_runs": 6,
+    "lean_failures": 4,
+    "prompt_tokens": 169202,
+    "completion_tokens": 18222,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "Compiles cleanly, no axioms used, and the exported delta is 59,298 bytes (well under the 400,000 budget).\n\nDONE",
+    "cost_usd": 0.0726,
+    "signed_responses": 19,
+    "responses": 19,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' does not depend on any axioms\nSolution.proof : Wallet.Claim.Refute.SlidingDayCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 59298,
+    "delta_sha256": "5fb4311b21f40a2fe4fb64201680736a6ea5a83d7a54789c9e455e357173979f",
+    "decls": 16,
+    "heaviest": [
+      {
+        "name": "Solution.mem_req",
+        "kind": "thm",
+        "bytes": 33496
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "List.Mem.casesOn",
+        "kind": "def",
+        "bytes": 3346
+      },
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 3269
+      },
+      {
+        "name": "List.cons.noConfusion",
+        "kind": "def",
+        "bytes": 3175
+      },
+      {
+        "name": "List.noConfusionType",
+        "kind": "def",
+        "bytes": 3161
+      },
+      {
+        "name": "instDecidableNot._proof_1",
+        "kind": "thm",
+        "bytes": 1388
+      },
+      {
+        "name": "Solution.p",
+        "kind": "def",
+        "bytes": 1073
+      },
+      {
+        "name": "List.ctorIdx",
+        "kind": "def",
+        "bytes": 1005
+      },
+      {
+        "name": "Solution.reqs",
+        "kind": "def",
+        "bytes": 752
+      },
+      {
+        "name": "instDecidableNot",
+        "kind": "def",
+        "bytes": 751
+      },
+      {
+        "name": "Solution.run_res",
+        "kind": "thm",
+        "bytes": 688
+      },
+      {
+        "name": "UInt8.instOfNat",
+        "kind": "def",
+        "bytes": 609
+      },
+      {
+        "name": "UInt8.ofNat",
+        "kind": "def",
+        "bytes": 437
+      },
+      {
+        "name": "Solution.s",
+        "kind": "def",
+        "bytes": 372
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

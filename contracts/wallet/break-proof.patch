@@ -1,0 +1,11 @@
+--- a/Policy/Core.lean	2026-11-05 22:47:23.531848855 +0000
++++ b/Policy/Core.lean	2026-11-05 22:47:23.533848912 +0000
+@@ -90,7 +90,7 @@
+ def step (p : Policy) (s : State) (now : UInt64) (to : Account) (amount : UInt64) :
+     Verdict × State :=
+   if isAllowed to p.allowed then
+-    if p.perTxCap < amount then (.denyPerTx, s)
++    if p.perTxCap + p.perTxCap < amount then (.denyPerTx, s)
+     else
+       let r := rollDay p s now
+       if U64MAX - r.spentTotal < amount || U64MAX - r.spentToday < amount ||

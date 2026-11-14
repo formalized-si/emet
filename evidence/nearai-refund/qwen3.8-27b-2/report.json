@@ -1,0 +1,79 @@
+{
+  "case": "cases/intents-refund",
+  "upstream_revision": "35044fd1795b0de9d1ac269c6aa28a0d6a7efdfa",
+  "upstream_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+  "started": "2026-11-12T09:38:52Z",
+  "max_rounds": 3,
+  "no_axioms_asked": false,
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "Qwen/Qwen3.8-27B",
+    "model_owner": "nearai",
+    "seconds": 808.9,
+    "turns": 5,
+    "tool_calls": 3,
+    "solution_writes": 0,
+    "repair_rounds": 0,
+    "lean_runs": 0,
+    "lean_failures": 0,
+    "lost_responses": 0,
+    "prompt_tokens": 21394,
+    "completion_tokens": 40501,
+    "usd_per_token": {
+      "prompt": 4e-08,
+      "completion": 1.35e-06
+    },
+    "final": "accepted in round 2",
+    "cost_usd": 0.0555,
+    "signed_responses": 5,
+    "responses": 5,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "expression": "requested_refund.min(*deposited).min(balance_left)",
+      "source_sha256": "63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f",
+      "claim": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+      "patch": "bound",
+      "solution": "import RefundCase\n\nnamespace Solution\n\ntheorem proof : Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct := by\n  intro a _\n  constructor\n  \u00b7 exact Nat.le_trans (Refund.min_le_first _ _) (Refund.min_le_first _ _)\n  \u00b7 constructor\n    \u00b7 exact Nat.le_trans (Refund.min_le_first _ _) (Refund.min_le_second _ _)\n    \u00b7 constructor\n      \u00b7 exact Refund.min_le_second _ _\n      \u00b7 cases Nat.le_total (min a.requested a.deposited) a.balance with\n        | inl hmn =>\n          have hmn_eq : min (min a.requested a.deposited) a.balance = min a.requested a.deposited := Nat.min_eq_left hmn\n          cases Nat.le_total a.requested a.deposited with\n          | inl hrd =>\n            have hmn_eq_R : min a.requested a.deposited = a.requested := Nat.min_eq_left hrd\n            left\n            rw [hmn_eq, hmn_eq_R]\n          | inr hDR =>\n            have hmn_eq_D : min a.requested a.deposited = a.deposited := Refund.min_right hDR\n            right\n            left\n            rw [hmn_eq, hmn_eq_D]\n        | inr hBmn =>\n          have hB_eq : min (min a.requested a.deposited) a.balance = a.balance := Refund.min_right hBmn\n          right\n          right\n          rw [hB_eq]\n\nend Solution",
+      "proof": "rejected",
+      "error": "Bound 2 candidates to one unchanged upstream context\n\u2714 [2/6] Built RefundCase (160ms)\n\u2716 [4/6] Building Solution (148ms)\ntrace: .> LEAN_PATH=./cases/intents-refund/.lake/build/lib/lean ~/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean ./cases/intents-refund/Solution.lean -o ./cases/intents-refund/.lake/build/lib/lean/Solution.olean -i ./cases/intents-refund/.lake/build/lib/lean/Solution.ilean -c ./cases/intents-refund/.lake/build/ir/Solution.c --setup ./cases/intents-refund/.lake/build/ir/Solution.setup.json --json\nerror: Solution.lean:20:16: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  min (min a.requested a.deposited) a.balance\nin the target expression\n  Refund.eval a Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.expression = a.requested\n\ncase right.right.right.inl.inl\na : Refund.Args\na\u271d : Refund.InRange a\nhmn : min a.requested a.deposited \u2264 a.balance\nhmn_eq : min (min a.requested a.deposited) a.balance = min a.requested a.deposited\nhrd : a.requested \u2264 a.deposited\nhmn_eq_R : min a.requested a.deposited = a.requested\n\u22a2 Refund.eval a Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.expression = a.requested\nerror: Solution.lean:25:16: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  min (min a.requested a.deposited) a.balance\nin the target expression\n  Refund.eval a Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.expression = a.deposited\n\ncase right.right.right.inl.inr\na : Refund.Args\na\u271d : Refund.InRange a\nhmn : min a.requested a.deposited \u2264 a.balance\nhmn_eq : min (min a.requested a.deposited) a.balance = min a.requested a.deposited\nhDR : a.deposited \u2264 a.requested\nhmn_eq_D : min a.requested a.deposited = a.deposited\n\u22a2 Refund.eval a Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.expression = a.deposited\nerror: Solution.lean:30:14: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  min (min a.requested a.deposited) a.balance\nin the target expression\n  Refund.eval a Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.expression = a.balance\n\ncase right.right.right.inr\na : Refund.Args\na\u271d : Refund.InRange a\nhBmn : a.balance \u2264 min a.requested a.deposited\nhB_eq : min (min a.requested a.deposited) a.balance = a.balance\n\u22a2 Refund.eval a Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.expression = a.balance\nSome required targets logged failures:\n- Solution\nerror: build failed"
+    },
+    {
+      "round": 2,
+      "expression": "requested_refund.min(*deposited).min(balance_left)",
+      "source_sha256": "63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f",
+      "claim": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+      "patch": "bound",
+      "solution": "import RefundCase\n\nnamespace Solution\n\ntheorem proof : Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct := by\n  intro a _\n  constructor\n  \u00b7 exact Nat.le_trans (Refund.min_le_first _ _) (Refund.min_le_first _ _)\n  \u00b7 constructor\n    \u00b7 exact Nat.le_trans (Refund.min_le_first _ _) (Refund.min_le_second _ _)\n    \u00b7 constructor\n      \u00b7 exact Refund.min_le_second _ _\n      \u00b7 cases Nat.le_total (min a.requested a.deposited) a.balance with\n        | inl hmn =>\n          have hmn_eq : min (min a.requested a.deposited) a.balance = min a.requested a.deposited :=\n            Nat.min_eq_left hmn\n          cases Nat.le_total a.requested a.deposited with\n          | inl hrd =>\n            have hmn_eq_R : min a.requested a.deposited = a.requested := Nat.min_eq_left hrd\n            left\n            change (min (min a.requested a.deposited) a.balance = a.requested)\n            rw [hmn_eq, hmn_eq_R]\n          | inr hDR =>\n            have hmn_eq_D : min a.requested a.deposited = a.deposited := Refund.min_right hDR\n            right\n            left\n            change (min (min a.requested a.deposited) a.balance = a.deposited)\n            rw [hmn_eq, hmn_eq_D]\n        | inr hBmn =>\n          have hB_eq : min (min a.requested a.deposited) a.balance = a.balance := Refund.min_right hBmn\n          right\n          right\n          change (min (min a.requested a.deposited) a.balance = a.balance)\n          rw [hB_eq]\n\nend Solution",
+      "proof": "accepted",
+      "proof_bytes": 16663,
+      "proof_sha256": "5f05af44fef5070096acf746994000f9630a5a94d95783b69fbd8dbe4339dc8e",
+      "base_sha256": "9463928eb2d59fdb321e6e35f1ec7a33ad3d73e9b5389b78ed2ce21fa840e44e",
+      "axioms": [],
+      "axioms_line": "'Solution.proof' does not depend on any axioms"
+    }
+  ],
+  "accepted": true,
+  "expression": "requested_refund.min(*deposited).min(balance_left)",
+  "source_sha256": "63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f",
+  "claim": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+  "proof_bytes": 16663,
+  "proof_sha256": "0708a80b95f860c3c2f4312cd6b8f2908d3c73af36de40d262fe7cbf067a3f93",
+  "base_sha256": "19df256217ece38d8d52bc4918f7cfecfaf44c826b67443676e7051720c7e80b",
+  "axioms": [],
+  "axioms_line": "'Solution.proof' does not depend on any axioms",
+  "job": {
+    "command": "python3 cases/intents-refund/propose.py --candidate evidence/nearai-refund/qwen3.8-27b-2/candidate.rs --proof evidence/nearai-refund/qwen3.8-27b-2/Solution.lean --side proof --out run-output/nearai-refund/qwen3.8-27b-2",
+    "started": "2026-11-13T18:28:21Z",
+    "wall_seconds": 171.5,
+    "export_is_the_round's": false,
+    "code_sha256": {
+      "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+      "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+      "gate": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d"
+    }
+  }
+}

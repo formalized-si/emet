@@ -1,0 +1,101 @@
+{
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext]\nSolution.proof : Wallet.Claim.AllowedReceiversOnly\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 198853,
+    "delta_sha256": "64b5368c17e7f12d333a4c43317f0a11f9166c348403c9e3bb278878c000d27a",
+    "decls": 43,
+    "heaviest": [
+      {
+        "name": "Solution.main._f",
+        "kind": "def",
+        "bytes": 40086
+      },
+      {
+        "name": "Solution.main.match_1_1",
+        "kind": "def",
+        "bytes": 13267
+      },
+      {
+        "name": "Bool.or_eq_true",
+        "kind": "thm",
+        "bytes": 11957
+      },
+      {
+        "name": "Solution.run_snd",
+        "kind": "thm",
+        "bytes": 11314
+      },
+      {
+        "name": "Bool.and_eq_true",
+        "kind": "thm",
+        "bytes": 10995
+      },
+      {
+        "name": "_private.Init.Data.List.Lemmas.0.List.not_mem_nil.match_1_1",
+        "kind": "def",
+        "bytes": 9860
+      },
+      {
+        "name": "Solution.isAllowed_mem._f",
+        "kind": "def",
+        "bytes": 9812
+      },
+      {
+        "name": "Solution.accEq_eq._f",
+        "kind": "def",
+        "bytes": 9460
+      },
+      {
+        "name": "Solution.accEq_eq.match_1_1",
+        "kind": "def",
+        "bytes": 9403
+      },
+      {
+        "name": "Solution.step_allow",
+        "kind": "thm",
+        "bytes": 7794
+      },
+      {
+        "name": "instDecidableIff.match_1",
+        "kind": "def",
+        "bytes": 7564
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "instDecidableOr.match_3",
+        "kind": "def",
+        "bytes": 5153
+      },
+      {
+        "name": "Solution.isAllowed_mem.match_1_1",
+        "kind": "def",
+        "bytes": 4455
+      },
+      {
+        "name": "instDecidableIff._proof_1",
+        "kind": "thm",
+        "bytes": 4321
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

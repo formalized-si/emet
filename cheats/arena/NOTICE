@@ -1,0 +1,6 @@
+The files under bad/ and good/ are test exports of the Lean Kernel Arena
+(https://github.com/leanprover/lean-kernel-arena, commit 6c2d82164f1a2b1ac94aee62290fe78a3c3853fb).
+They come unchanged from https://arena.lean-lang.org/lean-arena-tests.tar.gz. The license is Apache-2.0,
+and the license text is licenses/Lean4-LICENSE. MANIFEST.json has the sha256 of the tarball and of each file.
+The files under built/ are this repository's own exports of the arena's tests/bugs/rec-proof-irrel.lean.
+cheats/ForgedRec.lean keeps that file, and tools/check_arena.sh makes the exports.

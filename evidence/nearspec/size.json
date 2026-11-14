@@ -1,0 +1,39 @@
+{
+ "arena": "https://github.com/ilblackdragon/near-proof-arena",
+ "arena_commit": "7358a938",
+ "lean": "4.35.0 (the Arena pins 4.34.1)",
+ "relation": {
+  "constant": "NearSpec.TransferV1.NearRelation",
+  "export_bytes": 2957476,
+  "declarations_as_the_kernel_counts_them": 1595,
+  "sha256": "d184748d3f6a670ea6bc14675801346c14e5e85abce5b73ecb2f33f431aa5bb8"
+ },
+ "sealed_environment": {
+  "roots": [
+   "NearSpec.TransferV1.NearRelation",
+   "Emet.Arena.OutputsUnique",
+   "Emet.Arena.RelationInDomain"
+  ],
+  "export_bytes": 2961932,
+  "declarations_as_the_kernel_counts_them": 1600,
+  "sha256": "3accca2b4aafcc0f340fe49e8802feb99307efa3280490dda3e69d393835baaf"
+ },
+ "axioms_lean_reports": [
+  "'Emet.Arena.Proofs.outputs_unique' depends on axioms: [propext, Classical.choice, Quot.sound]",
+  "'Emet.Arena.Proofs.relation_in_domain' depends on axioms: [propext, Classical.choice, Quot.sound]"
+ ],
+ "proofs": {
+  "outputs_unique": {
+   "file": "evidence/nearspec/outputs_unique.delta.ndjson",
+   "bytes": 21131,
+   "sha256": "b1497f1ab7eb3d91ea992f00c9a226cfaf180a4e7b56f1f5f9710aab08102683",
+   "declarations": 6
+  },
+  "relation_in_domain": {
+   "file": "evidence/nearspec/relation_in_domain.delta.ndjson",
+   "bytes": 16603,
+   "sha256": "813c299f6e40143ee84208f2ee75d7844f3fad171606a139309a3b5c32ef6545",
+   "declarations": 2
+  }
+ }
+}

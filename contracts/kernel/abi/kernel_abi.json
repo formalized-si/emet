@@ -1,0 +1,608 @@
+{
+  "schema_version": "0.4.0",
+  "metadata": {
+    "name": "kernel",
+    "version": "0.1.0",
+    "build": {
+      "compiler": "rustc 1.99.1",
+      "builder": "cargo-near cargo-near-build 0.11.5"
+    },
+    "wasm_hash": "7sZPtZmkuPf68ZGnjzHg287rdrBPFRVdAWVx7wfr18By"
+  },
+  "body": {
+    "functions": [
+      {
+        "name": "check",
+        "doc": " Same as `check_result` but panics with `rejected:<reason>` on any rejection.",
+        "kind": "view",
+        "params": {
+          "serialization_type": "json",
+          "args": [
+            {
+              "name": "theorem_name",
+              "type_schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "delta",
+              "type_schema": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "$ref": "#/definitions/CheckResult"
+          }
+        }
+      },
+      {
+        "name": "check_base_range",
+        "doc": " Kernel-check base declarations [from, to) (insertion order). Anyone may advance the\n seal; `from` must equal the saved progress. The base is sealed after the last range.",
+        "kind": "call",
+        "params": {
+          "serialization_type": "json",
+          "args": [
+            {
+              "name": "from",
+              "type_schema": {
+                "type": "integer",
+                "format": "uint32",
+                "minimum": 0.0
+              }
+            },
+            {
+              "name": "to",
+              "type_schema": {
+                "type": "integer",
+                "format": "uint32",
+                "minimum": 0.0
+              }
+            }
+          ]
+        },
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "$ref": "#/definitions/RangeResult"
+          }
+        }
+      },
+      {
+        "name": "check_borsh",
+        "doc": " v1 frozen interface (kernel_stub `check_borsh`): Borsh args, JSON Verdict.",
+        "kind": "view",
+        "params": {
+          "serialization_type": "borsh",
+          "args": [
+            {
+              "name": "statement_name",
+              "type_schema": {
+                "declaration": "String",
+                "definitions": {
+                  "String": {
+                    "Sequence": {
+                      "length_width": 4,
+                      "length_range": {
+                        "start": 0,
+                        "end": 4294967295
+                      },
+                      "elements": "u8"
+                    }
+                  },
+                  "u8": {
+                    "Primitive": 1
+                  }
+                }
+              }
+            },
+            {
+              "name": "export",
+              "type_schema": {
+                "declaration": "Vec<u8>",
+                "definitions": {
+                  "Vec<u8>": {
+                    "Sequence": {
+                      "length_width": 4,
+                      "length_range": {
+                        "start": 0,
+                        "end": 4294967295
+                      },
+                      "elements": "u8"
+                    }
+                  },
+                  "u8": {
+                    "Primitive": 1
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "$ref": "#/definitions/Verdict"
+          }
+        }
+      },
+      {
+        "name": "check_result",
+        "doc": " Bounty v2 interface (contracts/README.md). JSON args. Pre-kernel rejections return\n `ok:false` + `reason`; kernel type errors panic (the bounty records `kernel_failed`).",
+        "kind": "view",
+        "params": {
+          "serialization_type": "json",
+          "args": [
+            {
+              "name": "theorem_name",
+              "type_schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "delta",
+              "type_schema": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "$ref": "#/definitions/CheckResult"
+          }
+        }
+      },
+      {
+        "name": "check_result_raw",
+        "doc": " Same, raw input `<theorem_name>\\n<delta bytes>` (no JSON escaping; recommended for the bounty).",
+        "kind": "view",
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "$ref": "#/definitions/CheckResult"
+          }
+        }
+      },
+      {
+        "name": "contract_source_metadata",
+        "kind": "view"
+      },
+      {
+        "name": "dry_run",
+        "doc": " View-safe dry run (free RPC view): same checks and reasons, gas fields 0.",
+        "kind": "view",
+        "params": {
+          "serialization_type": "json",
+          "args": [
+            {
+              "name": "theorem_name",
+              "type_schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "delta",
+              "type_schema": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "$ref": "#/definitions/CheckResult"
+          }
+        }
+      },
+      {
+        "name": "init",
+        "kind": "call",
+        "modifiers": [
+          "init"
+        ],
+        "params": {
+          "serialization_type": "json",
+          "args": [
+            {
+              "name": "owner",
+              "type_schema": {
+                "description": "NEAR Account Identifier.\n\nThis is a unique, syntactically valid, human-readable account identifier on the NEAR network.\n\n[See the crate-level docs for information about validation.](index.html#account-id-rules)\n\nAlso see [Error kind precedence](AccountId#error-kind-precedence).\n\n## Examples\n\n``` use near_account_id::AccountId;\n\nlet alice: AccountId = \"alice.near\".parse().unwrap();\n\nassert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```",
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "kernel_name",
+        "kind": "view",
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "name": "load_base_chunk",
+        "doc": " Owner only. Raw input (no JSON): `<chunk_idx> [raw|lz4|zlib]\\n<payload>`. The decoded\n payload must be whole NDJSON lines; chunk 0 starts with the meta line. Returns decoded base bytes so far.",
+        "kind": "call",
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          }
+        }
+      },
+      {
+        "name": "seal_base",
+        "doc": " Owner only. Pins the uploaded base: checks its sha256 and declaration count and that it\n contains no axiom besides propext / Classical.choice / Quot.sound (parse only, no kernel).",
+        "kind": "call",
+        "params": {
+          "serialization_type": "json",
+          "args": [
+            {
+              "name": "expected_sha256",
+              "type_schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "expected_decl_count",
+              "type_schema": {
+                "type": "integer",
+                "format": "uint32",
+                "minimum": 0.0
+              }
+            }
+          ]
+        },
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "$ref": "#/definitions/Status"
+          }
+        }
+      },
+      {
+        "name": "statement_of",
+        "doc": " View: pretty-printed declaration of `theorem_name` in base + delta (no kernel check).\n For a claim (base Prop definition) this prints the claim with its body, which is the\n statement a bounty is about. Cheap alternative for exact comparison: `statement_hash`\n in `check_result` (sha256 of nanoda's debug print of the theorem type).",
+        "kind": "view",
+        "params": {
+          "serialization_type": "json",
+          "args": [
+            {
+              "name": "theorem_name",
+              "type_schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "delta",
+              "type_schema": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "name": "status",
+        "kind": "view",
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "$ref": "#/definitions/Status"
+          }
+        }
+      }
+    ],
+    "root_schema": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "String",
+      "type": "string",
+      "definitions": {
+        "CheckResult": {
+          "type": "object",
+          "required": [
+            "axioms",
+            "decls_checked",
+            "delta_bytes",
+            "gas_analyze",
+            "gas_kernel",
+            "gas_parse",
+            "gas_read",
+            "new_decls",
+            "ok",
+            "theorem"
+          ],
+          "properties": {
+            "axioms": {
+              "description": "Axioms the theorem transitively depends on (all from the sealed base).",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "base_hash": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "decls_checked": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "delta_bytes": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "gas": {
+              "description": "total gas used by the call (string; absent in views)",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "gas_analyze": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "gas_hint": {
+              "description": "same as `gas` (kept for the lead's field name)",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "gas_kernel": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "gas_parse": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "gas_read": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "mode": {
+              "description": "\"claim\" (statement_name is a base Prop definition; the proof theorem's type must be that constant) or \"theorem\" (statement_name names the new theorem in the delta).",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "new_decls": {
+              "description": "`kind name` of each declaration the delta adds.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "ok": {
+              "type": "boolean"
+            },
+            "proof_theorem": {
+              "description": "The delta theorem that was checked.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "reason": {
+              "description": "Why the delta was rejected (None when ok).",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "statement": {
+              "description": "Pretty-printed statement (nanoda pretty printer).",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "statement_hash": {
+              "description": "hex sha256 of nanoda's debug print of the theorem type; pins the statement for bounties.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "theorem": {
+              "type": "string"
+            }
+          }
+        },
+        "RangeResult": {
+          "type": "object",
+          "required": [
+            "base_decls",
+            "checked_from",
+            "checked_to",
+            "gas_check",
+            "gas_parse",
+            "gas_read",
+            "sealed"
+          ],
+          "properties": {
+            "base_decls": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "checked_from": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "checked_to": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "gas_check": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "gas_parse": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "gas_read": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "sealed": {
+              "type": "boolean"
+            }
+          }
+        },
+        "Status": {
+          "type": "object",
+          "required": [
+            "axioms_in_base",
+            "base_bytes",
+            "base_decls",
+            "checked_upto",
+            "chunks",
+            "owner",
+            "sealed",
+            "stored_bytes"
+          ],
+          "properties": {
+            "axioms_in_base": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "base_bytes": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "base_decls": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "base_hash": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "checked_upto": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "chunks": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "owner": {
+              "description": "NEAR Account Identifier.\n\nThis is a unique, syntactically valid, human-readable account identifier on the NEAR network.\n\n[See the crate-level docs for information about validation.](index.html#account-id-rules)\n\nAlso see [Error kind precedence](AccountId#error-kind-precedence).\n\n## Examples\n\n``` use near_account_id::AccountId;\n\nlet alice: AccountId = \"alice.near\".parse().unwrap();\n\nassert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```",
+              "type": "string"
+            },
+            "sealed": {
+              "type": "boolean"
+            },
+            "stored_bytes": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            }
+          }
+        },
+        "Verdict": {
+          "description": "Frozen bounty interface (contracts/lean_check, kernel_stub): externally tagged JSON.",
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "Accepted"
+              ],
+              "properties": {
+                "Accepted": {
+                  "type": "object",
+                  "required": [
+                    "axioms",
+                    "decls",
+                    "gas"
+                  ],
+                  "properties": {
+                    "axioms": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "decls": {
+                      "type": "integer",
+                      "format": "uint32",
+                      "minimum": 0.0
+                    },
+                    "gas": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "Rejected"
+              ],
+              "properties": {
+                "Rejected": {
+                  "type": "object",
+                  "required": [
+                    "reason"
+                  ],
+                  "properties": {
+                    "reason": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
+    }
+  }
+}

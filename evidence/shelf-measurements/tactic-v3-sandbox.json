@@ -1,0 +1,297 @@
+{
+  "manifest": {
+    "base_sha256": "116fab3453766449486aa65c0cfb842fd295178d084d422cd8422bbb997a2de1",
+    "base_bytes": 6120241,
+    "base_decls": 2243,
+    "codec": "lz4",
+    "chunks": [
+      "chunk-0000.bin",
+      "chunk-0001.bin",
+      "chunk-0002.bin",
+      "chunk-0003.bin",
+      "chunk-0004.bin",
+      "chunk-0005.bin",
+      "chunk-0006.bin",
+      "chunk-0007.bin",
+      "chunk-0008.bin",
+      "chunk-0009.bin",
+      "chunk-0010.bin",
+      "chunk-0011.bin",
+      "chunk-0012.bin"
+    ],
+    "stored_bytes": 1732105
+  },
+  "calls": [
+    {
+      "label": "upload chunk-0000.bin",
+      "ok": true,
+      "tgas": 19.268174395094
+    },
+    {
+      "label": "upload chunk-0001.bin",
+      "ok": true,
+      "tgas": 19.345987888634
+    },
+    {
+      "label": "upload chunk-0002.bin",
+      "ok": true,
+      "tgas": 18.844465218416
+    },
+    {
+      "label": "upload chunk-0003.bin",
+      "ok": true,
+      "tgas": 19.276141532012
+    },
+    {
+      "label": "upload chunk-0004.bin",
+      "ok": true,
+      "tgas": 19.048981878884
+    },
+    {
+      "label": "upload chunk-0005.bin",
+      "ok": true,
+      "tgas": 19.308975992549
+    },
+    {
+      "label": "upload chunk-0006.bin",
+      "ok": true,
+      "tgas": 19.281533434637
+    },
+    {
+      "label": "upload chunk-0007.bin",
+      "ok": true,
+      "tgas": 19.475278084097
+    },
+    {
+      "label": "upload chunk-0008.bin",
+      "ok": true,
+      "tgas": 19.2277568819
+    },
+    {
+      "label": "upload chunk-0009.bin",
+      "ok": true,
+      "tgas": 19.417685537114
+    },
+    {
+      "label": "upload chunk-0010.bin",
+      "ok": true,
+      "tgas": 19.325856972059
+    },
+    {
+      "label": "upload chunk-0011.bin",
+      "ok": true,
+      "tgas": 19.384867066496
+    },
+    {
+      "label": "upload chunk-0012.bin",
+      "ok": true,
+      "tgas": 14.869201124303
+    },
+    {
+      "label": "seal_base",
+      "ok": true,
+      "tgas": 847.456713230816
+    },
+    {
+      "label": "check_base_range 0..64",
+      "ok": true,
+      "tgas": 670.634546585598
+    },
+    {
+      "label": "check_base_range 64..192",
+      "ok": true,
+      "tgas": 694.622971455006
+    },
+    {
+      "label": "check_base_range 192..448",
+      "ok": true,
+      "tgas": 795.456390324279
+    },
+    {
+      "label": "check_base_range 448..704",
+      "ok": true,
+      "tgas": 790.779197711307
+    },
+    {
+      "label": "check_base_range 704..960",
+      "ok": true,
+      "tgas": 737.11357708533
+    },
+    {
+      "label": "check_base_range 960..1216",
+      "ok": true,
+      "tgas": 831.244919372787
+    },
+    {
+      "label": "check_base_range 1216..1472",
+      "ok": true,
+      "tgas": 818.418345630843
+    },
+    {
+      "label": "check_base_range 1472..1728",
+      "ok": false,
+      "tgas": 1001.198065866311
+    },
+    {
+      "label": "check_base_range 1472..1600",
+      "ok": true,
+      "tgas": 808.648788676983
+    },
+    {
+      "label": "check_base_range 1600..1856",
+      "ok": false,
+      "tgas": 1001.198065866311
+    },
+    {
+      "label": "check_base_range 1600..1728",
+      "ok": false,
+      "tgas": 1001.198065866311
+    },
+    {
+      "label": "check_base_range 1600..1664",
+      "ok": true,
+      "tgas": 811.345354189107
+    },
+    {
+      "label": "check_base_range 1664..1792",
+      "ok": false,
+      "tgas": 1001.198065866311
+    },
+    {
+      "label": "check_base_range 1664..1728",
+      "ok": true,
+      "tgas": 881.181886408671
+    },
+    {
+      "label": "check_base_range 1728..1856",
+      "ok": true,
+      "tgas": 920.486561357991
+    },
+    {
+      "label": "check_base_range 1856..2112",
+      "ok": false,
+      "tgas": 1001.198065866311
+    },
+    {
+      "label": "check_base_range 1856..1984",
+      "ok": true,
+      "tgas": 891.156702061143
+    },
+    {
+      "label": "check_base_range 1984..2240",
+      "ok": false,
+      "tgas": 1001.198065866311
+    },
+    {
+      "label": "check_base_range 1984..2112",
+      "ok": false,
+      "tgas": 1001.198065866311
+    },
+    {
+      "label": "check_base_range 1984..2048",
+      "ok": false,
+      "tgas": 1001.198065866311
+    },
+    {
+      "label": "check_base_range 1984..2016",
+      "ok": true,
+      "tgas": 892.787755769955
+    },
+    {
+      "label": "check_base_range 2016..2080",
+      "ok": true,
+      "tgas": 806.567839646031
+    },
+    {
+      "label": "check_base_range 2080..2208",
+      "ok": true,
+      "tgas": 777.732668976231
+    },
+    {
+      "label": "check_base_range 2208..2243",
+      "ok": true,
+      "tgas": 690.119253285513
+    },
+    {
+      "label": "check small-noBypassSequence",
+      "ok": true,
+      "tgas": 789.462552772758
+    },
+    {
+      "label": "check tactic-receiverGate",
+      "ok": true,
+      "tgas": 681.183679865529
+    },
+    {
+      "label": "check tactic-tightenSound",
+      "ok": false,
+      "tgas": 1038.952096726415
+    },
+    {
+      "label": "check tactic-noBypassSequence",
+      "ok": false,
+      "tgas": 1050.136893602759
+    }
+  ],
+  "cases": [
+    {
+      "label": "small-noBypassSequence",
+      "delta_bytes": 273273,
+      "ok_call": true,
+      "tgas": 789.462552772758,
+      "verdict_ok": true,
+      "reason": null,
+      "mode": "claim",
+      "proof_theorem": "Wallet.Small.noBypassSequence",
+      "decls_checked": 26,
+      "gas_read": 90480392191104,
+      "gas_parse": 583391191141971,
+      "gas_kernel": 74068205590239,
+      "statement_hash": "a5f108bd47c188a8c03609763953c599b3296cc82a09ac92c2fdb389c4d8f186"
+    },
+    {
+      "label": "tactic-receiverGate",
+      "delta_bytes": 35456,
+      "ok_call": true,
+      "tgas": 681.183679865529,
+      "verdict_ok": true,
+      "reason": null,
+      "mode": "claim",
+      "proof_theorem": "Wallet.Spec.receiverGate",
+      "decls_checked": 6,
+      "gas_read": 90284781129348,
+      "gas_parse": 568462459591755,
+      "gas_kernel": 9961122365043,
+      "statement_hash": "8c2ca3b57afd655dd22362f825d2edcff0bf4e540b621c8e40276ef2dbc2a1b1"
+    },
+    {
+      "label": "tactic-tightenSound",
+      "delta_bytes": 756294,
+      "ok_call": false,
+      "tgas": 1038.952096726415
+    },
+    {
+      "label": "tactic-noBypassSequence",
+      "delta_bytes": 980346,
+      "ok_call": false,
+      "tgas": 1050.136893602759
+    }
+  ],
+  "bootstrap_tgas": 13911.828377773785,
+  "bootstrap_seconds": 74.227,
+  "status": {
+    "owner": "test.near",
+    "chunks": 13,
+    "base_bytes": 6120241,
+    "stored_bytes": 1732037,
+    "base_hash": "116fab3453766449486aa65c0cfb842fd295178d084d422cd8422bbb997a2de1",
+    "base_decls": 2243,
+    "checked_upto": 2243,
+    "sealed": true,
+    "axioms_in_base": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  }
+}

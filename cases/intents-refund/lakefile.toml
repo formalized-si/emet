@@ -1,0 +1,11 @@
+name = "refund_case"
+defaultTargets = ["RefundCase", "LogBudget", "RefundProofs"]
+
+[[lean_lib]]
+name = "RefundCase"
+
+[[lean_lib]]
+name = "LogBudget"
+
+[[lean_lib]]
+name = "RefundProofs"

@@ -1,0 +1,106 @@
+{
+ "model": "z-ai/glm-5.3-flash",
+ "ok": true,
+ "checks": [
+  {
+   "check": "gateway: TDX quote v4, signed by a key certified under the Intel SGX Root CA; TD not in debug mode",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "gateway: report_data binds the signing key and the agent's nonce",
+   "ok": true,
+   "detail": "40599fb284f43953\u2026 || cf637c11b036ad42\u2026"
+  },
+  {
+   "check": "gateway: MRCONFIGID is the sha256 of app_compose",
+   "ok": true,
+   "detail": "877959253d2406f0\u2026"
+  },
+  {
+   "check": "gateway: the event log replays to the quote's RTMR3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the report has model evidence, fetched for the model the agent asked for",
+   "ok": true,
+   "detail": "z-ai/glm-5.3-flash"
+  },
+  {
+   "check": "model report 1: TDX quote v4, signed by a key certified under the Intel SGX Root CA; TD not in debug mode",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1: report_data binds the signing key and the agent's nonce",
+   "ok": true,
+   "detail": "5a0210f2442c7935\u2026 || cf637c11b036ad42\u2026"
+  },
+  {
+   "check": "model report 1: MRCONFIGID is the sha256 of app_compose",
+   "ok": true,
+   "detail": "c900dc7304663b73\u2026"
+  },
+  {
+   "check": "model report 1: the event log replays to the quote's RTMR3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1, compose manager: TDX quote v4, signed by a key certified under the Intel SGX Root CA; TD not in debug mode",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1, compose manager: report_data binds the action log and the agent's nonce",
+   "ok": true,
+   "detail": "e196ae7210ec5344\u2026 || cf637c11b036ad42\u2026"
+  },
+  {
+   "check": "model report 1, compose manager: the event log replays to the quote's RTMR3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1: the compose manager's quote carries the model quote's measurements (MRTD, RTMR0-3, MRCONFIGID)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1: the attested action log names the deployment last started",
+   "ok": true,
+   "detail": "prod/GLM-5.3-Flash-SGL-TP2x4-W4AFP8-V12Q8.yaml (commit dfbb641fdf, sha256 2d10ba2c3dbc\u2026, 2026-11-12T08:55:50)"
+  },
+  {
+   "check": "model report 1: GPU evidence is present and carries the nonce (its content is NOT verified here)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "response 0002: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "ad65668780\u2026/13a0eaf6b7\u2026"
+  },
+  {
+   "check": "response 0003: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "359dbe46bf\u2026/f62f5a2ead\u2026"
+  },
+  {
+   "check": "response 0004: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "c50d642a17\u2026/e45b748ea9\u2026"
+  },
+  {
+   "check": "3 of 3 responses carry a valid signature",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "prompt.md is the first message of every signed request",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

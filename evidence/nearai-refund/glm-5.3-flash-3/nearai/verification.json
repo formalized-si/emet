@@ -1,0 +1,176 @@
+{
+ "model": "z-ai/glm-5.3-flash",
+ "ok": true,
+ "checks": [
+  {
+   "check": "gateway: TDX quote v4, signed by a key certified under the Intel SGX Root CA; TD not in debug mode",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "gateway: report_data binds the signing key and the agent's nonce",
+   "ok": true,
+   "detail": "40599fb284f43953\u2026 || 92ba8c419636e681\u2026"
+  },
+  {
+   "check": "gateway: MRCONFIGID is the sha256 of app_compose",
+   "ok": true,
+   "detail": "877959253d2406f0\u2026"
+  },
+  {
+   "check": "gateway: the event log replays to the quote's RTMR3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the report has model evidence, fetched for the model the agent asked for",
+   "ok": true,
+   "detail": "z-ai/glm-5.3-flash"
+  },
+  {
+   "check": "model report 1: TDX quote v4, signed by a key certified under the Intel SGX Root CA; TD not in debug mode",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1: report_data binds the signing key and the agent's nonce",
+   "ok": true,
+   "detail": "5a0210f2442c7935\u2026 || 92ba8c419636e681\u2026"
+  },
+  {
+   "check": "model report 1: MRCONFIGID is the sha256 of app_compose",
+   "ok": true,
+   "detail": "c900dc7304663b73\u2026"
+  },
+  {
+   "check": "model report 1: the event log replays to the quote's RTMR3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1, compose manager: TDX quote v4, signed by a key certified under the Intel SGX Root CA; TD not in debug mode",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1, compose manager: report_data binds the action log and the agent's nonce",
+   "ok": true,
+   "detail": "e196ae7210ec5344\u2026 || 92ba8c419636e681\u2026"
+  },
+  {
+   "check": "model report 1, compose manager: the event log replays to the quote's RTMR3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1: the compose manager's quote carries the model quote's measurements (MRTD, RTMR0-3, MRCONFIGID)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1: the attested action log names the deployment last started",
+   "ok": true,
+   "detail": "prod/GLM-5.3-Flash-SGL-TP2x4-W4AFP8-V12Q8.yaml (commit dfbb641fdf, sha256 2d10ba2c3dbc\u2026, 2026-11-12T08:55:50)"
+  },
+  {
+   "check": "model report 1: GPU evidence is present and carries the nonce (its content is NOT verified here)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "response 0001: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "3c01d0837b\u2026/76dad69ddf\u2026"
+  },
+  {
+   "check": "response 0003: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "1f96c2777f\u2026/272654875c\u2026"
+  },
+  {
+   "check": "response 0004: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "cbc21c3de0\u2026/907d744abf\u2026"
+  },
+  {
+   "check": "response 0005: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "c0025eeb72\u2026/44314d2073\u2026"
+  },
+  {
+   "check": "4 of 4 responses carry a valid signature",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "Solution.lean is, byte for byte, the last write_solution call in the responses signed by the model's key",
+   "ok": true,
+   "detail": "response 0005, sha256 77f96a5c6fe42c0d\u2026"
+  },
+  {
+   "check": "prompt.md is the first message of every signed request",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "cases/intents-refund/upstream/tokens.rs is the pinned upstream file",
+   "ok": true,
+   "detail": "72245952a41246be\u2026"
+  },
+  {
+   "check": "candidate.rs is the pinned file with only the refund expression replaced, by the last propose_patch call before that write_solution call",
+   "ok": true,
+   "detail": "response 0001: balance_left.min(requested_refund).min(*deposited)"
+  },
+  {
+   "check": "RefundCase.lean, the generated statement of the claim, is in a signed request",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "proof.ndjson and its sealed environment are the bytes report.json records",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "proof.ndjson declares no axiom, opaque or quotient",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "proof.ndjson: its theorem Refund.user_patch states exactly the claim generated for candidate.rs",
+   "ok": true,
+   "detail": "Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct"
+  },
+  {
+   "check": "nanoda (this repository's kernel, native) type-checks the sealed environment + proof.ndjson",
+   "ok": true,
+   "detail": "13,648 bytes, sha256 cb2a2588dd531ee5\u2026, environment e008339e88d5afa7\u2026"
+  },
+  {
+   "check": "recorded job: complete, every check of the run passed, the implementation did not change while it ran",
+   "ok": true,
+   "detail": "14/14 checks"
+  },
+  {
+   "check": "recorded job: the kernel contract's certificate is for this claim, these proof bytes and this sealed environment; the board paid the prover",
+   "ok": true,
+   "detail": "bounty 1, winner prover.test.near"
+  },
+  {
+   "check": "recorded job: the certificate lists the axioms Lean reported for the model's proof",
+   "ok": true,
+   "detail": "propext"
+  },
+  {
+   "check": "recorded job: the gate installed the wasm built from this candidate, and the same account answered 100 before and 1 after",
+   "ok": true,
+   "detail": "wasm a18b6290ed78885a\u2026"
+  },
+  {
+   "check": "recorded job: it used this repository's kernel, board and gate binaries",
+   "ok": true,
+   "detail": "kernel 6dd4f5f42d3a7b49\u2026"
+  }
+ ]
+}

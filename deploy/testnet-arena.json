@@ -1,0 +1,412 @@
+{
+  "schema": "emet-live-arena/1",
+  "network": "testnet",
+  "rpc": "https://test.rpc.fastnear.com",
+  "explorer": "https://testnet.nearblocks.io",
+  "started_at": "2026-11-13T17:57:15.870Z",
+  "account": "arena2.emet.testnet",
+  "master": "emet.testnet",
+  "arena": "https://github.com/ilblackdragon/near-proof-arena",
+  "arena_commit": "7358a938",
+  "kernel_wasm_sha256": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+  "environment": {
+    "roots": [
+      "NearSpec.TransferV1.NearRelation",
+      "Emet.Arena.OutputsUnique",
+      "Emet.Arena.RelationInDomain"
+    ],
+    "export_bytes": 2961932,
+    "declarations_as_the_kernel_counts_them": 1600,
+    "sha256": "3accca2b4aafcc0f340fe49e8802feb99307efa3280490dda3e69d393835baaf"
+  },
+  "transactions": [
+    {
+      "label": "create arena2.emet.testnet",
+      "hash": "8oE9NQ5EQANndAURK4cFgYcSw41zi3wzex2uDyHVkaiG",
+      "explorer": "https://testnet.nearblocks.io/txns/8oE9NQ5EQANndAURK4cFgYcSw41zi3wzex2uDyHVkaiG",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.0071
+    },
+    {
+      "label": "deploy arena2.emet.testnet and delete its key",
+      "hash": "9bTzQ4h4xpt2xE7EhVv4Bs1Vq2CYH1L7HRFSZyUFkkY3",
+      "explorer": "https://testnet.nearblocks.io/txns/9bTzQ4h4xpt2xE7EhVv4Bs1Vq2CYH1L7HRFSZyUFkkY3",
+      "signer": "arena2.emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 57.145,
+      "tokens_burnt_near": 0.0057
+    },
+    {
+      "label": "upload chunk-0000.bin",
+      "hash": "5skC6asfN9EJMkFvP61XFKjyi7ubehq2pqTSimWf4Pf8",
+      "explorer": "https://testnet.nearblocks.io/txns/5skC6asfN9EJMkFvP61XFKjyi7ubehq2pqTSimWf4Pf8",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 19.336,
+      "tokens_burnt_near": 0.0019
+    },
+    {
+      "label": "upload chunk-0001.bin",
+      "hash": "FJraGzZLrUF858mEXosDQZ3QQycjzGGfRPxiAgad6QGb",
+      "explorer": "https://testnet.nearblocks.io/txns/FJraGzZLrUF858mEXosDQZ3QQycjzGGfRPxiAgad6QGb",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 19.365,
+      "tokens_burnt_near": 0.0019
+    },
+    {
+      "label": "upload chunk-0002.bin",
+      "hash": "HeyYjecPC3qhdsoHsLgGazNqzVaC2uWUPToUSx6vh3Wq",
+      "explorer": "https://testnet.nearblocks.io/txns/HeyYjecPC3qhdsoHsLgGazNqzVaC2uWUPToUSx6vh3Wq",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 18.917,
+      "tokens_burnt_near": 0.0018
+    },
+    {
+      "label": "upload chunk-0003.bin",
+      "hash": "EuoBmkjyK6nG5xqJw4dqi2WrQEXpVxbBdPnHK6Zfi2Xv",
+      "explorer": "https://testnet.nearblocks.io/txns/EuoBmkjyK6nG5xqJw4dqi2WrQEXpVxbBdPnHK6Zfi2Xv",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 19.379,
+      "tokens_burnt_near": 0.0019
+    },
+    {
+      "label": "upload chunk-0004.bin",
+      "hash": "F5qfdcewXQ65KfJaGzxN1mLF4kPpzpg1fg1vWphxEsSg",
+      "explorer": "https://testnet.nearblocks.io/txns/F5qfdcewXQ65KfJaGzxN1mLF4kPpzpg1fg1vWphxEsSg",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 19.656,
+      "tokens_burnt_near": 0.0019
+    },
+    {
+      "label": "upload chunk-0005.bin",
+      "hash": "J7cRBwASWgHRpYBz9kEYtGAFqXcywYx6wHmYGSPkvftu",
+      "explorer": "https://testnet.nearblocks.io/txns/J7cRBwASWgHRpYBz9kEYtGAFqXcywYx6wHmYGSPkvftu",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 19.116,
+      "tokens_burnt_near": 0.0019
+    },
+    {
+      "label": "upload chunk-0006.bin",
+      "hash": "D5X18ahSA7YCeXi8e6zwR3mH9jooRBJFBMraKpztpv7",
+      "explorer": "https://testnet.nearblocks.io/txns/D5X18ahSA7YCeXi8e6zwR3mH9jooRBJFBMraKpztpv7",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 5.259,
+      "tokens_burnt_near": 0.0005
+    },
+    {
+      "label": "seal the environment",
+      "hash": "78nzGGjQu4edEirNGvHppQrk9h93qw67GqrYUuPsLLbc",
+      "explorer": "https://testnet.nearblocks.io/txns/78nzGGjQu4edEirNGvHppQrk9h93qw67GqrYUuPsLLbc",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 463.053,
+      "tokens_burnt_near": 0.0463
+    },
+    {
+      "label": "type-check declarations 1 to 128",
+      "hash": "9Z63oP2DcKFofLNME4n3aTRw5oFWAJz2m3cA8ev9JoSk",
+      "explorer": "https://testnet.nearblocks.io/txns/9Z63oP2DcKFofLNME4n3aTRw5oFWAJz2m3cA8ev9JoSk",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 398.085,
+      "tokens_burnt_near": 0.0398
+    },
+    {
+      "label": "type-check declarations 129 to 256",
+      "hash": "EnXXkgsfK7c12Sxt6mNzofqfVZEK9pMEXNiV3iZ5Rwwh",
+      "explorer": "https://testnet.nearblocks.io/txns/EnXXkgsfK7c12Sxt6mNzofqfVZEK9pMEXNiV3iZ5Rwwh",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 426.327,
+      "tokens_burnt_near": 0.0426
+    },
+    {
+      "label": "type-check declarations 257 to 384",
+      "hash": "2hQcjd8FmLbngqxKnN6FaGeMBnWg5j3ggNYSGQq4jkdg",
+      "explorer": "https://testnet.nearblocks.io/txns/2hQcjd8FmLbngqxKnN6FaGeMBnWg5j3ggNYSGQq4jkdg",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 443.584,
+      "tokens_burnt_near": 0.0443
+    },
+    {
+      "label": "type-check declarations 385 to 512",
+      "hash": "AWrT7tr4qu1wKunjTEriFAwrCyySiWHqfQXPPRyYC8qq",
+      "explorer": "https://testnet.nearblocks.io/txns/AWrT7tr4qu1wKunjTEriFAwrCyySiWHqfQXPPRyYC8qq",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 433.083,
+      "tokens_burnt_near": 0.0433
+    },
+    {
+      "label": "type-check declarations 513 to 640",
+      "hash": "83ADa1cN59jAE35z9F7eXEHSpxzbP2fbFRr9UuofhAeX",
+      "explorer": "https://testnet.nearblocks.io/txns/83ADa1cN59jAE35z9F7eXEHSpxzbP2fbFRr9UuofhAeX",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 448.359,
+      "tokens_burnt_near": 0.0448
+    },
+    {
+      "label": "type-check declarations 641 to 768",
+      "hash": "DTzXeAzG11EaAfnbDYuBKbp3GCfpN6ApPz8HvZoWMhbt",
+      "explorer": "https://testnet.nearblocks.io/txns/DTzXeAzG11EaAfnbDYuBKbp3GCfpN6ApPz8HvZoWMhbt",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 434.435,
+      "tokens_burnt_near": 0.0434
+    },
+    {
+      "label": "type-check declarations 769 to 896",
+      "hash": "GArPbezHQBFER3r8N5ddu6ZU2XmvHeL6h87a99F6WeZj",
+      "explorer": "https://testnet.nearblocks.io/txns/GArPbezHQBFER3r8N5ddu6ZU2XmvHeL6h87a99F6WeZj",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 438.643,
+      "tokens_burnt_near": 0.0438
+    },
+    {
+      "label": "type-check declarations 897 to 1024",
+      "hash": "369AiLPEVAqoCdk4YLv5cvnmt5FBGJmWUpxKmPsKbqhx",
+      "explorer": "https://testnet.nearblocks.io/txns/369AiLPEVAqoCdk4YLv5cvnmt5FBGJmWUpxKmPsKbqhx",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 435.494,
+      "tokens_burnt_near": 0.0435
+    },
+    {
+      "label": "type-check declarations 1025 to 1152",
+      "hash": "5gAnVPHyjPwSR7AtYVw7jQNXgkrbNhraSooP2ihqF3RS",
+      "explorer": "https://testnet.nearblocks.io/txns/5gAnVPHyjPwSR7AtYVw7jQNXgkrbNhraSooP2ihqF3RS",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 450.659,
+      "tokens_burnt_near": 0.045
+    },
+    {
+      "label": "type-check declarations 1153 to 1280",
+      "hash": "7C1vv3GcLF39vtxLurmTWqLKj6fJjo9nM3sy4C4QPzPz",
+      "explorer": "https://testnet.nearblocks.io/txns/7C1vv3GcLF39vtxLurmTWqLKj6fJjo9nM3sy4C4QPzPz",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 441.991,
+      "tokens_burnt_near": 0.0441
+    },
+    {
+      "label": "type-check declarations 1281 to 1408",
+      "hash": "9i2zeg94NQdSsPwQEXpyMnPeAtuLKBEmtPMTUKuoHq8Z",
+      "explorer": "https://testnet.nearblocks.io/txns/9i2zeg94NQdSsPwQEXpyMnPeAtuLKBEmtPMTUKuoHq8Z",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 412.758,
+      "tokens_burnt_near": 0.0412
+    },
+    {
+      "label": "type-check declarations 1409 to 1536",
+      "hash": "2dnNnfH8pFzURnwuQ8YTuH5iDeQ4ryNWBJ4MSqPu8Ko9",
+      "explorer": "https://testnet.nearblocks.io/txns/2dnNnfH8pFzURnwuQ8YTuH5iDeQ4ryNWBJ4MSqPu8Ko9",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 423.694,
+      "tokens_burnt_near": 0.0423
+    },
+    {
+      "label": "type-check declarations 1537 to 1600",
+      "hash": "DoVDTPJdufuRatncMSfUDtZRt7X5Pm5RnUZq8hea81wF",
+      "explorer": "https://testnet.nearblocks.io/txns/DoVDTPJdufuRatncMSfUDtZRt7X5Pm5RnUZq8hea81wF",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 392.812,
+      "tokens_burnt_near": 0.0392
+    },
+    {
+      "label": "check NearRelation.outputs_unique",
+      "hash": "Dv8kVWa7nZSroH3mErZ4W9iFsDYhWVe7xVKWb6cAdWBx",
+      "explorer": "https://testnet.nearblocks.io/txns/Dv8kVWa7nZSroH3mErZ4W9iFsDYhWVe7xVKWb6cAdWBx",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 394.617,
+      "tokens_burnt_near": 0.0394
+    },
+    {
+      "label": "check NearRelation.domain",
+      "hash": "2GaHV3AXxNTsBuhpmSB6JJGPRNCJMWd8qw7ANNJraP8v",
+      "explorer": "https://testnet.nearblocks.io/txns/2GaHV3AXxNTsBuhpmSB6JJGPRNCJMWd8qw7ANNJraP8v",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 392.676,
+      "tokens_burnt_near": 0.0392
+    },
+    {
+      "label": "check wrong on purpose: the proof of outputs_unique offered for the other claim",
+      "hash": "4Eh39oeZMVNpbngkxd9nZE9ata1NFW3WBsaX3N26d2ee",
+      "explorer": "https://testnet.nearblocks.io/txns/4Eh39oeZMVNpbngkxd9nZE9ata1NFW3WBsaX3N26d2ee",
+      "signer": "emet.testnet",
+      "receiver": "arena2.emet.testnet",
+      "ok": true,
+      "gas_burnt_tgas": 373.948,
+      "tokens_burnt_near": 0.0373
+    }
+  ],
+  "checks": [
+    {
+      "name": "The account runs artifacts/kernel.wasm and has no access key",
+      "ok": true,
+      "detail": {
+        "keys": 0
+      }
+    },
+    {
+      "name": "The kernel sealed the environment exported from the Arena specification and type-checked every declaration",
+      "ok": true,
+      "detail": {
+        "checked": 1600,
+        "of": 1600
+      }
+    },
+    {
+      "name": "Accepted in one call: the Arena's proof of NearRelation.outputs_unique",
+      "ok": true,
+      "detail": {
+        "gas_burnt_tgas": 394.617,
+        "reason": null
+      }
+    },
+    {
+      "name": "Accepted in one call: the Arena's proof of NearRelation.domain",
+      "ok": true,
+      "detail": {
+        "gas_burnt_tgas": 392.676,
+        "reason": null
+      }
+    },
+    {
+      "name": "Refused: one of those proofs offered under the other claim",
+      "ok": true,
+      "detail": {
+        "gas_burnt_tgas": 373.948,
+        "reason": "statement_mismatch:no theorem in the delta has type exactly `Emet.Arena.RelationInDomain`"
+      }
+    }
+  ],
+  "results": [
+    {
+      "label": "NearRelation.outputs_unique",
+      "claim": "Emet.Arena.OutputsUnique",
+      "proof": "evidence/nearspec/outputs_unique.delta.ndjson",
+      "proof_bytes": 21131,
+      "proof_sha256": "b1497f1ab7eb3d91ea992f00c9a226cfaf180a4e7b56f1f5f9710aab08102683",
+      "must_be_accepted": true,
+      "accepted": true,
+      "reason": null,
+      "proof_theorem": "Emet.Arena.Proofs.outputs_unique",
+      "statement_hash": "4a8ae930046d375917550de2beef5e39e2912506610c7dffac2198e311010367",
+      "decls_checked": 6,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "hash": "Dv8kVWa7nZSroH3mErZ4W9iFsDYhWVe7xVKWb6cAdWBx",
+      "explorer": "https://testnet.nearblocks.io/txns/Dv8kVWa7nZSroH3mErZ4W9iFsDYhWVe7xVKWb6cAdWBx",
+      "gas_burnt_tgas": 394.617,
+      "kernel_tgas": 3.086519609319,
+      "parse_tgas": 324.553092306567
+    },
+    {
+      "label": "NearRelation.domain",
+      "claim": "Emet.Arena.RelationInDomain",
+      "proof": "evidence/nearspec/relation_in_domain.delta.ndjson",
+      "proof_bytes": 16603,
+      "proof_sha256": "813c299f6e40143ee84208f2ee75d7844f3fad171606a139309a3b5c32ef6545",
+      "must_be_accepted": true,
+      "accepted": true,
+      "reason": null,
+      "proof_theorem": "Emet.Arena.Proofs.relation_in_domain",
+      "statement_hash": "805def12dac000831ef46927d245a6347e1eeed84c693687e126d8051fd45c33",
+      "decls_checked": 2,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "hash": "2GaHV3AXxNTsBuhpmSB6JJGPRNCJMWd8qw7ANNJraP8v",
+      "explorer": "https://testnet.nearblocks.io/txns/2GaHV3AXxNTsBuhpmSB6JJGPRNCJMWd8qw7ANNJraP8v",
+      "gas_burnt_tgas": 392.676,
+      "kernel_tgas": 2.368436273151,
+      "parse_tgas": 323.867298852375
+    },
+    {
+      "label": "wrong on purpose: the proof of outputs_unique offered for the other claim",
+      "claim": "Emet.Arena.RelationInDomain",
+      "proof": "evidence/nearspec/outputs_unique.delta.ndjson",
+      "proof_bytes": 21131,
+      "proof_sha256": "b1497f1ab7eb3d91ea992f00c9a226cfaf180a4e7b56f1f5f9710aab08102683",
+      "must_be_accepted": false,
+      "accepted": false,
+      "reason": "statement_mismatch:no theorem in the delta has type exactly `Emet.Arena.RelationInDomain`",
+      "proof_theorem": null,
+      "statement_hash": null,
+      "decls_checked": 0,
+      "axioms": [],
+      "hash": "4Eh39oeZMVNpbngkxd9nZE9ata1NFW3WBsaX3N26d2ee",
+      "explorer": "https://testnet.nearblocks.io/txns/4Eh39oeZMVNpbngkxd9nZE9ata1NFW3WBsaX3N26d2ee",
+      "gas_burnt_tgas": 373.948,
+      "kernel_tgas": 0,
+      "parse_tgas": 324.553092306567
+    }
+  ],
+  "status": {
+    "owner": "emet.testnet",
+    "chunks": 7,
+    "base_bytes": 2961932,
+    "stored_bytes": 835986,
+    "base_hash": "3accca2b4aafcc0f340fe49e8802feb99307efa3280490dda3e69d393835baaf",
+    "base_decls": 1600,
+    "checked_upto": 1600,
+    "sealed": true,
+    "axioms_in_base": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "access_keys": 0,
+  "storage_bytes": 1660364,
+  "ok": true,
+  "finished_at": "2026-11-13T17:59:58.348Z",
+  "spent_near": 0.7441
+}

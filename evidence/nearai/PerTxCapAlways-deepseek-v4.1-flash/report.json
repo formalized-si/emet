@@ -1,0 +1,35 @@
+{
+  "claim": "Wallet.Claim.PerTxCapAlways",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-11T18:21:11Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 2109.1,
+    "turns": 17,
+    "tool_calls": 19,
+    "solution_writes": 7,
+    "repair_rounds": 6,
+    "lean_runs": 7,
+    "lean_failures": 3,
+    "prompt_tokens": 101243,
+    "completion_tokens": 49619,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "HTTP 0: {\"error\": {\"message\": \"network: RemoteDisconnected: Remote end closed connection without response\"}}",
+    "cost_usd": 0.0899,
+    "signed_responses": 16,
+    "responses": 16,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": false,
+    "log": "\u2716 [6/7] Building Solution (182ms)\ntrace: .> LEAN_PATH=./.lake/build/lib/lean ~/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean ./Solution.lean -o ./.lake/build/lib/lean/Solution.olean -i ./.lake/build/lib/lean/Solution.ilean -c ./.lake/build/ir/Solution.c --setup ./.lake/build/ir/Solution.setup.json --json\nerror: Solution.lean:35:21: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  run p s' rest\nin the target expression\n  (match (v, s') with\n    | (v, s') =>\n      match run p s' rest with\n      | (sf, vs) => (sf, v :: vs)) =\n    (sf, v :: vs)\n\np : Policy\nrest : List Req\nih : \u2200 (s : State) (r : Req), r \u2208 acceptedReqs rest (run p s rest).snd \u2192 r.snd.snd \u2264 p.perTxCap\nnow : UInt64\nto : Account\namount : UInt64\ns : State\nr : Req\nhr : r \u2208 acceptedReqs ((now, to, amount) :: rest) (run p s ((now, to, amount) :: rest)).snd\nv : Verdict\ns' : State\nhstep : step p s now to amount = (v, s')\nsf : State\nvs : List Verdict\nhrun : run p s' rest = (sf, vs)\n\u22a2 (match (v, s') with\n    | (v, s') =>\n      match run p s' rest with\n      | (sf, vs) => (sf, v :: vs)) =\n    (sf, v :: vs)\nerror: Solution.lean:39:14: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  run p s' rest\nin the target expression\n  \u2200 (s : State) (r : Req), r \u2208 acceptedReqs rest (run p s rest).snd \u2192 r.snd.snd \u2264 p.perTxCap\n\np : Policy\nrest : List Req\nih : \u2200 (s : State) (r : Req), r \u2208 acceptedReqs rest (run p s rest).snd \u2192 r.snd.snd \u2264 p.perTxCap\nnow : UInt64\nto : Account\namount : UInt64\ns : State\nr : Req\ns' sf : State\nvs : List Verdict\nhrun : run p s' rest = (sf, vs)\nhstep : step p s now to amount = (Verdict.allow, s')\nhr : r \u2208 acceptedReqs ((now, to, amount) :: rest) (sf, Verdict.allow :: vs).snd\nhrun2 : run p s ((now, to, amount) :: rest) = (sf, Verdict.allow :: vs)\n\u22a2 r.snd.snd \u2264 p.perTxCap\nSome required targets logged failures:\n- Solution\nerror: build failed\n"
+  },
+  "ready_to_claim": false
+}

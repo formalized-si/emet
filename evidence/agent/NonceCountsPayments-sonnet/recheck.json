@@ -1,0 +1,101 @@
+{
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext]\nSolution.proof : Wallet.Claim.NonceCountsPayments\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 340708,
+    "delta_sha256": "3c08d2637dac55d1636266e92adf69af0dbcdf77470a623abc5b31a09b8cbbf9",
+    "decls": 27,
+    "heaviest": [
+      {
+        "name": "Solution.step_nonce",
+        "kind": "thm",
+        "bytes": 174115
+      },
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 74545
+      },
+      {
+        "name": "Wallet.run.eq_def",
+        "kind": "thm",
+        "bytes": 24738
+      },
+      {
+        "name": "_private.Init.Data.UInt.Lemmas.0.UInt64.toNat.inj.match_1_1",
+        "kind": "def",
+        "bytes": 18701
+      },
+      {
+        "name": "Prod.noConfusion",
+        "kind": "def",
+        "bytes": 8675
+      },
+      {
+        "name": "Prod.mk.noConfusion",
+        "kind": "def",
+        "bytes": 4135
+      },
+      {
+        "name": "noConfusionEnum",
+        "kind": "def",
+        "bytes": 3677
+      },
+      {
+        "name": "Prod.noConfusionType",
+        "kind": "def",
+        "bytes": 3325
+      },
+      {
+        "name": "List.brecOn.eq",
+        "kind": "thm",
+        "bytes": 3018
+      },
+      {
+        "name": "_private.Init.Data.Nat.Basic.0.Nat.le_antisymm_iff.match_1_1",
+        "kind": "def",
+        "bytes": 2854
+      },
+      {
+        "name": "Iff.trans",
+        "kind": "thm",
+        "bytes": 2270
+      },
+      {
+        "name": "Nat.le_antisymm_iff",
+        "kind": "thm",
+        "bytes": 1991
+      },
+      {
+        "name": "noConfusionEnum._proof_1",
+        "kind": "thm",
+        "bytes": 1731
+      },
+      {
+        "name": "UInt64.toNat_inj",
+        "kind": "thm",
+        "bytes": 1662
+      },
+      {
+        "name": "UInt64.toNat.inj",
+        "kind": "thm",
+        "bytes": 1590
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

@@ -1,0 +1,29 @@
+{
+  "upstream": "https://github.com/near/intents.git",
+  "revision": "35044fd1795b0de9d1ac269c6aa28a0d6a7efdfa",
+  "at": "2026-11-12T15:46:09.408257+00:00",
+  "compiler": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+  "boundary": "Pinned upstream and one extracted expression; the Rust compiler and extractor are trusted.",
+  "candidates": [
+    {
+      "label": "original",
+      "source_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+      "source_tree_sha256": "c98cd152b9d6267b89623255b1e7d6cc116ddeaebd57b0be7f81eda3f815768d",
+      "wasm_sha256": "ef7346022ea75975d584362ce0aba0b8f2b5eae010088c958142b7edf14afdac",
+      "claim": "Refund.C_72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e.Correct",
+      "expression": "balance_left.min(requested_refund)",
+      "file": "run-output/refund/old.wasm"
+    },
+    {
+      "label": "repair",
+      "source_sha256": "9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1",
+      "source_tree_sha256": "baa73ed547356b8e179a5a6bd98becb5d3bec445cc7936ca56fb7305773b9e00",
+      "wasm_sha256": "f24d072edcb76a81ef68471096b1e7756b948e5543f739421c71f20bfb6e0ce0",
+      "claim": "Refund.C_9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1.Correct",
+      "expression": "requested_refund.min(*deposited).min(balance_left)",
+      "file": "run-output/refund/fixed.wasm",
+      "source_tree_is_upstream_revision": "de07b1f16f28af30778d02cae188710e30bd02fa"
+    }
+  ],
+  "receiver_sha256": "89a2a72174da01ae8ee0c9341ebdb92d084b47225a09c0bb0b216e55e1d630f4"
+}

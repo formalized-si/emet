@@ -1,0 +1,260 @@
+#!/usr/bin/env python3
+"""lean-near — build a Lean 4 lake project into a NEAR wasm contract, check on-chain code.
+
+  lean-near build <lake-project> --entry near_entry.c --out wallet.wasm [--define NAME ...]
+      lake build (proofs included; any failure -> exit 1, no wasm) -> lake's C (.lake/build/ir)
+      -> Lean's bundled clang, wasm32, -mcpu=mvp -> ld.lld as wasm-ld (--gc-sections)
+      -> Init tree-shake if Init code is referenced -> MVP validation, imports check
+      -> prints size + sha256, writes <out>.meta.json
+  lean-near hash <account> [--wasm wallet.wasm] [--network testnet|mainnet]
+      downloads on-chain code (RPC view_code), sha256-compares with the local wasm: MATCH / MISMATCH
+  lean-near deploy <account> --wasm wallet.wasm [--init-args JSON] [--network testnet]
+      near-cli-rs deploy (legacy keychain), then `hash`.
+Runtime: option A (rt/lean_near_rt.c, single-threaded subset, fail-closed).
+"""
+import argparse, base64, concurrent.futures as cf, hashlib, json, os, re, shutil, subprocess, sys, urllib.request
+
+VERSION = "0.1.0"
+HERE = os.path.dirname(os.path.realpath(__file__))
+RT = os.path.join(HERE, "rt", "lean_near_rt.c")
+RPC = {"testnet": "https://test.rpc.fastnear.com", "mainnet": "https://free.rpc.fastnear.com"}
+CACHE = os.path.expanduser(os.environ.get("LEAN_NEAR_CACHE", "~/.cache/lean-near"))
+INITRE = re.compile(r"^(runtime_|meta_)?initialize_")
+UMBRELLA = {"initialize_Init", "runtime_initialize_Init", "meta_initialize_Init"}
+
+def die(msg, code=1):
+    print(f"lean-near: {msg}", file=sys.stderr); sys.exit(code)
+
+def sha256_file(p):
+    h = hashlib.sha256()
+    with open(p, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""): h.update(chunk)
+    return h.hexdigest()
+
+def run(cmd, cwd=None, check=True, capture=False):
+    r = subprocess.run(cmd, cwd=cwd, text=True, capture_output=capture)
+    if check and r.returncode != 0:
+        if capture: sys.stderr.write(r.stdout + r.stderr)
+        die(f"command failed ({r.returncode}): {' '.join(cmd[:3])} ...")
+    return r
+
+def lean_src_sha256(proj):
+    """sha256 over sorted 'relpath\\0sha256(file)\\n' for every .lean file, lakefile, toolchain, manifest."""
+    files = []
+    for root, dirs, fs in os.walk(proj):
+        dirs[:] = [d for d in dirs if d not in (".lake", ".git")]
+        for f in fs:
+            if f.endswith(".lean") or f in ("lakefile.toml", "lakefile.lean", "lean-toolchain", "lake-manifest.json"):
+                files.append(os.path.relpath(os.path.join(root, f), proj))
+    h = hashlib.sha256()
+    for rel in sorted(files): h.update(f"{rel}\0{sha256_file(os.path.join(proj, rel))}\n".encode())
+    return h.hexdigest(), len(files)
+
+# ---------------------------------------------------------------- build
+def toolchain(proj):
+    elan = os.path.expanduser("~/.elan/bin")
+    env = dict(os.environ, PATH=elan + ":" + os.environ.get("PATH", ""))
+    prefix = subprocess.check_output(["lean", "--print-prefix"], cwd=proj, text=True, env=env).strip()
+    ver = subprocess.check_output(["lean", "--version"], cwd=proj, text=True, env=env).strip()
+    return prefix, ver, env
+
+def init_c_cache(T, ver, env):
+    """C for every Init module of this toolchain (lean -c from the shipped sources), built once."""
+    key = hashlib.sha256(ver.encode()).hexdigest()[:12]
+    d = os.path.join(CACHE, f"initc-{key}")
+    if os.path.exists(os.path.join(d, ".done")): return d
+    os.makedirs(d, exist_ok=True)
+    src = os.path.join(T, "src", "lean")
+    mods = []
+    for root, _, fs in os.walk(os.path.join(src, "Init")):
+        for f in fs:
+            if f.endswith(".lean"): mods.append(os.path.relpath(os.path.join(root, f), src)[:-5])
+    print(f"lean-near: generating C for {len(mods)} Init modules (one-time) ...", flush=True)
+    def gen(m):
+        out = os.path.join(d, m.replace("/", "_") + ".c")
+        return subprocess.run(["lean", "-R", ".", "-c", out, m + ".lean"], cwd=src, env=env, capture_output=True).returncode
+    with cf.ThreadPoolExecutor(os.cpu_count() or 4) as ex:
+        bad = [m for m, rc in zip(mods, ex.map(gen, mods)) if rc != 0]
+    if bad: die(f"Init C generation failed for {bad[:3]}")
+    open(os.path.join(d, ".done"), "w").close()
+    return d
+
+def cmd_build(a):
+    proj = os.path.abspath(a.project); entry = os.path.abspath(a.entry); out = os.path.abspath(a.out)
+    if os.path.exists(out): os.remove(out)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    T, ver, env = toolchain(proj)
+    print(f"lean-near {VERSION}: {ver}")
+    # 1. lake build: elaborates every module, so every theorem is re-checked. Failure => no wasm.
+    r = subprocess.run(["lake", "build"], cwd=proj, env=env, text=True, capture_output=True)
+    sys.stdout.write(r.stdout[-4000:]); sys.stderr.write(r.stderr[-4000:])
+    if r.returncode != 0:
+        die(f"lake build failed (exit {r.returncode}): a definition or proof does not check; NO wasm produced")
+    work = os.path.join(proj, ".lake", "lean-near"); shutil.rmtree(work, ignore_errors=True)
+    inc = os.path.join(work, "inc", "lean"); bindir = os.path.join(work, "bin"); objd = os.path.join(work, "obj")
+    for x in (inc, bindir, objd): os.makedirs(x, exist_ok=True)
+    for f in ("lean.h", "version.h"): shutil.copy(os.path.join(T, "include", "lean", f), inc)
+    cfg = open(os.path.join(T, "include", "lean", "config.h")).read()
+    open(os.path.join(inc, "config.h"), "w").write(cfg.replace("#define LEAN_MIMALLOC\n", "/* LEAN_MIMALLOC off: wasm32 NEAR build */\n"))
+    lld = next((os.path.join(T, "bin", n) for n in ("ld.lld", "ld64.lld") if os.path.exists(os.path.join(T, "bin", n))), None)
+    if lld is None: die("no lld in the Lean toolchain")
+    os.symlink(lld, os.path.join(bindir, "wasm-ld"))   # lld picks the wasm flavor from the name
+    cc = [os.path.join(T, "bin", "clang"), "--target=wasm32-unknown-unknown", "-mcpu=mvp", "-O2", "-DNDEBUG",
+          "-ffreestanding", "-nostdlib", "-isystem", os.path.join(T, "include", "clang"),
+          "-I" + os.path.join(work, "inc"), "-B" + bindir]
+    # 2. lake's C for the root package and its dependencies
+    csrc = []
+    for base in [os.path.join(proj, ".lake", "build", "ir")] + \
+                [os.path.join(proj, ".lake", "packages", p, ".lake", "build", "ir")
+                 for p in (os.listdir(os.path.join(proj, ".lake", "packages")) if os.path.isdir(os.path.join(proj, ".lake", "packages")) else [])]:
+        for root, _, fs in os.walk(base):
+            csrc += [os.path.join(root, f) for f in fs if f.endswith(".c")]
+    if not csrc: die("no C files under .lake/build/ir (did lake build produce IR?)")
+    src_sha, nfiles = lean_src_sha256(proj)
+    rt_sha = sha256_file(RT); shim_sha = sha256_file(entry)
+    tool = re.sub(r"[^A-Za-z0-9 .,:()_+-]", "", ver)
+    meta_defs = [f'-DLEAN_SRC_SHA256="{src_sha}"', f'-DLEAN_TOOLCHAIN="{tool}"',
+                 f'-DLEAN_NEAR_RUNTIME="A:lean_near_rt.c sha256:{rt_sha[:16]}"',
+                 f'-DLEAN_NEAR_VERSION="{VERSION}"', f'-DSHIM_SHA256="{shim_sha}"']
+    defines = sorted(a.define or [])
+    for d in defines:
+        if not re.fullmatch(r"[A-Z][A-Z0-9_]*", d): die(f"bad --define {d!r}: a bare upper-case macro name")
+    meta_defs += [f"-D{d}" for d in defines]
+    jobs = [(c, os.path.join(objd, "lean_" + os.path.relpath(c, proj).replace("/", "_") + ".o"), ["-Wno-unused-parameter"]) for c in csrc]
+    jobs += [(entry, os.path.join(objd, "entry.o"), meta_defs), (RT, os.path.join(objd, "rt.o"), ["-fno-builtin"])]
+    def comp(j):
+        c, o, extra = j
+        return subprocess.run(cc + extra + ["-c", c, "-o", o], capture_output=True, text=True)
+    with cf.ThreadPoolExecutor(os.cpu_count() or 4) as ex:
+        for j, r in zip(jobs, ex.map(comp, jobs)):
+            if r.returncode != 0: sys.stderr.write(r.stderr); die(f"clang failed on {j[0]}")
+    user_objs = [j[1] for j in jobs]
+    # 3. link; pull in Init modules only if the linker asks for Init symbols
+    ld = ["-Wl,--no-entry", "-Wl,--gc-sections", "-Wl,--strip-all", "-Wl,-z,stack-size=262144",
+          "-Wl,--stack-first", "-Wl,--error-limit=0", "-Wl,--print-gc-sections"]
+    S, stubs, idx, initc = [], set(), None, None
+    def glue():
+        g = os.path.join(work, "glue.c")
+        with open(g, "w") as f:
+            f.write("#include <lean/lean.h>\n")
+            for s in sorted(stubs - UMBRELLA): f.write(f"lean_object *{s}(uint8_t b) {{ (void)b; return lean_io_result_mk_ok(lean_box(0)); }}\n")
+            for m in S: f.write(f"lean_object *runtime_initialize_{m}(uint8_t);\n")
+            f.write("static lean_object *shaken_init(uint8_t b) {\n  lean_object *r;\n")
+            for m in S: f.write(f"  r = runtime_initialize_{m}(b); if (lean_io_result_is_error(r)) return r; lean_dec_ref(r);\n")
+            f.write("  return lean_io_result_mk_ok(lean_box(0));\n}\n")
+            for u in sorted(UMBRELLA): f.write(f"lean_object *{u}(uint8_t b) {{ return shaken_init(b); }}\n")
+        run(cc + ["-c", g, "-o", g[:-2] + ".o"])
+        return g[:-2] + ".o"
+    def init_obj(m):
+        o = os.path.join(objd, f"init_{m}.o")
+        if not os.path.exists(o): run(cc + ["-Wno-unused-parameter", "-c", os.path.join(initc, m + ".c"), "-o", o])
+        return o
+    for _ in range(80):
+        r = subprocess.run(cc + user_objs + [init_obj(m) for m in S] + [glue(), "-o", out] + ld, capture_output=True, text=True)
+        und = sorted(set(re.findall(r"undefined symbol: ([A-Za-z_0-9]+)", r.stderr)))
+        need_init = [s for s in und if not INITRE.match(s) and not s.startswith("lean_")]
+        if need_init and idx is None:
+            initc = init_c_cache(T, ver, env); idx = {}
+            pat = re.compile(r"^LEAN_EXPORT\s+[^(;]*?\b([A-Za-z_][A-Za-z_0-9]*)\s*(\(|;)")
+            for f in os.listdir(initc):
+                if f.endswith(".c"):
+                    for line in open(os.path.join(initc, f), errors="replace"):
+                        mm = pat.match(line)
+                        if mm: idx.setdefault(mm.group(1), f[:-2])
+        new_mods = sorted({idx[s] for s in need_init if idx and s in idx} - set(S))
+        new_stubs = {s for s in und if INITRE.match(s)} - stubs
+        if new_mods: S += new_mods; continue
+        if new_stubs: stubs |= new_stubs; continue
+        break
+    # fail closed: only toolchain library initializers may be stubbed. A missing initializer of
+    # the project's own modules (e.g. a renamed lake package) would silently skip their
+    # initialization and break every closed term at run time.
+    own = sorted(s for s in stubs - UMBRELLA if not re.match(r"^(runtime_|meta_)?initialize_(Init|Std|Lean)(_|$)", s))
+    if own:
+        if os.path.exists(out): os.remove(out)
+        die(f"refusing to stub initializers of project modules: {own} (does the shim name the lake package?)")
+    if r.returncode != 0:
+        missing = [s for s in und if not INITRE.match(s)]
+        die(f"link failed; symbols outside the supported runtime subset: {' '.join(missing) or r.stderr[-800:]}")
+    # soundness: globals set only by skipped META initializers of linked Init modules must be dead
+    removed = set(re.findall(r"removing unused section .*?:\(([^)]*)\)", r.stdout + r.stderr))
+    live_meta = []
+    for m in S:
+        src = open(os.path.join(initc, m + ".c"), errors="replace").read()
+        mm = re.search(r"meta_initialize_" + m + r"\(uint8_t builtin\) \{(.*?)\n\}", src, re.S)
+        if mm: live_meta += [g for g in re.findall(r"^(l_[A-Za-z_0-9]+) = _init_", mm.group(1), re.M) if not any(x.endswith(g) for x in removed)]
+    if live_meta: os.remove(out); die(f"refusing: live meta-initialized Init globals {live_meta[:5]}")
+    # 4. checks + report
+    imports, valid = [], None
+    wt = shutil.which("wasm-tools") or os.path.expanduser("~/.cargo/bin/wasm-tools")
+    if os.path.exists(wt):
+        valid = subprocess.run([wt, "validate", "--features", "mvp", out], capture_output=True).returncode == 0
+        txt = subprocess.run([wt, "print", out], capture_output=True, text=True).stdout
+        imports = re.findall(r'\(import "([^"]+)" "([^"]+)"', txt)
+        bad = [m for m, _ in imports if m != "env"]
+        if bad: os.remove(out); die(f"non-NEAR imports {bad}")
+        if not valid: os.remove(out); die("wasm is not MVP-valid")
+    size, sha = os.path.getsize(out), sha256_file(out)
+    meta = {"wasm": os.path.basename(out), "size": size, "sha256": sha, "lean_src_sha256": src_sha, "lean_src_files": nfiles,
+            "toolchain": ver, "runtime": "A", "runtime_sha256": rt_sha, "shim": os.path.basename(entry), "shim_sha256": shim_sha, "shim_defines": defines,
+            "lean_c_files": len(csrc), "init_modules_linked": S, "mvp_valid": valid, "imports": [n for _, n in imports],
+            "lean_near": VERSION}
+    json.dump(meta, open(out + ".meta.json", "w"), indent=2)
+    print(f"wasm    {out}\nsize    {size} bytes\nsha256  {sha}\nlean    {src_sha} ({nfiles} files)\n"
+          f"init    {len(S)} Init modules linked\nmvp     {valid}\nimports {' '.join(n for _, n in imports)}")
+
+# ---------------------------------------------------------------- hash / deploy
+def rpc(network, method, params):
+    req = urllib.request.Request(RPC[network], data=json.dumps({"jsonrpc": "2.0", "id": 1, "method": method, "params": params}).encode(),
+                                 headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=30) as f: d = json.load(f)
+    if "result" not in d: die(f"RPC error: {json.dumps(d.get('error'))[:300]}")
+    return d["result"]
+
+B58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+def b58(b):
+    n = int.from_bytes(b, "big"); s = ""
+    while n: n, r = divmod(n, 58); s = B58[r] + s
+    return "1" * (len(b) - len(b.lstrip(b"\0"))) + s
+
+def cmd_hash(a):
+    code = base64.b64decode(rpc(a.network, "query", {"request_type": "view_code", "finality": "final", "account_id": a.account})["code_base64"])
+    acct = rpc(a.network, "query", {"request_type": "view_account", "finality": "final", "account_id": a.account})
+    on = hashlib.sha256(code).digest(); local = open(a.wasm, "rb").read(); lo = hashlib.sha256(local).digest()
+    ok = on == lo and acct["code_hash"] == b58(on)
+    print(f"account        {a.account} ({a.network})\non-chain bytes {len(code)}  sha256 {on.hex()}\n"
+          f"code_hash      {acct['code_hash']} (base58 sha256, from view_account)\nlocal          {a.wasm}  {len(local)} bytes  sha256 {lo.hex()}\n"
+          f"{'MATCH' if ok else 'MISMATCH'}")
+    sys.exit(0 if ok else 1)
+
+def cmd_deploy(a):
+    near = shutil.which("near") or os.path.expanduser("~/.cargo/bin/near")
+    cmd = [near, "contract", "deploy", a.account, "use-file", a.wasm]
+    if a.init_args:
+        json.loads(a.init_args)
+        # base64-args: near-cli-rs re-serializes json-args with sorted keys, which changes the bytes the contract sees
+        cmd += ["with-init-call", "init", "base64-args", base64.b64encode(a.init_args.encode()).decode(),
+                "prepaid-gas", "100.0 Tgas", "attached-deposit", "0 NEAR"]
+    else:
+        cmd += ["without-init-call"]
+    cmd += ["network-config", a.network, "sign-with-legacy-keychain", "send"]
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    txt = r.stdout + r.stderr
+    tx = re.findall(r"Transaction ID: ([A-Za-z0-9]+)", txt)
+    print(f"deploy tx {tx[0] if tx else '?'} exit {r.returncode}")
+    if r.returncode != 0: sys.stderr.write(txt[-2000:]); sys.exit(1)
+    a.wasm = a.wasm; cmd_hash(a)
+
+def main():
+    p = argparse.ArgumentParser(prog="lean-near", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sp = p.add_subparsers(dest="cmd", required=True)
+    b = sp.add_parser("build"); b.add_argument("project"); b.add_argument("--entry", required=True); b.add_argument("--out", required=True)
+    b.add_argument("--define", action="append", help="a macro defined for the entry shim only (e.g. WALLET_RULES_V2)")
+    h = sp.add_parser("hash"); h.add_argument("account"); h.add_argument("--wasm", required=True); h.add_argument("--network", default="testnet", choices=RPC)
+    d = sp.add_parser("deploy"); d.add_argument("account"); d.add_argument("--wasm", required=True); d.add_argument("--init-args")
+    d.add_argument("--network", default="testnet", choices=RPC)
+    a = p.parse_args()
+    {"build": cmd_build, "hash": cmd_hash, "deploy": cmd_deploy}[a.cmd](a)
+
+if __name__ == "__main__":
+    main()

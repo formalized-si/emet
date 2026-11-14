@@ -1,0 +1,203 @@
+{
+  "claim": "Wallet.Claim.AllowedReceiversOnly",
+  "shelf": "shelf/wallet-v4",
+  "started": "2026-11-08T21:30:39Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "claude-code",
+    "exit": 0,
+    "seconds": 52.2,
+    "final": "DONE \u2014 `Solution.proof` compiles with no errors or `sorry`, and `./measure.sh` reports OK at 198,934 bytes (limit 400,000).\n\n`lake env lean Solution.lean` gave one linter warning, an unused `run` argument in a `simp` call, and nothing else.\n\nThe proof is by induction on the request list. It uses three helper lemmas in `Solution.lean`:\n- Byte-wise `accEq` implies the two accounts are equal.\n- `isAllowed` implies membership in the allowlist.\n- A `step` that returns `allow` has its receiver in `p.allowed`.",
+    "cost_usd": 0.1674579,
+    "turns": 15,
+    "permission_denials": 2,
+    "stderr_tail": "",
+    "model": "sonnet"
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext]\nSolution.proof : Wallet.Claim.AllowedReceiversOnly\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec",
+    "delta_bytes": 198853,
+    "delta_sha256": "fd4b1500447ee8b72a52c2bbddec50643d8dfa2da3d34de6e9920eea11e39dd8",
+    "decls": 43,
+    "heaviest": [
+      {
+        "name": "Solution.main._f",
+        "kind": "def",
+        "bytes": 40086
+      },
+      {
+        "name": "Solution.main.match_1_1",
+        "kind": "def",
+        "bytes": 13267
+      },
+      {
+        "name": "Bool.or_eq_true",
+        "kind": "thm",
+        "bytes": 11957
+      },
+      {
+        "name": "Solution.run_snd",
+        "kind": "thm",
+        "bytes": 11314
+      },
+      {
+        "name": "Bool.and_eq_true",
+        "kind": "thm",
+        "bytes": 10995
+      },
+      {
+        "name": "_private.Init.Data.List.Lemmas.0.List.not_mem_nil.match_1_1",
+        "kind": "def",
+        "bytes": 9860
+      },
+      {
+        "name": "Solution.isAllowed_mem._f",
+        "kind": "def",
+        "bytes": 9812
+      },
+      {
+        "name": "Solution.accEq_eq._f",
+        "kind": "def",
+        "bytes": 9460
+      },
+      {
+        "name": "Solution.accEq_eq.match_1_1",
+        "kind": "def",
+        "bytes": 9403
+      },
+      {
+        "name": "Solution.step_allow",
+        "kind": "thm",
+        "bytes": 7794
+      },
+      {
+        "name": "instDecidableIff.match_1",
+        "kind": "def",
+        "bytes": 7564
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "instDecidableOr.match_3",
+        "kind": "def",
+        "bytes": 5153
+      },
+      {
+        "name": "Solution.isAllowed_mem.match_1_1",
+        "kind": "def",
+        "bytes": 4455
+      },
+      {
+        "name": "instDecidableIff._proof_1",
+        "kind": "thm",
+        "bytes": 4321
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true,
+  "export_v3": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "bf70d9ca32119086fbb0fe73f414eb3c8b5701c93104f298ac9d41a925411f73",
+    "delta_bytes": 198934,
+    "delta_sha256": "136dabc3860e6fb33e6f78b0dabfbf7ee873adec66d7e588945db23eb0b9c2e2",
+    "decls": 43,
+    "heaviest": [
+      {
+        "name": "Solution.main._f",
+        "kind": "def",
+        "bytes": 40086
+      },
+      {
+        "name": "Solution.main.match_1_1",
+        "kind": "def",
+        "bytes": 13348
+      },
+      {
+        "name": "Bool.or_eq_true",
+        "kind": "thm",
+        "bytes": 11957
+      },
+      {
+        "name": "Solution.run_snd",
+        "kind": "thm",
+        "bytes": 11314
+      },
+      {
+        "name": "Bool.and_eq_true",
+        "kind": "thm",
+        "bytes": 10995
+      },
+      {
+        "name": "_private.Init.Data.List.Lemmas.0.List.not_mem_nil.match_1_1",
+        "kind": "def",
+        "bytes": 9860
+      },
+      {
+        "name": "Solution.isAllowed_mem._f",
+        "kind": "def",
+        "bytes": 9812
+      },
+      {
+        "name": "Solution.accEq_eq._f",
+        "kind": "def",
+        "bytes": 9460
+      },
+      {
+        "name": "Solution.accEq_eq.match_1_1",
+        "kind": "def",
+        "bytes": 9403
+      },
+      {
+        "name": "Solution.step_allow",
+        "kind": "thm",
+        "bytes": 7794
+      },
+      {
+        "name": "instDecidableIff.match_1",
+        "kind": "def",
+        "bytes": 7564
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "instDecidableOr.match_3",
+        "kind": "def",
+        "bytes": 5153
+      },
+      {
+        "name": "Solution.isAllowed_mem.match_1_1",
+        "kind": "def",
+        "bytes": 4455
+      },
+      {
+        "name": "instDecidableIff._proof_1",
+        "kind": "thm",
+        "bytes": 4321
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "note": "The agent wrote Solution.lean against shelf v3 (same Core, Spec and claim); it was re-checked and re-exported unchanged against shelf v4."
+}

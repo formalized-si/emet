@@ -1,0 +1,77 @@
+{
+  "state": "complete",
+  "network": "local sandbox",
+  "started": "2026-11-12T11:18:55.790043+00:00",
+  "candidate_file": "candidate.rs",
+  "implementation_before": "093a45096028e928658d41cacf9c691ff34f742988e0e5d990701403b31798b6",
+  "source_sha256": "de5e910861ecb4d2d7ef4a82f491dfe26668eb458d04d48024c53bf60f92e683",
+  "expression": "balance_left.min(requested_refund).min(2u128)",
+  "ast": [
+    "min",
+    [
+      "min",
+      [
+        "arg",
+        "balance_left"
+      ],
+      [
+        "arg",
+        "requested_refund"
+      ]
+    ],
+    [
+      "lit",
+      2
+    ]
+  ],
+  "claim": "Refund.C_de5e910861ecb4d2d7ef4a82f491dfe26668eb458d04d48024c53bf60f92e683.Correct",
+  "counterexample": {
+    "requested_refund": 100,
+    "deposited": 1,
+    "balance_left": 1001,
+    "actual": 2,
+    "expected": 1,
+    "breaks": "more than was deposited"
+  },
+  "candidate_status": "refuted",
+  "installed": false,
+  "checks": [
+    {
+      "name": "Kernel checked the entire pinned environment",
+      "ok": true
+    },
+    {
+      "name": "Old upstream contract returns 100 from a deposit of 1",
+      "ok": true
+    },
+    {
+      "name": "No proof leaves the old artifact installed",
+      "ok": true
+    },
+    {
+      "name": "Different binary is refused before checking the certificate",
+      "ok": true
+    },
+    {
+      "name": "The known-bad source earns a refutation, not a safety certificate",
+      "ok": true
+    },
+    {
+      "name": "A paid refutation cannot authorize installation",
+      "ok": true
+    },
+    {
+      "name": "The new candidate is refuted by a checked proof",
+      "ok": true
+    },
+    {
+      "name": "The refuted user patch is not installed",
+      "ok": true
+    }
+  ],
+  "record": "upgrade.json",
+  "implementation_after": "093a45096028e928658d41cacf9c691ff34f742988e0e5d990701403b31798b6",
+  "implementation_unchanged": true,
+  "finished": "2026-11-12T11:22:00.149087+00:00",
+  "full_record_sha256": "addbe644a58443cb6f63a340dd94a3f5880f223e3d35fdaccacc070194a23cd1"
+}

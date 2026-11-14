@@ -1,0 +1,40 @@
+{
+ "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+ "signing_algo": "ed25519",
+ "base_url": "https://cloud-api.near.ai/v1",
+ "nonce": "ef74a9a276af43938b10b6a77b0bbe4cb902331f6182a505ed00975ab5d07d30",
+ "attestation_http": 200,
+ "attestation_fetched_at": "2026-11-12T09:33:29Z",
+ "records": [
+  {
+   "n": "0001",
+   "chat_id": "chatcmpl-de0c459a-f52a-4090-a47e-99e541c72582",
+   "received_at": "2026-11-12T09:33:37Z",
+   "request_sha256": "998ced4eede2dac6205b5b667a2b68f054379a92bebecc200776fbb772db0d2f",
+   "response_sha256": "6428a573bbfca2a1f99ff6570477919113fb863609d13cd847214fcbb04db45c",
+   "prompt_tokens": 2752,
+   "completion_tokens": 352,
+   "cost_usd": 0.001248
+  },
+  {
+   "n": "0002",
+   "chat_id": "chatcmpl-e49fc586-13bc-4dfb-903a-40e5b3364055",
+   "received_at": "2026-11-12T09:35:29Z",
+   "request_sha256": "59275f16b6cf5d53880217af29461295e28698cef2d1c2eb4000f6a092bf378b",
+   "response_sha256": "a0f8e233a3beb5b113285c3ba120102389a28b2c68f92caf5afca18e0e226e9f",
+   "prompt_tokens": 4362,
+   "completion_tokens": 6300,
+   "cost_usd": 0.008869
+  },
+  {
+   "n": "0003",
+   "chat_id": "chatcmpl-8f1ce216-2a17-44ed-8cc9-fb84f97575e4",
+   "received_at": "2026-11-12T09:36:07Z",
+   "request_sha256": "ef5c93ea41af591c5c6867eb538b424d1e1289e8c5a4c19b96281ae61b3003ee",
+   "response_sha256": "47088978fa968652795c6e429d2e93dd88fd6ea447d5289f72b2741468732c6b",
+   "prompt_tokens": 4404,
+   "completion_tokens": 2507,
+   "cost_usd": 0.00433
+  }
+ ]
+}

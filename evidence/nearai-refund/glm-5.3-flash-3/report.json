@@ -1,0 +1,83 @@
+{
+  "case": "cases/intents-refund",
+  "upstream_revision": "35044fd1795b0de9d1ac269c6aa28a0d6a7efdfa",
+  "upstream_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+  "started": "2026-11-12T10:37:12Z",
+  "max_rounds": 3,
+  "no_axioms_asked": false,
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "z-ai/glm-5.3-flash",
+    "model_owner": "nearai",
+    "seconds": 1208.8,
+    "turns": 5,
+    "tool_calls": 3,
+    "solution_writes": 0,
+    "repair_rounds": 0,
+    "lean_runs": 0,
+    "lean_failures": 0,
+    "lost_responses": 1,
+    "prompt_tokens": 15743,
+    "completion_tokens": 11715,
+    "usd_per_token": {
+      "prompt": 8e-08,
+      "completion": 5e-07
+    },
+    "final": "accepted in round 2",
+    "cost_usd": 0.0097,
+    "signed_responses": 4,
+    "responses": 4,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "expression": "balance_left.min(requested_refund).min(*deposited)",
+      "source_sha256": "4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6",
+      "claim": "Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct",
+      "patch": "bound",
+      "solution": "import RefundCase\n\nnamespace Solution\n\ntheorem proof : Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct := by\n  intro a _\n  simp only [Refund.meetsRule, Refund.Rule] at *\n  intro hr hd hb _\n  exact \u27e8le_min (le_min hb hr) hd,\n    Nat.min_eq_right (le_min hb hr) |>.trans\n      (Nat.min_eq_right hr |>.trans \u27e8\u27e9)\n    \u25b8 trivial\u27e9\n\nend Solution",
+      "proof": "rejected",
+      "error": "Bound 2 candidates to one unchanged upstream context\n\u2714 [2/6] Built RefundCase (243ms)\n\u2716 [4/6] Building Solution (250ms)\ntrace: .> LEAN_PATH=./cases/intents-refund/.lake/build/lib/lean ~/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean ./cases/intents-refund/Solution.lean -o ./cases/intents-refund/.lake/build/lib/lean/Solution.olean -i ./cases/intents-refund/.lake/build/lib/lean/Solution.ilean -c ./cases/intents-refund/.lake/build/ir/Solution.c --setup ./cases/intents-refund/.lake/build/ir/Solution.setup.json --json\nerror: Solution.lean:8:8: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\na : Refund.Args\na\u271d : Refund.InRange a\n\u22a2 Refund.eval a Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.expression \u2264 a.requested \u2227\n    Refund.eval a Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.expression \u2264 a.deposited \u2227\n      Refund.eval a Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.expression \u2264 a.balance \u2227\n        (Refund.eval a Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.expression =\n            a.requested \u2228\n          Refund.eval a Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.expression =\n              a.deposited \u2228\n            Refund.eval a Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.expression =\n              a.balance)\nwarning: Solution.lean:7:13: This simp argument is unused:\n  Refund.meetsRule\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Refund.Rule] at *\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nSome required targets logged failures:\n- Solution\nerror: build failed"
+    },
+    {
+      "round": 2,
+      "expression": "balance_left.min(requested_refund).min(*deposited)",
+      "source_sha256": "4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6",
+      "claim": "Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct",
+      "patch": "bound",
+      "solution": "import RefundCase\n\nnamespace Solution\n\ntheorem eval_eq (a : Refund.Args) :\n    Refund.eval a\n        Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.expression\n      = min (min a.balance a.requested) a.deposited := rfl\n\ntheorem proof : Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct := by\n  intro a _\n  unfold Refund.Rule\n  rw [eval_eq a]\n  refine \u27e8?_, ?_, ?_, ?_\u27e9\n  \u00b7 exact Nat.le_trans (Nat.min_le_left (min a.balance a.requested) a.deposited)\n      (Nat.min_le_right a.balance a.requested)\n  \u00b7 exact Nat.min_le_right (min a.balance a.requested) a.deposited\n  \u00b7 exact Nat.le_trans (Nat.min_le_left (min a.balance a.requested) a.deposited)\n      (Nat.min_le_left a.balance a.requested)\n  \u00b7 cases Nat.le_total (min a.balance a.requested) a.deposited with\n    | inr h => exact Or.inr (Or.inl (Nat.min_eq_right h))\n    | inl h =>\n      cases Nat.le_total a.balance a.requested with\n      | inl h2 => exact Or.inr (Or.inr ((Nat.min_eq_left h).trans (Nat.min_eq_left h2)))\n      | inr h2 => exact Or.inl ((Nat.min_eq_left h).trans (Nat.min_eq_right h2))\n\nend Solution",
+      "proof": "accepted",
+      "proof_bytes": 13648,
+      "proof_sha256": "9df8b830a97a108f0b499a6a1ef362bda0e1448298976a1fa84f51aa50d4df78",
+      "base_sha256": "41792b6b4a50a76aa537f8e12576d92b54dc34ba501b965b85bea729ae1343d5",
+      "axioms": [
+        "propext"
+      ],
+      "axioms_line": "'Solution.proof' depends on axioms: [propext]"
+    }
+  ],
+  "accepted": true,
+  "expression": "balance_left.min(requested_refund).min(*deposited)",
+  "source_sha256": "4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6",
+  "claim": "Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct",
+  "proof_bytes": 13648,
+  "proof_sha256": "cb2a2588dd531ee5ed4c6e1b82c45e899063a9c8832a881359babe817a4a51c3",
+  "base_sha256": "e008339e88d5afa7f1fa4edcb2dce7aedc8fa7079bba2622d74d7686e7315664",
+  "axioms": [
+    "propext"
+  ],
+  "axioms_line": "'Solution.proof' depends on axioms: [propext]",
+  "job": {
+    "command": "python3 cases/intents-refund/propose.py --candidate evidence/nearai-refund/glm-5.3-flash-3/candidate.rs --proof evidence/nearai-refund/glm-5.3-flash-3/Solution.lean --side proof --out run-output/nearai-refund/glm-5.3-flash-3",
+    "started": "2026-11-13T18:34:07Z",
+    "wall_seconds": 170.8,
+    "export_is_the_round's": false,
+    "code_sha256": {
+      "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+      "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+      "gate": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d"
+    }
+  }
+}

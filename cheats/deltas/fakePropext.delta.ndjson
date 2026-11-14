@@ -1,0 +1,4 @@
+{"in":3222,"str":{"pre":0,"str":"fake_propext_proof"}}
+{"axiom":{"isUnsafe":false,"levelParams":[],"name":2403,"type":1762}}
+{"const":{"name":2403,"us":[]},"ie":16409}
+{"thm":{"all":[3222],"levelParams":[],"name":3222,"type":1762,"value":16409}}

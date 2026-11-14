@@ -1,0 +1,31 @@
+# Formatted: the scripts and the page's own JavaScript and CSS. Everything below is left as it is.
+
+# Sources that decide the bytes of a binary, and third-party code.
+contracts/
+lean/
+cases/intents-refund/upstream/
+cases/intents-refund/candidates/
+
+# Records, exported proofs and built files: data, checked byte for byte.
+evidence/
+artifacts/
+deploy/*.json
+shelf/
+proofs/
+cheats/
+history/
+cases/intents-refund/shelf/
+cases/intents-refund/proofs/
+*.ndjson
+*.json
+package-lock.json
+
+# Written by hand for a reader.
+*.md
+*.html
+
+node_modules/
+run-output/
+.runtime/
+.tools/
+.sandbox/

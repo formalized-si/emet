@@ -1,0 +1,143 @@
+{
+  "upstream_revision": "35044fd1795b0de9d1ac269c6aa28a0d6a7efdfa",
+  "upstream_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+  "candidates": [
+    {
+      "label": "original",
+      "source_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+      "expression": "balance_left.min(requested_refund)",
+      "ast": [
+        "min",
+        [
+          "arg",
+          "balance_left"
+        ],
+        [
+          "arg",
+          "requested_refund"
+        ]
+      ],
+      "claim": "Refund.C_72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e.Correct",
+      "counter_claim": "Refund.C_72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e.Refute",
+      "proof": "Refund.original",
+      "proved": "Refund.C_72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e.Refute",
+      "counterexample": {
+        "requested_refund": 100,
+        "deposited": 1,
+        "balance_left": 1001,
+        "actual": 100,
+        "expected": 1,
+        "breaks": "more than was deposited"
+      }
+    },
+    {
+      "label": "deposit_only",
+      "source_sha256": "31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149",
+      "expression": "requested_refund.min(*deposited)",
+      "ast": [
+        "min",
+        [
+          "arg",
+          "requested_refund"
+        ],
+        [
+          "arg",
+          "deposited"
+        ]
+      ],
+      "claim": "Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Correct",
+      "counter_claim": "Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Refute",
+      "proof": "Refund.deposit_only",
+      "proved": "Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Refute",
+      "counterexample": {
+        "requested_refund": 1,
+        "deposited": 1,
+        "balance_left": 0,
+        "actual": 1,
+        "expected": 0,
+        "breaks": "more than the receiver holds"
+      }
+    },
+    {
+      "label": "ignore_request",
+      "source_sha256": "6641e563c26dbb57124c0650e7346e620d729c48e6efca343c9a7fea8316a0da",
+      "expression": "(*deposited).min(balance_left)",
+      "ast": [
+        "min",
+        [
+          "arg",
+          "deposited"
+        ],
+        [
+          "arg",
+          "balance_left"
+        ]
+      ],
+      "claim": "Refund.C_6641e563c26dbb57124c0650e7346e620d729c48e6efca343c9a7fea8316a0da.Correct",
+      "counter_claim": "Refund.C_6641e563c26dbb57124c0650e7346e620d729c48e6efca343c9a7fea8316a0da.Refute",
+      "proof": "Refund.ignore_request",
+      "proved": "Refund.C_6641e563c26dbb57124c0650e7346e620d729c48e6efca343c9a7fea8316a0da.Refute",
+      "counterexample": {
+        "requested_refund": 1,
+        "deposited": 2,
+        "balance_left": 2,
+        "actual": 2,
+        "expected": 1,
+        "breaks": "more than was requested"
+      }
+    },
+    {
+      "label": "zero_refund",
+      "source_sha256": "c196307c0e68c8b8632bad817235cd14d544cb0ac666a64e28979ebb1e50b878",
+      "expression": "0u128",
+      "ast": [
+        "lit",
+        0
+      ],
+      "claim": "Refund.C_c196307c0e68c8b8632bad817235cd14d544cb0ac666a64e28979ebb1e50b878.Correct",
+      "counter_claim": "Refund.C_c196307c0e68c8b8632bad817235cd14d544cb0ac666a64e28979ebb1e50b878.Refute",
+      "proof": "Refund.zero_refund",
+      "proved": "Refund.C_c196307c0e68c8b8632bad817235cd14d544cb0ac666a64e28979ebb1e50b878.Refute",
+      "counterexample": {
+        "requested_refund": 100,
+        "deposited": 1,
+        "balance_left": 1001,
+        "actual": 0,
+        "expected": 1,
+        "breaks": "less than the rule allows"
+      }
+    },
+    {
+      "label": "repair",
+      "source_sha256": "9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1",
+      "expression": "requested_refund.min(*deposited).min(balance_left)",
+      "ast": [
+        "min",
+        [
+          "min",
+          [
+            "arg",
+            "requested_refund"
+          ],
+          [
+            "arg",
+            "deposited"
+          ]
+        ],
+        [
+          "arg",
+          "balance_left"
+        ]
+      ],
+      "identical_to_upstream": {
+        "revision": "de07b1f16f28af30778d02cae188710e30bd02fa",
+        "file": "contracts/defuse/src/contract/tokens/mod.rs"
+      },
+      "claim": "Refund.C_9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1.Correct",
+      "counter_claim": "Refund.C_9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1.Refute",
+      "proof": "Refund.repair",
+      "proved": "Refund.C_9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1.Correct",
+      "counterexample": null
+    }
+  ]
+}

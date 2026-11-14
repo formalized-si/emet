@@ -1,0 +1,201 @@
+{
+  "claim": "Wallet.Claim.AllowedReceiversOnly",
+  "shelf": "shelf/wallet-v4",
+  "started": "2026-11-08T21:30:39Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "claude-code",
+    "exit": 0,
+    "seconds": 24.6,
+    "final": "DONE \u2014 `Solution.proof : Wallet.Claim.AllowedReceiversOnly` is in `Solution.lean`. It compiles with no errors and no `sorry`, and `./measure.sh` reports OK with a delta of 175,704 bytes against the 400,000 limit.\n\nThe proof uses three helper lemmas and an induction over the request list:\n- **`accEq_eq`:** if the wallet's byte comparison says two accounts are equal, they really are equal.\n- **`isAllowed_mem`:** if `isAllowed` returns true, the receiver is in the allowlist.\n- **`step_allow`:** a step that returns `allow` must have passed the allowlist check.\n- **`main`:** induction over the requests, which ties the three together for every accepted payment in a run.",
+    "cost_usd": 0.1616114,
+    "turns": 3,
+    "permission_denials": 0,
+    "stderr_tail": "",
+    "model": "opus"
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' does not depend on any axioms\nSolution.proof : Wallet.Claim.AllowedReceiversOnly\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec",
+    "delta_bytes": 175623,
+    "delta_sha256": "9174c96d60d0afdbc506b4f1571800379af1b7db1552014883ed17b2a3d82cb3",
+    "decls": 29,
+    "heaviest": [
+      {
+        "name": "Solution.main._f",
+        "kind": "def",
+        "bytes": 44896
+      },
+      {
+        "name": "Wallet.accEq.eq_def",
+        "kind": "thm",
+        "bytes": 22223
+      },
+      {
+        "name": "Wallet.isAllowed.eq_def",
+        "kind": "thm",
+        "bytes": 13439
+      },
+      {
+        "name": "Solution.accEq_eq._f",
+        "kind": "def",
+        "bytes": 12792
+      },
+      {
+        "name": "Solution.step_allow",
+        "kind": "thm",
+        "bytes": 11340
+      },
+      {
+        "name": "Solution.isAllowed_mem._f",
+        "kind": "def",
+        "bytes": 10498
+      },
+      {
+        "name": "Solution.accEq_eq.match_1_1",
+        "kind": "def",
+        "bytes": 9363
+      },
+      {
+        "name": "Solution.main.match_1_1",
+        "kind": "def",
+        "bytes": 7946
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "Solution.isAllowed_mem.match_1_1",
+        "kind": "def",
+        "bytes": 4455
+      },
+      {
+        "name": "noConfusionEnum",
+        "kind": "def",
+        "bytes": 3599
+      },
+      {
+        "name": "Solution.main.match_1_3",
+        "kind": "def",
+        "bytes": 3492
+      },
+      {
+        "name": "List.Mem.casesOn",
+        "kind": "def",
+        "bytes": 3346
+      },
+      {
+        "name": "List.cons.noConfusion",
+        "kind": "def",
+        "bytes": 3175
+      },
+      {
+        "name": "List.noConfusionType",
+        "kind": "def",
+        "bytes": 3026
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true,
+  "export_v3": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "bf70d9ca32119086fbb0fe73f414eb3c8b5701c93104f298ac9d41a925411f73",
+    "delta_bytes": 175704,
+    "delta_sha256": "3079bf264ab667de52ab22071198dc764328faceefdc35ef84399aab97e84403",
+    "decls": 29,
+    "heaviest": [
+      {
+        "name": "Solution.main._f",
+        "kind": "def",
+        "bytes": 44896
+      },
+      {
+        "name": "Wallet.accEq.eq_def",
+        "kind": "thm",
+        "bytes": 22223
+      },
+      {
+        "name": "Wallet.isAllowed.eq_def",
+        "kind": "thm",
+        "bytes": 13439
+      },
+      {
+        "name": "Solution.accEq_eq._f",
+        "kind": "def",
+        "bytes": 12792
+      },
+      {
+        "name": "Solution.step_allow",
+        "kind": "thm",
+        "bytes": 11340
+      },
+      {
+        "name": "Solution.isAllowed_mem._f",
+        "kind": "def",
+        "bytes": 10498
+      },
+      {
+        "name": "Solution.accEq_eq.match_1_1",
+        "kind": "def",
+        "bytes": 9363
+      },
+      {
+        "name": "Solution.main.match_1_1",
+        "kind": "def",
+        "bytes": 8027
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "Solution.isAllowed_mem.match_1_1",
+        "kind": "def",
+        "bytes": 4455
+      },
+      {
+        "name": "noConfusionEnum",
+        "kind": "def",
+        "bytes": 3599
+      },
+      {
+        "name": "Solution.main.match_1_3",
+        "kind": "def",
+        "bytes": 3492
+      },
+      {
+        "name": "List.Mem.casesOn",
+        "kind": "def",
+        "bytes": 3346
+      },
+      {
+        "name": "List.cons.noConfusion",
+        "kind": "def",
+        "bytes": 3175
+      },
+      {
+        "name": "List.noConfusionType",
+        "kind": "def",
+        "bytes": 3026
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "note": "The agent wrote Solution.lean against shelf v3 (same Core, Spec and claim); it was re-checked and re-exported unchanged against shelf v4."
+}

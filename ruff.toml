@@ -1,0 +1,4 @@
+# Formatting only (ruff format). Not formatted: the sources that decide the bytes of a contract binary, and
+# third-party files.
+line-length = 120
+extend-exclude = ["contracts", "lean", "cheats", "cases/intents-refund/upstream", "node_modules", "run-output", ".tools"]

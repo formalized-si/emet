@@ -1,0 +1,50 @@
+{
+ "model": "z-ai/glm-5.3-flash",
+ "signing_algo": "ed25519",
+ "base_url": "https://cloud-api.near.ai/v1",
+ "nonce": "92ba8c419636e681852a40c65409ff3ae2c575e1079758e0f7caed002a5f5398",
+ "attestation_http": 200,
+ "attestation_fetched_at": "2026-11-12T10:37:15Z",
+ "records": [
+  {
+   "n": "0001",
+   "chat_id": "29c555519b864c148845abb30068ef08",
+   "received_at": "2026-11-12T10:43:13Z",
+   "request_sha256": "3c01d0837b3f585c972375b84d5f9538548e173a8b942401fa22e5920614c82d",
+   "response_sha256": "76dad69ddf19eba60b417b1d1f97abc37d225ba5d0809c75e4ab4324c1f63779",
+   "prompt_tokens": 2436,
+   "completion_tokens": 3695,
+   "cost_usd": 0.002042
+  },
+  {
+   "n": "0003",
+   "chat_id": "8d11d9c3bbda4552b88e7219be841ff9",
+   "received_at": "2026-11-12T10:54:49Z",
+   "request_sha256": "1f96c2777f4aed6ba2d06bdf154c376c4cdce918015d9c60373f896abb2f1bf6",
+   "response_sha256": "272654875c0bb6cff7808aa1f279f1b2d0109e9922e5620e646bfd94831bc996",
+   "prompt_tokens": 4127,
+   "completion_tokens": 3000,
+   "cost_usd": 0.00183
+  },
+  {
+   "n": "0004",
+   "chat_id": "44a4616b5e054b7dbe0fd1b28d329bdd",
+   "received_at": "2026-11-12T10:54:56Z",
+   "request_sha256": "cbc21c3de0fe6e409b16240a55e58a91492107255c18e1557cc86aaa20d24d07",
+   "response_sha256": "907d744abfcae85947460a62473871a2a806370a21071fc3e61e13c810101520",
+   "prompt_tokens": 4166,
+   "completion_tokens": 153,
+   "cost_usd": 0.00041
+  },
+  {
+   "n": "0005",
+   "chat_id": "0340148890b24abeb00e717891a8dd58",
+   "received_at": "2026-11-12T10:57:21Z",
+   "request_sha256": "c0025eeb72a5f9afbcfdf6d08de9beaa2a2a9ad2fedb7c6aba2c6061494b23c8",
+   "response_sha256": "44314d20731cd4309d1db2c6f131a973d20ae6eb4e4b63707333a0535a240530",
+   "prompt_tokens": 5014,
+   "completion_tokens": 4867,
+   "cost_usd": 0.002835
+  }
+ ]
+}

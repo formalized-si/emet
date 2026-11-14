@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  records:
+    name: Offline checks and unit tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      # Every recorded run against the binaries, proofs and sources of this checkout. Python 3 only, no network.
+      - run: ./verify.sh --offline
+      # The page's evidence readers.
+      - run: npm test
+
+  format:
+    name: Formatting
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      # Scripts and the page's own JavaScript and CSS. Contract sources are not formatted: they decide the bytes
+      # of the deployed binaries (.prettierignore, ruff.toml).
+      - run: npx --yes prettier@3.6.2 --check .
+      - run: pipx run ruff==0.14.4 format --check .
+
+  rehearse:
+    name: The refund case on a local NEAR node
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Deploys the proof checker, the board, the gate and both NEAR Intents builds on a fresh local node and runs
+      # the whole story as real transactions: 18 checks. It sends nothing to a public network.
+      - run: ./verify.sh --rehearse

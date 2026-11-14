@@ -1,0 +1,128 @@
+{
+  "claim": "Wallet.Claim.AllowedReceiversOnly",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-11T18:40:53Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 3621.4,
+    "turns": 51,
+    "tool_calls": 53,
+    "solution_writes": 23,
+    "repair_rounds": 22,
+    "lean_runs": 22,
+    "lean_failures": 17,
+    "lost_responses": 0,
+    "prompt_tokens": 671859,
+    "completion_tokens": 113877,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "",
+    "cost_usd": 0.3382,
+    "signed_responses": 51,
+    "responses": 51,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' does not depend on any axioms\nSolution.proof : Wallet.Claim.AllowedReceiversOnly\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 159991,
+    "delta_sha256": "af50d3dd784d9cfb9cfb8cdf77908afdf0c961dab1e84f236b5f09d3b63cd4e2",
+    "decls": 26,
+    "heaviest": [
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 58020
+      },
+      {
+        "name": "Solution.accEq_sound._f",
+        "kind": "def",
+        "bytes": 25015
+      },
+      {
+        "name": "Solution.step_allow_isAllowed",
+        "kind": "thm",
+        "bytes": 18231
+      },
+      {
+        "name": "Solution.isAllowed_sound._f",
+        "kind": "def",
+        "bytes": 12822
+      },
+      {
+        "name": "Solution.run_cons",
+        "kind": "thm",
+        "bytes": 6257
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "Solution.isAllowed_sound.match_1_1",
+        "kind": "def",
+        "bytes": 4692
+      },
+      {
+        "name": "List.Mem.casesOn",
+        "kind": "def",
+        "bytes": 3346
+      },
+      {
+        "name": "List.cons.noConfusion",
+        "kind": "def",
+        "bytes": 3175
+      },
+      {
+        "name": "List.noConfusionType",
+        "kind": "def",
+        "bytes": 3026
+      },
+      {
+        "name": "Solution.accEq_sound.match_1_1",
+        "kind": "def",
+        "bytes": 2699
+      },
+      {
+        "name": "Wallet.run.eq_2",
+        "kind": "thm",
+        "bytes": 1808
+      },
+      {
+        "name": "List.mem_cons_of_mem",
+        "kind": "thm",
+        "bytes": 1752
+      },
+      {
+        "name": "Solution.step_allow_mem",
+        "kind": "thm",
+        "bytes": 1651
+      },
+      {
+        "name": "Wallet.accEq.eq_4",
+        "kind": "thm",
+        "bytes": 1356
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

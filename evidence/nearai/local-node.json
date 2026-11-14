@@ -1,0 +1,982 @@
+{
+  "kind": "nearai-proofs-on-a-local-node",
+  "started_at": "2026-11-13T18:38:22.609Z",
+  "code_sha256": {
+    "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+    "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+    "factory": "6dcec734db23cddb2341d281886686339e216d8b3de4208e1010460459dd4ce7",
+    "wallet": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+  },
+  "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+  "chains": [
+    {
+      "node": {
+        "version": {
+          "build": "2.14.0",
+          "commit": "bc4e9e8cfb03d9e82f027883055624e18576993e",
+          "rustc_version": "1.95.0",
+          "version": "2.14.0"
+        },
+        "protocol": 88
+      },
+      "results": [
+        {
+          "claim": "Wallet.Claim.AllowedReceiversOnly",
+          "dir": "evidence/nearai/AllowedReceiversOnly-deepseek-v4.1-flash-2",
+          "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "delta_bytes": 159991,
+          "delta_sha256": "af50d3dd784d9cfb9cfb8cdf77908afdf0c961dab1e84f236b5f09d3b63cd4e2",
+          "accepted_by_kernel_contract": true,
+          "decision": {
+            "id": "0",
+            "side": "proof",
+            "name": "Wallet.Claim.AllowedReceiversOnly",
+            "decision": "committed",
+            "reward": 5.000000000000001,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 4.940000000000001,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 159991,
+            "source": "cache"
+          },
+          "bounty": {
+            "id": "0",
+            "phase": "Paid",
+            "winner": "nearai-agent.test.near",
+            "certificate": {
+              "claimer": "nearai-agent.test.near",
+              "side": "proof",
+              "proved": "Wallet.Claim.AllowedReceiversOnly",
+              "proof_theorem": "Solution.proof",
+              "statement_hash": "9d62ba61439388513fc717ac8518ae3cb5045e7b64641a97aa7fecf1a9db23b5",
+              "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+              "axioms": [],
+              "decls_checked": 26,
+              "delta_sha256": "af50d3dd784d9cfb9cfb8cdf77908afdf0c961dab1e84f236b5f09d3b63cd4e2",
+              "block_height": "152",
+              "timestamp": "1794595223468630000"
+            }
+          },
+          "reveal": {
+            "success": true,
+            "received_near": 5.050000000000001,
+            "failures": [],
+            "kernel_tgas": 215.890101700089
+          }
+        },
+        {
+          "claim": "Wallet.Claim.PerTxCapAlways",
+          "dir": "evidence/nearai/PerTxCapAlways-deepseek-v4.1-flash-2",
+          "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "delta_bytes": 169374,
+          "delta_sha256": "b1609ad0c399dbcf7ebf1c1075a5d49a8264427671ad70893bbd9b9390ced6cd",
+          "accepted_by_kernel_contract": true,
+          "decision": {
+            "id": "4",
+            "side": "proof",
+            "name": "Wallet.Claim.PerTxCapAlways",
+            "decision": "committed",
+            "reward": 1,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 0.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 169374,
+            "source": "cache"
+          },
+          "bounty": {
+            "id": "4",
+            "phase": "Paid",
+            "winner": "nearai-agent.test.near",
+            "certificate": {
+              "claimer": "nearai-agent.test.near",
+              "side": "proof",
+              "proved": "Wallet.Claim.PerTxCapAlways",
+              "proof_theorem": "Solution.proof",
+              "statement_hash": "bf5e882157378a127259be80d5ccda62404b83da084f9e105817a805976ebc76",
+              "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+              "axioms": [
+                "propext"
+              ],
+              "decls_checked": 17,
+              "delta_sha256": "b1609ad0c399dbcf7ebf1c1075a5d49a8264427671ad70893bbd9b9390ced6cd",
+              "block_height": "147",
+              "timestamp": "1794595220422008000"
+            }
+          },
+          "reveal": {
+            "success": true,
+            "received_near": 1.05,
+            "failures": [],
+            "kernel_tgas": 214.691337519854
+          }
+        },
+        {
+          "claim": "Wallet.Claim.Refute.SlidingDayCap",
+          "dir": "evidence/nearai/Refute.SlidingDayCap-deepseek-v4.1-flash",
+          "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "delta_bytes": 59298,
+          "delta_sha256": "5fb4311b21f40a2fe4fb64201680736a6ea5a83d7a54789c9e455e357173979f",
+          "accepted_by_kernel_contract": true,
+          "decision": {
+            "id": "1",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "decision": "committed",
+            "reward": 3,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 2.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 59298,
+            "source": "cache"
+          },
+          "bounty": {
+            "id": "1",
+            "phase": "Paid",
+            "winner": "nearai-agent.test.near",
+            "certificate": {
+              "claimer": "nearai-agent.test.near",
+              "side": "refutation",
+              "proved": "Wallet.Claim.Refute.SlidingDayCap",
+              "proof_theorem": "Solution.proof",
+              "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+              "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+              "axioms": [],
+              "decls_checked": 16,
+              "delta_sha256": "5fb4311b21f40a2fe4fb64201680736a6ea5a83d7a54789c9e455e357173979f",
+              "block_height": "149",
+              "timestamp": "1794595221622371000"
+            }
+          },
+          "reveal": {
+            "success": true,
+            "received_near": 3.0500000000000003,
+            "failures": [],
+            "kernel_tgas": 186.041276234543
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "method": "commit",
+          "tx_hash": "FU3yWvu7nogRP6hwamWrkvu6i6tLqoz16dZiwQfizhgp",
+          "success": true,
+          "failures": [],
+          "transfers": [],
+          "tgas": 2.717155982436,
+          "kernel_tgas": 0
+        },
+        {
+          "method": "commit",
+          "tx_hash": "85uJVmd2q3n4fsdQc6kdyohfs3dbeEfDqZ2ZhL5Zjtdr",
+          "success": true,
+          "failures": [],
+          "transfers": [],
+          "tgas": 2.719923223064,
+          "kernel_tgas": 0
+        },
+        {
+          "method": "commit",
+          "tx_hash": "9jabcCbRfTRFH41bSSFhFEAijcG2P5jLaQa6QwqJhBzA",
+          "success": true,
+          "failures": [],
+          "transfers": [],
+          "tgas": 2.7233724781950004,
+          "kernel_tgas": 0
+        },
+        {
+          "method": "reveal",
+          "tx_hash": "9PApdUz6no33MFXM6WJmJpG7KToufswZ6k2WjY1uS4FM",
+          "success": true,
+          "failures": [],
+          "transfers": [
+            {
+              "from": "board.test.near",
+              "to": "nearai-agent.test.near",
+              "amount": "1050000000000000000000000",
+              "ok": true
+            }
+          ],
+          "tgas": 247.657489404219,
+          "kernel_tgas": 214.691337519854
+        },
+        {
+          "method": "reveal",
+          "tx_hash": "Gqqcjp676r2B8P2tYrW1xKccTGmNuJFx7a71hXCx77fR",
+          "success": true,
+          "failures": [],
+          "transfers": [
+            {
+              "from": "board.test.near",
+              "to": "nearai-agent.test.near",
+              "amount": "3050000000000000000000000",
+              "ok": true
+            }
+          ],
+          "tgas": 208.51501255709098,
+          "kernel_tgas": 186.041276234543
+        },
+        {
+          "method": "reveal",
+          "tx_hash": "GisvZ5qwqbRZ9cUDXzVws9cUw8mseYmQqegXryUwEAYs",
+          "success": true,
+          "failures": [],
+          "transfers": [
+            {
+              "from": "board.test.near",
+              "to": "nearai-agent.test.near",
+              "amount": "5050000000000000000000000",
+              "ok": true
+            }
+          ],
+          "tgas": 247.675962771352,
+          "kernel_tgas": 215.890101700089
+        }
+      ],
+      "ledger": {
+        "gas_tgas": 712.008916416357,
+        "fees_near": 0.03,
+        "bonds_near": 0.15,
+        "llm_usd": 0,
+        "earned_near": 9.150000000000002,
+        "decisions": [
+          {
+            "id": "0",
+            "side": "proof",
+            "name": "Wallet.Claim.AllowedReceiversOnly",
+            "decision": "committed",
+            "reward": 5.000000000000001,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 4.940000000000001,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 159991,
+            "source": "cache"
+          },
+          {
+            "id": "1",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingDayCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "1",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "decision": "committed",
+            "reward": 3,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 2.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 59298,
+            "source": "cache"
+          },
+          {
+            "id": "2",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingTwiceCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "2",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingTwiceCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "3",
+            "side": "proof",
+            "name": "Wallet.Claim.NonceCountsPayments",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "3",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.NonceCountsPayments",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "4",
+            "side": "proof",
+            "name": "Wallet.Claim.PerTxCapAlways",
+            "decision": "committed",
+            "reward": 1,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 0.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 169374,
+            "source": "cache"
+          }
+        ],
+        "gas_near": 0.0712008916416357,
+        "net_near": 8.898799108358366,
+        "commits": [
+          {
+            "id": "0",
+            "side": "proof",
+            "name": "Wallet.Claim.AllowedReceiversOnly",
+            "height": 83,
+            "source": "cache",
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 5.050000000000001,
+              "failures": [],
+              "kernel_tgas": 215.890101700089
+            }
+          },
+          {
+            "id": "1",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "height": 89,
+            "source": "cache",
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 3.0500000000000003,
+              "failures": [],
+              "kernel_tgas": 186.041276234543
+            }
+          },
+          {
+            "id": "4",
+            "side": "proof",
+            "name": "Wallet.Claim.PerTxCapAlways",
+            "height": 95,
+            "source": "cache",
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 1.05,
+              "failures": [],
+              "kernel_tgas": 214.691337519854
+            }
+          }
+        ]
+      }
+    },
+    {
+      "node": {
+        "version": {
+          "build": "2.14.0",
+          "commit": "bc4e9e8cfb03d9e82f027883055624e18576993e",
+          "rustc_version": "1.95.0",
+          "version": "2.14.0"
+        },
+        "protocol": 88
+      },
+      "results": [
+        {
+          "claim": "Wallet.Claim.Refute.SlidingDayCap",
+          "dir": "evidence/nearai/Refute.SlidingDayCap-glm-5.3-flash",
+          "model": "z-ai/glm-5.3-flash",
+          "delta_bytes": 56876,
+          "delta_sha256": "ca69f836eb1912a407cb7d6b70d2f007c43e41e65a7fa58cc305e56d7eddd97a",
+          "accepted_by_kernel_contract": true,
+          "decision": {
+            "id": "1",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "decision": "committed",
+            "reward": 3,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 2.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 56876,
+            "source": "cache"
+          },
+          "bounty": {
+            "id": "1",
+            "phase": "Paid",
+            "winner": "nearai-agent.test.near",
+            "certificate": {
+              "claimer": "nearai-agent.test.near",
+              "side": "refutation",
+              "proved": "Wallet.Claim.Refute.SlidingDayCap",
+              "proof_theorem": "Solution.proof",
+              "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+              "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+              "axioms": [],
+              "decls_checked": 11,
+              "delta_sha256": "ca69f836eb1912a407cb7d6b70d2f007c43e41e65a7fa58cc305e56d7eddd97a",
+              "block_height": "135",
+              "timestamp": "1794595282898639000"
+            }
+          },
+          "reveal": {
+            "success": true,
+            "received_near": 3.0500000000000003,
+            "failures": [],
+            "kernel_tgas": 180.8660781979
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "method": "commit",
+          "tx_hash": "72gsEtGwq3y6wSPmjSF29p1RL8Y8pCxLW67JExY6HQ8x",
+          "success": true,
+          "failures": [],
+          "transfers": [],
+          "tgas": 2.715363223064,
+          "kernel_tgas": 0
+        },
+        {
+          "method": "reveal",
+          "tx_hash": "DMo8UbP8XbokRWiUBFNso1HhKaRqkipLy1f137tk7fsJ",
+          "success": true,
+          "failures": [],
+          "transfers": [
+            {
+              "from": "board.test.near",
+              "to": "nearai-agent.test.near",
+              "amount": "3050000000000000000000000",
+              "ok": true
+            }
+          ],
+          "tgas": 202.996542264612,
+          "kernel_tgas": 180.8660781979
+        }
+      ],
+      "ledger": {
+        "gas_tgas": 205.711905487676,
+        "fees_near": 0.01,
+        "bonds_near": 0.049999999999999996,
+        "llm_usd": 0,
+        "earned_near": 3.0500000000000003,
+        "decisions": [
+          {
+            "id": "0",
+            "side": "proof",
+            "name": "Wallet.Claim.AllowedReceiversOnly",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "0",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.AllowedReceiversOnly",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "1",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingDayCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "1",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "decision": "committed",
+            "reward": 3,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 2.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 56876,
+            "source": "cache"
+          },
+          {
+            "id": "2",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingTwiceCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "2",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingTwiceCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "3",
+            "side": "proof",
+            "name": "Wallet.Claim.NonceCountsPayments",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "3",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.NonceCountsPayments",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "4",
+            "side": "proof",
+            "name": "Wallet.Claim.PerTxCapAlways",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "4",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.PerTxCapAlways",
+            "decision": "skip: no proof"
+          }
+        ],
+        "gas_near": 0.0205711905487676,
+        "net_near": 2.969428809451233,
+        "commits": [
+          {
+            "id": "1",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "height": 83,
+            "source": "cache",
+            "model": "z-ai/glm-5.3-flash",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 3.0500000000000003,
+              "failures": [],
+              "kernel_tgas": 180.8660781979
+            }
+          }
+        ]
+      }
+    },
+    {
+      "node": {
+        "version": {
+          "build": "2.14.0",
+          "commit": "bc4e9e8cfb03d9e82f027883055624e18576993e",
+          "rustc_version": "1.95.0",
+          "version": "2.14.0"
+        },
+        "protocol": 88
+      },
+      "results": [
+        {
+          "claim": "Wallet.Claim.Refute.SlidingDayCap",
+          "dir": "evidence/nearai/Refute.SlidingDayCap-qwen3.8-27b",
+          "model": "Qwen/Qwen3.8-27B",
+          "delta_bytes": 61735,
+          "delta_sha256": "7258b937c2c692802760906c24baa8482a0dd0f069167af7e46ba1b68a2c1a1d",
+          "accepted_by_kernel_contract": true,
+          "decision": {
+            "id": "1",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "decision": "committed",
+            "reward": 3,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 2.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 61735,
+            "source": "cache"
+          },
+          "bounty": {
+            "id": "1",
+            "phase": "Paid",
+            "winner": "nearai-agent.test.near",
+            "certificate": {
+              "claimer": "nearai-agent.test.near",
+              "side": "refutation",
+              "proved": "Wallet.Claim.Refute.SlidingDayCap",
+              "proof_theorem": "Solution.proof",
+              "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+              "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+              "axioms": [],
+              "decls_checked": 16,
+              "delta_sha256": "7258b937c2c692802760906c24baa8482a0dd0f069167af7e46ba1b68a2c1a1d",
+              "block_height": "135",
+              "timestamp": "1794595342331845000"
+            }
+          },
+          "reveal": {
+            "success": true,
+            "received_near": 3.0500000000000003,
+            "failures": [],
+            "kernel_tgas": 184.888418691531
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "method": "commit",
+          "tx_hash": "Cpoz44zZP3ahxbbDusx7P19AS4DgRwVwgRTZmvq1bTQj",
+          "success": true,
+          "failures": [],
+          "transfers": [],
+          "tgas": 2.715363223064,
+          "kernel_tgas": 0
+        },
+        {
+          "method": "reveal",
+          "tx_hash": "GQmzt6BnTWs3kMRCmc36nbo6vVjcox3FCJtV58z5xLZ5",
+          "success": true,
+          "failures": [],
+          "transfers": [
+            {
+              "from": "board.test.near",
+              "to": "nearai-agent.test.near",
+              "amount": "3050000000000000000000000",
+              "ok": true
+            }
+          ],
+          "tgas": 207.674229695742,
+          "kernel_tgas": 184.888418691531
+        }
+      ],
+      "ledger": {
+        "gas_tgas": 210.38959291880602,
+        "fees_near": 0.01,
+        "bonds_near": 0.049999999999999996,
+        "llm_usd": 0,
+        "earned_near": 3.0500000000000003,
+        "decisions": [
+          {
+            "id": "0",
+            "side": "proof",
+            "name": "Wallet.Claim.AllowedReceiversOnly",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "0",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.AllowedReceiversOnly",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "1",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingDayCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "1",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "decision": "committed",
+            "reward": 3,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 2.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 61735,
+            "source": "cache"
+          },
+          {
+            "id": "2",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingTwiceCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "2",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingTwiceCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "3",
+            "side": "proof",
+            "name": "Wallet.Claim.NonceCountsPayments",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "3",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.NonceCountsPayments",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "4",
+            "side": "proof",
+            "name": "Wallet.Claim.PerTxCapAlways",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "4",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.PerTxCapAlways",
+            "decision": "skip: no proof"
+          }
+        ],
+        "gas_near": 0.021038959291880602,
+        "net_near": 2.96896104070812,
+        "commits": [
+          {
+            "id": "1",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "height": 83,
+            "source": "cache",
+            "model": "Qwen/Qwen3.8-27B",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 3.0500000000000003,
+              "failures": [],
+              "kernel_tgas": 184.888418691531
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "node": {
+    "version": {
+      "build": "2.14.0",
+      "commit": "bc4e9e8cfb03d9e82f027883055624e18576993e",
+      "rustc_version": "1.95.0",
+      "version": "2.14.0"
+    },
+    "protocol": 88
+  },
+  "results": [
+    {
+      "claim": "Wallet.Claim.AllowedReceiversOnly",
+      "dir": "evidence/nearai/AllowedReceiversOnly-deepseek-v4.1-flash-2",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "delta_bytes": 159991,
+      "delta_sha256": "af50d3dd784d9cfb9cfb8cdf77908afdf0c961dab1e84f236b5f09d3b63cd4e2",
+      "accepted_by_kernel_contract": true,
+      "decision": {
+        "id": "0",
+        "side": "proof",
+        "name": "Wallet.Claim.AllowedReceiversOnly",
+        "decision": "committed",
+        "reward": 5.000000000000001,
+        "rivals": 0,
+        "cost": 0.060000000000000005,
+        "ev": 4.940000000000001,
+        "dry_run_ok": true,
+        "dry_run_mode": "claim",
+        "proof_bytes": 159991,
+        "source": "cache"
+      },
+      "bounty": {
+        "id": "0",
+        "phase": "Paid",
+        "winner": "nearai-agent.test.near",
+        "certificate": {
+          "claimer": "nearai-agent.test.near",
+          "side": "proof",
+          "proved": "Wallet.Claim.AllowedReceiversOnly",
+          "proof_theorem": "Solution.proof",
+          "statement_hash": "9d62ba61439388513fc717ac8518ae3cb5045e7b64641a97aa7fecf1a9db23b5",
+          "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+          "axioms": [],
+          "decls_checked": 26,
+          "delta_sha256": "af50d3dd784d9cfb9cfb8cdf77908afdf0c961dab1e84f236b5f09d3b63cd4e2",
+          "block_height": "152",
+          "timestamp": "1794595223468630000"
+        }
+      },
+      "reveal": {
+        "success": true,
+        "received_near": 5.050000000000001,
+        "failures": [],
+        "kernel_tgas": 215.890101700089
+      }
+    },
+    {
+      "claim": "Wallet.Claim.PerTxCapAlways",
+      "dir": "evidence/nearai/PerTxCapAlways-deepseek-v4.1-flash-2",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "delta_bytes": 169374,
+      "delta_sha256": "b1609ad0c399dbcf7ebf1c1075a5d49a8264427671ad70893bbd9b9390ced6cd",
+      "accepted_by_kernel_contract": true,
+      "decision": {
+        "id": "4",
+        "side": "proof",
+        "name": "Wallet.Claim.PerTxCapAlways",
+        "decision": "committed",
+        "reward": 1,
+        "rivals": 0,
+        "cost": 0.060000000000000005,
+        "ev": 0.94,
+        "dry_run_ok": true,
+        "dry_run_mode": "claim",
+        "proof_bytes": 169374,
+        "source": "cache"
+      },
+      "bounty": {
+        "id": "4",
+        "phase": "Paid",
+        "winner": "nearai-agent.test.near",
+        "certificate": {
+          "claimer": "nearai-agent.test.near",
+          "side": "proof",
+          "proved": "Wallet.Claim.PerTxCapAlways",
+          "proof_theorem": "Solution.proof",
+          "statement_hash": "bf5e882157378a127259be80d5ccda62404b83da084f9e105817a805976ebc76",
+          "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+          "axioms": [
+            "propext"
+          ],
+          "decls_checked": 17,
+          "delta_sha256": "b1609ad0c399dbcf7ebf1c1075a5d49a8264427671ad70893bbd9b9390ced6cd",
+          "block_height": "147",
+          "timestamp": "1794595220422008000"
+        }
+      },
+      "reveal": {
+        "success": true,
+        "received_near": 1.05,
+        "failures": [],
+        "kernel_tgas": 214.691337519854
+      }
+    },
+    {
+      "claim": "Wallet.Claim.Refute.SlidingDayCap",
+      "dir": "evidence/nearai/Refute.SlidingDayCap-deepseek-v4.1-flash",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "delta_bytes": 59298,
+      "delta_sha256": "5fb4311b21f40a2fe4fb64201680736a6ea5a83d7a54789c9e455e357173979f",
+      "accepted_by_kernel_contract": true,
+      "decision": {
+        "id": "1",
+        "side": "refutation",
+        "name": "Wallet.Claim.Refute.SlidingDayCap",
+        "decision": "committed",
+        "reward": 3,
+        "rivals": 0,
+        "cost": 0.060000000000000005,
+        "ev": 2.94,
+        "dry_run_ok": true,
+        "dry_run_mode": "claim",
+        "proof_bytes": 59298,
+        "source": "cache"
+      },
+      "bounty": {
+        "id": "1",
+        "phase": "Paid",
+        "winner": "nearai-agent.test.near",
+        "certificate": {
+          "claimer": "nearai-agent.test.near",
+          "side": "refutation",
+          "proved": "Wallet.Claim.Refute.SlidingDayCap",
+          "proof_theorem": "Solution.proof",
+          "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+          "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+          "axioms": [],
+          "decls_checked": 16,
+          "delta_sha256": "5fb4311b21f40a2fe4fb64201680736a6ea5a83d7a54789c9e455e357173979f",
+          "block_height": "149",
+          "timestamp": "1794595221622371000"
+        }
+      },
+      "reveal": {
+        "success": true,
+        "received_near": 3.0500000000000003,
+        "failures": [],
+        "kernel_tgas": 186.041276234543
+      }
+    },
+    {
+      "claim": "Wallet.Claim.Refute.SlidingDayCap",
+      "dir": "evidence/nearai/Refute.SlidingDayCap-glm-5.3-flash",
+      "model": "z-ai/glm-5.3-flash",
+      "delta_bytes": 56876,
+      "delta_sha256": "ca69f836eb1912a407cb7d6b70d2f007c43e41e65a7fa58cc305e56d7eddd97a",
+      "accepted_by_kernel_contract": true,
+      "decision": {
+        "id": "1",
+        "side": "refutation",
+        "name": "Wallet.Claim.Refute.SlidingDayCap",
+        "decision": "committed",
+        "reward": 3,
+        "rivals": 0,
+        "cost": 0.060000000000000005,
+        "ev": 2.94,
+        "dry_run_ok": true,
+        "dry_run_mode": "claim",
+        "proof_bytes": 56876,
+        "source": "cache"
+      },
+      "bounty": {
+        "id": "1",
+        "phase": "Paid",
+        "winner": "nearai-agent.test.near",
+        "certificate": {
+          "claimer": "nearai-agent.test.near",
+          "side": "refutation",
+          "proved": "Wallet.Claim.Refute.SlidingDayCap",
+          "proof_theorem": "Solution.proof",
+          "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+          "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+          "axioms": [],
+          "decls_checked": 11,
+          "delta_sha256": "ca69f836eb1912a407cb7d6b70d2f007c43e41e65a7fa58cc305e56d7eddd97a",
+          "block_height": "135",
+          "timestamp": "1794595282898639000"
+        }
+      },
+      "reveal": {
+        "success": true,
+        "received_near": 3.0500000000000003,
+        "failures": [],
+        "kernel_tgas": 180.8660781979
+      }
+    },
+    {
+      "claim": "Wallet.Claim.Refute.SlidingDayCap",
+      "dir": "evidence/nearai/Refute.SlidingDayCap-qwen3.8-27b",
+      "model": "Qwen/Qwen3.8-27B",
+      "delta_bytes": 61735,
+      "delta_sha256": "7258b937c2c692802760906c24baa8482a0dd0f069167af7e46ba1b68a2c1a1d",
+      "accepted_by_kernel_contract": true,
+      "decision": {
+        "id": "1",
+        "side": "refutation",
+        "name": "Wallet.Claim.Refute.SlidingDayCap",
+        "decision": "committed",
+        "reward": 3,
+        "rivals": 0,
+        "cost": 0.060000000000000005,
+        "ev": 2.94,
+        "dry_run_ok": true,
+        "dry_run_mode": "claim",
+        "proof_bytes": 61735,
+        "source": "cache"
+      },
+      "bounty": {
+        "id": "1",
+        "phase": "Paid",
+        "winner": "nearai-agent.test.near",
+        "certificate": {
+          "claimer": "nearai-agent.test.near",
+          "side": "refutation",
+          "proved": "Wallet.Claim.Refute.SlidingDayCap",
+          "proof_theorem": "Solution.proof",
+          "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+          "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+          "axioms": [],
+          "decls_checked": 16,
+          "delta_sha256": "7258b937c2c692802760906c24baa8482a0dd0f069167af7e46ba1b68a2c1a1d",
+          "block_height": "135",
+          "timestamp": "1794595342331845000"
+        }
+      },
+      "reveal": {
+        "success": true,
+        "received_near": 3.0500000000000003,
+        "failures": [],
+        "kernel_tgas": 184.888418691531
+      }
+    }
+  ],
+  "ok": true,
+  "finished_at": "2026-11-13T18:41:31.225Z"
+}

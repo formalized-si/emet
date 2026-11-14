@@ -1,0 +1,103 @@
+{
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext, Classical.choice, Quot.sound]\nSolution.proof : Wallet.Claim.V2.SlidingDayCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 380986,
+    "delta_sha256": "04d426bb30d536f39ea601cc32b8844c2d89fc94f44b3ad2a2955711a04ee2ed",
+    "decls": 86,
+    "heaviest": [
+      {
+        "name": "Solution.step_spec",
+        "kind": "thm",
+        "bytes": 65017
+      },
+      {
+        "name": "Solution.lemA",
+        "kind": "thm",
+        "bytes": 63252
+      },
+      {
+        "name": "Solution.K",
+        "kind": "thm",
+        "bytes": 31410
+      },
+      {
+        "name": "Solution.roll_start",
+        "kind": "thm",
+        "bytes": 15119
+      },
+      {
+        "name": "Classical.em",
+        "kind": "thm",
+        "bytes": 13889
+      },
+      {
+        "name": "Solution.roll_spent",
+        "kind": "thm",
+        "bytes": 11748
+      },
+      {
+        "name": "Solution.N2",
+        "kind": "thm",
+        "bytes": 9819
+      },
+      {
+        "name": "Solution.deny_sum",
+        "kind": "thm",
+        "bytes": 9324
+      },
+      {
+        "name": "Solution.sub_toNat",
+        "kind": "thm",
+        "bytes": 7601
+      },
+      {
+        "name": "instDecidableIff.match_1",
+        "kind": "def",
+        "bytes": 7564
+      },
+      {
+        "name": "Solution.run_cons",
+        "kind": "thm",
+        "bytes": 7146
+      },
+      {
+        "name": "_private.Init.Classical.0.Classical.em.match_1_1",
+        "kind": "def",
+        "bytes": 7079
+      },
+      {
+        "name": "Solution.and_l",
+        "kind": "thm",
+        "bytes": 6382
+      },
+      {
+        "name": "funext",
+        "kind": "thm",
+        "bytes": 4777
+      },
+      {
+        "name": "Solution.N3",
+        "kind": "thm",
+        "bytes": 4647
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

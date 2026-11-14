@@ -1,0 +1,11 @@
+**/target/
+**/.lake/
+**/__pycache__/
+node_modules
+.sandbox
+run-output/
+.tools
+.runtime
+.DS_Store
+.ruff_cache/
+lean/out/

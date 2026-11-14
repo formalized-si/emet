@@ -1,0 +1,185 @@
+{
+  "state": "complete",
+  "network": "local sandbox",
+  "started": "2026-11-13T18:34:07.179701+00:00",
+  "candidate_file": "candidate.rs",
+  "implementation_before": "8a555999089bb982ad3b026bf754a66c43999b42ff0ed9021286d6a028e7bdd7",
+  "source_sha256": "4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6",
+  "expression": "balance_left.min(requested_refund).min(*deposited)",
+  "ast": [
+    "min",
+    [
+      "min",
+      [
+        "arg",
+        "balance_left"
+      ],
+      [
+        "arg",
+        "requested_refund"
+      ]
+    ],
+    [
+      "arg",
+      "deposited"
+    ]
+  ],
+  "claim": "Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct",
+  "counterexample": null,
+  "candidate_status": "proved",
+  "installed": true,
+  "checks": [
+    {
+      "name": "Kernel checked the entire pinned environment",
+      "ok": true
+    },
+    {
+      "name": "Old upstream contract returns 100 from a deposit of 1",
+      "ok": true
+    },
+    {
+      "name": "No proof leaves the old artifact installed",
+      "ok": true
+    },
+    {
+      "name": "Different binary is refused before checking the certificate",
+      "ok": true
+    },
+    {
+      "name": "The known-bad source earns a refutation, not a safety certificate",
+      "ok": true
+    },
+    {
+      "name": "A paid refutation cannot authorize installation",
+      "ok": true
+    },
+    {
+      "name": "Exact repair proof is checked and its prover is paid",
+      "ok": true
+    },
+    {
+      "name": "The sole upgrader installed exactly the proof-bound wasm",
+      "ok": true,
+      "detail": {
+        "target": "target.test.near",
+        "board": "board.test.near",
+        "base_hash": "e008339e88d5afa7f1fa4edcb2dce7aedc8fa7079bba2622d74d7686e7315664",
+        "phase": "Applied",
+        "generation": "3",
+        "started_height": "157",
+        "candidate": "user_patch",
+        "last_error": null,
+        "candidates": [
+          {
+            "id": "original",
+            "source_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+            "wasm_sha256": "ef7346022ea75975d584362ce0aba0b8f2b5eae010088c958142b7edf14afdac",
+            "claim": "Refund.C_72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e.Correct",
+            "bounty_id": "0",
+            "chunks": [
+              {
+                "sha256": "8f0691264abeaeeb495abe6755c6867cd43554b2b4568d84ed7a17d08f750902",
+                "bytes": 300000
+              },
+              {
+                "sha256": "b8cc4e7070f425b0eb442bdca8eb8cc33b2f653d6e1526e91618b67b06e2ea8a",
+                "bytes": 300000
+              },
+              {
+                "sha256": "3bf983693af2ee979d2d083c8e59e14b99da2eb7900c6e9b09a72241ba84f880",
+                "bytes": 300000
+              },
+              {
+                "sha256": "6174c3470c3e825ce854b566121d3893f08b95bfe7f52dcd6db88fc3731e61b3",
+                "bytes": 300000
+              },
+              {
+                "sha256": "41d61f02df02ad6bdde933691cd03b5ebb351e4f83d9f086e94614ace7f5afc1",
+                "bytes": 292639
+              }
+            ]
+          },
+          {
+            "id": "user_patch",
+            "source_sha256": "4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6",
+            "wasm_sha256": "a18b6290ed78885a2be58c3fe37b39813880f8f82d71347f6ccef12c9004764a",
+            "claim": "Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct",
+            "bounty_id": "1",
+            "chunks": [
+              {
+                "sha256": "f2435fc5cfe7e3e6b7f65138c31c3d095a5350a1b2b0ca9e0bdc276eec8bb47b",
+                "bytes": 300000
+              },
+              {
+                "sha256": "08e16880623df6591a8aab09c0fbdef626707d25c64dba559c01bbb827f0c95b",
+                "bytes": 300000
+              },
+              {
+                "sha256": "e7f0df7151e64d13e611e3796ac07d978a649c5c47be8df72be012f0cbfc3915",
+                "bytes": 300000
+              },
+              {
+                "sha256": "aae87ad4ab40eb5686f005a045a67a4c1600177c24d427f4993cd481ad021883",
+                "bytes": 300000
+              },
+              {
+                "sha256": "2d104d4dfe77d335b98267b17afe9700f10300cf2988273c745973098b729786",
+                "bytes": 292719
+              }
+            ]
+          }
+        ],
+        "staged": [
+          [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Upgrade preserves existing contract balances",
+      "ok": true,
+      "detail": {
+        "before_upgrade": "901",
+        "after_upgrade": "901",
+        "after_refund": "901"
+      }
+    },
+    {
+      "name": "The same live account now returns 1 from a deposit of 1",
+      "ok": true
+    },
+    {
+      "name": "No full-access key on kernel.test.near",
+      "ok": true
+    },
+    {
+      "name": "No full-access key on board.test.near",
+      "ok": true
+    },
+    {
+      "name": "No full-access key on gate.test.near",
+      "ok": true
+    },
+    {
+      "name": "No full-access key on target.test.near",
+      "ok": true
+    }
+  ],
+  "record": "upgrade.json",
+  "implementation_after": "8a555999089bb982ad3b026bf754a66c43999b42ff0ed9021286d6a028e7bdd7",
+  "implementation_unchanged": true,
+  "finished": "2026-11-13T18:36:57.992021+00:00",
+  "full_record_sha256": "a822c0d268bfd023aa2758abfb2ce6abff89a01b27197112a26bfea860c4f242"
+}

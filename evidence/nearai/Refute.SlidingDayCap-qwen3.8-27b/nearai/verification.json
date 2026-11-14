@@ -1,0 +1,196 @@
+{
+ "model": "Qwen/Qwen3.8-27B",
+ "ok": true,
+ "checks": [
+  {
+   "check": "gateway: TDX quote v4, signed by a key certified under the Intel SGX Root CA; TD not in debug mode",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "gateway: report_data binds the signing key and the agent's nonce",
+   "ok": true,
+   "detail": "40599fb284f43953\u2026 || 1a77a91cb72b4c36\u2026"
+  },
+  {
+   "check": "gateway: MRCONFIGID is the sha256 of app_compose",
+   "ok": true,
+   "detail": "73dbb78cccfdfd69\u2026"
+  },
+  {
+   "check": "gateway: the event log replays to the quote's RTMR3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "the report has model evidence, fetched for the model the agent asked for",
+   "ok": true,
+   "detail": "Qwen/Qwen3.8-27B"
+  },
+  {
+   "check": "model report 1: TDX quote v4, signed by a key certified under the Intel SGX Root CA; TD not in debug mode",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1: report_data binds the signing key and the agent's nonce",
+   "ok": true,
+   "detail": "89154a43a4768474\u2026 || 1a77a91cb72b4c36\u2026"
+  },
+  {
+   "check": "model report 1: MRCONFIGID is the sha256 of app_compose",
+   "ok": true,
+   "detail": "e8416a02d6f7ce47\u2026"
+  },
+  {
+   "check": "model report 1: the event log replays to the quote's RTMR3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1, compose manager: TDX quote v4, signed by a key certified under the Intel SGX Root CA; TD not in debug mode",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1, compose manager: report_data binds the action log and the agent's nonce",
+   "ok": true,
+   "detail": "c590fb9ddfdda2c7\u2026 || 1a77a91cb72b4c36\u2026"
+  },
+  {
+   "check": "model report 1, compose manager: the event log replays to the quote's RTMR3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1: the compose manager's quote carries the model quote's measurements (MRTD, RTMR0-3, MRCONFIGID)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "model report 1: the attested action log names the deployment last started",
+   "ok": true,
+   "detail": "prod/small-models.yaml (commit eb5fd4bc1d, sha256 f5455af6fbf7\u2026, 2026-11-11T00:13:56)"
+  },
+  {
+   "check": "model report 1: GPU evidence is present and carries the nonce (its content is NOT verified here)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "response 0001: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "1ce0774c0c\u2026/256b2f3def\u2026"
+  },
+  {
+   "check": "response 0002: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "2a706e64cc\u2026/e3a4cef2fe\u2026"
+  },
+  {
+   "check": "response 0003: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "3b5e3f2fb1\u2026/248de8dc28\u2026"
+  },
+  {
+   "check": "response 0004: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "6a3848dab6\u2026/e187e13c1d\u2026"
+  },
+  {
+   "check": "response 0005: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "32dab98bc9\u2026/db5e52d859\u2026"
+  },
+  {
+   "check": "response 0006: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "99e2a6a2e9\u2026/4e3d2c1ebe\u2026"
+  },
+  {
+   "check": "response 0007: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "a0d22976dc\u2026/0f76c5d79b\u2026"
+  },
+  {
+   "check": "response 0008: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "1b402d477c\u2026/870a458757\u2026"
+  },
+  {
+   "check": "response 0009: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "39c6cc7f00\u2026/957838d265\u2026"
+  },
+  {
+   "check": "response 0010: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "62305e9548\u2026/bc783db385\u2026"
+  },
+  {
+   "check": "response 0011: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "fa38267f7b\u2026/3b0ca231d4\u2026"
+  },
+  {
+   "check": "response 0012: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "191784a452\u2026/a69056225d\u2026"
+  },
+  {
+   "check": "response 0013: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "3fde7bae03\u2026/0b309c9b64\u2026"
+  },
+  {
+   "check": "response 0014: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "a76a6738e7\u2026/4ca4beaee3\u2026"
+  },
+  {
+   "check": "response 0015: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "48387f5974\u2026/7d33b3a326\u2026"
+  },
+  {
+   "check": "response 0016: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "c35419b648\u2026/e578c57139\u2026"
+  },
+  {
+   "check": "response 0017: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "a8629037bc\u2026/62060f7f97\u2026"
+  },
+  {
+   "check": "response 0018: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "ee4193908c\u2026/bdbd254824\u2026"
+  },
+  {
+   "check": "response 0019: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "78bf927327\u2026/3206e0e52e\u2026"
+  },
+  {
+   "check": "response 0020: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "7a6aa861b8\u2026/e234007cb9\u2026"
+  },
+  {
+   "check": "response 0021: provider_tee signature over the model id and sha256 of the request and response bytes, by an attested key",
+   "ok": true,
+   "detail": "133d0fa2f9\u2026/0484c231a8\u2026"
+  },
+  {
+   "check": "21 of 21 responses carry a valid signature",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "Solution.lean is, byte for byte, the last write_solution call in the responses signed by the model's key",
+   "ok": true,
+   "detail": "response 0018, sha256 5bc1799fdefaa57c\u2026"
+  }
+ ]
+}

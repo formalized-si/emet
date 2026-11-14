@@ -1,0 +1,11 @@
+{
+  "base_sha256": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+  "base_bytes": 877505,
+  "base_decls": 534,
+  "codec": "lz4",
+  "chunks": [
+    "chunk-0000.bin",
+    "chunk-0001.bin"
+  ],
+  "stored_bytes": 250010
+}

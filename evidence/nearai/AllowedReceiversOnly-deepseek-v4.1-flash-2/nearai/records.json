@@ -1,0 +1,520 @@
+{
+ "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+ "signing_algo": "ed25519",
+ "base_url": "https://cloud-api.near.ai/v1",
+ "nonce": "c0987de3fcee26e43d0e0138f84e600d91cc153d94929d081fe4e41a3762d946",
+ "attestation_http": 200,
+ "attestation_fetched_at": "2026-11-11T18:40:56Z",
+ "records": [
+  {
+   "n": "0001",
+   "chat_id": "chatcmpl-0693e904-7592-4819-a5ff-b3f61f3f208e",
+   "received_at": "2026-11-11T18:40:59Z",
+   "request_sha256": "4630965d48e56b007355ff65d8b4245bf80cd3248bc03285a817ade2ceb9999a",
+   "response_sha256": "4ef0477db07f4ba369968079d1cc589ab217fc0f254c748f6732673623e95168",
+   "prompt_tokens": 997,
+   "completion_tokens": 83,
+   "cost_usd": 0.000399
+  },
+  {
+   "n": "0002",
+   "chat_id": "chatcmpl-ced7c73b-2b91-4078-b280-2906ba69db49",
+   "received_at": "2026-11-11T18:41:03Z",
+   "request_sha256": "ec3f66bb76690fdbe4a9fb6284095e47eab704728295f3293d3505681cb5b758",
+   "response_sha256": "849fa6f7271c06cd7f614da9a207b491e0cc6b38e8939764350d02696f737cd1",
+   "prompt_tokens": 4012,
+   "completion_tokens": 75,
+   "cost_usd": 0.001294
+  },
+  {
+   "n": "0003",
+   "chat_id": "chatcmpl-5a602757-c587-420f-a28d-9cdfdf0ead9d",
+   "received_at": "2026-11-11T18:46:49Z",
+   "request_sha256": "0e1875114a2a1b6ff6d60030a3e975b2f41834e0d80b195811cda357aa0c53e4",
+   "response_sha256": "8e8b7c587e2913bf98e10686de9721e0b338ec331b33513510e251455561f6dd",
+   "prompt_tokens": 5988,
+   "completion_tokens": 13667,
+   "cost_usd": 0.018197
+  },
+  {
+   "n": "0004",
+   "chat_id": "chatcmpl-011aa193-94f7-47d3-9be5-ec228730c6ea",
+   "received_at": "2026-11-11T18:51:25Z",
+   "request_sha256": "c9eba7677087a02313c29287d69c0dc51df26d2af5b4baa43e9cfc7dc40f9266",
+   "response_sha256": "f21c20e71a800895f076c4d4b9f585c70bb379f7e882d91160b948ef4de350d8",
+   "prompt_tokens": 6779,
+   "completion_tokens": 9581,
+   "cost_usd": 0.013531
+  },
+  {
+   "n": "0005",
+   "chat_id": "chatcmpl-90e62ecc-95a9-4a77-a437-b3cad9ed46e8",
+   "received_at": "2026-11-11T18:58:10Z",
+   "request_sha256": "938462321faa7be69b4310e8a83e206d7f8b4151578e4ad481c6b69a40441223",
+   "response_sha256": "b8ffdf1c34a4fa305b56491eaa8f4ef3a6abc29b89fd943398e7be4fe84dd1d7",
+   "prompt_tokens": 7655,
+   "completion_tokens": 8339,
+   "cost_usd": 0.012303
+  },
+  {
+   "n": "0006",
+   "chat_id": "chatcmpl-b151849f-e402-4834-a5e7-551ceba89405",
+   "received_at": "2026-11-11T18:58:24Z",
+   "request_sha256": "fb6569caa7ff19d0bc0dc5b7b7469db719ee3b6facdd442f0cbbc996113d09f3",
+   "response_sha256": "e9eb679928cf20d309d2e764fa7b5b01c12beb5deac356ca2bd4369ec36df6ea",
+   "prompt_tokens": 7728,
+   "completion_tokens": 278,
+   "cost_usd": 0.002652
+  },
+  {
+   "n": "0007",
+   "chat_id": "chatcmpl-f2581c4e-df88-4eeb-8cd7-fac729c020c1",
+   "received_at": "2026-11-11T19:06:44Z",
+   "request_sha256": "d491cd5028296c328c63c59651ab718709b801e59cf27108b1bd854a7bbbb1db",
+   "response_sha256": "cf7982fc1e9875248e11c0a459e44992a33b3780f50cbe001860e00ece3cb311",
+   "prompt_tokens": 8005,
+   "completion_tokens": 16000,
+   "cost_usd": 0.021601
+  },
+  {
+   "n": "0008",
+   "chat_id": "chatcmpl-6c7c235d-f590-4c6b-9130-46a96508d90a",
+   "received_at": "2026-11-11T19:11:46Z",
+   "request_sha256": "c99c0cbe0dd8b4ded90cd630c8320d10286a66dfa6654303de0072ef31f9b3ad",
+   "response_sha256": "8583eeac09c2da2957ee4573092780719030b7a632b5f7f4a6f9ce3ab1f018b0",
+   "prompt_tokens": 8051,
+   "completion_tokens": 8377,
+   "cost_usd": 0.012468
+  },
+  {
+   "n": "0009",
+   "chat_id": "chatcmpl-7b7b2c9b-e5ba-402b-b735-7f5f7c0052c3",
+   "received_at": "2026-11-11T19:11:48Z",
+   "request_sha256": "2b81ec54212c76b3be5de4f097e6dccf4b9a96f165c4b07dcb1b7881aae9a874",
+   "response_sha256": "e028ecbe26af0ad6f2a3958fe316adaf5b40a8d7811c0d690916b2e14be755da",
+   "prompt_tokens": 8265,
+   "completion_tokens": 24,
+   "cost_usd": 0.002508
+  },
+  {
+   "n": "0010",
+   "chat_id": "chatcmpl-89047149-d213-4f15-b02a-63e1509b79ed",
+   "received_at": "2026-11-11T19:11:58Z",
+   "request_sha256": "65c4126f34557002fef9d7569c321ac8b7add42f0b559045ceafeb52c2a81f1e",
+   "response_sha256": "5b14801bca2bf0836d7e84f9f2c2c2a4637824f870a8344ea51f37b1dd1fc53a",
+   "prompt_tokens": 8683,
+   "completion_tokens": 439,
+   "cost_usd": 0.003132
+  },
+  {
+   "n": "0011",
+   "chat_id": "chatcmpl-d1a58415-e147-43f2-a5e5-653586c88df4",
+   "received_at": "2026-11-11T19:12:00Z",
+   "request_sha256": "ce5761a6260ff32cdf7a384ad951894b71c6e2bc17a5910963d3e80b8190aa8f",
+   "response_sha256": "2b9b54c4d45ae06ca2bbd4bf773c44aaf69f60084be807dba4802c5a389baedd",
+   "prompt_tokens": 8900,
+   "completion_tokens": 24,
+   "cost_usd": 0.002699
+  },
+  {
+   "n": "0012",
+   "chat_id": "chatcmpl-a7c451e9-2593-43b0-9552-386242c5d50e",
+   "received_at": "2026-11-11T19:12:06Z",
+   "request_sha256": "0b84f236069d1d8e8fcae143d25a855c81c9c76d22b5106a08876b55e7bb2f63",
+   "response_sha256": "88506f5758446cae94fb057815f80fb75bb6a61a1bb1a907dc4931eb823c68f7",
+   "prompt_tokens": 9002,
+   "completion_tokens": 281,
+   "cost_usd": 0.003038
+  },
+  {
+   "n": "0013",
+   "chat_id": "chatcmpl-aafedbea-0964-4e47-934e-8cbe8ae800a1",
+   "received_at": "2026-11-11T19:12:09Z",
+   "request_sha256": "e1d280511cf743b38e0aa0d2424239765dccc8c4806b9e3054de48f22cad0077",
+   "response_sha256": "408c2026e0e730dd39df81c99c21f17114855f1c03557c66796a8f4ed0858ea4",
+   "prompt_tokens": 9218,
+   "completion_tokens": 24,
+   "cost_usd": 0.002794
+  },
+  {
+   "n": "0014",
+   "chat_id": "chatcmpl-df075468-24ee-4008-955e-df1e5d08d7a6",
+   "received_at": "2026-11-11T19:14:32Z",
+   "request_sha256": "2df1ffe4ccec839161f8025d1262aa1f43f24f7d88d9db76fdb06b25c71ce7c6",
+   "response_sha256": "576191186c56a4242072e0113a43c4d7ea5c72608b3bed3dda92d2206f38cb75",
+   "prompt_tokens": 9313,
+   "completion_tokens": 5804,
+   "cost_usd": 0.009759
+  },
+  {
+   "n": "0015",
+   "chat_id": "chatcmpl-9ca67d93-5e9f-4084-85eb-8ccf81150971",
+   "received_at": "2026-11-11T19:14:34Z",
+   "request_sha256": "a84956e37e05be4583dbd85a1d60106fe34c18b76880487f65ed90c72a119522",
+   "response_sha256": "6b5ed95ef95d66346b7959e946687931c38233b445fb9a3c1d1608a818eae554",
+   "prompt_tokens": 9757,
+   "completion_tokens": 24,
+   "cost_usd": 0.002956
+  },
+  {
+   "n": "0016",
+   "chat_id": "chatcmpl-ca7275af-4d75-4ff1-970b-38d54494ddaf",
+   "received_at": "2026-11-11T19:14:58Z",
+   "request_sha256": "c9a510f7f42d4a7b3485b9d4578231e56d2db7977363ede76363f9684620dec1",
+   "response_sha256": "f8fad318c8dd2a3eb2dcc3fd7f87d273d95159e4a8d71dad52dabaa05a06adf6",
+   "prompt_tokens": 9995,
+   "completion_tokens": 789,
+   "cost_usd": 0.003945
+  },
+  {
+   "n": "0017",
+   "chat_id": "chatcmpl-278b5dba-dc56-4f96-8e76-53fde9d132d3",
+   "received_at": "2026-11-11T19:15:00Z",
+   "request_sha256": "b2566d1829a059978fdb62f4b6c3c142a50d760743c91c2785b966e7bcf8449f",
+   "response_sha256": "08dd1a6598384838eaba638fa5c1014cb7a0b55d412f03026fad97dcd3d0eaab",
+   "prompt_tokens": 10418,
+   "completion_tokens": 24,
+   "cost_usd": 0.003154
+  },
+  {
+   "n": "0018",
+   "chat_id": "chatcmpl-1ec5141b-0f46-4cfc-8fc4-67a40e3490a0",
+   "received_at": "2026-11-11T19:15:35Z",
+   "request_sha256": "9593d4b77a535df1b46786f934a1c418daff4756628b4c8c706f9f55142d0561",
+   "response_sha256": "907146bf2ed80335e8ea73dd46ecd525dcfce19ca0544d8969b4c1dbcc28f03e",
+   "prompt_tokens": 10746,
+   "completion_tokens": 1527,
+   "cost_usd": 0.005056
+  },
+  {
+   "n": "0019",
+   "chat_id": "chatcmpl-f4258e3c-ab55-48ed-8a36-595fbcc8c4dd",
+   "received_at": "2026-11-11T19:15:36Z",
+   "request_sha256": "f426cfb73f81b1244912f154df9beeb54c3f132269af6c53cc9a7ec89e9bb5d2",
+   "response_sha256": "1ce5710c620389ba0e3f6420fad2c51715b857b9f09a707939fd6522240fc5d1",
+   "prompt_tokens": 10904,
+   "completion_tokens": 24,
+   "cost_usd": 0.0033
+  },
+  {
+   "n": "0020",
+   "chat_id": "chatcmpl-a90c06e1-01dd-44d2-b490-cf5788851198",
+   "received_at": "2026-11-11T19:16:46Z",
+   "request_sha256": "a61fc90562d728d20e0d6a945b902fd81464882a7e0bad7949178d2554217e99",
+   "response_sha256": "c20a8348a69a03bcfdf3cfe35b8082fd9e329b536247e5dc84246d3fdd621bfc",
+   "prompt_tokens": 10986,
+   "completion_tokens": 2683,
+   "cost_usd": 0.006515
+  },
+  {
+   "n": "0021",
+   "chat_id": "chatcmpl-008ceb40-d9e1-4b45-9b1f-aaff82279cd6",
+   "received_at": "2026-11-11T19:16:47Z",
+   "request_sha256": "bc0b45cdb3e2533995fc13a8a411a4fee086de8bb6936759d9158dc4f86fad8f",
+   "response_sha256": "64a24cc0200076e30f415700a88496a41d92e6749313f7dfbb2022d3c92bc58a",
+   "prompt_tokens": 11288,
+   "completion_tokens": 24,
+   "cost_usd": 0.003415
+  },
+  {
+   "n": "0022",
+   "chat_id": "chatcmpl-0ffc2e44-19e8-486d-bdea-647885e6512d",
+   "received_at": "2026-11-11T19:18:32Z",
+   "request_sha256": "ab91e4dd58fadf17acd5f2052351b4e92a81b08fb1ed2ca2d5ae2eeff293360f",
+   "response_sha256": "8be2e9fe80e3c05aa5a65a370f3861e53db4197c71ee804af6d91dd5085b21c0",
+   "prompt_tokens": 11384,
+   "completion_tokens": 4291,
+   "cost_usd": 0.008564
+  },
+  {
+   "n": "0023",
+   "chat_id": "chatcmpl-e3b89929-5570-4d2c-88ab-80af3bde7f3d",
+   "received_at": "2026-11-11T19:18:37Z",
+   "request_sha256": "10ddc204d86ecd6727429b09eb10e3ff54f5616c56bd8611b9f3850c05e3f850",
+   "response_sha256": "23ee3fdf13efd98126d3f808d3100e09f819526b053cb419e27eb6cffd2be731",
+   "prompt_tokens": 11728,
+   "completion_tokens": 24,
+   "cost_usd": 0.003547
+  },
+  {
+   "n": "0024",
+   "chat_id": "chatcmpl-ede28197-2a5d-4c93-8033-b17509f93d37",
+   "received_at": "2026-11-11T19:19:02Z",
+   "request_sha256": "4edb84147e4a4e74a4533e8fe531caf4f1936813a0f5000444891f088e942501",
+   "response_sha256": "bb20167dd5cfe5f0b5ee408aeed68affc16d66809aa86812cf77ebfd1f372157",
+   "prompt_tokens": 11881,
+   "completion_tokens": 548,
+   "cost_usd": 0.004222
+  },
+  {
+   "n": "0025",
+   "chat_id": "chatcmpl-7d21c464-47ba-41ad-a503-7da36af2cbc2",
+   "received_at": "2026-11-11T19:19:04Z",
+   "request_sha256": "9d4b10c49abb3ef838a9f31facac45fb72017667783c5aef902a3bbbce6ded50",
+   "response_sha256": "d3dac25957675789a4b3ff79cc8cdb2cfac19e502b5a4742b346253435832ecd",
+   "prompt_tokens": 12449,
+   "completion_tokens": 24,
+   "cost_usd": 0.003763
+  },
+  {
+   "n": "0026",
+   "chat_id": "chatcmpl-bf18572c-2a6f-4429-afdb-dfa2c49c16f9",
+   "received_at": "2026-11-11T19:20:35Z",
+   "request_sha256": "e1a1251bc0905bb7a8d3171154f2c9ffaa378a4dc432888309472ea59887db48",
+   "response_sha256": "cd33f29f90020d36a18cdd0fc053b46eeea1225bb8c31a946a4fd391efaec470",
+   "prompt_tokens": 12499,
+   "completion_tokens": 3394,
+   "cost_usd": 0.007822
+  },
+  {
+   "n": "0027",
+   "chat_id": "chatcmpl-f988330f-001b-4b03-b257-3beb556bbebe",
+   "received_at": "2026-11-11T19:20:37Z",
+   "request_sha256": "cca444467e5c19b47bc250f338755d5e58b4489b76bac29b84991d9af640a0c3",
+   "response_sha256": "78ee41d096bd0d94978b5b76d804f18f6eba0d56a8a92ac4455addc5f264da57",
+   "prompt_tokens": 13004,
+   "completion_tokens": 24,
+   "cost_usd": 0.00393
+  },
+  {
+   "n": "0028",
+   "chat_id": "chatcmpl-958b8940-ed3e-4070-b219-98e4ce98beb4",
+   "received_at": "2026-11-11T19:26:26Z",
+   "request_sha256": "46bb8c5a2ee5dee52ef394f244fe8291e03427e6b33eedec6ff2ec4d27674f03",
+   "response_sha256": "18b4d80121a8fc2063381b5ca3d76091ad09aa7e9b5de5e613bbb036aa19698e",
+   "prompt_tokens": 13156,
+   "completion_tokens": 8023,
+   "cost_usd": 0.013574
+  },
+  {
+   "n": "0029",
+   "chat_id": "chatcmpl-0548abe7-7d24-4a7f-beea-b82bc65619fd",
+   "received_at": "2026-11-11T19:26:33Z",
+   "request_sha256": "ddd4252fd19c3eb9e9ec14046698e048bb68131c53c1a88fcdd20a45d6a09afc",
+   "response_sha256": "5768e4ab6ab78fafe2243f9f1b191eae82894fc4b3322450e9aa8c3b98dae3a1",
+   "prompt_tokens": 13305,
+   "completion_tokens": 24,
+   "cost_usd": 0.00402
+  },
+  {
+   "n": "0030",
+   "chat_id": "chatcmpl-f71eede0-5f0b-4641-8818-a38c9787b428",
+   "received_at": "2026-11-11T19:27:44Z",
+   "request_sha256": "f67b1ed224cfa7e19163ce2b78fb95d137f9d47c86f7b8c906b17edc034de6ad",
+   "response_sha256": "74e6a9dfaf1a3209ab13f527c50ecf64ae33b01ff8c1625c461ee45169c43af3",
+   "prompt_tokens": 13355,
+   "completion_tokens": 2478,
+   "cost_usd": 0.00698
+  },
+  {
+   "n": "0031",
+   "chat_id": "chatcmpl-bc51d85f-d5c9-45f7-b595-36827152dfa8",
+   "received_at": "2026-11-11T19:27:48Z",
+   "request_sha256": "33fd37f2ff03b4f0363eda622f18e01d660cf38c359bb62aa28672e1d229f672",
+   "response_sha256": "1fc9e5b6f1bdf0d69e9cf5207e023c41c16b6592d2ea6896551292e72322da6e",
+   "prompt_tokens": 13535,
+   "completion_tokens": 24,
+   "cost_usd": 0.004089
+  },
+  {
+   "n": "0032",
+   "chat_id": "chatcmpl-e29e0a20-3c73-4b06-b172-44380f2d7dc1",
+   "received_at": "2026-11-11T19:29:21Z",
+   "request_sha256": "cf2d2730ad3037ef5e8e4b0aa1a48d1476827df1c2f51925e2ecb4e7717a76cc",
+   "response_sha256": "567e0638da8979f034e099a05b8e93b73b5beab88121d4ca9ae07a3242cb6c7b",
+   "prompt_tokens": 14034,
+   "completion_tokens": 3252,
+   "cost_usd": 0.008113
+  },
+  {
+   "n": "0033",
+   "chat_id": "chatcmpl-1c50320e-eded-4396-89c6-00771bc6f51c",
+   "received_at": "2026-11-11T19:29:23Z",
+   "request_sha256": "9152f8dc34d139d501418a8f45fd2ca19224d2279adde58f2dc15c73aabaebfa",
+   "response_sha256": "493b25c25a0efc1b1d94363f0d0915ced3bca81048807d4a1efd287d51ff2400",
+   "prompt_tokens": 14232,
+   "completion_tokens": 24,
+   "cost_usd": 0.004298
+  },
+  {
+   "n": "0034",
+   "chat_id": "chatcmpl-c98dadb1-ea7d-450d-a1dd-0d732aa22c3d",
+   "received_at": "2026-11-11T19:31:11Z",
+   "request_sha256": "df6dfc10f84440254669d73189e7b28bc7ef91673c0b3cac42a7757de78880af",
+   "response_sha256": "f64b8c6db33cbc7dc89bb160af106942c53add00866cadd5eeeea2496d32c868",
+   "prompt_tokens": 14727,
+   "completion_tokens": 3138,
+   "cost_usd": 0.008184
+  },
+  {
+   "n": "0035",
+   "chat_id": "chatcmpl-4fef5101-f438-40a2-b641-7f645d33837c",
+   "received_at": "2026-11-11T19:31:13Z",
+   "request_sha256": "843a0a1cc527972eca6a8d035fc85e464557e2937a302d0c7e42431afb08179b",
+   "response_sha256": "0ccf21e8d87c6c277966b26db7d7933bf0d6b5aa1106ec0aaa93e7704e462cce",
+   "prompt_tokens": 14877,
+   "completion_tokens": 24,
+   "cost_usd": 0.004492
+  },
+  {
+   "n": "0036",
+   "chat_id": "chatcmpl-0b9f7183-d4cf-4440-a12e-8d2dcdfb3dfa",
+   "received_at": "2026-11-11T19:32:29Z",
+   "request_sha256": "3c452088cd8252808465863cdf33430aacb777a1bdd25b3c6bc8ce9a2ce8b47a",
+   "response_sha256": "02442cb1f946dca46fbc09f2c5dd0566b26b797db55fb76bbe512251a0fb654c",
+   "prompt_tokens": 14927,
+   "completion_tokens": 2429,
+   "cost_usd": 0.007393
+  },
+  {
+   "n": "0037",
+   "chat_id": "chatcmpl-a8c7e645-aa44-426d-9a94-274adf7f665c",
+   "received_at": "2026-11-11T19:32:34Z",
+   "request_sha256": "1209f6e599a5f00441593aceaeedd9a8a166691ba49286c02809a3c34704d9a5",
+   "response_sha256": "350c1ed5fa76a0a70297207dbbbe157be0e353e8510f420eb9b5737256c82424",
+   "prompt_tokens": 15634,
+   "completion_tokens": 24,
+   "cost_usd": 0.004719
+  },
+  {
+   "n": "0038",
+   "chat_id": "chatcmpl-ac488a8c-12f3-42a9-a0d0-5ed5905d8399",
+   "received_at": "2026-11-11T19:33:31Z",
+   "request_sha256": "15e07e5650e824cab29597715e714eb7588efb961543c1d61084c925dc992d4d",
+   "response_sha256": "e12b97692162d711b2e61b8ed68b9313a234eafa642d399541280854540f42a2",
+   "prompt_tokens": 15786,
+   "completion_tokens": 1954,
+   "cost_usd": 0.007081
+  },
+  {
+   "n": "0039",
+   "chat_id": "chatcmpl-49a67f4d-6382-4559-b122-fa7182d9c94e",
+   "received_at": "2026-11-11T19:33:33Z",
+   "request_sha256": "24a48ad15989ba4b9c26e08d56fca70a2ad40a6d5f41c2db47c5bbc2667f9101",
+   "response_sha256": "1a317ab93e5e749e742dd94a226efa5e689d8533c9a8c77c85cb15d91b0ab73c",
+   "prompt_tokens": 16468,
+   "completion_tokens": 24,
+   "cost_usd": 0.004969
+  },
+  {
+   "n": "0040",
+   "chat_id": "chatcmpl-3577a361-313d-4397-8f67-44ea8f3b493a",
+   "received_at": "2026-11-11T19:35:35Z",
+   "request_sha256": "9bcc2978b1e44ead1e69ca8e32f3be8f6234bbda07a18f70c8654553de68a658",
+   "response_sha256": "d22166da32361e4c0196f8602f20b5fb34d431fdb739def35d6c8290e6223160",
+   "prompt_tokens": 16518,
+   "completion_tokens": 4997,
+   "cost_usd": 0.010952
+  },
+  {
+   "n": "0041",
+   "chat_id": "chatcmpl-5a0f4043-f184-41ce-a745-b4f16bfc5a93",
+   "received_at": "2026-11-11T19:35:39Z",
+   "request_sha256": "e4479cb812231e1d6aa2ccf36b9f239fd272c18af0af90431074980796d827ef",
+   "response_sha256": "2686cb5a73d8ae7ec02c20c621fb1711be61f0190fbcca5a96defab0627d8b56",
+   "prompt_tokens": 17749,
+   "completion_tokens": 24,
+   "cost_usd": 0.005353
+  },
+  {
+   "n": "0042",
+   "chat_id": "chatcmpl-4ffbc04d-8659-4fd3-8ae6-f89b5c951c55",
+   "received_at": "2026-11-11T19:36:48Z",
+   "request_sha256": "c94775239a8bc53a1e92422c37ec208f39eff630d07c47ee869f37926b972f6d",
+   "response_sha256": "4f4471e3f6d0b07d4be85ab1a3a3eba332387541f893d2981f9bb1ce16f061ab",
+   "prompt_tokens": 18027,
+   "completion_tokens": 2762,
+   "cost_usd": 0.008722
+  },
+  {
+   "n": "0043",
+   "chat_id": "chatcmpl-c3adfbb5-3b6a-410a-819d-70765e7075b7",
+   "received_at": "2026-11-11T19:36:50Z",
+   "request_sha256": "606fc5cb2ad3dfeface82b3a37de5ff40b395aefe71341bbdab0a83781d66e0d",
+   "response_sha256": "a5bc8632287880e9a7dbdae7fa2bf96c28fa6794fa96816ebd0025e255f3c352",
+   "prompt_tokens": 19262,
+   "completion_tokens": 24,
+   "cost_usd": 0.005807
+  },
+  {
+   "n": "0044",
+   "chat_id": "chatcmpl-23e822d5-504d-420f-89b2-d8ed1197e313",
+   "received_at": "2026-11-11T19:38:39Z",
+   "request_sha256": "684a587521bd6a56a1f10da79edec408309d8f55a1255fcda3e49fc23a847ec1",
+   "response_sha256": "aab11e1a0a9759ce9ef668274880739ee62fe344ec57ce9103e5f719f40c8684",
+   "prompt_tokens": 19736,
+   "completion_tokens": 2542,
+   "cost_usd": 0.008971
+  },
+  {
+   "n": "0045",
+   "chat_id": "chatcmpl-b911b985-7489-4ebe-b871-63f480633dab",
+   "received_at": "2026-11-11T19:38:42Z",
+   "request_sha256": "4cabfa7eeb4b49357290b6f963a2b50405a93a23be50a0111580ca48bcb3dd1e",
+   "response_sha256": "5e265a3654ea6b3820c63f4c9e7484474ae5a248456c3089f98b259f9bc9149a",
+   "prompt_tokens": 20924,
+   "completion_tokens": 24,
+   "cost_usd": 0.006306
+  },
+  {
+   "n": "0046",
+   "chat_id": "chatcmpl-a9acf529-7efc-4fb5-bd7b-86439f605398",
+   "received_at": "2026-11-11T19:39:13Z",
+   "request_sha256": "97542afb1bb189c2246b3e7eff2c8688561078843371ce62655c38541c82c30e",
+   "response_sha256": "293e52bf715d0a4f1f52b516352990278945fa59503207e3f6dee6eb446a4467",
+   "prompt_tokens": 20980,
+   "completion_tokens": 1503,
+   "cost_usd": 0.008098
+  },
+  {
+   "n": "0047",
+   "chat_id": "chatcmpl-2b0fdaa9-e50f-4402-8745-7802871707e8",
+   "received_at": "2026-11-11T19:39:16Z",
+   "request_sha256": "9675d1c0f1b47e3e8fa52e2bcea7eb2446dd89870044572f8bd9cef815227e25",
+   "response_sha256": "bb5846eb34eca2dae2e852899b933237efd0d2cbcaa76540e2985fede1fa6b24",
+   "prompt_tokens": 22150,
+   "completion_tokens": 24,
+   "cost_usd": 0.006674
+  },
+  {
+   "n": "0048",
+   "chat_id": "chatcmpl-bb1ba1af-b890-40fb-954e-5c6101dcefef",
+   "received_at": "2026-11-11T19:39:22Z",
+   "request_sha256": "e833512c129aa77e305b46dfa5fb5a563674d5b6bb322584103a83e5cbb69eb4",
+   "response_sha256": "3b9da74d498510c0192f7625a88cdd4da2ffab8ec54424e7b258d143a043dcc8",
+   "prompt_tokens": 22200,
+   "completion_tokens": 43,
+   "cost_usd": 0.006712
+  },
+  {
+   "n": "0049",
+   "chat_id": "chatcmpl-86d99f3c-378c-48c2-be44-e8bd1d654a4b",
+   "received_at": "2026-11-11T19:40:33Z",
+   "request_sha256": "80e008fc932665d52bc596d2393395bedb1a7a32ec6c7271030a4d62b831a84d",
+   "response_sha256": "92b0ac69efcef9c822ecf12144e4f132961b1d51d68b20f2a981db0103e9ab08",
+   "prompt_tokens": 22568,
+   "completion_tokens": 2393,
+   "cost_usd": 0.009642
+  },
+  {
+   "n": "0050",
+   "chat_id": "chatcmpl-0b05d81f-8510-4853-979e-d2dd3301bbab",
+   "received_at": "2026-11-11T19:40:36Z",
+   "request_sha256": "321697dd57e2f7ffeee53ff187d6039868b3606d1efd145f0ab721f763d07451",
+   "response_sha256": "aadde6aa0a65d424899185a2acc515a60189e89dd65d8a95a3df0ae3cabd58b6",
+   "prompt_tokens": 23873,
+   "completion_tokens": 24,
+   "cost_usd": 0.007191
+  },
+  {
+   "n": "0051",
+   "chat_id": "chatcmpl-9d127eb7-0c87-4e2e-94c7-96f870f87b80",
+   "received_at": "2026-11-11T19:41:18Z",
+   "request_sha256": "544a79cf175fa6f6c4473cea0beaac97a415d89c4ee2a3f70515653663499ba8",
+   "response_sha256": "4c1b31739454a101c43ab88fa7cea1f628c24288c1cf050bd1dc225b9cdf46f7",
+   "prompt_tokens": 24201,
+   "completion_tokens": 1703,
+   "cost_usd": 0.009304
+  }
+ ]
+}

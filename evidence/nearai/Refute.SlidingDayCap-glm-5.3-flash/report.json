@@ -1,0 +1,108 @@
+{
+  "claim": "Wallet.Claim.Refute.SlidingDayCap",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-11T20:09:22Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "z-ai/glm-5.3-flash",
+    "model_owner": "nearai",
+    "seconds": 660.9,
+    "turns": 11,
+    "tool_calls": 13,
+    "solution_writes": 3,
+    "repair_rounds": 2,
+    "lean_runs": 3,
+    "lean_failures": 2,
+    "lost_responses": 0,
+    "prompt_tokens": 74018,
+    "completion_tokens": 16549,
+    "usd_per_token": {
+      "prompt": 8e-08,
+      "completion": 5e-07
+    },
+    "final": "DONE",
+    "cost_usd": 0.0142,
+    "signed_responses": 11,
+    "responses": 11,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' does not depend on any axioms\nSolution.proof : Wallet.Claim.Refute.SlidingDayCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 56876,
+    "delta_sha256": "ca69f836eb1912a407cb7d6b70d2f007c43e41e65a7fa58cc305e56d7eddd97a",
+    "decls": 11,
+    "heaviest": [
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 37414
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "List.Mem.casesOn",
+        "kind": "def",
+        "bytes": 3346
+      },
+      {
+        "name": "List.cons.noConfusion",
+        "kind": "def",
+        "bytes": 3175
+      },
+      {
+        "name": "List.noConfusionType",
+        "kind": "def",
+        "bytes": 3161
+      },
+      {
+        "name": "Solution.pC",
+        "kind": "def",
+        "bytes": 1071
+      },
+      {
+        "name": "List.ctorIdx",
+        "kind": "def",
+        "bytes": 1005
+      },
+      {
+        "name": "Solution.reqsC",
+        "kind": "def",
+        "bytes": 721
+      },
+      {
+        "name": "UInt8.instOfNat",
+        "kind": "def",
+        "bytes": 609
+      },
+      {
+        "name": "UInt8.ofNat",
+        "kind": "def",
+        "bytes": 437
+      },
+      {
+        "name": "Solution.sC",
+        "kind": "def",
+        "bytes": 373
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

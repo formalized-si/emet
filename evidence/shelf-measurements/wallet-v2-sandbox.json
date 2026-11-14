@@ -1,0 +1,113 @@
+{
+  "manifest": {
+    "base_sha256": "cdcc2c7e963e0572e85cb15a9b09a873ffb313a0ca68a9d90a91fc84566e9903",
+    "base_bytes": 1058735,
+    "base_decls": 589,
+    "codec": "lz4",
+    "chunks": [
+      "chunk-0000.bin",
+      "chunk-0001.bin",
+      "chunk-0002.bin"
+    ],
+    "stored_bytes": 300708
+  },
+  "calls": [
+    {
+      "label": "upload chunk-0000.bin",
+      "ok": true,
+      "tgas": 19.268174395094
+    },
+    {
+      "label": "upload chunk-0001.bin",
+      "ok": true,
+      "tgas": 19.345987888634
+    },
+    {
+      "label": "upload chunk-0002.bin",
+      "ok": true,
+      "tgas": 5.8064277566
+    },
+    {
+      "label": "seal_base",
+      "ok": true,
+      "tgas": 170.182785710636
+    },
+    {
+      "label": "check_base_range 0..64",
+      "ok": true,
+      "tgas": 147.07673905665
+    },
+    {
+      "label": "check_base_range 64..192",
+      "ok": true,
+      "tgas": 170.697408136731
+    },
+    {
+      "label": "check_base_range 192..448",
+      "ok": true,
+      "tgas": 269.965973890464
+    },
+    {
+      "label": "check_base_range 448..589",
+      "ok": true,
+      "tgas": 243.076637105475
+    },
+    {
+      "label": "check small-noBypassSequence",
+      "ok": true,
+      "tgas": 263.331576192087
+    },
+    {
+      "label": "check small-noBypassDaily",
+      "ok": true,
+      "tgas": 281.359379687277
+    }
+  ],
+  "cases": [
+    {
+      "label": "small-noBypassSequence",
+      "delta_bytes": 260920,
+      "ok_call": true,
+      "tgas": 263.331576192087,
+      "verdict_ok": true,
+      "reason": null,
+      "mode": "claim",
+      "proof_theorem": "Wallet.Small.noBypassSequence",
+      "decls_checked": 26,
+      "gas_read": 15939719619486,
+      "gas_parse": 135202605566955,
+      "gas_kernel": 72363311175939,
+      "statement_hash": "a5f108bd47c188a8c03609763953c599b3296cc82a09ac92c2fdb389c4d8f186"
+    },
+    {
+      "label": "small-noBypassDaily",
+      "delta_bytes": 315173,
+      "ok_call": true,
+      "tgas": 281.359379687277,
+      "verdict_ok": true,
+      "reason": null,
+      "mode": "claim",
+      "proof_theorem": "Wallet.Small.noBypassDaily",
+      "decls_checked": 40,
+      "gas_read": 15984356600754,
+      "gas_parse": 139863442613403,
+      "gas_kernel": 78760541850147,
+      "statement_hash": "a98106c6fbae4f0dcd27b28683859980bfb69aa9b0b0a4cef8cac0af3b7c3fee"
+    }
+  ],
+  "bootstrap_tgas": 1045.420133940284,
+  "bootstrap_seconds": 14.745,
+  "status": {
+    "owner": "test.near",
+    "chunks": 3,
+    "base_bytes": 1058735,
+    "stored_bytes": 300693,
+    "base_hash": "cdcc2c7e963e0572e85cb15a9b09a873ffb313a0ca68a9d90a91fc84566e9903",
+    "base_decls": 589,
+    "checked_upto": 589,
+    "sealed": true,
+    "axioms_in_base": [
+      "propext"
+    ]
+  }
+}

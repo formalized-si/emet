@@ -1,0 +1,101 @@
+{
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext]\nSolution.proof : Wallet.Claim.SlidingTwiceCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 388914,
+    "delta_sha256": "04e58ae21b7fc26cee69c6f384bb7ea126cd5f75a208fa9ffbff58a52e9a7045",
+    "decls": 44,
+    "heaviest": [
+      {
+        "name": "Solution.step_spec",
+        "kind": "thm",
+        "bytes": 106390
+      },
+      {
+        "name": "Solution.phase1._f",
+        "kind": "def",
+        "bytes": 48764
+      },
+      {
+        "name": "Solution.phase2._f",
+        "kind": "def",
+        "bytes": 45926
+      },
+      {
+        "name": "Solution.no_roll",
+        "kind": "thm",
+        "bytes": 38158
+      },
+      {
+        "name": "Solution.phase1.match_1_1",
+        "kind": "def",
+        "bytes": 15016
+      },
+      {
+        "name": "Solution.phase2.match_1_1",
+        "kind": "def",
+        "bytes": 12787
+      },
+      {
+        "name": "Solution.sub_toNat",
+        "kind": "thm",
+        "bytes": 11458
+      },
+      {
+        "name": "Solution.roll_spec",
+        "kind": "thm",
+        "bytes": 10740
+      },
+      {
+        "name": "Solution.sum_deny",
+        "kind": "thm",
+        "bytes": 8830
+      },
+      {
+        "name": "_private.Init.Data.Nat.Basic.0.Nat.sub_le_sub_left.match_1_1",
+        "kind": "def",
+        "bytes": 8817
+      },
+      {
+        "name": "Nat.mul_comm._f",
+        "kind": "def",
+        "bytes": 8063
+      },
+      {
+        "name": "Nat.succ_mul",
+        "kind": "thm",
+        "bytes": 8051
+      },
+      {
+        "name": "Solution.add_toNat",
+        "kind": "thm",
+        "bytes": 7345
+      },
+      {
+        "name": "Nat.sub_sub",
+        "kind": "thm",
+        "bytes": 6873
+      },
+      {
+        "name": "Nat.zero_mul._f",
+        "kind": "def",
+        "bytes": 4162
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

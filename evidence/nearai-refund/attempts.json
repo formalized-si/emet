@@ -1,0 +1,503 @@
+{
+ "attempts": [
+  {
+   "attempt": "deepseek-v4.1-flash-2",
+   "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+   "started": "2026-11-12T09:33:26Z",
+   "accepted": true,
+   "agent_final": "accepted in round 1",
+   "rounds": [
+    {
+     "round": 1,
+     "expression": "(requested_refund.min(*deposited)).min(balance_left)",
+     "patch": "bound",
+     "proof": "accepted",
+     "proof_bytes": 12401
+    }
+   ],
+   "requests": 3,
+   "signed_responses": "3/3",
+   "lost_responses": 0,
+   "cut_replies": 1,
+   "prompt_tokens": 11518,
+   "completion_tokens": 9159,
+   "cost_usd": 0.0144,
+   "billed_usd": 0.0123,
+   "model_seconds": 161.2,
+   "prompt_sha256": "9ae8f6c4edc70c71d23eb6b5c375308931bd46e502c0d375536103fd8c918efd",
+   "no_axioms_asked": false,
+   "expression": "(requested_refund.min(*deposited)).min(balance_left)",
+   "source_sha256": "2947c314ccccc30626af77a12695196d1d77e0f7055edca006fa56f6c529bec6",
+   "claim": "Refund.C_2947c314ccccc30626af77a12695196d1d77e0f7055edca006fa56f6c529bec6.Correct",
+   "proof_bytes": 12401,
+   "proof_sha256": "248e3458ed177c6c296812d8a169e7a65077c4ffc247942a90f1dd60afe6c716",
+   "base_sha256": "e06fb584d91cef9911147e911e7f453699b8b5ace0e6a93133007b88c1cff719",
+   "axioms": [],
+   "bound_without_a_proof": null,
+   "attestation_verified_offline": true,
+   "local_node": {
+    "state": "complete",
+    "candidate_status": "proved",
+    "installed": true,
+    "checks_passed": 14,
+    "checks": 14,
+    "kernel_tgas": 158.7,
+    "reveal_receipts_tgas": 169.6,
+    "bounty_phase": "Paid",
+    "bounty_winner": "prover.test.near",
+    "certificate_proved": "Refund.C_2947c314ccccc30626af77a12695196d1d77e0f7055edca006fa56f6c529bec6.Correct",
+    "certificate_axioms": [],
+    "certificate_delta_sha256": "248e3458ed177c6c296812d8a169e7a65077c4ffc247942a90f1dd60afe6c716",
+    "installed_wasm_sha256": "f24d072edcb76a81ef68471096b1e7756b948e5543f739421c71f20bfb6e0ce0",
+    "answer_before": "100",
+    "answer_after": "1",
+    "node": "near-sandbox 2.14.0, protocol 88",
+    "job_started": "2026-11-13T18:25:26Z",
+    "job_wall_seconds": 174.4,
+    "exported_again": true,
+    "code_sha256": {
+     "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+     "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+     "gate": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d"
+    },
+    "full_trace_kept": false
+   },
+   "statement_shown_vs_generated_now": "the same declarations, other comments",
+   "statement_lines_that_differ": [
+    [
+     "  (r = a.requested \u2228 r = a.deposited \u2228 r = a.balance)  -- and it is one of the three, so never less than they allow",
+     "  (r = a.requested \u2228 r = a.deposited \u2228 r = a.balance)  -- and never less than the three allow"
+    ]
+   ]
+  },
+  {
+   "attempt": "qwen3.8-27b-2",
+   "model": "Qwen/Qwen3.8-27B",
+   "started": "2026-11-12T09:38:52Z",
+   "accepted": true,
+   "agent_final": "accepted in round 2",
+   "rounds": [
+    {
+     "round": 1,
+     "expression": "requested_refund.min(*deposited).min(balance_left)",
+     "patch": "bound",
+     "proof": "rejected"
+    },
+    {
+     "round": 2,
+     "expression": "requested_refund.min(*deposited).min(balance_left)",
+     "patch": "bound",
+     "proof": "accepted",
+     "proof_bytes": 16663
+    }
+   ],
+   "requests": 5,
+   "signed_responses": "5/5",
+   "lost_responses": 0,
+   "cut_replies": 2,
+   "prompt_tokens": 21394,
+   "completion_tokens": 40501,
+   "cost_usd": 0.0555,
+   "billed_usd": 0.0553,
+   "model_seconds": 808.9,
+   "prompt_sha256": "9ae8f6c4edc70c71d23eb6b5c375308931bd46e502c0d375536103fd8c918efd",
+   "no_axioms_asked": false,
+   "expression": "requested_refund.min(*deposited).min(balance_left)",
+   "source_sha256": "63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f",
+   "claim": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+   "proof_bytes": 16663,
+   "proof_sha256": "0708a80b95f860c3c2f4312cd6b8f2908d3c73af36de40d262fe7cbf067a3f93",
+   "base_sha256": "19df256217ece38d8d52bc4918f7cfecfaf44c826b67443676e7051720c7e80b",
+   "axioms": [],
+   "bound_without_a_proof": null,
+   "attestation_verified_offline": true,
+   "local_node": {
+    "state": "complete",
+    "candidate_status": "proved",
+    "installed": true,
+    "checks_passed": 14,
+    "checks": 14,
+    "kernel_tgas": 161.9,
+    "reveal_receipts_tgas": 173.2,
+    "bounty_phase": "Paid",
+    "bounty_winner": "prover.test.near",
+    "certificate_proved": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+    "certificate_axioms": [],
+    "certificate_delta_sha256": "0708a80b95f860c3c2f4312cd6b8f2908d3c73af36de40d262fe7cbf067a3f93",
+    "installed_wasm_sha256": "f24d072edcb76a81ef68471096b1e7756b948e5543f739421c71f20bfb6e0ce0",
+    "answer_before": "100",
+    "answer_after": "1",
+    "node": "near-sandbox 2.14.0, protocol 88",
+    "job_started": "2026-11-13T18:28:21Z",
+    "job_wall_seconds": 171.5,
+    "exported_again": true,
+    "code_sha256": {
+     "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+     "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+     "gate": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d"
+    },
+    "full_trace_kept": false
+   },
+   "statement_shown_vs_generated_now": "the same declarations, other comments",
+   "statement_lines_that_differ": [
+    [
+     "  (r = a.requested \u2228 r = a.deposited \u2228 r = a.balance)  -- and it is one of the three, so never less than they allow",
+     "  (r = a.requested \u2228 r = a.deposited \u2228 r = a.balance)  -- and never less than the three allow"
+    ]
+   ]
+  },
+  {
+   "attempt": "glm-5.3-flash-2",
+   "model": "z-ai/glm-5.3-flash",
+   "started": "2026-11-12T09:55:12Z",
+   "accepted": false,
+   "agent_final": "stopped at the time limit of 1800 s",
+   "rounds": [],
+   "requests": 3,
+   "signed_responses": "3/3",
+   "lost_responses": 1,
+   "cut_replies": 2,
+   "prompt_tokens": 8991,
+   "completion_tokens": 11007,
+   "cost_usd": 0.0097,
+   "billed_usd": 0.0059,
+   "model_seconds": 2027.5,
+   "prompt_sha256": "9ae8f6c4edc70c71d23eb6b5c375308931bd46e502c0d375536103fd8c918efd",
+   "no_axioms_asked": false,
+   "expression": null,
+   "source_sha256": null,
+   "claim": null,
+   "proof_bytes": null,
+   "proof_sha256": null,
+   "base_sha256": null,
+   "axioms": null,
+   "bound_without_a_proof": "balance_left.min(requested_refund).min(*deposited)",
+   "attestation_verified_offline": true,
+   "local_node": null
+  },
+  {
+   "attempt": "deepseek-v4.1-flash-noaxioms",
+   "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+   "started": "2026-11-12T10:29:06Z",
+   "accepted": true,
+   "agent_final": "accepted in round 1",
+   "rounds": [
+    {
+     "round": 1,
+     "expression": "requested_refund.min(*deposited).min(balance_left)",
+     "patch": "bound",
+     "proof": "accepted",
+     "proof_bytes": 14189
+    }
+   ],
+   "requests": 2,
+   "signed_responses": "2/2",
+   "lost_responses": 0,
+   "cut_replies": 0,
+   "prompt_tokens": 7157,
+   "completion_tokens": 5264,
+   "cost_usd": 0.0085,
+   "billed_usd": 0.0069,
+   "model_seconds": 153.4,
+   "prompt_sha256": "9ae8f6c4edc70c71d23eb6b5c375308931bd46e502c0d375536103fd8c918efd",
+   "no_axioms_asked": true,
+   "expression": "requested_refund.min(*deposited).min(balance_left)",
+   "source_sha256": "63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f",
+   "claim": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+   "proof_bytes": 14189,
+   "proof_sha256": "0e1229ebb3187dbb55f57a97e3d363717b755c8d597c02872d9741605a119c36",
+   "base_sha256": "19df256217ece38d8d52bc4918f7cfecfaf44c826b67443676e7051720c7e80b",
+   "axioms": [],
+   "bound_without_a_proof": null,
+   "attestation_verified_offline": true,
+   "local_node": {
+    "state": "complete",
+    "candidate_status": "proved",
+    "installed": true,
+    "checks_passed": 14,
+    "checks": 14,
+    "kernel_tgas": 159.9,
+    "reveal_receipts_tgas": 170.9,
+    "bounty_phase": "Paid",
+    "bounty_winner": "prover.test.near",
+    "certificate_proved": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+    "certificate_axioms": [],
+    "certificate_delta_sha256": "0e1229ebb3187dbb55f57a97e3d363717b755c8d597c02872d9741605a119c36",
+    "installed_wasm_sha256": "f24d072edcb76a81ef68471096b1e7756b948e5543f739421c71f20bfb6e0ce0",
+    "answer_before": "100",
+    "answer_after": "1",
+    "node": "near-sandbox 2.14.0, protocol 88",
+    "job_started": "2026-11-13T18:31:13Z",
+    "job_wall_seconds": 173.0,
+    "exported_again": true,
+    "code_sha256": {
+     "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+     "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+     "gate": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d"
+    },
+    "full_trace_kept": false
+   },
+   "statement_shown_vs_generated_now": "the same declarations, other comments",
+   "statement_lines_that_differ": [
+    [
+     "  (r = a.requested \u2228 r = a.deposited \u2228 r = a.balance)  -- and it is one of the three, so never less than they allow",
+     "  (r = a.requested \u2228 r = a.deposited \u2228 r = a.balance)  -- and never less than the three allow"
+    ]
+   ]
+  },
+  {
+   "attempt": "glm-5.3-flash-3",
+   "model": "z-ai/glm-5.3-flash",
+   "started": "2026-11-12T10:37:12Z",
+   "accepted": true,
+   "agent_final": "accepted in round 2",
+   "rounds": [
+    {
+     "round": 1,
+     "expression": "balance_left.min(requested_refund).min(*deposited)",
+     "patch": "bound",
+     "proof": "rejected"
+    },
+    {
+     "round": 2,
+     "expression": "balance_left.min(requested_refund).min(*deposited)",
+     "patch": "bound",
+     "proof": "accepted",
+     "proof_bytes": 13648
+    }
+   ],
+   "requests": 4,
+   "signed_responses": "4/4",
+   "lost_responses": 1,
+   "cut_replies": 1,
+   "prompt_tokens": 15743,
+   "completion_tokens": 11715,
+   "cost_usd": 0.0097,
+   "billed_usd": 0.0066,
+   "model_seconds": 1208.8,
+   "prompt_sha256": "9ae8f6c4edc70c71d23eb6b5c375308931bd46e502c0d375536103fd8c918efd",
+   "no_axioms_asked": false,
+   "expression": "balance_left.min(requested_refund).min(*deposited)",
+   "source_sha256": "4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6",
+   "claim": "Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct",
+   "proof_bytes": 13648,
+   "proof_sha256": "cb2a2588dd531ee5ed4c6e1b82c45e899063a9c8832a881359babe817a4a51c3",
+   "base_sha256": "e008339e88d5afa7f1fa4edcb2dce7aedc8fa7079bba2622d74d7686e7315664",
+   "axioms": [
+    "propext"
+   ],
+   "bound_without_a_proof": null,
+   "attestation_verified_offline": true,
+   "local_node": {
+    "state": "complete",
+    "candidate_status": "proved",
+    "installed": true,
+    "checks_passed": 14,
+    "checks": 14,
+    "kernel_tgas": 159.2,
+    "reveal_receipts_tgas": 170.3,
+    "bounty_phase": "Paid",
+    "bounty_winner": "prover.test.near",
+    "certificate_proved": "Refund.C_4f5f5c35f5d1a3f22f5ffed0dc884d8a714fb96209e52b585e71aea6a2dd94d6.Correct",
+    "certificate_axioms": [
+     "propext"
+    ],
+    "certificate_delta_sha256": "cb2a2588dd531ee5ed4c6e1b82c45e899063a9c8832a881359babe817a4a51c3",
+    "installed_wasm_sha256": "a18b6290ed78885a2be58c3fe37b39813880f8f82d71347f6ccef12c9004764a",
+    "answer_before": "100",
+    "answer_after": "1",
+    "node": "near-sandbox 2.14.0, protocol 88",
+    "job_started": "2026-11-13T18:34:07Z",
+    "job_wall_seconds": 170.8,
+    "exported_again": true,
+    "code_sha256": {
+     "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+     "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+     "gate": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d"
+    },
+    "full_trace_kept": false
+   },
+   "statement_shown_vs_generated_now": "the same text",
+   "statement_lines_that_differ": []
+  }
+ ],
+ "superseded": [
+  {
+   "attempt": "deepseek-v4.1-flash",
+   "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+   "started": "2026-11-12T09:02:41Z",
+   "accepted": true,
+   "agent_final": "accepted in round 1",
+   "rounds": [
+    {
+     "round": 1,
+     "expression": "balance_left.min(requested_refund.min(*deposited))",
+     "patch": "bound",
+     "proof": "accepted",
+     "proof_bytes": 816
+    }
+   ],
+   "requests": 2,
+   "signed_responses": "2/2",
+   "lost_responses": 0,
+   "prompt_tokens": 6555,
+   "completion_tokens": 519,
+   "cost_usd": 0.0026,
+   "billed_usd": 0.0017,
+   "model_seconds": 13.3,
+   "prompt_sha256": "ce8b4fdbb80e20a61924dcad48ffebe4e5a23fd93f226f0de83fac213b30bbc4",
+   "expression": "balance_left.min(requested_refund.min(*deposited))",
+   "source_sha256": "7f201d809a25116faa2013caaf3a8d2ebdac6f4f189b00496a449ac00fd517a2",
+   "claim": "Refund.C_7f201d809a25116faa2013caaf3a8d2ebdac6f4f189b00496a449ac00fd517a2.Correct",
+   "proof_bytes": 816,
+   "proof_sha256": "a11e5b52fde0ac5680749149f3d19279abd97a39a92072de7881dd09cf7f25a2",
+   "base_sha256": "7236be3b973b42900606cb353fffac642910248f00ffd82c0b8a638f7a7c2512",
+   "attestation_verified_offline": true,
+   "local_node": {
+    "state": "complete",
+    "candidate_status": "proved",
+    "installed": true,
+    "checks_passed": 14,
+    "checks": 14,
+    "kernel_tgas": 130.9,
+    "reveal_receipts_tgas": 140.8,
+    "bounty_phase": "Paid",
+    "bounty_winner": "prover.test.near",
+    "certificate_proved": "Refund.C_7f201d809a25116faa2013caaf3a8d2ebdac6f4f189b00496a449ac00fd517a2.Correct",
+    "certificate_axioms": [
+     "propext"
+    ],
+    "certificate_delta_sha256": "a11e5b52fde0ac5680749149f3d19279abd97a39a92072de7881dd09cf7f25a2",
+    "installed_wasm_sha256": "e40ffe7f78344d111bf50d687a4c47186c4ed78a56d34389de8cba50f824d4a6",
+    "answer_before": "100",
+    "answer_after": "1",
+    "node": "near-sandbox 2.14.0, protocol 88",
+    "job_wall_seconds": 158.1,
+    "full_trace_kept": true
+   },
+   "superseded": {
+    "reason": "the Lean statement of the rule changed on 12 November 2026, from one equation with min (exactRefund) to four requirements (Rule, meetsRule); these attempts proved the earlier statement",
+    "evidence_in_commit": "an earlier revision of this work, which this repository does not hold"
+   }
+  },
+  {
+   "attempt": "qwen3.8-27b",
+   "model": "Qwen/Qwen3.8-27B",
+   "started": "2026-11-12T09:03:32Z",
+   "accepted": true,
+   "agent_final": "accepted in round 1",
+   "rounds": [
+    {
+     "round": 1,
+     "expression": "requested_refund.min(*deposited).min(balance_left)",
+     "patch": "bound",
+     "proof": "accepted",
+     "proof_bytes": 816
+    }
+   ],
+   "requests": 2,
+   "signed_responses": "2/2",
+   "lost_responses": 0,
+   "prompt_tokens": 6932,
+   "completion_tokens": 4305,
+   "cost_usd": 0.0061,
+   "billed_usd": 0.0061,
+   "model_seconds": 88.0,
+   "prompt_sha256": "ce8b4fdbb80e20a61924dcad48ffebe4e5a23fd93f226f0de83fac213b30bbc4",
+   "expression": "requested_refund.min(*deposited).min(balance_left)",
+   "source_sha256": "63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f",
+   "claim": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+   "proof_bytes": 816,
+   "proof_sha256": "3bb299800ee4b5c87f8ab921ef450763ce72578cf6cae09466bbad6f36393787",
+   "base_sha256": "2b7d487faf78c78f280c730f0736d464fa907ee0b263e6a7be2b4ecc7d0cf282",
+   "attestation_verified_offline": true,
+   "local_node": {
+    "state": "complete",
+    "candidate_status": "proved",
+    "installed": true,
+    "checks_passed": 14,
+    "checks": 14,
+    "kernel_tgas": 129.6,
+    "reveal_receipts_tgas": 139.5,
+    "bounty_phase": "Paid",
+    "bounty_winner": "prover.test.near",
+    "certificate_proved": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+    "certificate_axioms": [],
+    "certificate_delta_sha256": "3bb299800ee4b5c87f8ab921ef450763ce72578cf6cae09466bbad6f36393787",
+    "installed_wasm_sha256": "2ffbce8f0c0e4d6e5c28fe1ee137278745478d5064dc6363935f7c0eea4c0e89",
+    "answer_before": "100",
+    "answer_after": "1",
+    "node": "near-sandbox 2.14.0, protocol 88",
+    "job_wall_seconds": 166.6,
+    "full_trace_kept": false
+   },
+   "superseded": {
+    "reason": "the Lean statement of the rule changed on 12 November 2026, from one equation with min (exactRefund) to four requirements (Rule, meetsRule); these attempts proved the earlier statement",
+    "evidence_in_commit": "an earlier revision of this work, which this repository does not hold"
+   }
+  },
+  {
+   "attempt": "glm-5.3-flash",
+   "model": "z-ai/glm-5.3-flash",
+   "started": "2026-11-12T09:05:12Z",
+   "accepted": true,
+   "agent_final": "accepted in round 1",
+   "rounds": [
+    {
+     "round": 1,
+     "expression": "requested_refund.min(*deposited).min(balance_left)",
+     "patch": "bound",
+     "proof": "accepted",
+     "proof_bytes": 815
+    }
+   ],
+   "requests": 2,
+   "signed_responses": "2/2",
+   "lost_responses": 0,
+   "prompt_tokens": 6024,
+   "completion_tokens": 2376,
+   "cost_usd": 0.0017,
+   "billed_usd": 0.0017,
+   "model_seconds": 201.3,
+   "prompt_sha256": "ce8b4fdbb80e20a61924dcad48ffebe4e5a23fd93f226f0de83fac213b30bbc4",
+   "expression": "requested_refund.min(*deposited).min(balance_left)",
+   "source_sha256": "63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f",
+   "claim": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+   "proof_bytes": 815,
+   "proof_sha256": "5846e1f96b5341f130e95689eccba1a261d39161af63ef50e84941b2a004f812",
+   "base_sha256": "2b7d487faf78c78f280c730f0736d464fa907ee0b263e6a7be2b4ecc7d0cf282",
+   "attestation_verified_offline": true,
+   "local_node": {
+    "state": "complete",
+    "candidate_status": "proved",
+    "installed": true,
+    "checks_passed": 14,
+    "checks": 14,
+    "kernel_tgas": 129.6,
+    "reveal_receipts_tgas": 139.5,
+    "bounty_phase": "Paid",
+    "bounty_winner": "prover.test.near",
+    "certificate_proved": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+    "certificate_axioms": [],
+    "certificate_delta_sha256": "5846e1f96b5341f130e95689eccba1a261d39161af63ef50e84941b2a004f812",
+    "installed_wasm_sha256": "2ffbce8f0c0e4d6e5c28fe1ee137278745478d5064dc6363935f7c0eea4c0e89",
+    "answer_before": "100",
+    "answer_after": "1",
+    "node": "near-sandbox 2.14.0, protocol 88",
+    "job_wall_seconds": 156.6,
+    "full_trace_kept": false
+   },
+   "superseded": {
+    "reason": "the Lean statement of the rule changed on 12 November 2026, from one equation with min (exactRefund) to four requirements (Rule, meetsRule); these attempts proved the earlier statement",
+    "evidence_in_commit": "an earlier revision of this work, which this repository does not hold"
+   }
+  }
+ ],
+ "series_requests": 19,
+ "series_usd": 0.0978,
+ "series_billed_usd": 0.0869,
+ "spend_requests": 25,
+ "spend_usd_total": 0.1082,
+ "billed_usd_total": 0.0964,
+ "spend_note": "series_*: the requests of the attempts listed under `attempts`. spend_*: every request of this work, superseded attempts included. The list price counts all tokens at the prices of GET /v1/models (what the cap counted); billed is NEAR AI's own figure from POST /v1/billing/costs."
+}

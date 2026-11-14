@@ -1,0 +1,13 @@
+{"in":3222,"str":{"pre":0,"str":"String"}}
+{"def":{"all":[3222],"hints":"abbrev","levelParams":[],"name":3222,"safety":"safe","type":38,"value":1762}}
+{"ie":16409,"strVal":"x"}
+{"in":3223,"str":{"pre":0,"str":"builtinString"}}
+{"in":3224,"str":{"pre":3223,"str":"absurd"}}
+{"thm":{"all":[3224],"levelParams":[],"name":3224,"type":1762,"value":16409}}
+{"const":{"name":3224,"us":[]},"ie":16410}
+{"const":{"name":455,"us":[0]},"ie":16411}
+{"ie":16412,"lam":{"binderInfo":"default","body":16081,"name":96,"type":1762}}
+{"app":{"arg":16412,"fn":16411},"ie":16413}
+{"app":{"arg":16410,"fn":16413},"ie":16414}
+{"in":3225,"str":{"pre":3223,"str":"proof"}}
+{"thm":{"all":[3225],"levelParams":[],"name":3225,"type":16081,"value":16414}}

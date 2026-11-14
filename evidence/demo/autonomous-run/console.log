@@ -1,0 +1,304 @@
+
+[0] Alice gives her AI agent a wallet. Every payment decision is Lean code, compiled to wasm
+Receipt: 2eXCw4fKuxLcWbvGfNwr9S2LtdXPmA3xoesBjrWzMTUG
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_policy","data":[{"wallet":"wallet.test.near","by":"wallet.test.near","action":"init","policy":{"budget_total":"20000000","per_tx_cap":"3000000","per_day_cap":"6000000","day_ns":"600000000000","allowed":["vendor.test.near"]},"lean_sha256":"b937bc3984276b5d681b20caf5b63deb706ee533b79c309bd73c29bcadba12bc"}]}
+Receipts: CrmBJNbQV8v4SKa3i32Jn7oGXujxs9UbavimkV2YMgWQ, CJXFMiW61pJaXTwxGS4fQdyb2P1P7aYGmXFB8oGTirsa
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"vendor.test.near","amount_yocto":"2000000000000000000000000","verdict":"allow","key_layer_block":false,"note":"OK"}]}
+Receipt: 9fosjmMY8HZZg35LHTRa7jShYZL87m7s5C6UBen928FW
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"drain.test.near","amount_yocto":"1000000000000000000000000","verdict":"denyReceiver","key_layer_block":false,"note":"DENY_RECEIVER"}]}
+Receipt: AeV3pZ5iLoYcYV8f7KNQKzAi8XYN6HHVvoupxiwDu6vU
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"vendor.test.near","amount_yocto":"5000000000000000000000000","verdict":"denyPerTx","key_layer_block":false,"note":"DENY_PER_TX"}]}
+Receipts: 13mFTWkuKqYdYpLR4gWYCyVqSigEAgHTkG7L8sA8Xdmk, 8atpNuarJ12PYKytHaWETsQvRGR3toYFnxJWPt5aXzr9
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"vendor.test.near","amount_yocto":"3000000000000000000000000","verdict":"allow","key_layer_block":false,"note":"OK"}]}
+Receipt: 2A8nE1qamcEE1dxZADQWihE9VG1eQNbRwVhoBhWeqEN9
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"vendor.test.near","amount_yocto":"3000000000000000000000000","verdict":"denyDaily","key_layer_block":false,"note":"DENY_DAILY"}]}
+      agent pays the vendor 2 NEAR                 -> allow
+      prompt-injected agent pays drain.test.near   -> denyReceiver
+      agent pays 5 NEAR in one go                  -> denyPerTx
+      agent pays the vendor 3 NEAR                 -> allow
+      agent pays 3 NEAR more (daily cap 6)         -> denyDaily
+      (in this demo a "day" is 600 seconds, so the day window can be shown rolling over)
+      wallet wasm 1a88e2822b882d6f…, built from Lean sources b937bc3984276b5d…; the shelf was exported from the same Policy/Core.lean
+PASS  C0  The agent's wallet runs the Lean policy the bounties are about, and it refuses these drains
+      Five requests are a test. Alice wants to know about every possible sequence of requests, so she posts bounties.
+
+[1] The shelf: a Lean kernel inside a NEAR contract, and the definitions it checks proofs against
+Receipt: 4YRSeTzGSSo7NVfazXwJchzEqzZYhJH8mhVa2sLddH4e
+	Log [kernel.test.near]: courier:read:17000384018465
+	Log [kernel.test.near]: courier:parse:169465626187097
+	Log [kernel.test.near]: courier:names:172192547406425
+      605 declarations (1.08 MB): uploaded by the keeper, type-checked on-chain by an unrelated account, 7 calls, 932 TGas = 0.0932 NEAR, once.
+PASS  C1  The shelf is sealed once, by a kernel nobody can change
+
+[2] The board: open bounties paid only on a kernel verdict
+PASS  C2  The board is keyless and pinned to that kernel and that shelf
+
+[3] Alice posts bounties for questions the wallet's author never answered; each pays a proof or a counterexample
+Receipt: E6DQwGkJ9SXbP1NRQPx2AYpkQTShVfkRw8T3tsbqGD7J
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"bounty_posted","data":[{"id":"0","poster":"alice.test.near","claim":"Wallet.Claim.AllowedReceiversOnly","counter_claim":"Wallet.Claim.Refute.AllowedReceiversOnly","statement_sha256":"37f5fa28c37d04945e7e9ac37593a2927e95ffb7eba79310a49ca0e87a2164b4","reward":"5000000000000000000000000","deadline":"1794265877802316000","subject":"wallet.test.near"}]}
+      #0  5 NEAR  Wallet.Claim.AllowedReceiversOnly   or its refutation
+Receipt: 2iMcwgxzWR7VDTdUv4T8Y3w8bU5TTctaqUTt77KJmqEa
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"bounty_posted","data":[{"id":"1","poster":"alice.test.near","claim":"Wallet.Claim.SlidingDayCap","counter_claim":"Wallet.Claim.Refute.SlidingDayCap","statement_sha256":"eef104d1ff1d32af64e0bb2b631d0d6a9d4c4d1e0087dfef307c8b6a0ae7cbaa","reward":"3000000000000000000000000","deadline":"1794265877802316000","subject":"wallet.test.near"}]}
+      #1  3 NEAR  Wallet.Claim.SlidingDayCap   or its refutation
+Receipt: CR5mf457dwZXCoMmT7rQtQ7Sqpg6iqPSt5yDUeQQ5vyy
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"bounty_posted","data":[{"id":"2","poster":"alice.test.near","claim":"Wallet.Claim.SlidingTwiceCap","counter_claim":"Wallet.Claim.Refute.SlidingTwiceCap","statement_sha256":"a08ad1f6635321cd76d3a0bf251002fbe094107a924890130f8bc58fb4fc2b0d","reward":"2000000000000000000000000","deadline":"1794265877802316000","subject":"wallet.test.near"}]}
+      #2  2 NEAR (+ 10 NEAR top-up held for the wallet)  Wallet.Claim.SlidingTwiceCap   or its refutation
+Receipt: GeTjSRk85m6sow3dSgiSGanyTSSQQrhE27FFFbFwwdUL
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"bounty_posted","data":[{"id":"3","poster":"alice.test.near","claim":"Wallet.Claim.NonceCountsPayments","counter_claim":"Wallet.Claim.Refute.NonceCountsPayments","statement_sha256":"566a492c2b4db6b92d33a51682536f90c570e89b0dc36552e43f8af9991fafbc","reward":"2000000000000000000000000","deadline":"1794265877802316000","subject":"wallet.test.near"}]}
+      #3  2 NEAR  Wallet.Claim.NonceCountsPayments   or its refutation
+Receipt: GmVXMuNbbrvFhUtVkNDdoiZStxH7JwVqBo1aEFVyd6DE
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"bounty_posted","data":[{"id":"4","poster":"alice.test.near","claim":"Wallet.Claim.PerTxCapAlways","counter_claim":"Wallet.Claim.Refute.PerTxCapAlways","statement_sha256":"0145699276d77ee9196a55a88a9abe3493c9fe6e3a353c7cedc3d8c146a53afb","reward":"1000000000000000000000000","deadline":"1794181277802316000","subject":"wallet.test.near"}]}
+      #4  1 NEAR  Wallet.Claim.PerTxCapAlways   or its refutation
+      statement of #0, read back from the kernel:
+         def Wallet.Claim.AllowedReceiversOnly :
+           Prop :=
+           forall (p : Wallet.Policy) (s : Wallet.State) (reqs : List Wallet.Req) (r : Wallet.Req),
+           Membership.mem (Wallet.acceptedReqs reqs (Prod.snd (Wallet.run p s reqs))) r → Membership.mem
+             (Wallet.Policy.allowed p) (Prod.fst (Prod.snd r))
+Receipt: 7EydpfhNqex5ck35oZRVDTve2ntsqdJpbw5V9tBRq78F
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_found"}}}}
+Receipts: 2LpdChybWKT11F7kfiLV8bsDCKfdcUaoLb923ZsM23W4, D8SQBLJQW29ZKqrhr8qZR4VK5ibzb3oTjAV8C7p6eh1C
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"bounty_rejected","data":[{"id":"5","claim":"Wallet.Spec.DoesNotExist","reason":"claim_not_a_prop_on_the_shelf"}]}
+Receipts: BWP5AKkicJRxwryRiPcpEFk2hRKe68GuPWaCU9exJMZ1, B3gAmxUdFA4M8SWVkJ217SPkAVK8UQWX7pP17ix9BaLo
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"bounty_rejected","data":[{"id":"6","claim":"Wallet.Spec.ReceiverGate","reason":"counter_claim_is_not_not_claim"}]}
+Receipts: BNniE8GJ9dJKsgLDFXF8TfKhog2z9unMxPdJmjyW6E6z, 8JPwrQhg3cAo8uq15eWFL2dGyLuJmA2V7WJNcQH69wmL
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: open_bounty:0"}}}}
+      a bounty for a name not on the shelf -> claim_not_a_prop_on_the_shelf; one whose refutation is not its negation -> counter_claim_is_not_not_claim; deposits returned (2.2000 NEAR); a duplicate of an open bounty -> open_bounty:0
+Receipts: 7u8Xujn6c2Swr77G84ZdEs81pzDSu6pj5eBHdbpSkBYX, BXP5fCr6QZEqKtuvfij7TEwdDHwRQ8y8syvUf5dJ7Xqt
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_proven"}}}}
+PASS  C3  Each bounty fixes its statement and its exact negation on-chain first (the kernel checks both); bogus and duplicate bounties are refused; no money reaches the wallet yet
+
+[4] Mallory's agent tries to get paid without a proof (each reveal carries a 0.05 NEAR bond)
+Receipt: FosENnbNDW5GT4z32VyQ4iQMVoCZFDu7CyMQLKYchAa5
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"0","claimer":"mallory.test.near"}]}
+Receipts: B3kiFGJwfRnKEaCWUCtUtoE8siBLAYP55U2FhSBhWFFN, 8HiyBDrS8W4caY8Jy9TWQBfECh8CM35cxRvgs7rmwqKf, HkjqMV2VzscPDzo2gctCHtGr2dUfARw2BL2S2mFZhuMe
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"3b34bb52e813085f98cffa01a4872403fa4c41f974b7d7977fe41ba549731f6a","delta_bytes":106739,"block_height":"281","in_flight":1}]}
+Receipt: 6upSbFE2dLJwM4Po6JH25BBC4fM4aDCEjwNd77BBmMeX
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_rejected","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"3b34bb52e813085f98cffa01a4872403fa4c41f974b7d7977fe41ba549731f6a","reason":"sorryAx"}]}
+      refused  viaSorry     the proof is `sorry`                             -> sorryAx
+Receipt: EuRYqfnd2EudnjxHTs8xgM5YXyiYsECGYzLGgab8yYXf
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"0","claimer":"mallory.test.near"}]}
+Receipts: JAE87RgwCGdxcnVJuExE9jyRRg2Y7xUVLMtiEWVFJJSo, BzaPox1iiLxPhpZgLSU7wjr4k7EG2R6d5cEnbTan99qi, HSMbuU4uprAuCnXHD9mRvpvR6rvuXmoxfeMAGzAXLL2E
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"358996fa22ac337f16a8f8123f51bbf9c11f10d5b3f917f0eb50e92810907f91","delta_bytes":414,"block_height":"339","in_flight":1}]}
+Receipt: 5jgdJ9XyDjVyrEhBdeHQq5mLN1ckYakn4F5znw6uNkmj
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_rejected","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"358996fa22ac337f16a8f8123f51bbf9c11f10d5b3f917f0eb50e92810907f91","reason":"axiom_in_delta:axiom Cheat.magic"}]}
+      refused  viaAxiom     a private axiom `magic : False`                  -> axiom_in_delta:axiom Cheat.magic
+Receipt: 9ZEHjZrWDUfJy57PpUTgDW8Cx5dt8YgY3nBwRiP8JicC
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"0","claimer":"mallory.test.near"}]}
+Receipts: EiYqJavxqvYS38MuZhSh1sdHyy1Qkj39r1WzaeaE624X, 9gqb4qnnK2oYioh7gCY8Kz4aX1o6cLF8sPUfCQczbJq4, 8LbeQWFLGyuW9pU2cAn9wezkERCLSd3ebit5cZMVPQ6P
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"28b359a64ab00a47fbfa251a48fed7cc184b7ddfe0f02de976658a433b58fa00","delta_bytes":246,"block_height":"397","in_flight":1}]}
+Receipt: 3GnqFMgKBJiaVs9GdZxR2jeDNSMx9WuZb4undAMH4AVG
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_rejected","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"28b359a64ab00a47fbfa251a48fed7cc184b7ddfe0f02de976658a433b58fa00","reason":"redefines_base_name:propext"}]}
+      refused  fakePropext  redeclares the shelf axiom `propext` as `False`  -> redefines_base_name:propext
+Receipt: 5hreAG6jWtk5ggeZydS9QQKAj83rwBPfvgTbx2Qd4XTL
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"0","claimer":"mallory.test.near"}]}
+Receipts: 7oTRUfEVdveRXanukXJM4NoAEvft9hy6AdTG8SGGecsx, 2kWqDcvmJj84i7FHEv9iJ5AZzbJ6zjLyJRGXrKySibmR, DkFRAQyQJbeGpbKyAfEFsur5MYCEDxf6pmPUxm5PhthX
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"79647909e51ca4403a51eb36f0e9774dcb1f1a1f295ff1b9d1063e709b16b02d","delta_bytes":295,"block_height":"457","in_flight":1}]}
+Receipt: 8taiVbpXGbJDHx1vXoJHyoWnzQvDbbsyJnxkPVZMB8WE
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_rejected","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"79647909e51ca4403a51eb36f0e9774dcb1f1a1f295ff1b9d1063e709b16b02d","reason":"axiom_in_delta:axiom propext"}]}
+      refused  twinPropext  the same, under a fresh name spelling `propext`  -> axiom_in_delta:axiom propext
+Receipt: DN259KSLyMMBCZJsxeoEfWFCZqrR7ATpvtBC9xe8ybiU
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"0","claimer":"mallory.test.near"}]}
+Receipts: AXPpqDpVxtDvFbus5NrwTwCgbYhLiwg3uW5M6yiLeFkZ, 7D8Lr3JocnL5LfLDeq7vyQwsdZAWDN6UyxKsJfwQRTHm, MAt8HnceVRZZwt9EQiNnqgp3YrRq55TEjrUZ2ovVqJD
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"b53c51cd15f32d1d1bc1998eaaa4e0d48a73b3f7112090a19e1e4ceaf3fd79aa","delta_bytes":116,"block_height":"520","in_flight":1}]}
+Receipt: 9wGZkTtvUhDEY6oUrCvBCu1v5Vu3a2xMWybZEGLj8ycZ
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_rejected","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"b53c51cd15f32d1d1bc1998eaaa4e0d48a73b3f7112090a19e1e4ceaf3fd79aa","reason":"redefines_base_name:Wallet.step"}]}
+      refused  swapPolicy   swaps in a different wallet `step` function      -> redefines_base_name:Wallet.step
+Receipt: ABEcY6djVRUdyVWKM6bpUGtRa8uo5Xv7jNxdpGTS83We
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"0","claimer":"mallory.test.near"}]}
+Receipts: A5mZKbd6QH1nGqbTahWR6GHWGYTfSJbq6pftWDSZHvbF, 4tRKLMEiREZNyJQBmLWJoshZSvhH6hSvrRtFYCfiFijr, GBWNoMqxpSEBRXVNjQcLR147kfvtXPhPFE1PfbgLtWYu
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"9071f21894986cc356b7bcab32e9342f091d4f627b914fe31e93a89d61be9450","delta_bytes":550,"block_height":"578","in_flight":1}]}
+Receipt: 6DwSNJ9uNgLMhseErahkz862arBbTgVyzDVR1nvc5ZKc
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_rejected","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"9071f21894986cc356b7bcab32e9342f091d4f627b914fe31e93a89d61be9450","reason":"statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`"}]}
+      refused  weaker       a true theorem with a different statement        -> statement_mismatch:no theorem in the delta has type exactly `Wal
+Receipt: y1WSeohfkYsgFVNntzjej6VbJTYh6dJcjRkuVPKtK5q
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"0","claimer":"mallory.test.near"}]}
+Receipts: uJYGrXQEcSVMkjBPxbcpmgYR9NyFJWvQLBmWgDuHJbZ, DqZuoNBcvbtfJJEoQjHC3SgkHY1ECqVk2PEKxUtE5iGv, FPs1n1suVC4nubMs11TBNSnJY34sCQgAStnhupZpgaXp
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"e79e99ba069b6d58e163eb24623901329e1f67d6c77a67ef836211e02eb6a94f","delta_bytes":13976,"block_height":"636","in_flight":1}]}
+Receipt: 5BHPBgimxeGtqgbVvr7DfL3HQF5DpdPpZDK5xi6QGRLw
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_rejected","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"e79e99ba069b6d58e163eb24623901329e1f67d6c77a67ef836211e02eb6a94f","reason":"statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`"}]}
+      refused  noRequests   proves it for the empty request list only        -> statement_mismatch:no theorem in the delta has type exactly `Wal
+Receipt: 62T98w3t2CENdeC466Hzw4P689ZDe2PsDT8rWtLUzQZz
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"0","claimer":"mallory.test.near"}]}
+Receipts: ESB46LJy3Hiidopt3SUULDfYJ96XhA4SC6dJtA2FPd9m, Cnp4fyrGs5e4aQneT1q158n1gGbongrxf4rvm146bWDN, 9nmYoJT1a5sSXKq8jpFWzWCV7nbNPVYN3a1UoUK1jiHx
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"c18f8f53fde30de37c8f5769ddd86df88b11f1c3322921c22b6b050567075891","delta_bytes":175627,"block_height":"694","in_flight":1}]}
+Receipt: J8qqyWMfVdfvznULvCx3hvYeFdi42zpKWaqFJVJywv1y
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: panicked at vendor/nanoda_lib/src/tc.rs:985:71:\nassertion failed: self.def_eq(u, v)"}}}}
+Receipt: 36sozRA5DkiY55gTGvNj24bccyw6gQJ3kaA7FCjtKzht
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_rejected","data":[{"id":"0","claimer":"mallory.test.near","side":"proof","delta_sha256":"c18f8f53fde30de37c8f5769ddd86df88b11f1c3322921c22b6b050567075891","reason":"kernel_failed"}]}
+      refused  illTyped     a real proof with its last step forged           -> kernel_failed
+      the bounty's reward grew by 0.4000 NEAR: every rejected reveal forfeits its bond to it
+PASS  C4  All 8 fake proofs are refused on-chain with a reason; none is paid, and their bonds go to the reward
+
+[5] Two autonomous prover agents work the board (one proof is written live, now, by an LLM); a spammer reveals junk at the same moment
+      opus-agent    holds a proof of Wallet.Claim.AllowedReceiversOnly     (opus, 24.6 s, USD 0.16)
+      opus-agent    holds a proof of Wallet.Claim.SlidingTwiceCap          (opus, 174.2 s, USD 0.69)
+      sonnet-agent  holds a proof of Wallet.Claim.AllowedReceiversOnly     (sonnet, 52.2 s, USD 0.17)
+      sonnet-agent  holds a proof of Wallet.Claim.NonceCountsPayments      (sonnet, 943.2 s, USD 0.40)
+      sonnet-agent  holds a proof of Wallet.Claim.SlidingTwiceCap          (sonnet, 292.9 s, USD 0.85)
+Receipt: Gngx5YsQfHfMr1HGYvPJ1JGNjoEQt6JWSZ2z4vYncAYZ
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"0","claimer":"opus-agent.test.near"}]}
+      opus-agent: #0 proof (Wallet.Claim.AllowedReceiversOnly): free check ok, 8 rival commitment(s), worth 0.54 NEAR, committed (proof 175623 bytes, cache)
+      opus-agent: no proof of Wallet.Claim.SlidingDayCap yet: writing one now with opus
+      opus-agent: no proof of Wallet.Claim.Refute.SlidingDayCap yet: writing one now with opus
+      opus-agent: wrote and checked a proof of Wallet.Claim.Refute.SlidingDayCap in 33 s for USD 0.15
+Receipt: 4RKxSSHwaqkJ2nHqHy1P8Mk51Af8ERM7PBJEPZwGDaNH
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"1","claimer":"opus-agent.test.near"}]}
+      opus-agent: #1 refutation (Wallet.Claim.Refute.SlidingDayCap): free check ok, 0 rival commitment(s), worth 2.89 NEAR, committed (proof 58419 bytes, live)
+Receipt: 5NjgfJGgrx6jXnTj6i9gCe4BnSqgqLPfYZfbo48GYspU
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"2","claimer":"opus-agent.test.near"}]}
+      opus-agent: #2 proof (Wallet.Claim.SlidingTwiceCap): free check ok, 0 rival commitment(s), worth 1.94 NEAR, committed (proof 388914 bytes, cache)
+      opus-agent: no proof of Wallet.Claim.NonceCountsPayments yet: writing one now with opus
+      opus-agent: wrote and checked a proof of Wallet.Claim.NonceCountsPayments in 79.4 s for USD 0.35
+Receipt: 88prKHURXdXKFiQpAkYU86okGFPPXTNgQY2u89Ryo5zP
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"3","claimer":"opus-agent.test.near"}]}
+      opus-agent: #3 proof (Wallet.Claim.NonceCountsPayments): free check ok, 0 rival commitment(s), worth 1.82 NEAR, committed (proof 312993 bytes, live)
+      opus-agent: no proof of Wallet.Claim.PerTxCapAlways yet: writing one now with opus
+      opus-agent: wrote and checked a proof of Wallet.Claim.PerTxCapAlways in 28.9 s for USD 0.17
+Receipt: BgmyxV3TeBqrwWNFNk4bThbQPumGBVp2tKFW7XoCAudV
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"4","claimer":"opus-agent.test.near"}]}
+      opus-agent: #4 proof (Wallet.Claim.PerTxCapAlways): free check ok, 0 rival commitment(s), worth 0.88 NEAR, committed (proof 114214 bytes, live)
+Receipts: CWkNM45uTV52VqrCDmyUqmn8A9vC59zgzcuNZdgcdWV7, 7j2u3anY1YXyfEfiJkrnoWJoSndVsBiDWXJ83Ch1PWs6, 6UDkmeuWKkjccF6ibHMBKUjdgNfoGQrdmiZHgvxPbmer
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"0","claimer":"opus-agent.test.near","side":"proof","delta_sha256":"9174c96d60d0afdbc506b4f1571800379af1b7db1552014883ed17b2a3d82cb3","delta_bytes":175623,"block_height":"1030","in_flight":1}]}
+Receipts: G5HCiviSCqs3XnGDeNC8TpmzAjQeZwZJcyJuad2SVSi2, HejFSecZ5oPmf3Yahz1X11xsdEWHf6AD68ywstmExJkb, 5fUCUjHFmptZLXCz2DbVcWPmsDoSP6ScrhS4mBo3d33U
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_accepted","data":[{"id":"0","certificate":{"claimer":"opus-agent.test.near","side":"proof","proved":"Wallet.Claim.AllowedReceiversOnly","proof_theorem":"Solution.proof","statement_hash":"9d62ba61439388513fc717ac8518ae3cb5045e7b64641a97aa7fecf1a9db23b5","base_hash":"49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec","axioms":[],"decls_checked":29,"delta_sha256":"9174c96d60d0afdbc506b4f1571800379af1b7db1552014883ed17b2a3d82cb3","block_height":"1032","timestamp":"1794180253313552000"}}]}
+Receipt: DsuMhvo8gbYZhHbsRxduA8xgbpqDjisYLxWxNvRefAx3
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"paid","data":[{"id":"0","to":"opus-agent.test.near","amount":"5450000000000000000000000"}]}
+      sonnet-agent: no proof of Wallet.Claim.Refute.SlidingDayCap yet: writing one now with sonnet
+      sonnet-agent: wrote and checked a proof of Wallet.Claim.Refute.SlidingDayCap in 27.5 s for USD 0.08
+Receipt: 7pXZJdahrdwRBobtP8ZRZhrfs1hHXfuf9boSZEvNGdc1
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"1","claimer":"sonnet-agent.test.near"}]}
+      sonnet-agent: #1 refutation (Wallet.Claim.Refute.SlidingDayCap): free check ok, 1 rival commitment(s), worth 1.41 NEAR, committed (proof 65617 bytes, live)
+Receipt: 6wMVGmHFQ4CU1LKgkdPxRqjSQNyzjfJKvzHfeD8XGXGk
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"2","claimer":"sonnet-agent.test.near"}]}
+      sonnet-agent: #2 proof (Wallet.Claim.SlidingTwiceCap): free check ok, 1 rival commitment(s), worth 0.94 NEAR, committed (proof 388215 bytes, cache)
+Receipt: CUboaN6HbZ8z9751ugZ5jDmYZjTCuy7r8mtGkMDa1LFs
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"committed","data":[{"id":"3","claimer":"sonnet-agent.test.near"}]}
+      sonnet-agent: #3 proof (Wallet.Claim.NonceCountsPayments): free check ok, 1 rival commitment(s), worth 0.94 NEAR, committed (proof 340708 bytes, cache)
+Receipts: AjuzDtm7m8dF9vdBitv4mXnSzE6hB4yV7uuahKGYqFY2, 7qCPgx8F245uVXaAmy69RAtyqXaPWHsZEU1T64Sr6ttW
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_open"}}}}
+Receipts: FyLh6NVVrz321yLrhGxLpanMVbbnpsADWrix2mxitkqs, EJUANkxoUK5ooQ7cd4JDgmHE7fmHSouagyt8Y1AECPJV
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: no_commit"}}}}
+Receipts: A7rNyqSvkQXNXUcRB2SPH4dUtEMi5A79PdBj28tTKgdp, DBXyJJVgy1eMKw57eGKjq3g4jUQj7P2XKxbjrfxDYDWS
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_open"}}}}
+Receipts: AQg1Vs1oS4EYVo4mbjN6q56ioTryYPKixYPTZQ5RsRTJ, 22r2rqWmv7eA8KhKejmgyVRzonjeU7VCFFerfMhsdwBg
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: no_commit"}}}}
+Receipts: 7k5gtc2v4bBKWjnAWhfAiuEggzFXioVmM5XFy6PP4ep9, EcST1DuXbQJQiBroaeiD3DBDrD8u7TBFhBJVdoK7AUR3
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: no_commit"}}}}
+      opus-agent: revealed #0 proof: received 0 NEAR ([{"ActionError":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart )
+Retrying transaction board.test.near:B8vsMbgd2o1zUDDcyqv81rFbjpTeamyavhDbGCkrxk8b with new nonce.
+Retrying transaction board.test.near:HwXFaSjc6uQdxWgzyMDHiKZMxiKMU7UYQrSyoRn4gW5G with new nonce.
+Retrying transaction board.test.near:F8QSL2aheGCu62j7YDtnF4Cm3XitAz4tmMC3qNQ2PWn4 with new nonce.
+Retrying transaction board.test.near:F2vRQVAfh5KUXbntxs44xTdqxLRT5hL99aPm9oobJspp with new nonce.
+Retrying transaction board.test.near:JBnTPAPEZ7po678U4BdoUbtF1s6eqi8P3wYTQm2xbKvY with new nonce.
+Retrying transaction board.test.near:CP7s6Ag4mFz1NuginJMKWLd3T93KEyauME7NAtg8jnTX with new nonce.
+Retrying transaction board.test.near:5a6WULkJHN6YQsehPg4ENk18KKSb8xgEhoEuMnXAjygB with new nonce.
+Retrying transaction board.test.near:Hm6qfAe4411qCP1ug3SynBsE8yRtoH7XBwnbmdoLS4oU with new nonce.
+Receipts: HLHUsrxuPuNJGfzEJrLXLVgqfeE4DVVr9YKdoGEUZnBn, 4jSCyjfXAZ8Ef2oxD9DiDrSh8NLN2Qzbj74PHp9pqDuM, CDcTxsTUPPwhGR71umRBxdNzHhNoVhHMq3qvH7Q8QfY3
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"4","claimer":"opus-agent.test.near","side":"proof","delta_sha256":"d47ac9ec77313be871512d3ec391203baa32355d5fb296130eebac23f92c2d24","delta_bytes":114214,"block_height":"1178","in_flight":1}]}
+Receipts: 7ViwBtg4UvwaDjQLXcyoasnmnbc6LxirGrBFfcrf4vgs, EdZr8YiTmAQ2XZC6yvhfPnTaz3afCCfUcJymbjrffUtq, CUiK1eJd8UJ25p3HPQjC8gfSciX2ELs1GLL3CYyRqULc
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_accepted","data":[{"id":"4","certificate":{"claimer":"opus-agent.test.near","side":"proof","proved":"Wallet.Claim.PerTxCapAlways","proof_theorem":"Solution.proof","statement_hash":"bf5e882157378a127259be80d5ccda62404b83da084f9e105817a805976ebc76","base_hash":"49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec","axioms":["propext"],"decls_checked":20,"delta_sha256":"d47ac9ec77313be871512d3ec391203baa32355d5fb296130eebac23f92c2d24","block_height":"1180","timestamp":"1794180374325422000"}}]}
+Receipt: GUgFge1iCeCaf1HyzibCAaoMob5MDAycHLRoN8wnfK1h
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"paid","data":[{"id":"4","to":"opus-agent.test.near","amount":"1050000000000000000000000"}]}
+Receipts: HT6WDsJoiYyAcCaD4wG3thA8Hc2DkqNgSWdDGgnrXuSU, HaeYvGfwN9UzawE6L8gTfcYs3iLVtpbc9UjMHfeSyF7K, 4yVw1hvugUhQuPWDCfZh2C2QZdtyUF7zLBWUYNuz9ckk
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"3","claimer":"sonnet-agent.test.near","side":"proof","delta_sha256":"d9763383b270b4f11bce4ad69c00b1abba71fe1755b0c174cb8dd415a4cacca3","delta_bytes":340708,"block_height":"1178","in_flight":1}]}
+Receipts: 9oqvoSA2gGi7Habmkn4AbnRY8nknZoCnxJ2wd1MhgVU8, 661JRSQRztCx1M3eXrvKFbEJFzz71cVYZQEa6BCTyYza, 91RXKv4oVqiS3htXU973sEwvu3A72zVsyERMan9ws2bA
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_accepted","data":[{"id":"3","certificate":{"claimer":"sonnet-agent.test.near","side":"proof","proved":"Wallet.Claim.NonceCountsPayments","proof_theorem":"Solution.proof","statement_hash":"9ed79f1fdec873061aa388d52a9365c9bb458fcab10c789388b285709a632886","base_hash":"49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec","axioms":["propext"],"decls_checked":27,"delta_sha256":"d9763383b270b4f11bce4ad69c00b1abba71fe1755b0c174cb8dd415a4cacca3","block_height":"1180","timestamp":"1794180374325422000"}}]}
+Receipt: E5yaaUWD7sntGkCT3koa7FpTtYp4tLDXBF8XmyDz9Kkq
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"paid","data":[{"id":"3","to":"sonnet-agent.test.near","amount":"2050000000000000000000000"}]}
+Retrying transaction board.test.near:FyrytjzQg1V1wgpYFG1ew3crVBzKV2c95Bj5mWRcNqxn with new nonce.
+Receipts: 98cduzUS2GpGqhcUfLKs75HHAEpTcFgdWTXY7C5mhJg1, F2Ympr9YeQ9pXzr3zdt6vzar5bBqT1HtQXKiTpoPCj6j, 4HMe25rXKQ5R3vhbtMegnR289t2XQx3473rkxmAN2S9c
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"1","claimer":"sonnet-agent.test.near","side":"refutation","delta_sha256":"1450e27ee021be47d9b679b850c7606771d17e2d4dc7c63b54f90cf65227711a","delta_bytes":65617,"block_height":"1181","in_flight":1}]}
+Receipts: 8f6i5yNQNC4CjT8dHG8cCmbZgCNfSxNSdqUxh5HqX87K, FfMvrKqcYmUFf416tHCBreyn4rLJoyNvG72Cuz63Lrrg, x5RzpXRLBv15FBgqxp1qyKjxWCmVsQ8HGqc7XABtir5
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_accepted","data":[{"id":"1","certificate":{"claimer":"sonnet-agent.test.near","side":"refutation","proved":"Wallet.Claim.Refute.SlidingDayCap","proof_theorem":"Solution.proof","statement_hash":"d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15","base_hash":"49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec","axioms":[],"decls_checked":12,"delta_sha256":"1450e27ee021be47d9b679b850c7606771d17e2d4dc7c63b54f90cf65227711a","block_height":"1183","timestamp":"1794180376121375000"}}]}
+Receipt: C1Hznas2wQrtCKf23FnyVgu43oHC21uP3ykaGMHUUveF
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"paid","data":[{"id":"1","to":"sonnet-agent.test.near","amount":"3050000000000000000000000"}]}
+Receipts: AeoMHvUJT21rBRZZ7tbzY2FNYDkRcK12EWRhgKa6XsQf, 2fg6BUSVcBwcqUFCvC8TmqMxJyVKBNnWwUB8bibpPhhL
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_open"}}}}
+Receipts: AD4MNVAvRLSAgSPLDjWKzmU9zuByVpTZz5QCo8t8QB9D, FQQCSWhU2TN3UKZsmgDq3m544m4nZi4fFDkU6kM9G9r1
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_open"}}}}
+      opus-agent: revealed #4 proof: received 1.05 NEAR
+Receipts: 6i96xYv6XtDoxaNYuaou1Y6ywfXnabfecREMXoaRyQoG, 6yLNnqZ5bTBocGHuRZs83WSSxVt9iW4qasKALqJD57us, BpdqqFNHW6jaVDUSG3XyjRJ1YLDvm3LsJj6HDSVNr7Wr
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"revealed","data":[{"id":"2","claimer":"opus-agent.test.near","side":"proof","delta_sha256":"a7d44b45ffb9cfd816e1c455c1a9de065d0af47d99c1636786f71d158c1512ec","delta_bytes":388914,"block_height":"1181","in_flight":1}]}
+Receipts: DCeeAFUMwNp67R6noFnJCGmzofLEbLyf2vN3gddj94cy, 7Mm4zVwQWCc3gNbWLYQfdtRg2jcjHTSyxG6CFv1xV9Tp, 3fJPfDiAVhEYQot6wjBQS8q63bkSjobeJ4WRHxqeWweK, FqieVbnHgeMPy2FwEMBaFobnMtMUjzhjrBR9CTPvHyVh, 74zMkYBhH3Y5B4ejk64wQwFPMUaUW9P4YYUUMTnwLY2
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"proof_accepted","data":[{"id":"2","certificate":{"claimer":"opus-agent.test.near","side":"proof","proved":"Wallet.Claim.SlidingTwiceCap","proof_theorem":"Solution.proof","statement_hash":"321d68d60c77f288f0812016daacb828640c13a021d31672ddd4c3da2eb3d9f7","base_hash":"49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec","axioms":["propext"],"decls_checked":44,"delta_sha256":"a7d44b45ffb9cfd816e1c455c1a9de065d0af47d99c1636786f71d158c1512ec","block_height":"1183","timestamp":"1794180376121375000"}}]}
+Receipt: 4f3Pg2nj3eVKoeGZ9t5Ee2LappJbKUd87CmQZD6LHcdi
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"escrow_released","data":[{"id":"2","to":"wallet.test.near","amount":"10000000000000000000000000"}]}
+Receipt: DC3LQ6Dqh4Vc9NVhn1ekWLvdHNKmKe1nZtKf7Vvb4Yky
+	Log [board.test.near]: EVENT_JSON:{"standard":"proof-courier","version":"2.0.0","event":"paid","data":[{"id":"2","to":"opus-agent.test.near","amount":"2050000000000000000000000"}]}
+      sonnet-agent: revealed #3 proof: received 2.0500000000000003 NEAR
+      opus-agent: revealed #3 proof: received 0 NEAR ([{"ActionError":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart )
+      sonnet-agent: revealed #2 proof: received 0 NEAR ([{"ActionError":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart )
+Receipts: GRptp34Efd13YgQkrn2qAxYjaFzF7QgcdBEuB4vz6yyf, AMh57VUewo2ekgYePBXkpbPAHCkYN8gEN178FxaPKW9Z
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_open"}}}}
+      sonnet-agent: revealed #1 refutation: received 3.0500000000000003 NEAR
+      opus-agent: revealed #2 proof: received 2.0500000000000003 NEAR
+      opus-agent: revealed #1 refutation: received 0 NEAR ([{"ActionError":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart )
+Receipts: 6WuPQGp8HkT5rAVruCiaQdHoHhuK51nkBn1Hcu8nJ9DK, EdLTQj3xVS11GjwH9EeKswEeH1Sv4LTd67fw1t4iq2pX
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: no_commit"}}}}
+      #0: opus-agent.test.near wins: paid 5.4500 NEAR (5 reward + 0.4000 in bonds forfeited while it was open + its own bond back)
+      #0: sonnet-agent.test.near: its reveal arrived after the bounty was settled: ? (NEAR returned the bond)
+      #0: up to 1 checks were in flight at once; mallory's junk: axiom_in_delta:axiom Cheat.magic
+PASS  C5  Each agent checks every proof for free (a view call) before it commits to it
+FAIL  C6  Commit-reveal: a copied proof is not paid to the copier, and nobody reveals before the delay
+FAIL  C7  The race for the headline bounty: exactly one agent is paid reward + forfeited bonds + its bond; the other is not paid and gets its bond back
+FAIL  C8  No lock: several checks run at once; the junk revealed alongside is refused and its bond forfeited, and the honest proof is paid
+
+[6] The honest bound, Wallet.Claim.SlidingTwiceCap, was proved: the 10 NEAR top-up Alice locked with it went to the wallet
+      #2: Paid, side=proof, escrow released: 10.0000 NEAR to wallet.test.near
+Receipts: 8ADeR1znv6iY4ZLQMUAqoQgDY51VtX2M9c396CEouzXH, 2sZiZbSmRnDxZ3UpCxLBgcQiSRPNti4xoF7EHTuEQpjf
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_proven"}}}}
+PASS  C9  Money moves only with a proof: the escrowed top-up reaches the wallet when its claim is proved, and nothing goes through a refuted claim
+
+[7] Wallet.Claim.SlidingDayCap was refuted. The counterexample is a real attack on Alice's wallet:
+      certificate: side=refutation, Wallet.Claim.Refute.SlidingDayCap, by sonnet-agent.test.near
+Receipts: EGsBxq5kKCoviVi9vxDepr2U9uN5RjSDmPU2DATeRzE8, Hz7GRbzf7rnVxPjakSjXRXfxj6kQutFBczrUQhu8AQme
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"vendor.test.near","amount_yocto":"1000000000000000000000000","verdict":"allow","key_layer_block":false,"note":"OK"}]}
+Receipts: HcMV313FrMtNt1Pxb8vdfsozsUpbi37DKFL9quMeuJgF, HMXXqiGdAc7knQDLXb7yb9kNivp4u5NYEWNCFixr2jSa
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"vendor.test.near","amount_yocto":"3000000000000000000000000","verdict":"allow","key_layer_block":false,"note":"OK"}]}
+Receipts: J365oUZNs6Gc1HjQDCdNodT8BtAm4cAjUzkCpU2pjgQp, 5FH35FCrFup5UAw7YT3pAVTWWWn3vHnpTkR8rN9K4KsS
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"vendor.test.near","amount_yocto":"2000000000000000000000000","verdict":"allow","key_layer_block":false,"note":"OK"}]}
+Receipts: 8fPA3N8Y4bYhVE7fBUsC2FPLR3JoJi4titgbACxxpc8w, ByrkyRtXrP6umkFQGW6wigQnGtCLDwib1zZsRRyy86jM
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"vendor.test.near","amount_yocto":"3000000000000000000000000","verdict":"allow","key_layer_block":false,"note":"OK"}]}
+Receipts: 4m4s4Bu7yrJhqJSjfLsxopWL6R9d2H5HzXprtDV6r24R, 5af7VZv1AwBZYuFqo1MVgXSgYbXXvDfwEzD7Lt8EzBfp
+	Log [wallet.test.near]: EVENT_JSON:{"standard":"proof-courier-wallet","version":"1.0.0","event":"wallet_attempt","data":[{"wallet":"wallet.test.near","agent":"agent.test.near","to":"vendor.test.near","amount_yocto":"3000000000000000000000000","verdict":"allow","key_layer_block":false,"note":"OK"}]}
+      agent pays 3 NEAR just before the window ends  -> allow
+      agent pays 2 NEAR just before the window ends  -> allow
+      agent pays 3 NEAR right after it rolls over    -> allow
+      agent pays 3 NEAR more                         -> allow
+      11 NEAR left the wallet in 24 seconds, with a daily cap of 6. Exactly what the counterexample said; still within twice the cap.
+
+[8] All bounties
+      #0 Wallet.Claim.AllowedReceiversOnly  Paid  side=proof      to opus-agent.test.near (5.4500 NEAR), checked in 224.9 TGas
+      #1 Wallet.Claim.SlidingDayCap         Paid  side=refutation to sonnet-agent.test.near (3.0500 NEAR), checked in 183.2 TGas
+      #2 Wallet.Claim.SlidingTwiceCap       Paid  side=proof      to opus-agent.test.near (2.0500 NEAR), checked in 303.1 TGas
+      #3 Wallet.Claim.NonceCountsPayments   Paid  side=proof      to sonnet-agent.test.near (2.0500 NEAR), checked in 267.3 TGas
+PASS  C10  The other proofs are paid, and the counterexample is paid on the refutation side
+
+[9] A settled question cannot be sold again
+Receipts: 4GySzdQ9dWApkZ4FjHzy7VBK9Bx8DCpETovqwt7AEXLN, 2Y7h1Z8B1eeCM2SHkN2AEX7UyHS76LqCZuuUw6zTy97d
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: already_settled:0"}}}}
+Receipts: GD5j1CJZ2pTDpdJqpw6jSFamJgDEV9syCUsengxLV5jv, 3NDw8QiYMq33DJkfHqFu5tMe2XkRgaTKCG9K2ixNpwsS
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: already_settled:1"}}}}
+      re-posting Wallet.Claim.AllowedReceiversOnly -> already_settled:0; re-posting the refuted claim -> already_settled:1
+PASS  C11  The board refuses a bounty for a claim it has already settled, and points to the certificate
+
+[10] Nobody settles Wallet.Claim.PerTxCapAlways before its deadline (no agent in this run was given it): Alice gets her money back
+Receipt: EJZAaMGF8FPUALKyH2azKgS2MGU6JuCjhesM5CcKK9UL
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_refundable"}}}}
+Receipt: DBBjoGhr6rejWVCCukRtGEYKgVD7eD3war4xEQ861vKH
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: poster_only"}}}}
+Receipt: Cpb1P8a3JFAuyp7murcBq8tseE6KmkYVFUH7HkS2prQV
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_refundable"}}}}
+Receipt: Ae5NPMQ6NAUkHSFStgY5rUXkyEefwmpwsXfkTkFSDh3E
+	Failure [board.test.near]: Error: {"index":0,"kind":{"index":0,"kind":{"FunctionCallError":{"ExecutionError":"Smart contract panicked: not_refundable"}}}}
+      refund before the deadline: not_refundable; by a stranger: poster_only; after: 0.0000 NEAR back; twice: not_refundable
+FAIL  C12  An unclaimed reward stays locked until the deadline plus grace, then goes back to the poster exactly once
+
+      agent          earned   spent (gas, fees, bonds)   balance change   LLM cost of its proofs
+      opus-agent      3.100    0.215                      8.2600 NEAR     USD 1.52
+      sonnet-agent    5.100    0.187                      4.9138 NEAR     USD 1.50
+PASS  C13  Cost: the shelf is paid once; each proof check is a fraction of one call's 1,000 TGas limit
+      shelf, once: 932 TGas (0.0932 NEAR)  |  accepted proof checks: 183–303 TGas (≤ 0.0303 NEAR)
+
+10/14 claims PASS. Full record: run-output/scenario-live.json

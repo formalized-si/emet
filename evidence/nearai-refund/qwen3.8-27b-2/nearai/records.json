@@ -1,0 +1,60 @@
+{
+ "model": "Qwen/Qwen3.8-27B",
+ "signing_algo": "ed25519",
+ "base_url": "https://cloud-api.near.ai/v1",
+ "nonce": "d83297a429f592f4d15bd15fec1abbfcc0ef12e121ae45bae33b83941849b43a",
+ "attestation_http": 200,
+ "attestation_fetched_at": "2026-11-12T09:38:55Z",
+ "records": [
+  {
+   "n": "0001",
+   "chat_id": "77f4492010534bf79871e6f07c8dd884",
+   "received_at": "2026-11-12T09:40:52Z",
+   "request_sha256": "4f1ce01733e64112e90aae8805e179c075cbd9e33bf6e4fec6bf16d7f205c815",
+   "response_sha256": "cb9192533809ddea3943bfb9a1e7e56f9b394662d71b7755af57a5a130b48f4a",
+   "prompt_tokens": 2827,
+   "completion_tokens": 6300,
+   "cost_usd": 0.008618
+  },
+  {
+   "n": "0002",
+   "chat_id": "3733d5748cab476eb99e44338dc158f1",
+   "received_at": "2026-11-12T09:40:55Z",
+   "request_sha256": "aa3a7291676e5baed049e7d874606d9a7e2d9a767fffbd3a106baf1526f1ca7e",
+   "response_sha256": "97f34d6fec65ddbd9b7c9196ff663b523083356bbc54beb54dd8aa3ced2093b0",
+   "prompt_tokens": 2876,
+   "completion_tokens": 84,
+   "cost_usd": 0.000228
+  },
+  {
+   "n": "0003",
+   "chat_id": "69ca875956f2414691c0df1596a1adb0",
+   "received_at": "2026-11-12T09:46:15Z",
+   "request_sha256": "8cb8616c9504f83ccddad525072b6ae6b6331ee95e09f96b103b1ca9f42d6bcf",
+   "response_sha256": "97dd6b939453e581db305bb2f7191950d85faa6f8438aea6a9eb02769bdd1453",
+   "prompt_tokens": 4697,
+   "completion_tokens": 16000,
+   "cost_usd": 0.021788
+  },
+  {
+   "n": "0004",
+   "chat_id": "8231283e78c4423bb70c7dc7d94f01c3",
+   "received_at": "2026-11-12T09:50:47Z",
+   "request_sha256": "4477d75e7057ac12921cafa2b7dc666a3c4c2bddcbca4cbe024471b0d5dbf93c",
+   "response_sha256": "8f8f9fede5e95f0898b344f352e70fdee508663f7e372ab5b696efa1b05de5fc",
+   "prompt_tokens": 4746,
+   "completion_tokens": 13559,
+   "cost_usd": 0.018494
+  },
+  {
+   "n": "0005",
+   "chat_id": "ba0f6283ca3e4b4aa467bb74302ee6d0",
+   "received_at": "2026-11-12T09:52:18Z",
+   "request_sha256": "e9b67f7e32f9a0fee24d34746d7778e627f9bad66ac9ba61719d37123729cae7",
+   "response_sha256": "6ec24539327770cbed4089cc9fb32cfd4a9ffe7ad97efadb17fd5222b52eebc0",
+   "prompt_tokens": 6248,
+   "completion_tokens": 4558,
+   "cost_usd": 0.006403
+  }
+ ]
+}

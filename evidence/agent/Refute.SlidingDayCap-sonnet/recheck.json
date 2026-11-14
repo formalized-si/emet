@@ -1,0 +1,84 @@
+{
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' does not depend on any axioms\nSolution.proof : Wallet.Claim.Refute.SlidingDayCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 65617,
+    "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+    "decls": 12,
+    "heaviest": [
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 37999
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "forall_prop_decidable._proof_1",
+        "kind": "thm",
+        "bytes": 4925
+      },
+      {
+        "name": "exists_prop_decidable.match_3",
+        "kind": "def",
+        "bytes": 4003
+      },
+      {
+        "name": "List.Mem.casesOn",
+        "kind": "def",
+        "bytes": 3346
+      },
+      {
+        "name": "List.cons.noConfusion",
+        "kind": "def",
+        "bytes": 3175
+      },
+      {
+        "name": "List.noConfusionType",
+        "kind": "def",
+        "bytes": 3161
+      },
+      {
+        "name": "forall_prop_decidable",
+        "kind": "def",
+        "bytes": 1176
+      },
+      {
+        "name": "List.ctorIdx",
+        "kind": "def",
+        "bytes": 1005
+      },
+      {
+        "name": "UInt8.instOfNat",
+        "kind": "def",
+        "bytes": 609
+      },
+      {
+        "name": "UInt8.ofNat",
+        "kind": "def",
+        "bytes": 437
+      },
+      {
+        "name": "exists_prop_decidable.match_5",
+        "kind": "def",
+        "bytes": 217
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

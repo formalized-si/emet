@@ -1,0 +1,5625 @@
+{
+  "kind": "proof-courier-scenario",
+  "version": 4,
+  "started_at": "2026-11-13T18:09:28.468Z",
+  "claims": [
+    {
+      "id": "C0",
+      "title": "The agent's wallet runs the Lean policy the bounties are about, and it refuses these drains",
+      "pass": true,
+      "detail": {
+        "code_meta": {
+          "rules": "v1",
+          "lean_src_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe",
+          "lean_toolchain": "Lean (version 4.35.0, arm64-apple-darwin24.6.0, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+          "runtime": "A:lean_near_rt.c sha256:56ec24d3f909215c",
+          "lean_near": "0.1.0",
+          "shim_sha256": "13a228c410cbf6a24aebe78fccf03342609bc729caab67ddd87994c04585aed7",
+          "cc": "clang 23.1.0 (https://github.com/llvm/llvm-project ea7d852a70e8bdfaf601d6626a760f9771b2c4b4)",
+          "unit_yocto": "1000000000000000000"
+        },
+        "verdicts": [
+          "allow",
+          "denyReceiver",
+          "denyPerTx",
+          "allow",
+          "denyDaily"
+        ],
+        "wallet_keys": 0,
+        "factory_record": {
+          "wallet": "alice.wallets.test.near",
+          "owner": "alice.test.near",
+          "code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+          "created_at": "1794593396752659000"
+        },
+        "global_contract_hash": "3HHFstwLNW3tpg2oDPS2c2uLQ2CctEj3Eeje5vBzidvi",
+        "may_be_frozen_by": "board.test.near",
+        "frozen": false
+      }
+    },
+    {
+      "id": "C1",
+      "title": "The shelf is sealed once, by a kernel nobody can change",
+      "pass": true,
+      "detail": {
+        "sealed": true,
+        "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+        "kernel_keys": 0,
+        "code_hash": "8PjnPmLNWyPdGyrNQZfpBfWFHo7Nn7k38e35QuU7Dt65"
+      }
+    },
+    {
+      "id": "C2",
+      "title": "The board is keyless and pinned to that kernel, that shelf, the wallet factory with that wallet code, and the claims about that code",
+      "pass": true,
+      "detail": {
+        "config": {
+          "kernel": "kernel.test.near",
+          "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+          "factory": "wallets.test.near",
+          "wallet_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+          "claims": [
+            {
+              "claim": "Wallet.Claim.AllowedReceiversOnly",
+              "counter": "Wallet.Claim.Refute.AllowedReceiversOnly"
+            },
+            {
+              "claim": "Wallet.Claim.SlidingDayCap",
+              "counter": "Wallet.Claim.Refute.SlidingDayCap"
+            },
+            {
+              "claim": "Wallet.Claim.SlidingTwiceCap",
+              "counter": "Wallet.Claim.Refute.SlidingTwiceCap"
+            },
+            {
+              "claim": "Wallet.Claim.NonceCountsPayments",
+              "counter": "Wallet.Claim.Refute.NonceCountsPayments"
+            },
+            {
+              "claim": "Wallet.Claim.PerTxCapAlways",
+              "counter": "Wallet.Claim.Refute.PerTxCapAlways"
+            }
+          ],
+          "reveal_delay_blocks": "40",
+          "min_reveal_gas_tgas": "500",
+          "reveal_bond": "50000000000000000000000",
+          "grace_seconds": "120",
+          "stale_blocks": "200",
+          "bounties": "0",
+          "commit_domain": "proof-courier/commit/v2",
+          "allowed_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "code_refuted_by": null,
+          "kernel_broken_by": null
+        },
+        "board_keys": 0
+      }
+    },
+    {
+      "id": "C3",
+      "title": "Each bounty is about one of the board's claims, two-sided, with its statement and exact negation fixed by the kernel and its wallet confirmed by the factory; bogus, one-sided, far-off and duplicate bounties are refused; no money reaches the wallet yet",
+      "pass": true,
+      "detail": {
+        "ids": {
+          "receivers": "1",
+          "slidingday": "2",
+          "slidingtwice": "3",
+          "nonce": "4",
+          "pertx": "5"
+        },
+        "refused_at_once": {
+          "not_on_board": "claim_not_on_this_board",
+          "wrong_counter": "counter_claim_must_be_the_listed_negation",
+          "one_sided": "counter_claim_must_be_the_listed_negation",
+          "far_deadline": "deadline_too_far",
+          "duplicate": "open_bounty:1"
+        },
+        "refused_after_factory": [
+          {
+            "claim": "Wallet.Claim.SlidingDayCap",
+            "reason": "subject_not_a_factory_wallet",
+            "escrow": "returned"
+          }
+        ],
+        "returned": "2000000000000000000000000"
+      }
+    },
+    {
+      "id": "C4",
+      "title": "All 8 fake proofs are refused on-chain with a reason; none is paid, and their bonds go to the reward",
+      "pass": true,
+      "detail": {
+        "cheats": [
+          [
+            "viaSorry",
+            "sorryAx"
+          ],
+          [
+            "viaAxiom",
+            "axiom_in_delta:axiom Cheat.magic"
+          ],
+          [
+            "fakePropext",
+            "redefines_base_name:propext"
+          ],
+          [
+            "twinPropext",
+            "axiom_in_delta:axiom propext"
+          ],
+          [
+            "swapPolicy",
+            "redefines_base_name:Wallet.step"
+          ],
+          [
+            "weaker",
+            "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`"
+          ],
+          [
+            "noRequests",
+            "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`"
+          ],
+          [
+            "illTyped",
+            "kernel_failed"
+          ]
+        ],
+        "reward_growth_near": "0.4000"
+      }
+    },
+    {
+      "id": "C5",
+      "title": "Each agent checks every proof for free (a view call) after committing to it and before revealing it, so the RPC operator cannot commit to it first",
+      "pass": true,
+      "detail": {
+        "decisions": [
+          {
+            "agent": "opus-agent",
+            "decisions": [
+              {
+                "id": "1",
+                "side": "proof",
+                "name": "Wallet.Claim.AllowedReceiversOnly",
+                "decision": "committed",
+                "reward": 5.8999999999999995,
+                "rivals": 1,
+                "cost": 0.060000000000000005,
+                "ev": 2.8899999999999997,
+                "dry_run_ok": true,
+                "dry_run_mode": "claim",
+                "proof_bytes": 175623,
+                "source": "cache"
+              },
+              {
+                "id": "2",
+                "side": "proof",
+                "name": "Wallet.Claim.SlidingDayCap",
+                "decision": "skip: no proof"
+              },
+              {
+                "id": "2",
+                "side": "refutation",
+                "name": "Wallet.Claim.Refute.SlidingDayCap",
+                "decision": "skip: no proof"
+              },
+              {
+                "id": "3",
+                "side": "proof",
+                "name": "Wallet.Claim.SlidingTwiceCap",
+                "decision": "committed",
+                "reward": 2,
+                "rivals": 0,
+                "cost": 0.060000000000000005,
+                "ev": 1.94,
+                "dry_run_ok": true,
+                "dry_run_mode": "claim",
+                "proof_bytes": 388914,
+                "source": "cache"
+              },
+              {
+                "id": "4",
+                "side": "proof",
+                "name": "Wallet.Claim.NonceCountsPayments",
+                "decision": "skip: no proof"
+              },
+              {
+                "id": "4",
+                "side": "refutation",
+                "name": "Wallet.Claim.Refute.NonceCountsPayments",
+                "decision": "skip: no proof"
+              },
+              {
+                "id": "5",
+                "side": "proof",
+                "name": "Wallet.Claim.PerTxCapAlways",
+                "decision": "skip: no proof"
+              },
+              {
+                "id": "5",
+                "side": "refutation",
+                "name": "Wallet.Claim.Refute.PerTxCapAlways",
+                "decision": "skip: no proof"
+              }
+            ]
+          },
+          {
+            "agent": "sonnet-agent",
+            "decisions": [
+              {
+                "id": "1",
+                "side": "proof",
+                "name": "Wallet.Claim.AllowedReceiversOnly",
+                "decision": "committed",
+                "reward": 5.8999999999999995,
+                "rivals": 2,
+                "cost": 0.060000000000000005,
+                "ev": 1.9066666666666665,
+                "dry_run_ok": true,
+                "dry_run_mode": "claim",
+                "proof_bytes": 198853,
+                "source": "cache"
+              },
+              {
+                "id": "2",
+                "side": "proof",
+                "name": "Wallet.Claim.SlidingDayCap",
+                "decision": "skip: no proof"
+              },
+              {
+                "id": "2",
+                "side": "refutation",
+                "name": "Wallet.Claim.Refute.SlidingDayCap",
+                "decision": "committed",
+                "reward": 3,
+                "rivals": 0,
+                "cost": 0.060000000000000005,
+                "ev": 2.94,
+                "dry_run_ok": true,
+                "dry_run_mode": "claim",
+                "proof_bytes": 65617,
+                "source": "cache"
+              },
+              {
+                "id": "3",
+                "side": "proof",
+                "name": "Wallet.Claim.SlidingTwiceCap",
+                "decision": "committed",
+                "reward": 2,
+                "rivals": 1,
+                "cost": 0.060000000000000005,
+                "ev": 0.94,
+                "dry_run_ok": true,
+                "dry_run_mode": "claim",
+                "proof_bytes": 388138,
+                "source": "cache"
+              },
+              {
+                "id": "4",
+                "side": "proof",
+                "name": "Wallet.Claim.NonceCountsPayments",
+                "decision": "committed",
+                "reward": 2,
+                "rivals": 0,
+                "cost": 0.060000000000000005,
+                "ev": 1.94,
+                "dry_run_ok": true,
+                "dry_run_mode": "claim",
+                "proof_bytes": 340708,
+                "source": "cache"
+              },
+              {
+                "id": "5",
+                "side": "proof",
+                "name": "Wallet.Claim.PerTxCapAlways",
+                "decision": "skip: no proof"
+              },
+              {
+                "id": "5",
+                "side": "refutation",
+                "name": "Wallet.Claim.Refute.PerTxCapAlways",
+                "decision": "skip: no proof"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "C6",
+      "title": "Commit-reveal: a copied proof is not paid to the copier, and nobody reveals before the delay",
+      "pass": true,
+      "detail": {
+        "frontrun": [
+          {
+            "who": "eve",
+            "what": "reveals a leaked copy of the proof with no commitment of her own",
+            "outcome": "no_commit"
+          },
+          {
+            "who": "opus-agent",
+            "what": "reveals before its own delay has passed",
+            "outcome": "reveal_too_early"
+          },
+          {
+            "who": "eve",
+            "what": "commits the copy, waits her delay, reveals",
+            "outcome": "not_open"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C7",
+      "title": "The race for the headline bounty: exactly one agent is paid reward + forfeited bonds + its bond; the other is not paid and gets its bond back",
+      "pass": true,
+      "detail": {
+        "certificate": {
+          "claimer": "opus-agent.test.near",
+          "side": "proof",
+          "proved": "Wallet.Claim.AllowedReceiversOnly",
+          "proof_theorem": "Solution.proof",
+          "statement_hash": "9d62ba61439388513fc717ac8518ae3cb5045e7b64641a97aa7fecf1a9db23b5",
+          "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+          "axioms": [],
+          "decls_checked": 29,
+          "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+          "block_height": "887",
+          "timestamp": "1794594161841980000"
+        },
+        "winner": "opus-agent.test.near",
+        "paid": "5950000000000000000000000",
+        "loser": {
+          "claimer": "sonnet-agent.test.near",
+          "side": "proof",
+          "delta_sha256": "64b5368c17e7f12d333a4c43317f0a11f9166c348403c9e3bb278878c000d27a",
+          "outcome": "accepted_after_settled",
+          "block_height": "887"
+        }
+      }
+    },
+    {
+      "id": "C8",
+      "title": "No lock: several checks run at once; the junk revealed alongside is refused and its bond forfeited, and the honest proof is paid",
+      "pass": true,
+      "detail": {
+        "max_in_flight": 3,
+        "junk": {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "7f734283721fc5bfd887601c54d7b5f68cae3c3a84d4567941e902dbed59427b",
+          "outcome": "axiom_in_delta:axiom Cheat.magic",
+          "block_height": "405"
+        }
+      }
+    },
+    {
+      "id": "C13",
+      "title": "One proof covers every wallet the factory made from this code: Bob's wallet, with other caps, is funded through the proved bounty with no new proof; a look-alike account with a key is refused",
+      "pass": true,
+      "detail": {
+        "bob_wallet": "bob.wallets.test.near",
+        "bob_policy_near": {
+          "budget": 50,
+          "per_tx": 5,
+          "per_day": 10,
+          "allowed": [
+            "shop.test.near"
+          ]
+        },
+        "funded_near": "5.0000",
+        "bob_pay_verdict": "allow",
+        "lookalike": "copycat.test.near",
+        "lookalike_refunded_near": "5.0000",
+        "bob_wallet_storage_bytes": 457
+      }
+    },
+    {
+      "id": "C9",
+      "title": "Money moves only with a proof: the escrowed top-up reaches the wallet when its claim is proved, and nothing goes through a refuted claim",
+      "pass": true,
+      "detail": {
+        "escrow_state": "released",
+        "released": "10000000000000000000000000",
+        "refuted": "not_proven"
+      }
+    },
+    {
+      "id": "C10",
+      "title": "The other proofs are paid, and the counterexample is paid on the refutation side",
+      "pass": true,
+      "detail": {
+        "nonce": {
+          "claimer": "sonnet-agent.test.near",
+          "side": "proof",
+          "proved": "Wallet.Claim.NonceCountsPayments",
+          "proof_theorem": "Solution.proof",
+          "statement_hash": "9ed79f1fdec873061aa388d52a9365c9bb458fcab10c789388b285709a632886",
+          "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+          "axioms": [
+            "propext"
+          ],
+          "decls_checked": 27,
+          "delta_sha256": "3c08d2637dac55d1636266e92adf69af0dbcdf77470a623abc5b31a09b8cbbf9",
+          "block_height": "897",
+          "timestamp": "1794594167972421000"
+        },
+        "slidingday": {
+          "claimer": "sonnet-agent.test.near",
+          "side": "refutation",
+          "proved": "Wallet.Claim.Refute.SlidingDayCap",
+          "proof_theorem": "Solution.proof",
+          "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+          "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+          "axioms": [],
+          "decls_checked": 12,
+          "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+          "block_height": "1513",
+          "timestamp": "1794594876099560000"
+        },
+        "bypass": {
+          "payments": [
+            {
+              "label": "agent pays 3 NEAR just before the window ends",
+              "to": "vendor.test.near",
+              "amount_near": 3,
+              "verdict": "allow",
+              "at_ns": "1794594847586788000",
+              "transferred_yocto": "3000000000000000000000000"
+            },
+            {
+              "label": "agent pays 2 NEAR just before the window ends",
+              "to": "vendor.test.near",
+              "amount_near": 2,
+              "verdict": "allow",
+              "at_ns": "1794594851826904000",
+              "transferred_yocto": "2000000000000000000000000"
+            },
+            {
+              "label": "agent pays 3 NEAR right after it rolls over",
+              "to": "vendor.test.near",
+              "amount_near": 3,
+              "verdict": "allow",
+              "at_ns": "1794594867491791000",
+              "transferred_yocto": "3000000000000000000000000"
+            },
+            {
+              "label": "agent pays 3 NEAR more",
+              "to": "vendor.test.near",
+              "amount_near": 3,
+              "verdict": "allow",
+              "at_ns": "1794594871724541000",
+              "transferred_yocto": "3000000000000000000000000"
+            }
+          ],
+          "total_near": 11,
+          "seconds": 24.137753,
+          "per_day_cap_near": 6,
+          "bounty_phase_at_the_time": "Open",
+          "freeze_before_any_refutation": "nothing_refuted"
+        }
+      }
+    },
+    {
+      "id": "C16",
+      "title": "Alive only while its rule is true: the transaction that pays the counterexample freezes the wallet the bounty is about; the agent's next payment, which the rules allow, is refused; only the owner takes money out; the board forwards nothing more to this code; before the refutation the same freeze was refused",
+      "pass": true,
+      "detail": {
+        "bounty": "2",
+        "tx": "BKXxG7modg2H5zh59arhC6KBo2cK9huYPop798h5XdJT",
+        "refuter": "sonnet-agent.test.near",
+        "paid_yocto": "3050000000000000000000000",
+        "wallet": "alice.wallets.test.near",
+        "frozen_by": "board.test.near",
+        "gas": {
+          "total_tgas": 208.407099294705,
+          "kernel_tgas": 185.028097183212,
+          "wallet_freeze_tgas": 1.206631551594,
+          "board_on_frozen_tgas": 1.612854744997,
+          "board_on_verdict_tgas": 4.653683625188
+        },
+        "code_refuted_by": "2",
+        "wallet_after": {
+          "frozen": true,
+          "board": "board.test.near"
+        },
+        "refused_payment": {
+          "label": "agent pays 3 NEAR in the next window (frozen)",
+          "to": "vendor.test.near",
+          "amount_near": 3,
+          "verdict": "frozen",
+          "at_ns": "1794595471143774000",
+          "transferred_yocto": "0",
+          "fresh_window": true,
+          "within_budget": true,
+          "state_unchanged": true
+        },
+        "withdraw": {
+          "by_agent": "DENY_CALLER",
+          "by_owner": "OK",
+          "amount_yocto": "1995000000000000000000000"
+        },
+        "gates": {
+          "through_refuted_bounty": "not_proven",
+          "through_proved_bounty_of_refuted_code": "code_refuted"
+        },
+        "second_wallet": {
+          "wallet": "bob.wallets.test.near",
+          "frozen_by_call_from": "eve.test.near",
+          "tx": "C3nCF54p6MvtwVJrxqanUcG6KkN5oZtRttQSGt5hYRHy",
+          "tgas": 10.062508968569,
+          "before": false,
+          "after": true,
+          "pay_after": "frozen",
+          "withdrawn_yocto": "995000000000000000000000",
+          "freeze_again": true,
+          "lookalike": {
+            "account": "copycat.test.near",
+            "outcome": {
+              "wallet": "copycat.test.near",
+              "reason": "not_a_factory_wallet"
+            },
+            "frozen": false
+          },
+          "direct_call": "ERR_FREEZE_NOT_BOARD"
+        },
+        "return_path": {
+          "board": "boardv2.test.near",
+          "bounty": "0",
+          "to": "alice.walletsv2.test.near",
+          "amount_yocto": "1995000000000000000000000",
+          "agent_pay_verdict": "allow",
+          "v1_wallet_still_frozen": true,
+          "v2_wallet_frozen": false,
+          "freeze_v2_without_a_refutation": "nothing_refuted"
+        }
+      }
+    },
+    {
+      "id": "C17",
+      "title": "Any other wallet of the refuted code can be frozen by anyone through the board, which asks the factory first; its owner still takes the money out; a look-alike is not touched, and nobody but the board can freeze a wallet",
+      "pass": true,
+      "detail": {
+        "wallet": "bob.wallets.test.near",
+        "frozen_by_call_from": "eve.test.near",
+        "tx": "C3nCF54p6MvtwVJrxqanUcG6KkN5oZtRttQSGt5hYRHy",
+        "tgas": 10.062508968569,
+        "before": false,
+        "after": true,
+        "pay_after": "frozen",
+        "withdrawn_yocto": "995000000000000000000000",
+        "freeze_again": true,
+        "lookalike": {
+          "account": "copycat.test.near",
+          "outcome": {
+            "wallet": "copycat.test.near",
+            "reason": "not_a_factory_wallet"
+          },
+          "frozen": false
+        },
+        "direct_call": "ERR_FREEZE_NOT_BOARD"
+      }
+    },
+    {
+      "id": "C11",
+      "title": "The board refuses a bounty for a claim it has already settled, and points to the certificate",
+      "pass": true,
+      "detail": {}
+    },
+    {
+      "id": "C12",
+      "title": "An unclaimed reward stays locked until the deadline plus grace; then anyone may close the bounty, the poster gets its reward exactly once, and a pooled part goes back to whoever added it",
+      "pass": true,
+      "detail": {
+        "refund": "1000000000000000000000000",
+        "boost_back": "500000000000000000000000"
+      }
+    },
+    {
+      "id": "C14",
+      "title": "The fix: the bounty for the same claim about the v2 wallet is proved (the paid v1 counterexample does not refute it), and the same bypass on a v2 wallet stops at the daily cap",
+      "pass": true,
+      "detail": {
+        "factory": "walletsv2.test.near",
+        "board": "boardv2.test.near",
+        "wallet": "alice.walletsv2.test.near",
+        "wallet_v2_sha256": "51e19e26ce9b7a9199b61b84510f0725df06ac42d1a7c06e148798349afb1f61",
+        "rules": "v2",
+        "bounty": {
+          "id": "0",
+          "claim": "Wallet.Claim.V2.SlidingDayCap",
+          "phase": "Paid",
+          "winner": "opus-agent.test.near",
+          "certificate": {
+            "claimer": "opus-agent.test.near",
+            "side": "proof",
+            "proved": "Wallet.Claim.V2.SlidingDayCap",
+            "proof_theorem": "Solution.proof",
+            "statement_hash": "08ebca4c45403b4cc55ff6860ababd0a248e5d3ab97c5019dc11e4f4f763c5a2",
+            "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "decls_checked": 90,
+            "delta_sha256": "04d426bb30d536f39ea601cc32b8844c2d89fc94f44b3ad2a2955711a04ee2ed",
+            "block_height": "3543",
+            "timestamp": "1794597311710545000"
+          },
+          "kernel_tgas": 297.191786561174,
+          "escrow_released": "10000000000000000000000000"
+        },
+        "old_counterexample_on_v2": {
+          "ok": false,
+          "reason": "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.V2.Refute.SlidingDayCap`"
+        },
+        "payments": [
+          {
+            "label": "agent pays the vendor 1 NEAR (opens a window)",
+            "amount_near": 1,
+            "verdict": "allow",
+            "at_ns": "1794597317561333000"
+          },
+          {
+            "label": "agent pays 3 NEAR just before the window ends",
+            "amount_near": 3,
+            "verdict": "allow",
+            "at_ns": "1794597822620289000"
+          },
+          {
+            "label": "agent pays 2 NEAR just before the window ends",
+            "amount_near": 2,
+            "verdict": "allow",
+            "at_ns": "1794597826843180000"
+          },
+          {
+            "label": "agent pays 3 NEAR right after it rolls over",
+            "amount_near": 3,
+            "verdict": "denyDaily",
+            "at_ns": "1794597840611992000"
+          },
+          {
+            "label": "agent pays 3 NEAR more",
+            "amount_near": 3,
+            "verdict": "denyDaily",
+            "at_ns": "1794597844245484000"
+          },
+          {
+            "label": "two windows later: agent pays 3 NEAR",
+            "amount_near": 3,
+            "verdict": "allow",
+            "at_ns": "1794598442556429000"
+          }
+        ],
+        "allowed_in_day_near": 6,
+        "per_day_cap_near": 6,
+        "courier": {
+          "gas_tgas": 364.45138543699,
+          "fees_near": 0.01,
+          "bonds_near": 0.049999999999999996,
+          "llm_usd": 0,
+          "earned_near": 3.0500000000000003,
+          "decisions": [
+            {
+              "id": "0",
+              "side": "proof",
+              "name": "Wallet.Claim.V2.SlidingDayCap",
+              "decision": "committed",
+              "reward": 3,
+              "rivals": 0,
+              "cost": 0.060000000000000005,
+              "ev": 2.94,
+              "dry_run_ok": true,
+              "dry_run_mode": "claim",
+              "proof_bytes": 380986,
+              "source": "cache"
+            }
+          ],
+          "gas_near": 0.036445138543699,
+          "net_near": 2.953554861456302,
+          "commits": [
+            {
+              "id": "0",
+              "side": "proof",
+              "name": "Wallet.Claim.V2.SlidingDayCap",
+              "height": 3491,
+              "source": "cache",
+              "model": "opus",
+              "revealed": true,
+              "result": {
+                "success": true,
+                "received_near": 3.0500000000000003,
+                "failures": [],
+                "kernel_tgas": 297.191786561174
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "C18",
+      "title": "Nothing unfreezes a wallet: the money its owner took out goes back under an agent only through fund_if_proven on the board where the claim is proved, and that wallet cannot be frozen on an accusation",
+      "pass": true,
+      "detail": {
+        "board": "boardv2.test.near",
+        "bounty": "0",
+        "to": "alice.walletsv2.test.near",
+        "amount_yocto": "1995000000000000000000000",
+        "agent_pay_verdict": "allow",
+        "v1_wallet_still_frozen": true,
+        "v2_wallet_frozen": false,
+        "freeze_v2_without_a_refutation": "nothing_refuted"
+      }
+    },
+    {
+      "id": "C15",
+      "title": "Cost: the shelf is paid once; each proof check is a fraction of one call's 1,000 TGas limit",
+      "pass": true,
+      "detail": {
+        "shelf": {
+          "calls": 7,
+          "tgas": 957.43322516826,
+          "near": "0.0957",
+          "base_bytes": 1093131,
+          "stored_bytes": 310293,
+          "decls": 623
+        },
+        "storage": {
+          "kernel.test.near": {
+            "bytes": 1094277,
+            "staked_near": "10.9428"
+          },
+          "board.test.near": {
+            "bytes": 298753,
+            "staked_near": "2.9875"
+          },
+          "wallets.test.near": {
+            "bytes": 157522,
+            "staked_near": "1.5752"
+          },
+          "alice.wallets.test.near": {
+            "bytes": 505,
+            "staked_near": "0.0050"
+          }
+        },
+        "check_tgas_range": [
+          185.028097183212,
+          306.488373367009
+        ],
+        "check_near_max": "0.0306",
+        "gas_price_yocto": "100000000"
+      }
+    }
+  ],
+  "transactions": [
+    {
+      "label": "deploy_keyless_wallets.test.near",
+      "tx_hash": "9mfVZYXdgjYfM1BowN4oWtUrHAprJNtmWXA2u4AgJ5xD",
+      "success": true
+    },
+    {
+      "label": "alice creates her agent's wallet from the factory",
+      "signer": "alice.test.near",
+      "receiver": "wallets.test.near",
+      "method": "create_wallet",
+      "tx_hash": "CEhJwADDjxcKdtDGnCsm3R6W1RE1gaUgxHYaftdADFJU",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "wallets.test.near",
+          "to": "alice.wallets.test.near",
+          "amount": "45000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_policy",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "by": "wallets.test.near",
+              "action": "init",
+              "policy": {
+                "budget_total": "20000000",
+                "per_tx_cap": "3000000",
+                "per_day_cap": "6000000",
+                "day_ns": "600000000000",
+                "allowed": [
+                  "vendor.test.near"
+                ]
+              },
+              "lean_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-factory",
+          "version": "1.0.0",
+          "event": "wallet_created",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "owner": "alice.test.near",
+              "code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        }
+      ],
+      "tgas": 14.767782362899,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays the vendor 2 NEAR",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "ET8d5pZdGpRnTDB1EUnG7MGy6VanXrZQE5HmSyctRYYr",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.wallets.test.near",
+          "to": "vendor.test.near",
+          "amount": "2000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "2000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.852198867627,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "prompt-injected agent pays drain.test.near",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "J2znt9hTTY7HPkaqEbzk6Qa4EfhWWnNUzJvvYxfauVdM",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "drain.test.near",
+              "amount_yocto": "1000000000000000000000000",
+              "verdict": "denyReceiver",
+              "key_layer_block": false,
+              "note": "DENY_RECEIVER"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.081693517062,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 5 NEAR in one go",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "GCcsL1XsCVouuiF4z9rKFyThRDV9hv1e7LbdzPYXRhdh",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "5000000000000000000000000",
+              "verdict": "denyPerTx",
+              "key_layer_block": false,
+              "note": "DENY_PER_TX"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.0816188559,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays the vendor 3 NEAR",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "5vsqfmUaDiCEDMF4CrR5b6HHJhvBiNf9inuerPxgXUv1",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.wallets.test.near",
+          "to": "vendor.test.near",
+          "amount": "3000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.852198867627,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 3 NEAR more (daily cap 6)",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "9YuS2WPzgJUoztmjth1RbtRNWC4ncWkSCW84iNkYbTUi",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "denyDaily",
+              "key_layer_block": false,
+              "note": "DENY_DAILY"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.081181415052,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "deploy_keyless_kernel.test.near",
+      "tx_hash": "9NYEh3zDmxKJK3jgfCiizFq2qo2t3GTS8EqaDriisaSy",
+      "success": true
+    },
+    {
+      "label": "upload chunks/chunk-0000.bin",
+      "signer": "keeper.test.near",
+      "receiver": "kernel.test.near",
+      "method": "load_base_chunk",
+      "tx_hash": "pSteKLFqQgDdFcnSHqkrgMzusDhGTfY5dMWiQoegcsL",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [],
+      "tgas": 19.522241361036,
+      "kernel_tgas": 12.510687062606
+    },
+    {
+      "label": "upload chunks/chunk-0001.bin",
+      "signer": "keeper.test.near",
+      "receiver": "kernel.test.near",
+      "method": "load_base_chunk",
+      "tx_hash": "88cQmSUfZjJJCsuf24PFkUduRhrnQvvK8vqVBCFYk8n1",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [],
+      "tgas": 19.599765244464,
+      "kernel_tgas": 12.556358224414
+    },
+    {
+      "label": "upload chunks/chunk-0002.bin",
+      "signer": "keeper.test.near",
+      "receiver": "kernel.test.near",
+      "method": "load_base_chunk",
+      "tx_hash": "H4v8ev6YZrNn1KaubTKnAYCyP61Hw2YKoWLPDx3J5B2F",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [],
+      "tgas": 7.242944162049,
+      "kernel_tgas": 4.906110547359
+    },
+    {
+      "label": "seal_base",
+      "signer": "keeper.test.near",
+      "receiver": "kernel.test.near",
+      "method": "seal_base",
+      "tx_hash": "3g1Qn6WgFA3tfga2dKhLG5fND7hhHsnyrHNmvtx7o1uT",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [],
+      "tgas": 177.350169829104,
+      "kernel_tgas": 176.813158037089
+    },
+    {
+      "label": "check_base_range 0..256",
+      "signer": "anyone.test.near",
+      "receiver": "kernel.test.near",
+      "method": "check_base_range",
+      "tx_hash": "E3KR1NkB7xvGxQvBQd5aHranr1fSVUJBGfBfQttxyZ1a",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [],
+      "tgas": 230.499401756405,
+      "kernel_tgas": 229.96649076388
+    },
+    {
+      "label": "check_base_range 256..512",
+      "signer": "anyone.test.near",
+      "receiver": "kernel.test.near",
+      "method": "check_base_range",
+      "tx_hash": "DU7mhxHMzWr4CwYazamDvkZgRLvQoePnnRWBvdpqYcPE",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [],
+      "tgas": 290.339098961282,
+      "kernel_tgas": 289.806092601327
+    },
+    {
+      "label": "check_base_range 512..623",
+      "signer": "anyone.test.near",
+      "receiver": "kernel.test.near",
+      "method": "check_base_range",
+      "tx_hash": "EFqKgZDjdMFLYsU6fbt3TXyepW6yHjP9g763yweGUWBS",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [],
+      "tgas": 212.87960385392,
+      "kernel_tgas": 212.346597493965
+    },
+    {
+      "label": "deploy_keyless_board.test.near",
+      "tx_hash": "5tngGQYm3DBaJMoNc9rnnjQQT58jhGTbrvE5vxTRETWw",
+      "success": true
+    },
+    {
+      "label": "copycat initialises its own copy of the wallet",
+      "signer": "copycat.test.near",
+      "receiver": "copycat.test.near",
+      "method": "init",
+      "tx_hash": "94RN9jXq4fq14sFCeXUXQqtLLVcVmF3sjCnPU9zGeLqK",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_policy",
+          "data": [
+            {
+              "wallet": "copycat.test.near",
+              "by": "copycat.test.near",
+              "action": "init",
+              "policy": {
+                "budget_total": "20000000",
+                "per_tx_cap": "3000000",
+                "per_day_cap": "6000000",
+                "day_ns": "600000000000",
+                "allowed": [
+                  "copycat.test.near"
+                ]
+              },
+              "lean_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.084760290079,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "a bounty that escrows money for a look-alike wallet",
+      "signer": "bogus.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "Cjh9KU7RKp1VA1wnEjw692zsDnzq8vR9hpipVPCumY7s",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "bogus.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        },
+        {
+          "from": "board.test.near",
+          "to": "bogus.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_rejected",
+          "data": [
+            {
+              "id": "0",
+              "claim": "Wallet.Claim.SlidingDayCap",
+              "reason": "subject_not_a_factory_wallet"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "escrow_returned",
+          "data": [
+            {
+              "id": "0",
+              "to": "bogus.test.near",
+              "amount": "1000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "refunded",
+          "data": [
+            {
+              "id": "0",
+              "to": "bogus.test.near",
+              "amount": "1000000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 301.159596967292,
+      "kernel_tgas": 286.003202095906
+    },
+    {
+      "label": "post receivers",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "9uzzoUqC57L1aePPNtqiRue99ahhhzZxx3fz3ZnA851Z",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "1",
+              "poster": "alice.test.near",
+              "claim": "Wallet.Claim.AllowedReceiversOnly",
+              "counter_claim": "Wallet.Claim.Refute.AllowedReceiversOnly",
+              "statement_sha256": "37f5fa28c37d04945e7e9ac37593a2927e95ffb7eba79310a49ca0e87a2164b4",
+              "reward": "5000000000000000000000000",
+              "deadline": "1794679866574483000",
+              "subject": "alice.wallets.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 293.958219786211,
+      "kernel_tgas": 285.204784596732
+    },
+    {
+      "label": "post slidingday",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "CxnSLbeTUegdEVdoySeF41Qws56SU6djnsZe347ASQYf",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "2",
+              "poster": "alice.test.near",
+              "claim": "Wallet.Claim.SlidingDayCap",
+              "counter_claim": "Wallet.Claim.Refute.SlidingDayCap",
+              "statement_sha256": "eef104d1ff1d32af64e0bb2b631d0d6a9d4c4d1e0087dfef307c8b6a0ae7cbaa",
+              "reward": "3000000000000000000000000",
+              "deadline": "1794679866574483000",
+              "subject": "alice.wallets.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 294.788720085375,
+      "kernel_tgas": 286.003202095906
+    },
+    {
+      "label": "post slidingtwice",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "9RZVxCAc8c5FmriFnopt3Fd2rb8ipx1unMkT8sF9j2Jq",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "3",
+              "poster": "alice.test.near",
+              "claim": "Wallet.Claim.SlidingTwiceCap",
+              "counter_claim": "Wallet.Claim.Refute.SlidingTwiceCap",
+              "statement_sha256": "a08ad1f6635321cd76d3a0bf251002fbe094107a924890130f8bc58fb4fc2b0d",
+              "reward": "2000000000000000000000000",
+              "deadline": "1794679866574483000",
+              "subject": "alice.wallets.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 295.032347747774,
+      "kernel_tgas": 286.236233701991
+    },
+    {
+      "label": "post nonce",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "93VnYix34kFVxxpu9gYPghK5Dw6rVfNC6B1sf1Eo2XqH",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "4",
+              "poster": "alice.test.near",
+              "claim": "Wallet.Claim.NonceCountsPayments",
+              "counter_claim": "Wallet.Claim.Refute.NonceCountsPayments",
+              "statement_sha256": "566a492c2b4db6b92d33a51682536f90c570e89b0dc36552e43f8af9991fafbc",
+              "reward": "2000000000000000000000000",
+              "deadline": "1794679866574483000",
+              "subject": "alice.wallets.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 294.109313596102,
+      "kernel_tgas": 285.344074773699
+    },
+    {
+      "label": "post pertx",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "5pq4sZ313kBsNG7Z2XWeexzrSz4XLBgL4J1kgKTzCHnd",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "5",
+              "poster": "alice.test.near",
+              "claim": "Wallet.Claim.PerTxCapAlways",
+              "counter_claim": "Wallet.Claim.Refute.PerTxCapAlways",
+              "statement_sha256": "0145699276d77ee9196a55a88a9abe3493c9fe6e3a353c7cedc3d8c146a53afb",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794597066574483000",
+              "subject": "alice.wallets.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 293.915466968637,
+      "kernel_tgas": 285.164026351718
+    },
+    {
+      "label": "carol pools 0.5 NEAR into the headline bounty",
+      "signer": "carol.test.near",
+      "receiver": "board.test.near",
+      "method": "boost",
+      "tx_hash": "Fee14CjgfgsxhUf3T1S5EM1PNxtsSZTMvJkKvNSpri8h",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "boosted",
+          "data": [
+            {
+              "id": "1",
+              "by": "carol.test.near",
+              "amount": "500000000000000000000000",
+              "reward": "5500000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.58692460675,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "carol pools 0.5 NEAR into the per-payment bounty",
+      "signer": "carol.test.near",
+      "receiver": "board.test.near",
+      "method": "boost",
+      "tx_hash": "6r9hRBbDzrJAptK9UCoM2wDTRd7pdEeNMNLqTBhYwX53",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "boosted",
+          "data": [
+            {
+              "id": "5",
+              "by": "carol.test.near",
+              "amount": "500000000000000000000000",
+              "reward": "1500000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.586405592521,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "a bounty for a claim this board is not about",
+      "signer": "bogus.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "6KWG21QKCu17JmqQ3cXw7AuU73VZvztaKbyFrgZsHUJa",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: claim_not_on_this_board"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.107910092518,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "a bounty whose \"refutation\" is another claim",
+      "signer": "bogus.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "FyamrT2D2yxDVSj1GGhuidE2eteujCBucSBQgtHkKWqV",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: counter_claim_must_be_the_listed_negation"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.116960850397,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "a one-sided bounty (no refutation side)",
+      "signer": "bogus.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "3D3ZLoe9YbztQj1FodKz62fp8Q8J4G6AAUGc1YPek9gG",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: counter_claim_must_be_the_listed_negation"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.114257003281,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "a bounty with a deadline a year away",
+      "signer": "bogus.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "A5XTxEWxDxujjbuTs6PCHocSgZNXXzJAn1AXJEAqCMkF",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: deadline_too_far"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.111157996402,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "a second open bounty for the headline claim",
+      "signer": "bogus.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "6ieHSsbQwEmYDJsYCjoRbpVYUwvRUxhTqmweGG5UPDYh",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: open_bounty:1"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.249790736637,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "alice tries to top up the wallet through the board before any proof",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "fund_if_proven",
+      "tx_hash": "FQhdDfurCKYf8ENxQfmNdnHbgLENAfLpYRDLHUX25PU5",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_proven"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.207774975629,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "commit cheat viaSorry",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "Fvo59FgKkSffjcWTut2CBjfhtE55U38iXrUCrVtjgf2j",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.713902117171,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "reveal cheat viaSorry",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "6DjJgnJasc2beKwFxf7BC585Z4JhYmPWhA1MmFfEsMyp",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "b2ce4d2874c4b0360b4df26371d6b2a2c44723949bc840cfae7ccab510d4432e",
+              "delta_bytes": 106739,
+              "block_height": "345",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "b2ce4d2874c4b0360b4df26371d6b2a2c44723949bc840cfae7ccab510d4432e",
+              "reason": "sorryAx"
+            }
+          ]
+        }
+      ],
+      "tgas": 34.284949540561,
+      "kernel_tgas": 13.795677984008
+    },
+    {
+      "label": "commit cheat viaAxiom",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "3cQfNijJdpNkKH58t9GVKwudJrEqKBCaNSL2PUwPNqzC",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.636472212225,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "reveal cheat viaAxiom",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "EDK4NL1yffD7v38KgvSoc8hf9Q9D7bEggJcHWgC414Wi",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "7f734283721fc5bfd887601c54d7b5f68cae3c3a84d4567941e902dbed59427b",
+              "delta_bytes": 414,
+              "block_height": "403",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "7f734283721fc5bfd887601c54d7b5f68cae3c3a84d4567941e902dbed59427b",
+              "reason": "axiom_in_delta:axiom Cheat.magic"
+            }
+          ]
+        }
+      ],
+      "tgas": 8.427899445474,
+      "kernel_tgas": 2.031780613444
+    },
+    {
+      "label": "commit cheat fakePropext",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "BYGV2cYCTXk9D3ZZKHbUP4rBMzahtA5ZZDhdCFUVCmyS",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.654260763547,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "reveal cheat fakePropext",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "BCeZNNjZtEH97ZMtpMT149EJE4WqrkEDZjoSjyjPPi4A",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "827ef5b37b482165e83a5015e95a63fdd4b1e0114df972ab702ac5bafc86a2a0",
+              "delta_bytes": 246,
+              "block_height": "461",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "827ef5b37b482165e83a5015e95a63fdd4b1e0114df972ab702ac5bafc86a2a0",
+              "reason": "redefines_base_name:propext"
+            }
+          ]
+        }
+      ],
+      "tgas": 9.685191058978,
+      "kernel_tgas": 3.279800369529
+    },
+    {
+      "label": "commit cheat twinPropext",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "J2zqSkgG67APswJir9bcy9AaW1KA5qUpFmXPUxejgZYx",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.671757860044,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "reveal cheat twinPropext",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "GSBdC1ofBLbrvj9nK7j899j2cSW4ugFLGCbrg4E1ges1",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "c2d4401a607762ff932eb43c719cb416db674f5b34168bf6a5a36331bfb81b50",
+              "delta_bytes": 295,
+              "block_height": "519",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "c2d4401a607762ff932eb43c719cb416db674f5b34168bf6a5a36331bfb81b50",
+              "reason": "axiom_in_delta:axiom propext"
+            }
+          ]
+        }
+      ],
+      "tgas": 8.460918649983,
+      "kernel_tgas": 2.011500836568
+    },
+    {
+      "label": "commit cheat swapPolicy",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "3SfNuGrL5tMCxu7CJxKvthCGBvVxCZnYmb3seGegoajb",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.690849332958,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "reveal cheat swapPolicy",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "AWJPeFpQcodbq2qSEZ9jcTorcrqj16hLtDq4G42kN4ca",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "b53c51cd15f32d1d1bc1998eaaa4e0d48a73b3f7112090a19e1e4ceaf3fd79aa",
+              "delta_bytes": 116,
+              "block_height": "577",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "b53c51cd15f32d1d1bc1998eaaa4e0d48a73b3f7112090a19e1e4ceaf3fd79aa",
+              "reason": "redefines_base_name:Wallet.step"
+            }
+          ]
+        }
+      ],
+      "tgas": 9.71411727925,
+      "kernel_tgas": 3.251248062997
+    },
+    {
+      "label": "commit cheat weaker",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "GrvsQ12npoDzb32tbGhCtEkU9YZH5ddfVt9P541PF9Hn",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.708737562467,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "reveal cheat weaker",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "7hN1m55dgNWEmrmAqjn5ADNSGobVntwj2KNLGi7Z3qwq",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "a66f51e5942f66ef22106c13c9b4b2ab3d9d511bca821445d0fe3c2f724e1e83",
+              "delta_bytes": 550,
+              "block_height": "635",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "a66f51e5942f66ef22106c13c9b4b2ab3d9d511bca821445d0fe3c2f724e1e83",
+              "reason": "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`"
+            }
+          ]
+        }
+      ],
+      "tgas": 148.93219018902,
+      "kernel_tgas": 142.343433522385
+    },
+    {
+      "label": "commit cheat noRequests",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "BaK9mZLDYEvEZnWUkLPSsXJXD4SfSq1sdkkohDhauG79",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.732232297416,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "reveal cheat noRequests",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "8822dTTD4nPYFTbVacmbdJbnykcx6bRiX5UABDfvfQ4H",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "7bea641eb48a6b2527bd717eee68902a49a6906bc8af316ffede7c46c5f810c6",
+              "delta_bytes": 13976,
+              "block_height": "693",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "7bea641eb48a6b2527bd717eee68902a49a6906bc8af316ffede7c46c5f810c6",
+              "reason": "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`"
+            }
+          ]
+        }
+      ],
+      "tgas": 153.243238663908,
+      "kernel_tgas": 144.822729295335
+    },
+    {
+      "label": "commit cheat illTyped",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "HBn8hqRaZ2dh4zSzsFXPqG3jP4DZsgJeujMb9g89mmqU",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.755727032365,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "reveal cheat illTyped",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "HJT6C6t559A3BcL9Ls6m3jHwPRqU8qwc3ijf8fCWBXHq",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: panicked at vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "563c726d37846fabc9a3b232638901ad7a5a7a94cb5d2ad39dc8d8d4558d4b16",
+              "delta_bytes": 175627,
+              "block_height": "751",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "563c726d37846fabc9a3b232638901ad7a5a7a94cb5d2ad39dc8d8d4558d4b16",
+              "reason": "kernel_failed"
+            }
+          ]
+        }
+      ],
+      "tgas": 255.480227624129,
+      "kernel_tgas": 225.659647903349
+    },
+    {
+      "label": "opus-agent commit",
+      "signer": "opus-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "4qjfoKPA2ty8RgyCTBa5cKpBY2PUJ77ZefuWVVsQ7HJK",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "opus-agent.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.870121819614,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "opus-agent commit",
+      "signer": "opus-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "2WYt1ZTaZGfqTNXGSsnGyyGUPtvkNSyJCAnBozPjLhts",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "3",
+              "claimer": "opus-agent.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.724161977756,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "opus-agent reveals before its own delay",
+      "signer": "opus-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "8w8ZhPfwxRf9nwfmJpRAYt6iNhpQZMq8HwPsWJCdPdwp",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: reveal_too_early"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 16.371360204023,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "sonnet-agent commit",
+      "signer": "sonnet-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "7dRxAd87GsUQtrjQZsADx3aW4GnaFWCkVaCcEDwPwtYW",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "sonnet-agent.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.875984188476,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "sonnet-agent commit",
+      "signer": "sonnet-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "Dt4od7BLXtWXJ5ptjsLpR81iMLsKdmTv2KTrFZzB5Mq9",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "2",
+              "claimer": "sonnet-agent.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.731323223064,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "sonnet-agent commit",
+      "signer": "sonnet-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "iycdQv8ZX8xydFkRXPLBswnvnozVxvuN6aAZ4qEmMMP",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "3",
+              "claimer": "sonnet-agent.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.734578587326,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "sonnet-agent commit",
+      "signer": "sonnet-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "Dj6sic4LcDrXLypP1Ne8RbAboFooWfE7X4p5wsriQLgV",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "4",
+              "claimer": "sonnet-agent.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.732478616054,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "commit junk to reveal alongside the agents",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "6iRvKAZAUsifTbmzCKebZPCHxtMeESEQ6zST1wWnRaAj",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.776578069008,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "eve reveals a leaked copy with no commitment of her own",
+      "signer": "eve.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "GPDZcbUDuYswqMgoDN6jXPyzUx95EJKmDNeXJdmbhTG6",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: no_commit"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 16.355678661677,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "commit eve commits the copy",
+      "signer": "eve.test.near",
+      "receiver": "board.test.near",
+      "method": "commit",
+      "tx_hash": "CeqqTfDcsBDntuefnLRgkf8Go7z1EogSRqPYf7LQ5nwa",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "eve.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.867932797623,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "mallory reveals junk alongside",
+      "signer": "mallory.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "99SN6KL3yweFcqhyVbjpPCBKhtQkLi9jrt5QYodxuyAj",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "alice.test.near",
+          "amount": "50000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "7f734283721fc5bfd887601c54d7b5f68cae3c3a84d4567941e902dbed59427b",
+              "delta_bytes": 414,
+              "block_height": "885",
+              "in_flight": 3
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "mallory.test.near",
+              "side": "proof",
+              "delta_sha256": "7f734283721fc5bfd887601c54d7b5f68cae3c3a84d4567941e902dbed59427b",
+              "reason": "axiom_in_delta:axiom Cheat.magic"
+            }
+          ]
+        }
+      ],
+      "tgas": 9.395541069413,
+      "kernel_tgas": 2.031780613444
+    },
+    {
+      "label": "sonnet-agent reveal",
+      "signer": "sonnet-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "8CrrQEPTbm3kraiLmqMsh8YJiS6oJexsv4EPYptQYifS",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "sonnet-agent.test.near",
+          "amount": "50000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "sonnet-agent.test.near",
+              "side": "proof",
+              "delta_sha256": "64b5368c17e7f12d333a4c43317f0a11f9166c348403c9e3bb278878c000d27a",
+              "delta_bytes": 198853,
+              "block_height": "885",
+              "in_flight": 2
+            }
+          ]
+        }
+      ],
+      "tgas": 266.893978143926,
+      "kernel_tgas": 233.208629302093
+    },
+    {
+      "label": "opus-agent reveal",
+      "signer": "opus-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "4CBehj3Tp3B5ELRrkX3CYKr7Z2zVKMa7EgYM487QDikt",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "opus-agent.test.near",
+          "amount": "5950000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "opus-agent.test.near",
+              "side": "proof",
+              "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+              "delta_bytes": 175623,
+              "block_height": "885",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "1",
+              "certificate": {
+                "claimer": "opus-agent.test.near",
+                "side": "proof",
+                "proved": "Wallet.Claim.AllowedReceiversOnly",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "9d62ba61439388513fc717ac8518ae3cb5045e7b64641a97aa7fecf1a9db23b5",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [],
+                "decls_checked": 29,
+                "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+                "block_height": "887",
+                "timestamp": "1794594161841980000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "1",
+              "to": "opus-agent.test.near",
+              "amount": "5950000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 261.454253218742,
+      "kernel_tgas": 227.097114603348
+    },
+    {
+      "label": "sonnet-agent reveal",
+      "signer": "sonnet-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "7uLnUmFUHqVkPM6MrBpFpLiQZM8YayGRH86avpo4vCuQ",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_open"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 33.746134888435,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "opus-agent reveal",
+      "signer": "opus-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "HMX3N66uim3XT8cTuPhbJp7nUPkjeAbBkDbu5VcDztGj",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "alice.wallets.test.near",
+          "amount": "10000000000000000000000000",
+          "ok": true
+        },
+        {
+          "from": "board.test.near",
+          "to": "opus-agent.test.near",
+          "amount": "2050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "3",
+              "claimer": "opus-agent.test.near",
+              "side": "proof",
+              "delta_sha256": "04e58ae21b7fc26cee69c6f384bb7ea126cd5f75a208fa9ffbff58a52e9a7045",
+              "delta_bytes": 388914,
+              "block_height": "895",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "3",
+              "certificate": {
+                "claimer": "opus-agent.test.near",
+                "side": "proof",
+                "proved": "Wallet.Claim.SlidingTwiceCap",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "321d68d60c77f288f0812016daacb828640c13a021d31672ddd4c3da2eb3d9f7",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [
+                  "propext"
+                ],
+                "decls_checked": 44,
+                "delta_sha256": "04e58ae21b7fc26cee69c6f384bb7ea126cd5f75a208fa9ffbff58a52e9a7045",
+                "block_height": "897",
+                "timestamp": "1794594167972421000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "escrow_released",
+          "data": [
+            {
+              "id": "3",
+              "to": "alice.wallets.test.near",
+              "amount": "10000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "3",
+              "to": "opus-agent.test.near",
+              "amount": "2050000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 372.013509385246,
+      "kernel_tgas": 306.488373367009
+    },
+    {
+      "label": "sonnet-agent reveal",
+      "signer": "sonnet-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "AHnNjYaDozBGxgHLXUfHQ5ULTufq3XQffA3kUL6CKvDH",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "sonnet-agent.test.near",
+          "amount": "2050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "4",
+              "claimer": "sonnet-agent.test.near",
+              "side": "proof",
+              "delta_sha256": "3c08d2637dac55d1636266e92adf69af0dbcdf77470a623abc5b31a09b8cbbf9",
+              "delta_bytes": 340708,
+              "block_height": "895",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "4",
+              "certificate": {
+                "claimer": "sonnet-agent.test.near",
+                "side": "proof",
+                "proved": "Wallet.Claim.NonceCountsPayments",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "9ed79f1fdec873061aa388d52a9365c9bb458fcab10c789388b285709a632886",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [
+                  "propext"
+                ],
+                "decls_checked": 27,
+                "delta_sha256": "3c08d2637dac55d1636266e92adf69af0dbcdf77470a623abc5b31a09b8cbbf9",
+                "block_height": "897",
+                "timestamp": "1794594167972421000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "4",
+              "to": "sonnet-agent.test.near",
+              "amount": "2050000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 325.226373218406,
+      "kernel_tgas": 269.457530436308
+    },
+    {
+      "label": "eve reveals the copy after her delay",
+      "signer": "eve.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "H2C55Zs9XgVKkHgjuyCAzCmQesuUsU5xLgQArmyUFrSM",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_open"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 16.666845232292,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "bob creates a wallet with his own caps",
+      "signer": "bob.test.near",
+      "receiver": "wallets.test.near",
+      "method": "create_wallet",
+      "tx_hash": "CgiDnCpbrt5ntRsfFYHu9mrPsMQP9tL2gHgNnWyV2msm",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "wallets.test.near",
+          "to": "bob.wallets.test.near",
+          "amount": "45000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_policy",
+          "data": [
+            {
+              "wallet": "bob.wallets.test.near",
+              "by": "wallets.test.near",
+              "action": "init",
+              "policy": {
+                "budget_total": "50000000",
+                "per_tx_cap": "5000000",
+                "per_day_cap": "10000000",
+                "day_ns": "86400000000000",
+                "allowed": [
+                  "shop.test.near"
+                ]
+              },
+              "lean_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-factory",
+          "version": "1.0.0",
+          "event": "wallet_created",
+          "data": [
+            {
+              "wallet": "bob.wallets.test.near",
+              "owner": "bob.test.near",
+              "code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        }
+      ],
+      "tgas": 14.801644674587,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "bob funds his wallet through the proved bounty #3",
+      "signer": "bob.test.near",
+      "receiver": "board.test.near",
+      "method": "fund_if_proven",
+      "tx_hash": "41HWXARkJepuNb1KDaLPSSQAeg2yWwiU4LvigBdRKSwN",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "bob.wallets.test.near",
+          "amount": "5000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "funded",
+          "data": [
+            {
+              "id": "3",
+              "from": "bob.test.near",
+              "to": "bob.wallets.test.near",
+              "amount": "5000000000000000000000000",
+              "claim": "Wallet.Claim.SlidingTwiceCap"
+            }
+          ]
+        }
+      ],
+      "tgas": 7.600866059058,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "bob's wallet pays the shop 4 NEAR",
+      "signer": "bob.test.near",
+      "receiver": "bob.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "4E51ds26qabs5wmhQxYKAY7ut2paaUAC5vafT4fZP5pF",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "bob.wallets.test.near",
+          "to": "shop.test.near",
+          "amount": "4000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "bob.wallets.test.near",
+              "agent": "bob.test.near",
+              "to": "shop.test.near",
+              "amount_yocto": "4000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.785046741038,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "bob tries to fund the look-alike copycat.test.near through #3",
+      "signer": "bob.test.near",
+      "receiver": "board.test.near",
+      "method": "fund_if_proven",
+      "tx_hash": "8WmfAYK5a79C64xNuc5kVZjEHWeuBSsWGC2FKmAUdxrV",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "bob.test.near",
+          "amount": "5000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "fund_refused",
+          "data": [
+            {
+              "id": "3",
+              "from": "bob.test.near",
+              "to": "copycat.test.near",
+              "amount": "5000000000000000000000000",
+              "reason": "not_a_factory_wallet"
+            }
+          ]
+        }
+      ],
+      "tgas": 7.52467003484,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "eve asks the board to freeze alice's wallet before any refutation",
+      "signer": "eve.test.near",
+      "receiver": "board.test.near",
+      "method": "freeze",
+      "tx_hash": "CLgVoxWx8Y1ANEMZnbc1xdqs7uQo8XhLwKZdFEzGw6qS",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: nothing_refuted"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 1.870296563124,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays the vendor 1 NEAR (opens a new window)",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "GDqDVWpsjtkWtFzUrpjmkyCPSX6zKovWtEmoVSSfrx8F",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.wallets.test.near",
+          "to": "vendor.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "1000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.854491208967,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 3 NEAR just before the window ends",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "DTQh7epURidbwzXBUMAMcy7bzSsepKkvuXeTtS3kkCLx",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.wallets.test.near",
+          "to": "vendor.test.near",
+          "amount": "3000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.854478867627,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 2 NEAR just before the window ends",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "B9e1N5tJMWuZnveLgPmrnwpp33ihtPzue7rEobXMD5no",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.wallets.test.near",
+          "to": "vendor.test.near",
+          "amount": "2000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "2000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.85447032762,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 3 NEAR right after it rolls over",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "CKRtEMYcfKX4egfmVEJPZRjYYjiuEXNqEMjS31nSzvEa",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.wallets.test.near",
+          "to": "vendor.test.near",
+          "amount": "3000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.85448266896,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 3 NEAR more",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "AGBcJZsmcyA8hdsdQ4jvw3adBjccyDGoumvVrguXPsMd",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.wallets.test.near",
+          "to": "vendor.test.near",
+          "amount": "3000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.85447032762,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "sonnet-agent reveal",
+      "signer": "sonnet-agent.test.near",
+      "receiver": "board.test.near",
+      "method": "reveal",
+      "tx_hash": "BKXxG7modg2H5zh59arhC6KBo2cK9huYPop798h5XdJT",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "sonnet-agent.test.near",
+          "amount": "3050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "2",
+              "claimer": "sonnet-agent.test.near",
+              "side": "refutation",
+              "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+              "delta_bytes": 65617,
+              "block_height": "1511",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "2",
+              "certificate": {
+                "claimer": "sonnet-agent.test.near",
+                "side": "refutation",
+                "proved": "Wallet.Claim.Refute.SlidingDayCap",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [],
+                "decls_checked": 12,
+                "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+                "block_height": "1513",
+                "timestamp": "1794594876099560000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "code_refuted",
+          "data": [
+            {
+              "id": "2",
+              "wallet_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "by": "board.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "2",
+              "to": "sonnet-agent.test.near",
+              "amount": "3050000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 208.407099294705,
+      "kernel_tgas": 185.028097183212
+    },
+    {
+      "label": "agent pays 3 NEAR in the next window (frozen)",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "GevvvMPTZuU8kNDK7gn9k1LD8kC9VFAks5ZjXd9b2Qsi",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "frozen",
+              "key_layer_block": false,
+              "note": "FROZEN"
+            }
+          ]
+        }
+      ],
+      "tgas": 1.883488903227,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "the agent tries to withdraw from the frozen wallet",
+      "signer": "agent.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "withdraw",
+      "tx_hash": "DmGvutPyvHKW3FrnsgmMwUrRoQQxxSMKwFFaV7TmamDx",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [],
+      "tgas": 1.601834002356,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "alice withdraws from her frozen wallet",
+      "signer": "alice.test.near",
+      "receiver": "alice.wallets.test.near",
+      "method": "withdraw",
+      "tx_hash": "ERu7CjcSj2CriqEHoZH4o1jPhTmUs2wxMGPomJdbPUTj",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.wallets.test.near",
+          "to": "alice.test.near",
+          "amount": "1995000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_withdraw",
+          "data": [
+            {
+              "wallet": "alice.wallets.test.near",
+              "owner": "alice.test.near",
+              "amount_yocto": "1995000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.431135185064,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "alice tries to top up through the refuted bounty",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "fund_if_proven",
+      "tx_hash": "AszCFE2Aut6GkapoJvqku7XiGuiC2iyCTq3GttjQqoKw",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_proven"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.229623432019,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "alice tries to top up through the proved bounty, after the refutation",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "fund_if_proven",
+      "tx_hash": "DvxoZtkwCP82TWESiq2e2exY3YJpwcHCkRm268RWGNmD",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: code_refuted"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.231727399307,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "eve freezes bob's wallet through the board",
+      "signer": "eve.test.near",
+      "receiver": "board.test.near",
+      "method": "freeze",
+      "tx_hash": "C3nCF54p6MvtwVJrxqanUcG6KkN5oZtRttQSGt5hYRHy",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "bob.wallets.test.near",
+              "by": "board.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "bob.wallets.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 10.062508968569,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "bob's wallet pays the shop 1 NEAR (frozen)",
+      "signer": "bob.test.near",
+      "receiver": "bob.wallets.test.near",
+      "method": "pay",
+      "tx_hash": "3UnMQK4eCafneaEMFJfLsc84ZWvyfpoxbq9mELLAP7bz",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "bob.wallets.test.near",
+              "agent": "bob.test.near",
+              "to": "shop.test.near",
+              "amount_yocto": "1000000000000000000000000",
+              "verdict": "frozen",
+              "key_layer_block": false,
+              "note": "FROZEN"
+            }
+          ]
+        }
+      ],
+      "tgas": 1.811937080736,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "bob withdraws from his frozen wallet",
+      "signer": "bob.test.near",
+      "receiver": "bob.wallets.test.near",
+      "method": "withdraw",
+      "tx_hash": "8xMcPKj7xzYewDiYkjLKVvPy6YE42jdDKXeVYDFZjE8",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "bob.wallets.test.near",
+          "to": "bob.test.near",
+          "amount": "995000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_withdraw",
+          "data": [
+            {
+              "wallet": "bob.wallets.test.near",
+              "owner": "bob.test.near",
+              "amount_yocto": "995000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.428604712048,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "eve freezes bob's wallet again",
+      "signer": "eve.test.near",
+      "receiver": "board.test.near",
+      "method": "freeze",
+      "tx_hash": "7hC5YYHYNCiuFTEgmpm6JZNtfRQE622LSsNRmfzhBgpe",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "bob.wallets.test.near",
+              "by": "board.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "bob.wallets.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 10.069970409926,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "eve asks the board to freeze the look-alike copycat.test.near",
+      "signer": "eve.test.near",
+      "receiver": "board.test.near",
+      "method": "freeze",
+      "tx_hash": "6trztzTdoDh7z79ArCzLvRqCyJfwu9zdABkMRTuGGbjk",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "freeze_refused",
+          "data": [
+            {
+              "wallet": "copycat.test.near",
+              "reason": "not_a_factory_wallet"
+            }
+          ]
+        }
+      ],
+      "tgas": 6.0812177902,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "eve calls freeze on a wallet herself",
+      "signer": "eve.test.near",
+      "receiver": "bob.wallets.test.near",
+      "method": "freeze",
+      "tx_hash": "CrZL64wvsTM2nGrasTxrsTFtPbDsn91WsggG3DRewGfb",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_FREEZE_NOT_BOARD"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 1.600329313038,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "alice posts the headline claim again",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "EV7uxL9MrfN5LgmaaxNsJ3q1HLH9A13uk29EwrffvthJ",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: already_settled:1"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.187167276341,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "eve posts the refuted claim again",
+      "signer": "eve.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "2aZwsc8spFxRxPMWfKpR5ufxJkqRrZMvFoDTtQwijveu",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: already_settled:2"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.185637656021,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "alice refunds before the deadline",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "refund",
+      "tx_hash": "12TUT54uh9vkCTZjGoiqMiMKHXgx2faAnNuaxXBh2G9S",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_expired"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 1.984035132554,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "carol takes her boost back before the deadline",
+      "signer": "carol.test.near",
+      "receiver": "board.test.near",
+      "method": "withdraw_boost",
+      "tx_hash": "Haeo8nytn6hRhqQv6MVVLtMpxXNtpbnh4H2uQc8XSLyf",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_expired"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.071193053341,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "eve closes the expired bounty",
+      "signer": "eve.test.near",
+      "receiver": "board.test.near",
+      "method": "refund",
+      "tx_hash": "H9uVhEsW2wVEvQJbe4dj2YETL45K6BaMTK2698AN57yX",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "alice.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "refunded",
+          "data": [
+            {
+              "id": "5",
+              "to": "alice.test.near",
+              "amount": "1000000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 5.86832814534,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "alice refunds it again",
+      "signer": "alice.test.near",
+      "receiver": "board.test.near",
+      "method": "refund",
+      "tx_hash": "678qb4pqpkzQUbdymnBL2qu6VACM5MKsN9gFJ4MDD5H3",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_refundable"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 1.984557779159,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "carol takes her boost back",
+      "signer": "carol.test.near",
+      "receiver": "board.test.near",
+      "method": "withdraw_boost",
+      "tx_hash": "4Uq2ecmuHbEPGr2qRHUpLeuLKi5VCR65TKbmT7Tg4hum",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "carol.test.near",
+          "amount": "500000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "boost_withdrawn",
+          "data": [
+            {
+              "id": "5",
+              "by": "carol.test.near",
+              "amount": "500000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 5.462526660977,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "carol takes it back twice",
+      "signer": "carol.test.near",
+      "receiver": "board.test.near",
+      "method": "withdraw_boost",
+      "tx_hash": "CAXNDAbS57AHwqzXy1QmjPhGroutxkXtaeSoDKeL2F2Y",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: no_boost"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 1.943112644214,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "carol tries to take back her boost of the settled headline bounty",
+      "signer": "carol.test.near",
+      "receiver": "board.test.near",
+      "method": "withdraw_boost",
+      "tx_hash": "3HYBUaqtKG8XkwzhrUKZsDLkVexEpYpobD6UXtm16zLq",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: settled"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.1569293916,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "deploy_keyless_walletsv2.test.near",
+      "tx_hash": "2N9NU6ycxGqGZd8N8FgBpW97awXNN4rk8vNZ9EXEX1VU",
+      "success": true
+    },
+    {
+      "label": "deploy_keyless_boardv2.test.near",
+      "tx_hash": "5LrKWUqBrZKzX5FgZZvrNQV81Hpjpr8t76ZfuGqKKxkR",
+      "success": true
+    },
+    {
+      "label": "alice creates a v2 wallet with the same policy",
+      "signer": "alice.test.near",
+      "receiver": "walletsv2.test.near",
+      "method": "create_wallet",
+      "tx_hash": "5xiciEJf9AjgLqvxt4HcwEX2dCaY2HkCLbn7nxpeF3N9",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "walletsv2.test.near",
+          "to": "alice.walletsv2.test.near",
+          "amount": "45000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_policy",
+          "data": [
+            {
+              "wallet": "alice.walletsv2.test.near",
+              "by": "walletsv2.test.near",
+              "action": "init",
+              "policy": {
+                "budget_total": "20000000",
+                "per_tx_cap": "3000000",
+                "per_day_cap": "6000000",
+                "day_ns": "600000000000",
+                "allowed": [
+                  "vendor.test.near"
+                ]
+              },
+              "lean_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-factory",
+          "version": "1.0.0",
+          "event": "wallet_created",
+          "data": [
+            {
+              "wallet": "alice.walletsv2.test.near",
+              "owner": "alice.test.near",
+              "code_hash": "51e19e26ce9b7a9199b61b84510f0725df06ac42d1a7c06e148798349afb1f61"
+            }
+          ]
+        }
+      ],
+      "tgas": 14.811533746154,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "a bounty about the v2 claim on the v1 board",
+      "signer": "bogus.test.near",
+      "receiver": "board.test.near",
+      "method": "post_bounty",
+      "tx_hash": "BHdmPzbapLQ72LSaVsw7KLajSgRYNRmFY8YA98REVAP9",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: claim_not_on_this_board"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.111303979607,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "a bounty about a v1 claim on the v2 board",
+      "signer": "bogus.test.near",
+      "receiver": "boardv2.test.near",
+      "method": "post_bounty",
+      "tx_hash": "4isWxyzJgErjB2cvwgntkktcAEEmgBaEmifjjtQePapp",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: claim_not_on_this_board"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 2.098810135699,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "alice posts the bounty for the fix, with a 10 NEAR top-up for her v2 wallet",
+      "signer": "alice.test.near",
+      "receiver": "boardv2.test.near",
+      "method": "post_bounty",
+      "tx_hash": "FcMnHY9vbEUEyVDEt4vhdqtKJSVBUQYSX6HLvjga7YdS",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "0",
+              "poster": "alice.test.near",
+              "claim": "Wallet.Claim.V2.SlidingDayCap",
+              "counter_claim": "Wallet.Claim.V2.Refute.SlidingDayCap",
+              "statement_sha256": "b5a1c4b27bee324e32e280778b3bb30c5d8b6b876fe00b38590ac6ae9f86f449",
+              "reward": "3000000000000000000000000",
+              "deadline": "1794683637882597000",
+              "subject": "alice.walletsv2.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 294.755747790677,
+      "kernel_tgas": 286.00763826709
+    },
+    {
+      "label": "opus-agent commit (v2 board)",
+      "signer": "opus-agent.test.near",
+      "receiver": "boardv2.test.near",
+      "method": "commit",
+      "tx_hash": "BcfjKTvhXS2e4EWvhqM9kdqqzGqy7dXv4CuXccG2633V",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "0",
+              "claimer": "opus-agent.test.near"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.713162589694,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "opus-agent reveal (v2 board)",
+      "signer": "opus-agent.test.near",
+      "receiver": "boardv2.test.near",
+      "method": "reveal",
+      "tx_hash": "B7aZ8fxngesx2NH6rNYeMZGtufnK2EeqnV73QprzMsyW",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardv2.test.near",
+          "to": "alice.walletsv2.test.near",
+          "amount": "10000000000000000000000000",
+          "ok": true
+        },
+        {
+          "from": "boardv2.test.near",
+          "to": "opus-agent.test.near",
+          "amount": "3050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "0",
+              "claimer": "opus-agent.test.near",
+              "side": "proof",
+              "delta_sha256": "04d426bb30d536f39ea601cc32b8844c2d89fc94f44b3ad2a2955711a04ee2ed",
+              "delta_bytes": 380986,
+              "block_height": "3541",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "0",
+              "certificate": {
+                "claimer": "opus-agent.test.near",
+                "side": "proof",
+                "proved": "Wallet.Claim.V2.SlidingDayCap",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "08ebca4c45403b4cc55ff6860ababd0a248e5d3ab97c5019dc11e4f4f763c5a2",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [
+                  "Classical.choice",
+                  "Quot.sound",
+                  "propext"
+                ],
+                "decls_checked": 90,
+                "delta_sha256": "04d426bb30d536f39ea601cc32b8844c2d89fc94f44b3ad2a2955711a04ee2ed",
+                "block_height": "3543",
+                "timestamp": "1794597311710545000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "escrow_released",
+          "data": [
+            {
+              "id": "0",
+              "to": "alice.walletsv2.test.near",
+              "amount": "10000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "0",
+              "to": "opus-agent.test.near",
+              "amount": "3050000000000000000000000"
+            }
+          ]
+        }
+      ],
+      "tgas": 361.738222847296,
+      "kernel_tgas": 297.191786561174
+    },
+    {
+      "label": "agent pays the vendor 1 NEAR (opens a window)",
+      "signer": "agent.test.near",
+      "receiver": "alice.walletsv2.test.near",
+      "method": "pay",
+      "tx_hash": "7fAY7hbevCWP3X12M84CjWzkb9uwXwyg44WFGzVxNJPY",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.walletsv2.test.near",
+          "to": "vendor.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.walletsv2.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "1000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.859730380834,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 3 NEAR just before the window ends",
+      "signer": "agent.test.near",
+      "receiver": "alice.walletsv2.test.near",
+      "method": "pay",
+      "tx_hash": "WmTqjHYzfSNVNzX6b7DLCZqKGS5AFjS8tEFQbDJHdHo",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.walletsv2.test.near",
+          "to": "vendor.test.near",
+          "amount": "3000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.walletsv2.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.859730380834,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 2 NEAR just before the window ends",
+      "signer": "agent.test.near",
+      "receiver": "alice.walletsv2.test.near",
+      "method": "pay",
+      "tx_hash": "45XpEKL4HyL2oyTFSuK2mWF8GXzGDhrNDcG5rQQiEJ9J",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.walletsv2.test.near",
+          "to": "vendor.test.near",
+          "amount": "2000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.walletsv2.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "2000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.859730380834,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 3 NEAR right after it rolls over",
+      "signer": "agent.test.near",
+      "receiver": "alice.walletsv2.test.near",
+      "method": "pay",
+      "tx_hash": "BtonYxMphdKH1hjjqmH8BUDtz61wa4pRqWXGYHYfen2n",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.walletsv2.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "denyDaily",
+              "key_layer_block": false,
+              "note": "DENY_DAILY"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.082005391975,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays 3 NEAR more",
+      "signer": "agent.test.near",
+      "receiver": "alice.walletsv2.test.near",
+      "method": "pay",
+      "tx_hash": "Dd3BrvfU4fdAnqdroShdcgqN6z2GsNWkPTfKw6m8R1rr",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.walletsv2.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "denyDaily",
+              "key_layer_block": false,
+              "note": "DENY_DAILY"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.082005391975,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "two windows later: agent pays 3 NEAR",
+      "signer": "agent.test.near",
+      "receiver": "alice.walletsv2.test.near",
+      "method": "pay",
+      "tx_hash": "6jR8BZUMqG5syXVWbuqTJwDev6qRFKuHzzkxZ3yzckk5",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.walletsv2.test.near",
+          "to": "vendor.test.near",
+          "amount": "3000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.walletsv2.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "3000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.85975177249,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "alice funds her v2 wallet through the proved v2 bounty",
+      "signer": "alice.test.near",
+      "receiver": "boardv2.test.near",
+      "method": "fund_if_proven",
+      "tx_hash": "5uzjMmJ9imq4Q85xj9w7zdU9d6iBNpttVWqym1T2v4HY",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardv2.test.near",
+          "to": "alice.walletsv2.test.near",
+          "amount": "1995000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "funded",
+          "data": [
+            {
+              "id": "0",
+              "from": "alice.test.near",
+              "to": "alice.walletsv2.test.near",
+              "amount": "1995000000000000000000000",
+              "claim": "Wallet.Claim.V2.SlidingDayCap"
+            }
+          ]
+        }
+      ],
+      "tgas": 3.191086491792,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "agent pays the vendor 1 NEAR from the v2 wallet",
+      "signer": "agent.test.near",
+      "receiver": "alice.walletsv2.test.near",
+      "method": "pay",
+      "tx_hash": "98EQjeJ1DttYUrQDRwJzM8dgeRUZQ4p42PKnjdjcyd5D",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "alice.walletsv2.test.near",
+          "to": "vendor.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "alice.walletsv2.test.near",
+              "agent": "agent.test.near",
+              "to": "vendor.test.near",
+              "amount_yocto": "1000000000000000000000000",
+              "verdict": "allow",
+              "key_layer_block": false,
+              "note": "OK"
+            }
+          ]
+        }
+      ],
+      "tgas": 2.859721840827,
+      "kernel_tgas": 0
+    },
+    {
+      "label": "eve asks the v2 board to freeze the v2 wallet",
+      "signer": "eve.test.near",
+      "receiver": "boardv2.test.near",
+      "method": "freeze",
+      "tx_hash": "HSpW9rYpvHM6ShjcUMCjuau5VPjx5qrJe7GDHePJm7h9",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: nothing_refuted"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [],
+      "tgas": 1.857813695458,
+      "kernel_tgas": 0
+    }
+  ],
+  "bounties": {
+    "receivers": {
+      "id": "1",
+      "claim": "Wallet.Claim.AllowedReceiversOnly",
+      "counter_claim": "Wallet.Claim.Refute.AllowedReceiversOnly",
+      "title": "Whatever an agent sends, in any order, the wallet only ever pays allowlisted receivers",
+      "reward_near": "5",
+      "escrow_near": null,
+      "deadline": "1794679866574483000",
+      "statement": "def Wallet.Claim.AllowedReceiversOnly :\n  Prop :=\n  forall (p : Wallet.Policy) (s : Wallet.State) (reqs : List Wallet.Req) (r : Wallet.Req),\n  Membership.mem (Wallet.acceptedReqs reqs (Prod.snd (Wallet.run p s reqs))) r → Membership.mem\n    (Wallet.Policy.allowed p) (Prod.fst (Prod.snd r))",
+      "counter_statement": "def Wallet.Claim.Refute.AllowedReceiversOnly : Prop := Not Wallet.Claim.AllowedReceiversOnly",
+      "settled": {
+        "winner": "opus-agent.test.near",
+        "side": "proof",
+        "paid": "5950000000000000000000000",
+        "kernel_tgas": 227.097114603348
+      }
+    },
+    "slidingday": {
+      "id": "2",
+      "claim": "Wallet.Claim.SlidingDayCap",
+      "counter_claim": "Wallet.Claim.Refute.SlidingDayCap",
+      "title": "Within any stretch shorter than a day, the wallet pays out at most one day's cap",
+      "reward_near": "3",
+      "escrow_near": null,
+      "deadline": "1794679866574483000",
+      "statement": "def Wallet.Claim.SlidingDayCap :\n  Prop :=\n  forall (p : Wallet.Policy) (s : Wallet.State) (reqs : List Wallet.Req) (t0 : UInt64),\n  LE.le (Wallet.State.spentToday s) (Wallet.Policy.perDayCap p) → (forall (r : Wallet.Req),\n    Membership.mem reqs r → And (LE.le t0 (Prod.fst r))\n      (LT.lt (HSub.hSub (Prod.fst r) t0) (Wallet.Policy.dayLength p))) →\n  LE.le (Wallet.allowedSum reqs (Prod.snd (Wallet.run p s reqs))) (UInt64.toNat (Wallet.Policy.perDayCap p))",
+      "counter_statement": "def Wallet.Claim.Refute.SlidingDayCap : Prop := Not Wallet.Claim.SlidingDayCap",
+      "settled": {
+        "winner": "sonnet-agent.test.near",
+        "side": "refutation",
+        "paid": "3050000000000000000000000",
+        "kernel_tgas": 185.028097183212
+      }
+    },
+    "slidingtwice": {
+      "id": "3",
+      "claim": "Wallet.Claim.SlidingTwiceCap",
+      "counter_claim": "Wallet.Claim.Refute.SlidingTwiceCap",
+      "title": "Within any stretch shorter than a day, the wallet pays out at most twice the daily cap",
+      "reward_near": "2",
+      "escrow_near": "10",
+      "deadline": "1794679866574483000",
+      "statement": "def Wallet.Claim.SlidingTwiceCap :\n  Prop :=\n  forall (p : Wallet.Policy) (s : Wallet.State) (reqs : List Wallet.Req) (t0 : UInt64),\n  LE.le (Wallet.State.spentToday s) (Wallet.Policy.perDayCap p) → (forall (r : Wallet.Req),\n    Membership.mem reqs r → And (LE.le t0 (Prod.fst r))\n      (LT.lt (HSub.hSub (Prod.fst r) t0) (Wallet.Policy.dayLength p))) →\n  LE.le (Wallet.allowedSum reqs (Prod.snd (Wallet.run p s reqs)))\n    (HMul.hMul (OfNat.ofNat 2) (UInt64.toNat (Wallet.Policy.perDayCap p)))",
+      "counter_statement": "def Wallet.Claim.Refute.SlidingTwiceCap : Prop := Not Wallet.Claim.SlidingTwiceCap",
+      "settled": {
+        "winner": "opus-agent.test.near",
+        "side": "proof",
+        "paid": "2050000000000000000000000",
+        "kernel_tgas": 306.488373367009
+      }
+    },
+    "nonce": {
+      "id": "4",
+      "claim": "Wallet.Claim.NonceCountsPayments",
+      "counter_claim": "Wallet.Claim.Refute.NonceCountsPayments",
+      "title": "The nonce counts the payments the wallet made, exactly",
+      "reward_near": "2",
+      "escrow_near": null,
+      "deadline": "1794679866574483000",
+      "statement": "def Wallet.Claim.NonceCountsPayments :\n  Prop :=\n  forall (p : Wallet.Policy) (s : Wallet.State) (reqs : List Wallet.Req),\n  Eq (UInt64.toNat (Wallet.State.nonce (Prod.fst (Wallet.run p s reqs))))\n    (HAdd.hAdd (UInt64.toNat (Wallet.State.nonce s))\n      (List.length (Wallet.acceptedReqs reqs (Prod.snd (Wallet.run p s reqs)))))",
+      "counter_statement": "def Wallet.Claim.Refute.NonceCountsPayments : Prop := Not Wallet.Claim.NonceCountsPayments",
+      "settled": {
+        "winner": "sonnet-agent.test.near",
+        "side": "proof",
+        "paid": "2050000000000000000000000",
+        "kernel_tgas": 269.457530436308
+      }
+    },
+    "pertx": {
+      "id": "5",
+      "claim": "Wallet.Claim.PerTxCapAlways",
+      "counter_claim": "Wallet.Claim.Refute.PerTxCapAlways",
+      "title": "Every payment the wallet ever makes is within the per-payment cap",
+      "reward_near": "1",
+      "escrow_near": null,
+      "deadline": "1794597066574483000",
+      "statement": "def Wallet.Claim.PerTxCapAlways :\n  Prop :=\n  forall (p : Wallet.Policy) (s : Wallet.State) (reqs : List Wallet.Req) (r : Wallet.Req),\n  Membership.mem (Wallet.acceptedReqs reqs (Prod.snd (Wallet.run p s reqs))) r → LE.le (Prod.snd (Prod.snd r))\n    (Wallet.Policy.perTxCap p)",
+      "counter_statement": "def Wallet.Claim.Refute.PerTxCapAlways : Prop := Not Wallet.Claim.PerTxCapAlways"
+    }
+  },
+  "cheats": [
+    {
+      "name": "viaSorry",
+      "story": "the proof is `sorry`",
+      "delta_bytes": 106739,
+      "outcome": "sorryAx",
+      "expected": "sorryAx",
+      "refused": true,
+      "kernel_tgas": 13.795677984008,
+      "tx": "6DjJgnJasc2beKwFxf7BC585Z4JhYmPWhA1MmFfEsMyp"
+    },
+    {
+      "name": "viaAxiom",
+      "story": "a private axiom `magic : False`",
+      "delta_bytes": 414,
+      "outcome": "axiom_in_delta:axiom Cheat.magic",
+      "expected": "axiom_in_delta",
+      "refused": true,
+      "kernel_tgas": 2.031780613444,
+      "tx": "EDK4NL1yffD7v38KgvSoc8hf9Q9D7bEggJcHWgC414Wi"
+    },
+    {
+      "name": "fakePropext",
+      "story": "redeclares the shelf axiom `propext` as `False`",
+      "delta_bytes": 246,
+      "outcome": "redefines_base_name:propext",
+      "expected": "redefines_base_name:propext",
+      "refused": true,
+      "kernel_tgas": 3.279800369529,
+      "tx": "BCeZNNjZtEH97ZMtpMT149EJE4WqrkEDZjoSjyjPPi4A"
+    },
+    {
+      "name": "twinPropext",
+      "story": "the same, under a fresh name spelling `propext`",
+      "delta_bytes": 295,
+      "outcome": "axiom_in_delta:axiom propext",
+      "expected": "axiom_in_delta:axiom propext",
+      "refused": true,
+      "kernel_tgas": 2.011500836568,
+      "tx": "GSBdC1ofBLbrvj9nK7j899j2cSW4ugFLGCbrg4E1ges1"
+    },
+    {
+      "name": "swapPolicy",
+      "story": "swaps in a different wallet `step` function",
+      "delta_bytes": 116,
+      "outcome": "redefines_base_name:Wallet.step",
+      "expected": "redefines_base_name:Wallet.step",
+      "refused": true,
+      "kernel_tgas": 3.251248062997,
+      "tx": "AWJPeFpQcodbq2qSEZ9jcTorcrqj16hLtDq4G42kN4ca"
+    },
+    {
+      "name": "weaker",
+      "story": "a true theorem with a different statement",
+      "delta_bytes": 550,
+      "outcome": "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`",
+      "expected": "statement_mismatch",
+      "refused": true,
+      "kernel_tgas": 142.343433522385,
+      "tx": "7hN1m55dgNWEmrmAqjn5ADNSGobVntwj2KNLGi7Z3qwq"
+    },
+    {
+      "name": "noRequests",
+      "story": "proves it for the empty request list only",
+      "delta_bytes": 13976,
+      "outcome": "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`",
+      "expected": "statement_mismatch",
+      "refused": true,
+      "kernel_tgas": 144.822729295335,
+      "tx": "8822dTTD4nPYFTbVacmbdJbnykcx6bRiX5UABDfvfQ4H"
+    },
+    {
+      "name": "illTyped",
+      "story": "a real proof with its last step forged",
+      "delta_bytes": 175627,
+      "outcome": "kernel_failed",
+      "expected": "kernel_failed",
+      "refused": true,
+      "kernel_tgas": 225.659647903349,
+      "tx": "HJT6C6t559A3BcL9Ls6m3jHwPRqU8qwc3ijf8fCWBXHq"
+    }
+  ],
+  "costs": {
+    "shelf": {
+      "calls": 7,
+      "tgas": 957.43322516826,
+      "near": "0.0957",
+      "base_bytes": 1093131,
+      "stored_bytes": 310293,
+      "decls": 623
+    },
+    "storage": {
+      "kernel.test.near": {
+        "bytes": 1094277,
+        "staked_near": "10.9428"
+      },
+      "board.test.near": {
+        "bytes": 298753,
+        "staked_near": "2.9875"
+      },
+      "wallets.test.near": {
+        "bytes": 157522,
+        "staked_near": "1.5752"
+      },
+      "alice.wallets.test.near": {
+        "bytes": 505,
+        "staked_near": "0.0050"
+      }
+    },
+    "check_tgas_range": [
+      185.028097183212,
+      306.488373367009
+    ],
+    "check_near_max": "0.0306",
+    "gas_price_yocto": "100000000"
+  },
+  "inputs": {
+    "kernel_wasm_sha256": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+    "board_wasm_sha256": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+    "wallet_wasm_sha256": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+    "factory_wasm_sha256": "6dcec734db23cddb2341d281886686339e216d8b3de4208e1010460459dd4ce7",
+    "wallet_v2_wasm_sha256": "51e19e26ce9b7a9199b61b84510f0725df06ac42d1a7c06e148798349afb1f61",
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "shelf_decls": 623
+  },
+  "node": {
+    "version": {
+      "build": "2.14.0",
+      "commit": "bc4e9e8cfb03d9e82f027883055624e18576993e",
+      "rustc_version": "1.95.0",
+      "version": "2.14.0"
+    },
+    "protocol": 88
+  },
+  "wallet": {
+    "account": "alice.wallets.test.near",
+    "owner": "alice.test.near",
+    "agent": "agent.test.near",
+    "factory": "wallets.test.near",
+    "policy_near": {
+      "budget": 20,
+      "per_tx": 3,
+      "per_day": 6,
+      "day_seconds": 600,
+      "allowed": [
+        "vendor.test.near"
+      ]
+    },
+    "payments": [
+      {
+        "label": "agent pays the vendor 2 NEAR",
+        "to": "vendor.test.near",
+        "amount_near": 2,
+        "verdict": "allow",
+        "at_ns": "1794593403445171000",
+        "transferred_yocto": "2000000000000000000000000"
+      },
+      {
+        "label": "prompt-injected agent pays drain.test.near",
+        "to": "drain.test.near",
+        "amount_near": 1,
+        "verdict": "denyReceiver",
+        "at_ns": "1794593407089818000",
+        "transferred_yocto": "0"
+      },
+      {
+        "label": "agent pays 5 NEAR in one go",
+        "to": "vendor.test.near",
+        "amount_near": 5,
+        "verdict": "denyPerTx",
+        "at_ns": "1794593410730005000",
+        "transferred_yocto": "0"
+      },
+      {
+        "label": "agent pays the vendor 3 NEAR",
+        "to": "vendor.test.near",
+        "amount_near": 3,
+        "verdict": "allow",
+        "at_ns": "1794593414973131000",
+        "transferred_yocto": "3000000000000000000000000"
+      },
+      {
+        "label": "agent pays 3 NEAR more (daily cap 6)",
+        "to": "vendor.test.near",
+        "amount_near": 3,
+        "verdict": "denyDaily",
+        "at_ns": "1794593418617685000",
+        "transferred_yocto": "0"
+      },
+      {
+        "label": "agent pays the vendor 1 NEAR (opens a new window)",
+        "to": "vendor.test.near",
+        "amount_near": 1,
+        "verdict": "allow",
+        "at_ns": "1794594263249735000",
+        "transferred_yocto": "1000000000000000000000000"
+      },
+      {
+        "label": "agent pays 3 NEAR just before the window ends",
+        "to": "vendor.test.near",
+        "amount_near": 3,
+        "verdict": "allow",
+        "at_ns": "1794594847586788000",
+        "transferred_yocto": "3000000000000000000000000"
+      },
+      {
+        "label": "agent pays 2 NEAR just before the window ends",
+        "to": "vendor.test.near",
+        "amount_near": 2,
+        "verdict": "allow",
+        "at_ns": "1794594851826904000",
+        "transferred_yocto": "2000000000000000000000000"
+      },
+      {
+        "label": "agent pays 3 NEAR right after it rolls over",
+        "to": "vendor.test.near",
+        "amount_near": 3,
+        "verdict": "allow",
+        "at_ns": "1794594867491791000",
+        "transferred_yocto": "3000000000000000000000000"
+      },
+      {
+        "label": "agent pays 3 NEAR more",
+        "to": "vendor.test.near",
+        "amount_near": 3,
+        "verdict": "allow",
+        "at_ns": "1794594871724541000",
+        "transferred_yocto": "3000000000000000000000000"
+      },
+      {
+        "label": "agent pays 3 NEAR in the next window (frozen)",
+        "to": "vendor.test.near",
+        "amount_near": 3,
+        "verdict": "frozen",
+        "at_ns": "1794595471143774000",
+        "transferred_yocto": "0"
+      }
+    ]
+  },
+  "factory": {
+    "account": "wallets.test.near",
+    "wallet_code_sha256": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+    "code_publication_near": "7.5340",
+    "wallet_storage_bytes": 463,
+    "global_contract_hash": "3HHFstwLNW3tpg2oDPS2c2uLQ2CctEj3Eeje5vBzidvi"
+  },
+  "frontrun": [
+    {
+      "who": "eve",
+      "what": "reveals a leaked copy of the proof with no commitment of her own",
+      "outcome": "no_commit"
+    },
+    {
+      "who": "opus-agent",
+      "what": "reveals before its own delay has passed",
+      "outcome": "reveal_too_early"
+    },
+    {
+      "who": "eve",
+      "what": "commits the copy, waits her delay, reveals",
+      "outcome": "not_open"
+    }
+  ],
+  "money_path": [
+    {
+      "when": "before any proof",
+      "what": "fund_if_proven(#1) with 1 NEAR",
+      "outcome": "not_proven",
+      "ok": false
+    },
+    {
+      "when": "while #3 was open",
+      "what": "10 NEAR top-up held by the board",
+      "outcome": "held",
+      "ok": true
+    },
+    {
+      "when": "after #3 was proved",
+      "what": "the board released the top-up to the wallet",
+      "outcome": "10.0000 NEAR released",
+      "ok": true
+    },
+    {
+      "when": "after #3 was proved",
+      "what": "Bob funds his own factory wallet (other caps) through #3",
+      "outcome": "5.0000 NEAR to bob.wallets.test.near",
+      "ok": true
+    },
+    {
+      "when": "after #3 was proved",
+      "what": "Bob tries to fund copycat.test.near, the same bytes with a key",
+      "outcome": "not_a_factory_wallet, 5.0000 NEAR back",
+      "ok": false
+    },
+    {
+      "when": "after #2 was refuted",
+      "what": "fund_if_proven(#2)",
+      "outcome": "not_proven",
+      "ok": false
+    },
+    {
+      "when": "after #2 was refuted",
+      "what": "fund_if_proven(#3), a proved bounty about the same code",
+      "outcome": "code_refuted",
+      "ok": false
+    },
+    {
+      "when": "after the wallet was frozen",
+      "what": "Alice withdraws from the frozen wallet to her own account",
+      "outcome": "1.9950 NEAR to alice.test.near",
+      "ok": true
+    },
+    {
+      "when": "after #0 was proved on boardv2.test.near",
+      "what": "Alice funds her v2 wallet through the proved v2 bounty with what she took out of the frozen v1 wallet",
+      "outcome": "1.9950 NEAR to alice.walletsv2.test.near",
+      "ok": true
+    }
+  ],
+  "reuse": {
+    "bob_wallet": "bob.wallets.test.near",
+    "bob_policy_near": {
+      "budget": 50,
+      "per_tx": 5,
+      "per_day": 10,
+      "allowed": [
+        "shop.test.near"
+      ]
+    },
+    "funded_near": "5.0000",
+    "bob_pay_verdict": "allow",
+    "lookalike": "copycat.test.near",
+    "lookalike_refunded_near": "5.0000",
+    "bob_wallet_storage_bytes": 457
+  },
+  "bypass": {
+    "payments": [
+      {
+        "label": "agent pays 3 NEAR just before the window ends",
+        "to": "vendor.test.near",
+        "amount_near": 3,
+        "verdict": "allow",
+        "at_ns": "1794594847586788000",
+        "transferred_yocto": "3000000000000000000000000"
+      },
+      {
+        "label": "agent pays 2 NEAR just before the window ends",
+        "to": "vendor.test.near",
+        "amount_near": 2,
+        "verdict": "allow",
+        "at_ns": "1794594851826904000",
+        "transferred_yocto": "2000000000000000000000000"
+      },
+      {
+        "label": "agent pays 3 NEAR right after it rolls over",
+        "to": "vendor.test.near",
+        "amount_near": 3,
+        "verdict": "allow",
+        "at_ns": "1794594867491791000",
+        "transferred_yocto": "3000000000000000000000000"
+      },
+      {
+        "label": "agent pays 3 NEAR more",
+        "to": "vendor.test.near",
+        "amount_near": 3,
+        "verdict": "allow",
+        "at_ns": "1794594871724541000",
+        "transferred_yocto": "3000000000000000000000000"
+      }
+    ],
+    "total_near": 11,
+    "seconds": 24.137753,
+    "per_day_cap_near": 6,
+    "bounty_phase_at_the_time": "Open",
+    "freeze_before_any_refutation": "nothing_refuted"
+  },
+  "freeze": {
+    "bounty": "2",
+    "tx": "BKXxG7modg2H5zh59arhC6KBo2cK9huYPop798h5XdJT",
+    "refuter": "sonnet-agent.test.near",
+    "paid_yocto": "3050000000000000000000000",
+    "wallet": "alice.wallets.test.near",
+    "frozen_by": "board.test.near",
+    "gas": {
+      "total_tgas": 208.407099294705,
+      "kernel_tgas": 185.028097183212,
+      "wallet_freeze_tgas": 1.206631551594,
+      "board_on_frozen_tgas": 1.612854744997,
+      "board_on_verdict_tgas": 4.653683625188
+    },
+    "code_refuted_by": "2",
+    "wallet_after": {
+      "frozen": true,
+      "board": "board.test.near"
+    },
+    "refused_payment": {
+      "label": "agent pays 3 NEAR in the next window (frozen)",
+      "to": "vendor.test.near",
+      "amount_near": 3,
+      "verdict": "frozen",
+      "at_ns": "1794595471143774000",
+      "transferred_yocto": "0",
+      "fresh_window": true,
+      "within_budget": true,
+      "state_unchanged": true
+    },
+    "withdraw": {
+      "by_agent": "DENY_CALLER",
+      "by_owner": "OK",
+      "amount_yocto": "1995000000000000000000000"
+    },
+    "gates": {
+      "through_refuted_bounty": "not_proven",
+      "through_proved_bounty_of_refuted_code": "code_refuted"
+    },
+    "second_wallet": {
+      "wallet": "bob.wallets.test.near",
+      "frozen_by_call_from": "eve.test.near",
+      "tx": "C3nCF54p6MvtwVJrxqanUcG6KkN5oZtRttQSGt5hYRHy",
+      "tgas": 10.062508968569,
+      "before": false,
+      "after": true,
+      "pay_after": "frozen",
+      "withdrawn_yocto": "995000000000000000000000",
+      "freeze_again": true,
+      "lookalike": {
+        "account": "copycat.test.near",
+        "outcome": {
+          "wallet": "copycat.test.near",
+          "reason": "not_a_factory_wallet"
+        },
+        "frozen": false
+      },
+      "direct_call": "ERR_FREEZE_NOT_BOARD"
+    },
+    "return_path": {
+      "board": "boardv2.test.near",
+      "bounty": "0",
+      "to": "alice.walletsv2.test.near",
+      "amount_yocto": "1995000000000000000000000",
+      "agent_pay_verdict": "allow",
+      "v1_wallet_still_frozen": true,
+      "v2_wallet_frozen": false,
+      "freeze_v2_without_a_refutation": "nothing_refuted"
+    }
+  },
+  "fix": {
+    "factory": "walletsv2.test.near",
+    "board": "boardv2.test.near",
+    "wallet": "alice.walletsv2.test.near",
+    "wallet_v2_sha256": "51e19e26ce9b7a9199b61b84510f0725df06ac42d1a7c06e148798349afb1f61",
+    "rules": "v2",
+    "bounty": {
+      "id": "0",
+      "claim": "Wallet.Claim.V2.SlidingDayCap",
+      "phase": "Paid",
+      "winner": "opus-agent.test.near",
+      "certificate": {
+        "claimer": "opus-agent.test.near",
+        "side": "proof",
+        "proved": "Wallet.Claim.V2.SlidingDayCap",
+        "proof_theorem": "Solution.proof",
+        "statement_hash": "08ebca4c45403b4cc55ff6860ababd0a248e5d3ab97c5019dc11e4f4f763c5a2",
+        "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "decls_checked": 90,
+        "delta_sha256": "04d426bb30d536f39ea601cc32b8844c2d89fc94f44b3ad2a2955711a04ee2ed",
+        "block_height": "3543",
+        "timestamp": "1794597311710545000"
+      },
+      "kernel_tgas": 297.191786561174,
+      "escrow_released": "10000000000000000000000000"
+    },
+    "old_counterexample_on_v2": {
+      "ok": false,
+      "reason": "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.V2.Refute.SlidingDayCap`"
+    },
+    "payments": [
+      {
+        "label": "agent pays the vendor 1 NEAR (opens a window)",
+        "amount_near": 1,
+        "verdict": "allow",
+        "at_ns": "1794597317561333000"
+      },
+      {
+        "label": "agent pays 3 NEAR just before the window ends",
+        "amount_near": 3,
+        "verdict": "allow",
+        "at_ns": "1794597822620289000"
+      },
+      {
+        "label": "agent pays 2 NEAR just before the window ends",
+        "amount_near": 2,
+        "verdict": "allow",
+        "at_ns": "1794597826843180000"
+      },
+      {
+        "label": "agent pays 3 NEAR right after it rolls over",
+        "amount_near": 3,
+        "verdict": "denyDaily",
+        "at_ns": "1794597840611992000"
+      },
+      {
+        "label": "agent pays 3 NEAR more",
+        "amount_near": 3,
+        "verdict": "denyDaily",
+        "at_ns": "1794597844245484000"
+      },
+      {
+        "label": "two windows later: agent pays 3 NEAR",
+        "amount_near": 3,
+        "verdict": "allow",
+        "at_ns": "1794598442556429000"
+      }
+    ],
+    "allowed_in_day_near": 6,
+    "per_day_cap_near": 6,
+    "courier": {
+      "gas_tgas": 364.45138543699,
+      "fees_near": 0.01,
+      "bonds_near": 0.049999999999999996,
+      "llm_usd": 0,
+      "earned_near": 3.0500000000000003,
+      "decisions": [
+        {
+          "id": "0",
+          "side": "proof",
+          "name": "Wallet.Claim.V2.SlidingDayCap",
+          "decision": "committed",
+          "reward": 3,
+          "rivals": 0,
+          "cost": 0.060000000000000005,
+          "ev": 2.94,
+          "dry_run_ok": true,
+          "dry_run_mode": "claim",
+          "proof_bytes": 380986,
+          "source": "cache"
+        }
+      ],
+      "gas_near": 0.036445138543699,
+      "net_near": 2.953554861456302,
+      "commits": [
+        {
+          "id": "0",
+          "side": "proof",
+          "name": "Wallet.Claim.V2.SlidingDayCap",
+          "height": 3491,
+          "source": "cache",
+          "model": "opus",
+          "revealed": true,
+          "result": {
+            "success": true,
+            "received_near": 3.0500000000000003,
+            "failures": [],
+            "kernel_tgas": 297.191786561174
+          }
+        }
+      ]
+    }
+  },
+  "couriers": [
+    {
+      "agent": "opus-agent",
+      "ledger": {
+        "gas_tgas": 639.062046401358,
+        "fees_near": 0.02,
+        "bonds_near": 0.09999999999999999,
+        "llm_usd": 0,
+        "earned_near": 8,
+        "decisions": [
+          {
+            "id": "1",
+            "side": "proof",
+            "name": "Wallet.Claim.AllowedReceiversOnly",
+            "decision": "committed",
+            "reward": 5.8999999999999995,
+            "rivals": 1,
+            "cost": 0.060000000000000005,
+            "ev": 2.8899999999999997,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 175623,
+            "source": "cache"
+          },
+          {
+            "id": "2",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingDayCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "2",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "3",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingTwiceCap",
+            "decision": "committed",
+            "reward": 2,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 1.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 388914,
+            "source": "cache"
+          },
+          {
+            "id": "4",
+            "side": "proof",
+            "name": "Wallet.Claim.NonceCountsPayments",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "4",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.NonceCountsPayments",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "5",
+            "side": "proof",
+            "name": "Wallet.Claim.PerTxCapAlways",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "5",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.PerTxCapAlways",
+            "decision": "skip: no proof"
+          }
+        ],
+        "gas_near": 0.0639062046401358,
+        "net_near": 7.816093795359865,
+        "commits": [
+          {
+            "id": "1",
+            "side": "proof",
+            "name": "Wallet.Claim.AllowedReceiversOnly",
+            "height": 781,
+            "source": "cache",
+            "model": "opus",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 5.95,
+              "failures": [],
+              "kernel_tgas": 227.097114603348
+            }
+          },
+          {
+            "id": "3",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingTwiceCap",
+            "height": 787,
+            "source": "cache",
+            "model": "opus",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 2.0500000000000003,
+              "failures": [],
+              "kernel_tgas": 306.488373367009
+            }
+          }
+        ]
+      },
+      "balance_change_near": "10.7685",
+      "llm_usd_spent_writing_its_proofs": 0.8532826000000001
+    },
+    {
+      "agent": "sonnet-agent",
+      "ledger": {
+        "gas_tgas": 845.347950160392,
+        "fees_near": 0.04,
+        "bonds_near": 0.15,
+        "llm_usd": 0,
+        "earned_near": 5.15,
+        "decisions": [
+          {
+            "id": "1",
+            "side": "proof",
+            "name": "Wallet.Claim.AllowedReceiversOnly",
+            "decision": "committed",
+            "reward": 5.8999999999999995,
+            "rivals": 2,
+            "cost": 0.060000000000000005,
+            "ev": 1.9066666666666665,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 198853,
+            "source": "cache"
+          },
+          {
+            "id": "2",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingDayCap",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "2",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "decision": "committed",
+            "reward": 3,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 2.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 65617,
+            "source": "cache"
+          },
+          {
+            "id": "3",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingTwiceCap",
+            "decision": "committed",
+            "reward": 2,
+            "rivals": 1,
+            "cost": 0.060000000000000005,
+            "ev": 0.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 388138,
+            "source": "cache"
+          },
+          {
+            "id": "4",
+            "side": "proof",
+            "name": "Wallet.Claim.NonceCountsPayments",
+            "decision": "committed",
+            "reward": 2,
+            "rivals": 0,
+            "cost": 0.060000000000000005,
+            "ev": 1.94,
+            "dry_run_ok": true,
+            "dry_run_mode": "claim",
+            "proof_bytes": 340708,
+            "source": "cache"
+          },
+          {
+            "id": "5",
+            "side": "proof",
+            "name": "Wallet.Claim.PerTxCapAlways",
+            "decision": "skip: no proof"
+          },
+          {
+            "id": "5",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.PerTxCapAlways",
+            "decision": "skip: no proof"
+          }
+        ],
+        "gas_near": 0.0845347950160392,
+        "net_near": 4.875465204983961,
+        "commits": [
+          {
+            "id": "1",
+            "side": "proof",
+            "name": "Wallet.Claim.AllowedReceiversOnly",
+            "height": 799,
+            "source": "cache",
+            "model": "sonnet",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 0.049999999999999996,
+              "failures": [],
+              "kernel_tgas": 233.208629302093
+            }
+          },
+          {
+            "id": "2",
+            "side": "refutation",
+            "name": "Wallet.Claim.Refute.SlidingDayCap",
+            "height": 805,
+            "source": "cache",
+            "model": "sonnet",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 3.0500000000000003,
+              "failures": [],
+              "kernel_tgas": 185.028097183212
+            }
+          },
+          {
+            "id": "3",
+            "side": "proof",
+            "name": "Wallet.Claim.SlidingTwiceCap",
+            "height": 811,
+            "source": "cache",
+            "model": "sonnet",
+            "revealed": true,
+            "result": {
+              "success": false,
+              "received_near": 0,
+              "failures": [
+                {
+                  "ActionError": {
+                    "index": 0,
+                    "kind": {
+                      "FunctionCallError": {
+                        "ExecutionError": "Smart contract panicked: not_open"
+                      }
+                    }
+                  }
+                }
+              ],
+              "kernel_tgas": 0
+            }
+          },
+          {
+            "id": "4",
+            "side": "proof",
+            "name": "Wallet.Claim.NonceCountsPayments",
+            "height": 817,
+            "source": "cache",
+            "model": "sonnet",
+            "revealed": true,
+            "result": {
+              "success": true,
+              "received_near": 2.0500000000000003,
+              "failures": [],
+              "kernel_tgas": 269.457530436308
+            }
+          }
+        ]
+      },
+      "balance_change_near": "4.8760",
+      "llm_usd_spent_writing_its_proofs": 1.4950355000000002
+    }
+  ],
+  "board_final": [
+    {
+      "id": "0",
+      "poster": "bogus.test.near",
+      "claim": "Wallet.Claim.SlidingDayCap",
+      "counter_claim": "Wallet.Claim.Refute.SlidingDayCap",
+      "statement_sha256": null,
+      "counter_statement_sha256": null,
+      "title": "x",
+      "reward": "1000000000000000000000000",
+      "forfeited": "0",
+      "boosted": "0",
+      "boosters": 0,
+      "deadline": "1794597066574483000",
+      "posted_at": "1794593483537692000",
+      "subject": "copycat.test.near",
+      "subject_code_hash": null,
+      "phase": "Refunded",
+      "pending": 0,
+      "winner": null,
+      "winner_bond": "0",
+      "certificate": null,
+      "funded": "0",
+      "escrow": "1000000000000000000000000",
+      "escrow_state": "returned",
+      "commitments": 0,
+      "attempts": [],
+      "attempts_total": 0,
+      "last_error": null,
+      "refused_because": "subject_not_a_factory_wallet"
+    },
+    {
+      "id": "1",
+      "poster": "alice.test.near",
+      "claim": "Wallet.Claim.AllowedReceiversOnly",
+      "counter_claim": "Wallet.Claim.Refute.AllowedReceiversOnly",
+      "statement_sha256": "37f5fa28c37d04945e7e9ac37593a2927e95ffb7eba79310a49ca0e87a2164b4",
+      "counter_statement_sha256": "1ca14df0b952bc58faec2858c85702d098ab369a49818a8f1b123ab4fbd77108",
+      "title": "Whatever an agent sends, in any order, the wallet only ever pays allowlisted receivers",
+      "reward": "5900000000000000000000000",
+      "forfeited": "450000000000000000000000",
+      "boosted": "500000000000000000000000",
+      "boosters": 1,
+      "deadline": "1794679866574483000",
+      "posted_at": "1794593489617698000",
+      "subject": "alice.wallets.test.near",
+      "subject_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+      "phase": "Paid",
+      "pending": 0,
+      "winner": "opus-agent.test.near",
+      "winner_bond": "50000000000000000000000",
+      "certificate": {
+        "claimer": "opus-agent.test.near",
+        "side": "proof",
+        "proved": "Wallet.Claim.AllowedReceiversOnly",
+        "proof_theorem": "Solution.proof",
+        "statement_hash": "9d62ba61439388513fc717ac8518ae3cb5045e7b64641a97aa7fecf1a9db23b5",
+        "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+        "axioms": [],
+        "decls_checked": 29,
+        "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+        "block_height": "887",
+        "timestamp": "1794594161841980000"
+      },
+      "funded": "0",
+      "escrow": "0",
+      "escrow_state": "none",
+      "commitments": 4,
+      "attempts": [
+        {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "b2ce4d2874c4b0360b4df26371d6b2a2c44723949bc840cfae7ccab510d4432e",
+          "outcome": "sorryAx",
+          "block_height": "347"
+        },
+        {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "7f734283721fc5bfd887601c54d7b5f68cae3c3a84d4567941e902dbed59427b",
+          "outcome": "axiom_in_delta:axiom Cheat.magic",
+          "block_height": "405"
+        },
+        {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "827ef5b37b482165e83a5015e95a63fdd4b1e0114df972ab702ac5bafc86a2a0",
+          "outcome": "redefines_base_name:propext",
+          "block_height": "463"
+        },
+        {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "c2d4401a607762ff932eb43c719cb416db674f5b34168bf6a5a36331bfb81b50",
+          "outcome": "axiom_in_delta:axiom propext",
+          "block_height": "521"
+        },
+        {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "b53c51cd15f32d1d1bc1998eaaa4e0d48a73b3f7112090a19e1e4ceaf3fd79aa",
+          "outcome": "redefines_base_name:Wallet.step",
+          "block_height": "579"
+        },
+        {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "a66f51e5942f66ef22106c13c9b4b2ab3d9d511bca821445d0fe3c2f724e1e83",
+          "outcome": "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`",
+          "block_height": "637"
+        },
+        {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "7bea641eb48a6b2527bd717eee68902a49a6906bc8af316ffede7c46c5f810c6",
+          "outcome": "statement_mismatch:no theorem in the delta has type exactly `Wallet.Claim.AllowedReceiversOnly`",
+          "block_height": "695"
+        },
+        {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "563c726d37846fabc9a3b232638901ad7a5a7a94cb5d2ad39dc8d8d4558d4b16",
+          "outcome": "kernel_failed",
+          "block_height": "753"
+        },
+        {
+          "claimer": "opus-agent.test.near",
+          "side": "proof",
+          "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+          "outcome": "accepted",
+          "block_height": "887"
+        },
+        {
+          "claimer": "sonnet-agent.test.near",
+          "side": "proof",
+          "delta_sha256": "64b5368c17e7f12d333a4c43317f0a11f9166c348403c9e3bb278878c000d27a",
+          "outcome": "accepted_after_settled",
+          "block_height": "887"
+        },
+        {
+          "claimer": "mallory.test.near",
+          "side": "proof",
+          "delta_sha256": "7f734283721fc5bfd887601c54d7b5f68cae3c3a84d4567941e902dbed59427b",
+          "outcome": "axiom_in_delta:axiom Cheat.magic",
+          "block_height": "887"
+        }
+      ],
+      "attempts_total": 11,
+      "last_error": null,
+      "refused_because": null
+    },
+    {
+      "id": "2",
+      "poster": "alice.test.near",
+      "claim": "Wallet.Claim.SlidingDayCap",
+      "counter_claim": "Wallet.Claim.Refute.SlidingDayCap",
+      "statement_sha256": "eef104d1ff1d32af64e0bb2b631d0d6a9d4c4d1e0087dfef307c8b6a0ae7cbaa",
+      "counter_statement_sha256": "127d389a15d141b8a7f6f01baaab5f346e7855d228b3f9c9e844bd2c72bcc576",
+      "title": "Within any stretch shorter than a day, the wallet pays out at most one day's cap",
+      "reward": "3000000000000000000000000",
+      "forfeited": "0",
+      "boosted": "0",
+      "boosters": 0,
+      "deadline": "1794679866574483000",
+      "posted_at": "1794593494465662000",
+      "subject": "alice.wallets.test.near",
+      "subject_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+      "phase": "Paid",
+      "pending": 0,
+      "winner": "sonnet-agent.test.near",
+      "winner_bond": "50000000000000000000000",
+      "certificate": {
+        "claimer": "sonnet-agent.test.near",
+        "side": "refutation",
+        "proved": "Wallet.Claim.Refute.SlidingDayCap",
+        "proof_theorem": "Solution.proof",
+        "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+        "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+        "axioms": [],
+        "decls_checked": 12,
+        "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+        "block_height": "1513",
+        "timestamp": "1794594876099560000"
+      },
+      "funded": "0",
+      "escrow": "0",
+      "escrow_state": "none",
+      "commitments": 1,
+      "attempts": [
+        {
+          "claimer": "sonnet-agent.test.near",
+          "side": "refutation",
+          "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+          "outcome": "accepted",
+          "block_height": "1513"
+        }
+      ],
+      "attempts_total": 1,
+      "last_error": null,
+      "refused_because": null
+    },
+    {
+      "id": "3",
+      "poster": "alice.test.near",
+      "claim": "Wallet.Claim.SlidingTwiceCap",
+      "counter_claim": "Wallet.Claim.Refute.SlidingTwiceCap",
+      "statement_sha256": "a08ad1f6635321cd76d3a0bf251002fbe094107a924890130f8bc58fb4fc2b0d",
+      "counter_statement_sha256": "465a58ce43a786ed7f3aae7181108b79a4e547842f1f9b5ae905d9e9fb7b9efc",
+      "title": "Within any stretch shorter than a day, the wallet pays out at most twice the daily cap",
+      "reward": "2000000000000000000000000",
+      "forfeited": "0",
+      "boosted": "0",
+      "boosters": 0,
+      "deadline": "1794679866574483000",
+      "posted_at": "1794593499322364000",
+      "subject": "alice.wallets.test.near",
+      "subject_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+      "phase": "Paid",
+      "pending": 0,
+      "winner": "opus-agent.test.near",
+      "winner_bond": "50000000000000000000000",
+      "certificate": {
+        "claimer": "opus-agent.test.near",
+        "side": "proof",
+        "proved": "Wallet.Claim.SlidingTwiceCap",
+        "proof_theorem": "Solution.proof",
+        "statement_hash": "321d68d60c77f288f0812016daacb828640c13a021d31672ddd4c3da2eb3d9f7",
+        "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+        "axioms": [
+          "propext"
+        ],
+        "decls_checked": 44,
+        "delta_sha256": "04e58ae21b7fc26cee69c6f384bb7ea126cd5f75a208fa9ffbff58a52e9a7045",
+        "block_height": "897",
+        "timestamp": "1794594167972421000"
+      },
+      "funded": "5000000000000000000000000",
+      "escrow": "10000000000000000000000000",
+      "escrow_state": "released",
+      "commitments": 2,
+      "attempts": [
+        {
+          "claimer": "opus-agent.test.near",
+          "side": "proof",
+          "delta_sha256": "04e58ae21b7fc26cee69c6f384bb7ea126cd5f75a208fa9ffbff58a52e9a7045",
+          "outcome": "accepted",
+          "block_height": "897"
+        }
+      ],
+      "attempts_total": 1,
+      "last_error": null,
+      "refused_because": null
+    },
+    {
+      "id": "4",
+      "poster": "alice.test.near",
+      "claim": "Wallet.Claim.NonceCountsPayments",
+      "counter_claim": "Wallet.Claim.Refute.NonceCountsPayments",
+      "statement_sha256": "566a492c2b4db6b92d33a51682536f90c570e89b0dc36552e43f8af9991fafbc",
+      "counter_statement_sha256": "455c98dddc0b6733c6067f7858510e1d8be5be42bba9d1fcf86e151c6070ad53",
+      "title": "The nonce counts the payments the wallet made, exactly",
+      "reward": "2000000000000000000000000",
+      "forfeited": "0",
+      "boosted": "0",
+      "boosters": 0,
+      "deadline": "1794679866574483000",
+      "posted_at": "1794593504172663000",
+      "subject": "alice.wallets.test.near",
+      "subject_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+      "phase": "Paid",
+      "pending": 0,
+      "winner": "sonnet-agent.test.near",
+      "winner_bond": "50000000000000000000000",
+      "certificate": {
+        "claimer": "sonnet-agent.test.near",
+        "side": "proof",
+        "proved": "Wallet.Claim.NonceCountsPayments",
+        "proof_theorem": "Solution.proof",
+        "statement_hash": "9ed79f1fdec873061aa388d52a9365c9bb458fcab10c789388b285709a632886",
+        "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+        "axioms": [
+          "propext"
+        ],
+        "decls_checked": 27,
+        "delta_sha256": "3c08d2637dac55d1636266e92adf69af0dbcdf77470a623abc5b31a09b8cbbf9",
+        "block_height": "897",
+        "timestamp": "1794594167972421000"
+      },
+      "funded": "0",
+      "escrow": "0",
+      "escrow_state": "none",
+      "commitments": 1,
+      "attempts": [
+        {
+          "claimer": "sonnet-agent.test.near",
+          "side": "proof",
+          "delta_sha256": "3c08d2637dac55d1636266e92adf69af0dbcdf77470a623abc5b31a09b8cbbf9",
+          "outcome": "accepted",
+          "block_height": "897"
+        }
+      ],
+      "attempts_total": 1,
+      "last_error": null,
+      "refused_because": null
+    },
+    {
+      "id": "5",
+      "poster": "alice.test.near",
+      "claim": "Wallet.Claim.PerTxCapAlways",
+      "counter_claim": "Wallet.Claim.Refute.PerTxCapAlways",
+      "statement_sha256": "0145699276d77ee9196a55a88a9abe3493c9fe6e3a353c7cedc3d8c146a53afb",
+      "counter_statement_sha256": "f063da75f534b3248d6246ef79ad98a5bab2afc65c0ef33a374fa959dee53ab6",
+      "title": "Every payment the wallet ever makes is within the per-payment cap",
+      "reward": "1000000000000000000000000",
+      "forfeited": "0",
+      "boosted": "0",
+      "boosters": 1,
+      "deadline": "1794597066574483000",
+      "posted_at": "1794593509018942000",
+      "subject": "alice.wallets.test.near",
+      "subject_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+      "phase": "Refunded",
+      "pending": 0,
+      "winner": null,
+      "winner_bond": "0",
+      "certificate": null,
+      "funded": "0",
+      "escrow": "0",
+      "escrow_state": "none",
+      "commitments": 0,
+      "attempts": [],
+      "attempts_total": 0,
+      "last_error": null,
+      "refused_because": null
+    }
+  ],
+  "kernel": {
+    "account": "kernel.test.near",
+    "status": {
+      "owner": "keeper.test.near",
+      "chunks": 3,
+      "base_bytes": 1093131,
+      "stored_bytes": 310278,
+      "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+      "base_decls": 623,
+      "checked_upto": 623,
+      "sealed": true,
+      "axioms_in_base": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    "name": "nanoda_lib-0.4.32/pinned-base/v4"
+  },
+  "finished_at": "2026-11-13T18:20:20.901Z",
+  "summary": {
+    "pass": 19,
+    "fail": 0
+  }
+}

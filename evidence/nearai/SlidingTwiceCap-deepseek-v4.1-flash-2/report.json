@@ -1,0 +1,36 @@
+{
+  "claim": "Wallet.Claim.SlidingTwiceCap",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-11T18:40:56Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 3697.9,
+    "turns": 19,
+    "tool_calls": 18,
+    "solution_writes": 5,
+    "repair_rounds": 4,
+    "lean_runs": 5,
+    "lean_failures": 4,
+    "lost_responses": 2,
+    "prompt_tokens": 144686,
+    "completion_tokens": 82727,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "",
+    "cost_usd": 0.2062,
+    "signed_responses": 17,
+    "responses": 17,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": false,
+    "log": "\u2716 [6/7] Building Solution (185ms)\ntrace: .> LEAN_PATH=./.lake/build/lib/lean ~/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean ./Solution.lean -o ./.lake/build/lib/lean/Solution.olean -i ./.lake/build/lib/lean/Solution.ilean -c ./.lake/build/ir/Solution.c --setup ./.lake/build/ir/Solution.setup.json --json\nerror: Solution.lean:11:6: Tactic `split` failed: Could not split an `if` or `match` expression in the type\n  (Verdict.denyPerTx, s) = (Verdict.allow, s')\nof `h`\n\nHint: Use `set_option trace.split.failure true` to display additional diagnostic information\n\ncase isTrue.isTrue\np : Policy\ns s' : State\nnow : UInt64\nto : Account\namount : UInt64\nh\u271d\u00b9 : isAllowed to p.allowed = true\nh\u271d : p.perTxCap < amount\nh : (Verdict.denyPerTx, s) = (Verdict.allow, s')\n\u22a2 True\ninfo: Solution.lean:22:6: case isTrue.isFalse\np : Policy\ns s' : State\nnow : UInt64\nto : Account\namount : UInt64\nh\u271d\u00b9 : isAllowed to p.allowed = true\nh\u271d : \u00acp.perTxCap < amount\nh :\n  (if\n        (decide (U64MAX - (rollDay p s now).spentTotal < amount) ||\n              decide (U64MAX - (rollDay p s now).spentToday < amount) ||\n            decide ((rollDay p s now).nonce = U64MAX)) =\n          true then\n      (Verdict.denyOverflow, s)\n    else\n      if p.budgetTotal < (rollDay p s now).spentTotal + amount then (Verdict.denyBudget, s)\n      else\n        if p.perDayCap < (rollDay p s now).spentToday + amount then (Verdict.denyDaily, s)\n        else\n          (Verdict.allow,\n            { spentTotal := (rollDay p s now).spentTotal + amount, spentToday := (rollDay p s now).spentToday + amount,\n              dayStart := (rollDay p s now).dayStart, nonce := (rollDay p s now).nonce + 1 })) =\n    (Verdict.allow, s')\n\u22a2 True\ninfo: Solution.lean:24:4: case isFalse\np : Policy\ns s' : State\nnow : UInt64\nto : Account\namount : UInt64\nh\u271d : \u00acisAllowed to p.allowed = true\nh : (Verdict.denyReceiver, s) = (Verdict.allow, s')\n\u22a2 True\nwarning: Solution.lean:27:8: declaration uses `sorry`\nSome required targets logged failures:\n- Solution\nerror: build failed\n"
+  },
+  "ready_to_claim": false
+}

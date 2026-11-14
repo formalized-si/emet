@@ -1,0 +1,23 @@
+{
+  "name": "emet",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Emet: a Lean proof checker inside a NEAR contract, and a gate that upgrades a contract only after the checker accepts a proof.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formalized-si/emet.git"
+  },
+  "homepage": "https://formalized-si.github.io/emet/",
+  "engines": {
+    "node": ">=20.15.0"
+  },
+  "scripts": {
+    "test": "node --test demo/web/patch-evidence.test.mjs demo/web/evidence.test.mjs"
+  },
+  "dependencies": {
+    "near-workspaces": "5.0.0",
+    "near-api-js": "5.1.1",
+    "signal-exit": "3.0.7"
+  }
+}

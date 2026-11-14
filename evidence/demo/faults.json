@@ -1,0 +1,3288 @@
+{
+  "kind": "proof-courier-faults",
+  "started_at": "2026-11-13T17:58:12.263Z",
+  "checks": [
+    {
+      "id": "F1",
+      "title": "A failed reward transfer leaves the bounty Owed; retry_payment pays the recorded winner once it can receive, exactly once",
+      "pass": true,
+      "detail": {
+        "owed_phase": "Owed",
+        "last_error": "transfer_failed_owed_preserved",
+        "retry_while_gone": "Owed",
+        "after": "Paid",
+        "paid": "1050000000000000000000000",
+        "retry_again": [
+          {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: nothing_owed"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "F2",
+      "title": "A failed escrow return leaves the escrow held; retry_escrow returns it to the poster once it can receive, exactly once, and never to the wallet of a refuted claim",
+      "pass": true,
+      "detail": {
+        "held": "held",
+        "after": "returned",
+        "returned": "2000000000000000000000000",
+        "again": [
+          {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: no_escrow_to_move"
+                }
+              }
+            }
+          }
+        ],
+        "wallet_frozen_by_the_refutation": true
+      }
+    },
+    {
+      "id": "F3",
+      "title": "A wallet whose setup fails is not created and not recorded, and the caller gets the whole deposit back",
+      "pass": true,
+      "detail": {
+        "refunded": "500000000000000000000000",
+        "lost_to_gas": "1376277528504800000000",
+        "record": null
+      }
+    },
+    {
+      "id": "F4",
+      "title": "retry_escrow is refused while a bounty is being validated; a refused bounty returns reward + escrow exactly once and keeps the posting fee",
+      "pass": true,
+      "detail": {
+        "phase": "Refunded",
+        "reason": null,
+        "escrow_state": "returned",
+        "retry": [
+          {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: no_escrow_to_move"
+                }
+              }
+            }
+          }
+        ],
+        "returned": "11000000000000000000000000",
+        "attacker_net": "-130029664347040100000000",
+        "board_net": "100000000000000000000000"
+      }
+    },
+    {
+      "id": "F5",
+      "title": "Retrying an old bounty’s refund pays its poster once and leaves a newer bounty’s hold on the claim alone, so the claim cannot be posted (and paid) twice",
+      "pass": true,
+      "detail": {
+        "a_phase_while_gone": "OwedRefund",
+        "a_refund": "1000000000000000000000000",
+        "open_for_after": "4",
+        "b": "4",
+        "c_post": [
+          {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: open_bounty:4"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "F6",
+      "title": "A refused post whose refund cannot be delivered stays owed (reward OwedRefund, escrow held), keeps its refusal reason, and is paid exactly once when the poster can receive",
+      "pass": true,
+      "detail": {
+        "refused_because": "subject_not_a_factory_wallet",
+        "while_gone": {
+          "phase": "OwedRefund",
+          "escrow": "held"
+        },
+        "refunded": "3000000000000000000000000",
+        "after": {
+          "phase": "Refunded",
+          "escrow": "returned"
+        }
+      }
+    },
+    {
+      "id": "F7",
+      "title": "A proof of False built on a forged recursor rule, stated as a proof of the headline claim, fails in the kernel, while an honest proof of that claim is accepted",
+      "pass": true,
+      "detail": {
+        "honest_proof_ok": true,
+        "kernel": "nanoda_lib-0.4.32/pinned-base/v4",
+        "forged": [
+          {
+            "name": "forgedRec",
+            "delta_sha256": "161745a560f0f731549c7721f28ccc8e33bece7735ab33336f74f55b4ab44eab",
+            "dry_run": "kernel_failed",
+            "check": "kernel_failed",
+            "failure": "[{\"ActionError\":{\"index\":0,\"kind\":{\"FunctionCallError\":{\"ExecutionError\":\"Smart contract panicked: panicked at vendor/nanoda_lib/src/tc.rs:988:71:\\nassertion failed: self.def_eq(u, v)\"}}}}]"
+          },
+          {
+            "name": "forgedRecNested",
+            "delta_sha256": "c65ee35a022940614d5db13b277febab0f1b67299a1fd9d49b043b2e68c02ec3",
+            "dry_run": "kernel_failed",
+            "check": "kernel_failed",
+            "failure": "[{\"ActionError\":{\"index\":0,\"kind\":{\"FunctionCallError\":{\"ExecutionError\":\"Smart contract panicked: panicked at vendor/nanoda_lib/src/tc.rs:988:71:\\nassertion failed: self.def_eq(u, v)\"}}}}]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "F8",
+      "title": "A counterexample revealed after its bounty expired and was refunded is refused: nobody is paid, the code is not recorded refuted, and the board freezes nothing, before or after",
+      "pass": true,
+      "detail": {
+        "phase": "Refunded",
+        "late_reveal": "not_open",
+        "code_refuted_by": null,
+        "freeze_before": "nothing_refuted",
+        "freeze_after": "nothing_refuted",
+        "wallet_frozen": false
+      }
+    },
+    {
+      "id": "F9",
+      "title": "Two refutations of one claim at the same moment: one is paid, once, and its transaction freezes the wallet; the other gets only its bond back; a repeated reveal, commit or freeze changes nothing, and an account the factory does not know is not frozen",
+      "pass": true,
+      "detail": {
+        "winner": "late.test.near",
+        "paid": "1050000000000000000000000",
+        "loser": "accepted_after_settled",
+        "loser_got": "50000000000000000000000",
+        "wallet_freezes_in_the_two_reveals": 1,
+        "reveal_again": "no_commit",
+        "commit_again": "not_open",
+        "freeze_again": true,
+        "code_refuted_by": "1"
+      }
+    },
+    {
+      "id": "F10",
+      "title": "A freeze the wallet refuses does not disturb the settlement: the refutation is paid once and the escrow returned once; sending the freeze again fails again and moves no money",
+      "pass": true,
+      "detail": {
+        "phase": "Paid",
+        "paid": "1050000000000000000000000",
+        "escrow": "returned",
+        "freeze": "freeze_failed",
+        "wallet_board": "elsewhere.test.near",
+        "freeze_again": "freeze_failed",
+        "retry_payment": "nothing_owed",
+        "retry_escrow": "no_escrow_to_move",
+        "transfers_after": 0
+      }
+    },
+    {
+      "id": "F11",
+      "title": "The root bounty on False, on the current kernel: one-sided; the two forged-recursor proofs of False fail in the kernel and an honest proof of another statement is not a proof of False; the bounty stays open with its reward and the kernel is not recorded broken",
+      "pass": true,
+      "detail": {
+        "kernel": "nanoda_lib-0.4.32/pinned-base/v4",
+        "statement": "inductive False : Prop",
+        "refused_at_once": {
+          "two_sided": "root_bounty_is_one_sided_and_has_no_escrow",
+          "duplicate": "open_bounty:6",
+          "refutation_side": "one_sided_bounty",
+          "no_theorem_named": "name_the_theorem_of_type_false"
+        },
+        "forged": [
+          {
+            "name": "forgedRec",
+            "theorem": "badApp",
+            "delta_sha256": "161745a560f0f731549c7721f28ccc8e33bece7735ab33336f74f55b4ab44eab",
+            "outcome": "kernel_failed",
+            "paid": "0"
+          },
+          {
+            "name": "forgedRecNested",
+            "theorem": "badNested",
+            "delta_sha256": "c65ee35a022940614d5db13b277febab0f1b67299a1fd9d49b043b2e68c02ec3",
+            "outcome": "kernel_failed",
+            "paid": "0"
+          }
+        ],
+        "honest_proof_of_another_statement": "not_a_proof_of_false",
+        "bounty": {
+          "phase": "Open",
+          "reward": "2150000000000000000000000",
+          "winner": null
+        },
+        "kernel_broken_by": null
+      }
+    },
+    {
+      "id": "F12",
+      "title": "WHAT-IF with the superseded kernel (nanoda_lib 0.4.31, not the kernel in artifacts/): a forged proof of False is paid the root bounty, once; the board records its kernel broken and from then on posts, commits, reveals, boosts and funds nothing; an open bounty returns its reward, escrow and boost at once; anyone can freeze the factory's wallets",
+      "pass": true,
+      "detail": {
+        "what_if": true,
+        "kernel": "nanoda_lib-0.4.31/pinned-base/v3",
+        "kernel_wasm": "history/kernel-nanoda-0.4.31/kernel.wasm",
+        "kernel_wasm_sha256": "ebed3bfb61020b130e68075ccfcd49c6b9e3f3d288f3dacf5e1af19d96d2e087",
+        "current_kernel_wasm_sha256": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+        "forged": [
+          {
+            "name": "forgedRec",
+            "theorem": "badApp",
+            "delta_sha256": "161745a560f0f731549c7721f28ccc8e33bece7735ab33336f74f55b4ab44eab"
+          },
+          {
+            "name": "forgedRecNested",
+            "theorem": "badNested",
+            "delta_sha256": "c65ee35a022940614d5db13b277febab0f1b67299a1fd9d49b043b2e68c02ec3"
+          }
+        ],
+        "root_bounty": {
+          "phase": "Paid",
+          "winner": "hunterb.test.near",
+          "paid": "5050000000000000000000000",
+          "certificate": {
+            "claimer": "hunterb.test.near",
+            "side": "proof",
+            "proved": "False",
+            "proof_theorem": "badNested",
+            "statement_hash": "a230a46ca5e70a1b2eec0ce060880d354617123df53bfbfbdc4c84823b6e317e",
+            "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+            "axioms": [],
+            "decls_checked": 15,
+            "delta_sha256": "c65ee35a022940614d5db13b277febab0f1b67299a1fd9d49b043b2e68c02ec3",
+            "block_height": "1625",
+            "timestamp": "1794594098845228000"
+          }
+        },
+        "second_proof": "kernel_broken",
+        "second_got": "50000000000000000000000",
+        "kernel_broken_by": "2",
+        "gates_after": {
+          "post_bounty": "kernel_broken",
+          "commit": "kernel_broken",
+          "reveal": "kernel_broken",
+          "boost": "kernel_broken",
+          "fund_if_proven": "kernel_broken",
+          "root_again": "kernel_broken"
+        },
+        "open_bounty": {
+          "phase": "Refunded",
+          "escrow": "returned",
+          "returned": "3000000000000000000000000",
+          "boost_back": "500000000000000000000000"
+        },
+        "freeze": {
+          "before": "nothing_refuted",
+          "after_frozen": true,
+          "owner_withdrew": "3000000000000000000000000"
+        }
+      }
+    }
+  ],
+  "transactions": [
+    {
+      "label": "upload",
+      "method": "load_base_chunk",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "upload",
+      "method": "load_base_chunk",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "upload",
+      "method": "load_base_chunk",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "seal",
+      "method": "seal_base",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "check",
+      "method": "check_base_range",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "check",
+      "method": "check_base_range",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "check",
+      "method": "check_base_range",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "post",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "0",
+              "poster": "poster.test.near",
+              "claim": "Wallet.Claim.AllowedReceiversOnly",
+              "counter_claim": "Wallet.Claim.Refute.AllowedReceiversOnly",
+              "statement_sha256": "37f5fa28c37d04945e7e9ac37593a2927e95ffb7eba79310a49ca0e87a2164b4",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794596344199327000",
+              "subject": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "0",
+              "claimer": "doomed.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal, then the winner deletes its account",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "doomed.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "doomed.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "doomed.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "doomed.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "doomed.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "doomed.test.near"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "doomed.test.near",
+          "amount": "1050000000000000000000000",
+          "ok": false
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "0",
+              "claimer": "doomed.test.near",
+              "side": "proof",
+              "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+              "delta_bytes": 175623,
+              "block_height": "173",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "0",
+              "certificate": {
+                "claimer": "doomed.test.near",
+                "side": "proof",
+                "proved": "Wallet.Claim.AllowedReceiversOnly",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "9d62ba61439388513fc717ac8518ae3cb5045e7b64641a97aa7fecf1a9db23b5",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [],
+                "decls_checked": 29,
+                "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+                "block_height": "175",
+                "timestamp": "1794592829245653000"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "retry_payment while the account is still gone",
+      "method": "retry_payment",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "doomed.test.near"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "doomed.test.near",
+          "amount": "1050000000000000000000000",
+          "ok": false
+        }
+      ],
+      "events": []
+    },
+    {
+      "label": "retry_payment after the account exists again",
+      "method": "retry_payment",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "doomed.test.near",
+          "amount": "1050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "0",
+              "to": "doomed.test.near",
+              "amount": "1050000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "retry_payment once more",
+      "method": "retry_payment",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: nothing_owed"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "owner creates a wallet",
+      "method": "create_wallet",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "wallets.test.near",
+          "to": "safe.wallets.test.near",
+          "amount": "45000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_policy",
+          "data": [
+            {
+              "wallet": "safe.wallets.test.near",
+              "by": "wallets.test.near",
+              "action": "init",
+              "policy": {
+                "budget_total": "20000000",
+                "per_tx_cap": "3000000",
+                "per_day_cap": "6000000",
+                "day_ns": "600000000000",
+                "allowed": [
+                  "owner.test.near"
+                ]
+              },
+              "lean_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-factory",
+          "version": "1.0.0",
+          "event": "wallet_created",
+          "data": [
+            {
+              "wallet": "safe.wallets.test.near",
+              "owner": "owner.test.near",
+              "code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "post with escrow",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "1",
+              "poster": "leaving.test.near",
+              "claim": "Wallet.Claim.SlidingDayCap",
+              "counter_claim": "Wallet.Claim.Refute.SlidingDayCap",
+              "statement_sha256": "eef104d1ff1d32af64e0bb2b631d0d6a9d4c4d1e0087dfef307c8b6a0ae7cbaa",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794596344199327000",
+              "subject": "safe.wallets.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "refuter.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal refutation",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "leaving.test.near"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "leaving.test.near",
+          "amount": "2000000000000000000000000",
+          "ok": false
+        },
+        {
+          "from": "board.test.near",
+          "to": "refuter.test.near",
+          "amount": "1050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "refuter.test.near",
+              "side": "refutation",
+              "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+              "delta_bytes": 65617,
+              "block_height": "298",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "1",
+              "certificate": {
+                "claimer": "refuter.test.near",
+                "side": "refutation",
+                "proved": "Wallet.Claim.Refute.SlidingDayCap",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [],
+                "decls_checked": 12,
+                "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+                "block_height": "300",
+                "timestamp": "1794592934149311000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "code_refuted",
+          "data": [
+            {
+              "id": "1",
+              "wallet_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "safe.wallets.test.near",
+              "by": "board.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "safe.wallets.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "1",
+              "to": "refuter.test.near",
+              "amount": "1050000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "retry_escrow after the poster exists again",
+      "method": "retry_escrow",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "leaving.test.near",
+          "amount": "2000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "escrow_returned",
+          "data": [
+            {
+              "id": "1",
+              "to": "leaving.test.near",
+              "amount": "2000000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "retry_escrow once more",
+      "method": "retry_escrow",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: no_escrow_to_move"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "create_wallet with a policy the wallet refuses (no allowed list)",
+      "method": "create_wallet",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 3,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_POLICY_JSON"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [
+        {
+          "from": "wallets.test.near",
+          "to": "broken.wallets.test.near",
+          "amount": "495000000000000000000000",
+          "ok": false
+        },
+        {
+          "from": "wallets.test.near",
+          "to": "careless.test.near",
+          "amount": "500000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-factory",
+          "version": "1.0.0",
+          "event": "wallet_setup_failed",
+          "data": [
+            {
+              "wallet": "broken.wallets.test.near",
+              "owner": "careless.test.near",
+              "refunded": "500000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "post with escrow for a non-wallet",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "attacker.test.near",
+          "amount": "10000000000000000000000000",
+          "ok": true
+        },
+        {
+          "from": "board.test.near",
+          "to": "attacker.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_rejected",
+          "data": [
+            {
+              "id": "2",
+              "claim": "Wallet.Claim.NonceCountsPayments",
+              "reason": "subject_not_a_factory_wallet"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "escrow_returned",
+          "data": [
+            {
+              "id": "2",
+              "to": "attacker.test.near",
+              "amount": "10000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "refunded",
+          "data": [
+            {
+              "id": "2",
+              "to": "attacker.test.near",
+              "amount": "1000000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "retry_escrow at once",
+      "method": "retry_escrow",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: no_escrow_to_move"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "A posts a short bounty",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "3",
+              "poster": "posta.test.near",
+              "claim": "Wallet.Claim.PerTxCapAlways",
+              "counter_claim": "Wallet.Claim.Refute.PerTxCapAlways",
+              "statement_sha256": "0145699276d77ee9196a55a88a9abe3493c9fe6e3a353c7cedc3d8c146a53afb",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794593052179803000",
+              "subject": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "anyone closes A while its poster is gone",
+      "method": "refund",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "posta.test.near"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "posta.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": false
+        }
+      ],
+      "events": []
+    },
+    {
+      "label": "B posts the same claim",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "4",
+              "poster": "postb.test.near",
+              "claim": "Wallet.Claim.PerTxCapAlways",
+              "counter_claim": "Wallet.Claim.Refute.PerTxCapAlways",
+              "statement_sha256": "0145699276d77ee9196a55a88a9abe3493c9fe6e3a353c7cedc3d8c146a53afb",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794596344199327000",
+              "subject": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "A's refund retried",
+      "method": "refund",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "posta.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "refunded",
+          "data": [
+            {
+              "id": "3",
+              "to": "posta.test.near",
+              "amount": "1000000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "C tries to post the same claim",
+      "method": "post_bounty",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: open_bounty:4"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "refused post whose poster leaves at once",
+      "method": "post_bounty",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        },
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "AccountDoesNotExist": {
+                "account_id": "gone.test.near"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "gone.test.near",
+          "amount": "2000000000000000000000000",
+          "ok": false
+        },
+        {
+          "from": "board.test.near",
+          "to": "gone.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": false
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_rejected",
+          "data": [
+            {
+              "id": "5",
+              "claim": "Wallet.Claim.SlidingTwiceCap",
+              "reason": "subject_not_a_factory_wallet"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "the refund retried (it also moves the held escrow)",
+      "method": "refund",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "board.test.near",
+          "to": "gone.test.near",
+          "amount": "2000000000000000000000000",
+          "ok": true
+        },
+        {
+          "from": "board.test.near",
+          "to": "gone.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "escrow_returned",
+          "data": [
+            {
+              "id": "5",
+              "to": "gone.test.near",
+              "amount": "2000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "refunded",
+          "data": [
+            {
+              "id": "5",
+              "to": "gone.test.near",
+              "amount": "1000000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "the escrow retried after that",
+      "method": "retry_escrow",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: no_escrow_to_move"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "the refund retried once more",
+      "method": "refund",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_refundable"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "check forgedRec",
+      "method": "check_result_raw",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: panicked at vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "check forgedRecNested",
+      "method": "check_result_raw",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: panicked at vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "create a wallet",
+      "method": "create_wallet",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "walletslate.test.near",
+          "to": "safe.walletslate.test.near",
+          "amount": "45000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_policy",
+          "data": [
+            {
+              "wallet": "safe.walletslate.test.near",
+              "by": "walletslate.test.near",
+              "action": "init",
+              "policy": {
+                "budget_total": "20000000",
+                "per_tx_cap": "3000000",
+                "per_day_cap": "6000000",
+                "day_ns": "600000000000",
+                "allowed": [
+                  "owner8.test.near"
+                ]
+              },
+              "lean_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-factory",
+          "version": "1.0.0",
+          "event": "wallet_created",
+          "data": [
+            {
+              "wallet": "safe.walletslate.test.near",
+              "owner": "owner8.test.near",
+              "code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "post a short bounty",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "0",
+              "poster": "poster8.test.near",
+              "claim": "Wallet.Claim.SlidingDayCap",
+              "counter_claim": "Wallet.Claim.Refute.SlidingDayCap",
+              "statement_sha256": "eef104d1ff1d32af64e0bb2b631d0d6a9d4c4d1e0087dfef307c8b6a0ae7cbaa",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794593394219435000",
+              "subject": "safe.walletslate.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "0",
+              "claimer": "late.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "freeze before any refutation",
+      "method": "freeze",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: nothing_refuted"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "anyone closes the expired bounty",
+      "method": "refund",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardlate.test.near",
+          "to": "poster8.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "refunded",
+          "data": [
+            {
+              "id": "0",
+              "to": "poster8.test.near",
+              "amount": "1000000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal refutation",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_open"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "freeze after the late reveal",
+      "method": "freeze",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: nothing_refuted"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "post again",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "1",
+              "poster": "poster8.test.near",
+              "claim": "Wallet.Claim.SlidingDayCap",
+              "counter_claim": "Wallet.Claim.Refute.SlidingDayCap",
+              "statement_sha256": "eef104d1ff1d32af64e0bb2b631d0d6a9d4c4d1e0087dfef307c8b6a0ae7cbaa",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794596344199327000",
+              "subject": "safe.walletslate.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "late.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "refuter9.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal refutation",
+      "method": "reveal",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardlate.test.near",
+          "to": "refuter9.test.near",
+          "amount": "50000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "refuter9.test.near",
+              "side": "refutation",
+              "delta_sha256": "f8c77bace586d70424ee403967d8edad7a0d9fd48882fbc804f5091dbe73fbcb",
+              "delta_bytes": 64272,
+              "block_height": "997",
+              "in_flight": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal refutation",
+      "method": "reveal",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardlate.test.near",
+          "to": "late.test.near",
+          "amount": "1050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "late.test.near",
+              "side": "refutation",
+              "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+              "delta_bytes": 65617,
+              "block_height": "997",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "1",
+              "certificate": {
+                "claimer": "late.test.near",
+                "side": "refutation",
+                "proved": "Wallet.Claim.Refute.SlidingDayCap",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [],
+                "decls_checked": 12,
+                "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+                "block_height": "999",
+                "timestamp": "1794593601486934000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "code_refuted",
+          "data": [
+            {
+              "id": "1",
+              "wallet_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "safe.walletslate.test.near",
+              "by": "boardlate.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "safe.walletslate.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "1",
+              "to": "late.test.near",
+              "amount": "1050000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal refutation",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: no_commit"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "the winner commits again",
+      "method": "commit",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_open"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "anyone sends the freeze again",
+      "method": "freeze",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "safe.walletslate.test.near",
+              "by": "boardlate.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "safe.walletslate.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "anyone asks the board to freeze an account the factory does not know",
+      "method": "freeze",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "freeze_refused",
+          "data": [
+            {
+              "wallet": "anyone.test.near",
+              "reason": "not_a_factory_wallet"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "create a wallet",
+      "method": "create_wallet",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "walletsdeaf.test.near",
+          "to": "safe.walletsdeaf.test.near",
+          "amount": "45000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_policy",
+          "data": [
+            {
+              "wallet": "safe.walletsdeaf.test.near",
+              "by": "walletsdeaf.test.near",
+              "action": "init",
+              "policy": {
+                "budget_total": "20000000",
+                "per_tx_cap": "3000000",
+                "per_day_cap": "6000000",
+                "day_ns": "600000000000",
+                "allowed": [
+                  "owner10.test.near"
+                ]
+              },
+              "lean_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-factory",
+          "version": "1.0.0",
+          "event": "wallet_created",
+          "data": [
+            {
+              "wallet": "safe.walletsdeaf.test.near",
+              "owner": "owner10.test.near",
+              "code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "post with escrow",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "0",
+              "poster": "poster10.test.near",
+              "claim": "Wallet.Claim.SlidingDayCap",
+              "counter_claim": "Wallet.Claim.Refute.SlidingDayCap",
+              "statement_sha256": "eef104d1ff1d32af64e0bb2b631d0d6a9d4c4d1e0087dfef307c8b6a0ae7cbaa",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794596344199327000",
+              "subject": "safe.walletsdeaf.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "0",
+              "claimer": "refuter10.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal refutation",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_FREEZE_NOT_BOARD"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [
+        {
+          "from": "boarddeaf.test.near",
+          "to": "poster10.test.near",
+          "amount": "2000000000000000000000000",
+          "ok": true
+        },
+        {
+          "from": "boarddeaf.test.near",
+          "to": "refuter10.test.near",
+          "amount": "1050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "0",
+              "claimer": "refuter10.test.near",
+              "side": "refutation",
+              "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+              "delta_bytes": 65617,
+              "block_height": "1151",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "0",
+              "certificate": {
+                "claimer": "refuter10.test.near",
+                "side": "refutation",
+                "proved": "Wallet.Claim.Refute.SlidingDayCap",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "d8be8d11c2281fe4594356b2df338363b50f3f730844711dc7aae4811acacd15",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [],
+                "decls_checked": 12,
+                "delta_sha256": "f7ac15382a9acfb8cbf8b941074a0c56f63d35947f9adfd8b87792447b0fceac",
+                "block_height": "1153",
+                "timestamp": "1794593725887374000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "code_refuted",
+          "data": [
+            {
+              "id": "0",
+              "wallet_code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "freeze_failed",
+          "data": [
+            {
+              "wallet": "safe.walletsdeaf.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "escrow_returned",
+          "data": [
+            {
+              "id": "0",
+              "to": "poster10.test.near",
+              "amount": "2000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "0",
+              "to": "refuter10.test.near",
+              "amount": "1050000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "anyone sends the freeze again",
+      "method": "freeze",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_FREEZE_NOT_BOARD"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "freeze_failed",
+          "data": [
+            {
+              "wallet": "safe.walletsdeaf.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "retry_payment after the failed freeze",
+      "method": "retry_payment",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: nothing_owed"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "retry_escrow after the failed freeze",
+      "method": "retry_escrow",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: no_escrow_to_move"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "a root bounty with a refutation side",
+      "method": "post_bounty",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: root_bounty_is_one_sided_and_has_no_escrow"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "post the root bounty",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "6",
+              "poster": "poster.test.near",
+              "claim": "False",
+              "counter_claim": null,
+              "statement_sha256": "6189d7eac6e56583aeb3242bb3721d408ff202b53fa7e2e58a88170ba651a960",
+              "reward": "2000000000000000000000000",
+              "deadline": "1794596344199327000",
+              "subject": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "a second root bounty",
+      "method": "post_bounty",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: open_bounty:6"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "hunter1.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "hunter2.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "scribe.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "anyone.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal refutation",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: one_sided_bounty"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "reveal proof",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: name_the_theorem_of_type_false"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "reveal proof badApp",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: panicked at vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "hunter1.test.near",
+              "side": "proof",
+              "delta_sha256": "161745a560f0f731549c7721f28ccc8e33bece7735ab33336f74f55b4ab44eab",
+              "delta_bytes": 9740,
+              "block_height": "1303",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "hunter1.test.near",
+              "side": "proof",
+              "delta_sha256": "161745a560f0f731549c7721f28ccc8e33bece7735ab33336f74f55b4ab44eab",
+              "reason": "kernel_failed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal proof badNested",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: panicked at vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "hunter2.test.near",
+              "side": "proof",
+              "delta_sha256": "c65ee35a022940614d5db13b277febab0f1b67299a1fd9d49b043b2e68c02ec3",
+              "delta_bytes": 14227,
+              "block_height": "1311",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "hunter2.test.near",
+              "side": "proof",
+              "delta_sha256": "c65ee35a022940614d5db13b277febab0f1b67299a1fd9d49b043b2e68c02ec3",
+              "reason": "kernel_failed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal proof Solution.proof",
+      "method": "reveal",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "scribe.test.near",
+              "side": "proof",
+              "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+              "delta_bytes": 175623,
+              "block_height": "1319",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_rejected",
+          "data": [
+            {
+              "id": "6",
+              "claimer": "scribe.test.near",
+              "side": "proof",
+              "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+              "reason": "not_a_proof_of_false"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "upload",
+      "method": "load_base_chunk",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "upload",
+      "method": "load_base_chunk",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "upload",
+      "method": "load_base_chunk",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "seal",
+      "method": "seal_base",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "check",
+      "method": "check_base_range",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "check",
+      "method": "check_base_range",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "check",
+      "method": "check_base_range",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "create a wallet",
+      "method": "create_wallet",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "walletsold.test.near",
+          "to": "safe.walletsold.test.near",
+          "amount": "45000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_policy",
+          "data": [
+            {
+              "wallet": "safe.walletsold.test.near",
+              "by": "walletsold.test.near",
+              "action": "init",
+              "policy": {
+                "budget_total": "20000000",
+                "per_tx_cap": "3000000",
+                "per_day_cap": "6000000",
+                "day_ns": "600000000000",
+                "allowed": [
+                  "ownero.test.near"
+                ]
+              },
+              "lean_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier-factory",
+          "version": "1.0.0",
+          "event": "wallet_created",
+          "data": [
+            {
+              "wallet": "safe.walletsold.test.near",
+              "owner": "ownero.test.near",
+              "code_hash": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "post the headline bounty",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "0",
+              "poster": "postero.test.near",
+              "claim": "Wallet.Claim.AllowedReceiversOnly",
+              "counter_claim": "Wallet.Claim.Refute.AllowedReceiversOnly",
+              "statement_sha256": "37f5fa28c37d04945e7e9ac37593a2927e95ffb7eba79310a49ca0e87a2164b4",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794596344199327000",
+              "subject": "safe.walletsold.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "post a bounty with an escrow",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "1",
+              "poster": "postero.test.near",
+              "claim": "Wallet.Claim.NonceCountsPayments",
+              "counter_claim": "Wallet.Claim.Refute.NonceCountsPayments",
+              "statement_sha256": "566a492c2b4db6b92d33a51682536f90c570e89b0dc36552e43f8af9991fafbc",
+              "reward": "1000000000000000000000000",
+              "deadline": "1794596344199327000",
+              "subject": "safe.walletsold.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "carol boosts it",
+      "method": "boost",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "boosted",
+          "data": [
+            {
+              "id": "1",
+              "by": "carolo.test.near",
+              "amount": "500000000000000000000000",
+              "reward": "1500000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "post the root bounty",
+      "method": "post_bounty",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "bounty_posted",
+          "data": [
+            {
+              "id": "2",
+              "poster": "postero.test.near",
+              "claim": "False",
+              "counter_claim": null,
+              "statement_sha256": "6189d7eac6e56583aeb3242bb3721d408ff202b53fa7e2e58a88170ba651a960",
+              "reward": "5000000000000000000000000",
+              "deadline": "1794596344199327000",
+              "subject": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "0",
+              "claimer": "provero.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "2",
+              "claimer": "huntera.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "2",
+              "claimer": "hunterb.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal proof",
+      "method": "reveal",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardold.test.near",
+          "to": "provero.test.near",
+          "amount": "1050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "0",
+              "claimer": "provero.test.near",
+              "side": "proof",
+              "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+              "delta_bytes": 175623,
+              "block_height": "1549",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "0",
+              "certificate": {
+                "claimer": "provero.test.near",
+                "side": "proof",
+                "proved": "Wallet.Claim.AllowedReceiversOnly",
+                "proof_theorem": "Solution.proof",
+                "statement_hash": "9d62ba61439388513fc717ac8518ae3cb5045e7b64641a97aa7fecf1a9db23b5",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [],
+                "decls_checked": 29,
+                "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+                "block_height": "1551",
+                "timestamp": "1794594024812934000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "0",
+              "to": "provero.test.near",
+              "amount": "1050000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "fund_if_proven before the kernel is recorded broken",
+      "method": "fund_if_proven",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardold.test.near",
+          "to": "safe.walletsold.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "funded",
+          "data": [
+            {
+              "id": "0",
+              "from": "postero.test.near",
+              "to": "safe.walletsold.test.near",
+              "amount": "1000000000000000000000000",
+              "claim": "Wallet.Claim.AllowedReceiversOnly"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "freeze before the kernel is recorded broken",
+      "method": "freeze",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: nothing_refuted"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "commit",
+      "method": "commit",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "committed",
+          "data": [
+            {
+              "id": "1",
+              "claimer": "provero.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal proof badApp",
+      "method": "reveal",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardold.test.near",
+          "to": "huntera.test.near",
+          "amount": "50000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "2",
+              "claimer": "huntera.test.near",
+              "side": "proof",
+              "delta_sha256": "161745a560f0f731549c7721f28ccc8e33bece7735ab33336f74f55b4ab44eab",
+              "delta_bytes": 9740,
+              "block_height": "1623",
+              "in_flight": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "reveal proof badNested",
+      "method": "reveal",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardold.test.near",
+          "to": "hunterb.test.near",
+          "amount": "5050000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "revealed",
+          "data": [
+            {
+              "id": "2",
+              "claimer": "hunterb.test.near",
+              "side": "proof",
+              "delta_sha256": "c65ee35a022940614d5db13b277febab0f1b67299a1fd9d49b043b2e68c02ec3",
+              "delta_bytes": 14227,
+              "block_height": "1623",
+              "in_flight": 1
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "proof_accepted",
+          "data": [
+            {
+              "id": "2",
+              "certificate": {
+                "claimer": "hunterb.test.near",
+                "side": "proof",
+                "proved": "False",
+                "proof_theorem": "badNested",
+                "statement_hash": "a230a46ca5e70a1b2eec0ce060880d354617123df53bfbfbdc4c84823b6e317e",
+                "base_hash": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+                "axioms": [],
+                "decls_checked": 15,
+                "delta_sha256": "c65ee35a022940614d5db13b277febab0f1b67299a1fd9d49b043b2e68c02ec3",
+                "block_height": "1625",
+                "timestamp": "1794594098845228000"
+              }
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "kernel_broken",
+          "data": [
+            {
+              "id": "2",
+              "kernel": "oldkernel.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "paid",
+          "data": [
+            {
+              "id": "2",
+              "to": "hunterb.test.near",
+              "amount": "5050000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "post after the break",
+      "method": "post_bounty",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: kernel_broken"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "commit after the break",
+      "method": "commit",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: kernel_broken"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "reveal proof",
+      "method": "reveal",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: kernel_broken"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "boost after the break",
+      "method": "boost",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: kernel_broken"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "fund_if_proven after the break",
+      "method": "fund_if_proven",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: kernel_broken"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "the root bounty posted again",
+      "method": "post_bounty",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: kernel_broken"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "anyone closes the open bounty at once",
+      "method": "refund",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardold.test.near",
+          "to": "postero.test.near",
+          "amount": "2000000000000000000000000",
+          "ok": true
+        },
+        {
+          "from": "boardold.test.near",
+          "to": "postero.test.near",
+          "amount": "1000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "escrow_returned",
+          "data": [
+            {
+              "id": "1",
+              "to": "postero.test.near",
+              "amount": "2000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "refunded",
+          "data": [
+            {
+              "id": "1",
+              "to": "postero.test.near",
+              "amount": "1000000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "and again",
+      "method": "refund",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: not_refundable"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "carol takes her boost back at once",
+      "method": "withdraw_boost",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "boardold.test.near",
+          "to": "carolo.test.near",
+          "amount": "500000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "boost_withdrawn",
+          "data": [
+            {
+              "id": "1",
+              "by": "carolo.test.near",
+              "amount": "500000000000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "and again",
+      "method": "withdraw_boost",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: no_boost"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "retry_payment of the paid root bounty",
+      "method": "retry_payment",
+      "success": false,
+      "failures": [
+        {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: nothing_owed"
+              }
+            }
+          }
+        }
+      ],
+      "transfers": [],
+      "events": []
+    },
+    {
+      "label": "anyone freezes a wallet of the factory",
+      "method": "freeze",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "safe.walletsold.test.near",
+              "by": "boardold.test.near"
+            }
+          ]
+        },
+        {
+          "standard": "proof-courier",
+          "version": "2.0.0",
+          "event": "wallet_frozen",
+          "data": [
+            {
+              "wallet": "safe.walletsold.test.near"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "the agent pays from the frozen wallet",
+      "method": "pay",
+      "success": true,
+      "failures": [],
+      "transfers": [],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_attempt",
+          "data": [
+            {
+              "wallet": "safe.walletsold.test.near",
+              "agent": "agento.test.near",
+              "to": "ownero.test.near",
+              "amount_yocto": "1000000000000000000000000",
+              "verdict": "frozen",
+              "key_layer_block": false,
+              "note": "FROZEN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "the owner withdraws",
+      "method": "withdraw",
+      "success": true,
+      "failures": [],
+      "transfers": [
+        {
+          "from": "safe.walletsold.test.near",
+          "to": "ownero.test.near",
+          "amount": "3000000000000000000000000",
+          "ok": true
+        }
+      ],
+      "events": [
+        {
+          "standard": "proof-courier-wallet",
+          "version": "1.0.0",
+          "event": "wallet_withdraw",
+          "data": [
+            {
+              "wallet": "safe.walletsold.test.near",
+              "owner": "ownero.test.near",
+              "amount_yocto": "3000000000000000000000000"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": {
+    "kernel_wasm_sha256": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+    "board_wasm_sha256": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+    "wallet_wasm_sha256": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+    "factory_wasm_sha256": "6dcec734db23cddb2341d281886686339e216d8b3de4208e1010460459dd4ce7",
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "superseded_kernel_wasm": "history/kernel-nanoda-0.4.31/kernel.wasm",
+    "superseded_kernel_wasm_sha256": "ebed3bfb61020b130e68075ccfcd49c6b9e3f3d288f3dacf5e1af19d96d2e087"
+  },
+  "finished_at": "2026-11-13T18:09:28.242Z",
+  "summary": {
+    "pass": 12,
+    "fail": 0
+  }
+}

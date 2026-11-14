@@ -1,0 +1,135 @@
+{
+  "scope": "Recorded local evidence; file integrity is not a new chain execution.",
+  "files": [
+    {
+      "path": "artifacts/refund/build.json",
+      "sha256": "236c1e772bfef5f6c57c262ac86ba2caf03538a7f2d1dd952cd78ef6f692f92a",
+      "bytes": 1566
+    },
+    {
+      "path": "artifacts/refund/fixed.wasm",
+      "sha256": "f24d072edcb76a81ef68471096b1e7756b948e5543f739421c71f20bfb6e0ce0",
+      "bytes": 1492763
+    },
+    {
+      "path": "artifacts/refund/gate.wasm",
+      "sha256": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d",
+      "bytes": 173401
+    },
+    {
+      "path": "artifacts/refund/old.wasm",
+      "sha256": "ef7346022ea75975d584362ce0aba0b8f2b5eae010088c958142b7edf14afdac",
+      "bytes": 1492639
+    },
+    {
+      "path": "artifacts/refund/receiver.wasm",
+      "sha256": "89a2a72174da01ae8ee0c9341ebdb92d084b47225a09c0bb0b216e55e1d630f4",
+      "bytes": 319034
+    },
+    {
+      "path": "cases/intents-refund/LogBudget.lean",
+      "sha256": "0ef35c4ec65c0a25de81b6c564c9b4ed79556a0255cce323d5f21605d5c49c2f",
+      "bytes": 5380
+    },
+    {
+      "path": "cases/intents-refund/RefundCase.lean",
+      "sha256": "b081b33d5aeae3b188044e6832c9d23509d9d470e5150828b31854fc46579ecb",
+      "bytes": 3780
+    },
+    {
+      "path": "cases/intents-refund/RefundProofs.lean",
+      "sha256": "976851437deb573413b587746b00086996a5b4e921a414d793848c15706e7df9",
+      "bytes": 2351
+    },
+    {
+      "path": "cases/intents-refund/candidates.json",
+      "sha256": "6b6dff00d033c2dc6b7791f90e4311ae2471469897c44a9b8a43a5dfb229726e",
+      "bytes": 4691
+    },
+    {
+      "path": "cases/intents-refund/proofs/deposit_only.ndjson",
+      "sha256": "db444480b1bc294e4b5c0459b72304126b37c4f60bd8d32c4101802968083575",
+      "bytes": 16505
+    },
+    {
+      "path": "cases/intents-refund/proofs/ignore_request.ndjson",
+      "sha256": "9a0e8988f0dbf40da8330ca130cf45b2801f65f2855d336c4758108ee60b8973",
+      "bytes": 16507
+    },
+    {
+      "path": "cases/intents-refund/proofs/original.ndjson",
+      "sha256": "984768705ce3cb49bcd463dc6b864c0a514c6656a1dccebd1e683411833b0b66",
+      "bytes": 16820
+    },
+    {
+      "path": "cases/intents-refund/proofs/repair.ndjson",
+      "sha256": "49b7600c0a80ad6490a4f7557584f815869dd73720ed4230a490d797d89ffeb4",
+      "bytes": 13942
+    },
+    {
+      "path": "cases/intents-refund/proofs/zero_refund.ndjson",
+      "sha256": "c8d73cdbeff35d5ec32240cbb481487a8d360808143813402a2d07c2fa34d1f8",
+      "bytes": 16823
+    },
+    {
+      "path": "cases/intents-refund/shelf/base.lines",
+      "sha256": "419203c8e9ac697a579be5bb92a4ef9a515558271be651678a85cb3d520f4aca",
+      "bytes": 6
+    },
+    {
+      "path": "cases/intents-refund/shelf/base.ndjson",
+      "sha256": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+      "bytes": 877505
+    },
+    {
+      "path": "cases/intents-refund/shelf/base.sha256",
+      "sha256": "7449cc785f9a6a4bae1d467a3f08fd2b6009c8aef21d1a07574b31ae77ee2cb8",
+      "bytes": 65
+    },
+    {
+      "path": "cases/intents-refund/shelf/base_roots.txt",
+      "sha256": "9f90a61645aab4ad46104a0a62cf43910a3e0f48797b33008071af0907511bba",
+      "bytes": 1538
+    },
+    {
+      "path": "cases/intents-refund/shelf/chunk-0000.bin",
+      "sha256": "8bbe67b0e1809d335c4d874e3ad8123036d95b6b0f94bba532d0754e42ecb49c",
+      "bytes": 137524
+    },
+    {
+      "path": "cases/intents-refund/shelf/chunk-0001.bin",
+      "sha256": "71a82a50b9ef937bf6ca205fbb91dea77206c63de49c5672d64a1d9b10bf7baf",
+      "bytes": 112486
+    },
+    {
+      "path": "cases/intents-refund/shelf/manifest.json",
+      "sha256": "170b0e7851b0eb96acfe41cb827683dff28e3c2aafb5cd566ee4aad052b9347b",
+      "bytes": 239
+    },
+    {
+      "path": "cases/intents-refund/upstream/tokens.rs",
+      "sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+      "bytes": 7574
+    },
+    {
+      "path": "evidence/refund/replay-full.json.gz",
+      "sha256": "a0ff8be842d2037e29699829404fc02c9ac50f14a90bf5a07cf9e61db3822076",
+      "bytes": 21180
+    },
+    {
+      "path": "evidence/refund/replay.json",
+      "sha256": "9c2de50b32fa26006903f2fd20c7594124492303d963b86497d56d49e9368f95",
+      "bytes": 313905
+    },
+    {
+      "path": "evidence/refund/upgrade-full.json.gz",
+      "sha256": "7e3fe493a6d6c1ce59cc62e5bc5bedbdef8e2c44f839818213005e397455dabd",
+      "bytes": 2459034
+    },
+    {
+      "path": "evidence/refund/upgrade.json",
+      "sha256": "52d8920edfcb7b90636efc5a5e922989409f0dabb26b8b36f052412af33faef8",
+      "bytes": 457573
+    }
+  ]
+}

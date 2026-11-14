@@ -1,0 +1,30 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+
+[*.{py,rs}]
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+
+# Left exactly as they are: records, exported proofs, third-party files, and the sources that decide the bytes of a
+# contract binary.
+[{evidence,artifacts,shelf,proofs,cheats,deploy,history,contracts,lean,licenses}/**]
+insert_final_newline = unset
+end_of_line = unset
+indent_style = unset
+indent_size = unset
+charset = unset
+
+[cases/intents-refund/{shelf,proofs,upstream,candidates}/**]
+insert_final_newline = unset
+end_of_line = unset
+indent_style = unset
+indent_size = unset
+charset = unset

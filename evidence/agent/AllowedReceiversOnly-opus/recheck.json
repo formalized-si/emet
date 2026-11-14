@@ -1,0 +1,99 @@
+{
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' does not depend on any axioms\nSolution.proof : Wallet.Claim.AllowedReceiversOnly\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 175623,
+    "delta_sha256": "fc60ad30f76d979ce207522bde8abc26bcb1fe9e005ae91f30e6baf3f5561bef",
+    "decls": 29,
+    "heaviest": [
+      {
+        "name": "Solution.main._f",
+        "kind": "def",
+        "bytes": 44896
+      },
+      {
+        "name": "Wallet.accEq.eq_def",
+        "kind": "thm",
+        "bytes": 22223
+      },
+      {
+        "name": "Wallet.isAllowed.eq_def",
+        "kind": "thm",
+        "bytes": 13439
+      },
+      {
+        "name": "Solution.accEq_eq._f",
+        "kind": "def",
+        "bytes": 12792
+      },
+      {
+        "name": "Solution.step_allow",
+        "kind": "thm",
+        "bytes": 11340
+      },
+      {
+        "name": "Solution.isAllowed_mem._f",
+        "kind": "def",
+        "bytes": 10498
+      },
+      {
+        "name": "Solution.accEq_eq.match_1_1",
+        "kind": "def",
+        "bytes": 9363
+      },
+      {
+        "name": "Solution.main.match_1_1",
+        "kind": "def",
+        "bytes": 7946
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "Solution.isAllowed_mem.match_1_1",
+        "kind": "def",
+        "bytes": 4455
+      },
+      {
+        "name": "noConfusionEnum",
+        "kind": "def",
+        "bytes": 3599
+      },
+      {
+        "name": "Solution.main.match_1_3",
+        "kind": "def",
+        "bytes": 3492
+      },
+      {
+        "name": "List.Mem.casesOn",
+        "kind": "def",
+        "bytes": 3346
+      },
+      {
+        "name": "List.cons.noConfusion",
+        "kind": "def",
+        "bytes": 3175
+      },
+      {
+        "name": "List.noConfusionType",
+        "kind": "def",
+        "bytes": 3026
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

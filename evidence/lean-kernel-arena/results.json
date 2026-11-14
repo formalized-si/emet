@@ -1,0 +1,240 @@
+{
+ "arena_commit": "6c2d82164f1a2b1ac94aee62290fe78a3c3853fb",
+ "checker": "tools/native (current contracts/kernel/vendor/nanoda_lib)",
+ "cases": [
+  {
+   "fixture": "tests/bugs/closure-level-subst.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "ba61ad635f4a1e8929b3ada25df22a8ab854f908d5fac44f9e7bf5f2d91ae3a0",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/constlevels.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "2fa6a967f15f76cfdcea3ef1992ff31a4cc4aa647b0f8fabf0ff61eedb3afbf1",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/large-elim-param.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "df7d23ff199c4956620f3b1b4d17976c6bbe99ec6c1b5a4e803a7f9f415e331f",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/expr.rs:455:9:\nassertion `left == right` failed\n  left: 2\n right: 1\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/level-imax-leq.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "497eaa80a214386c679356c33a72c8beab5019c4938494b1608e3772a2756191",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/inductive.rs:1353:21:\nassertion failed: old_r.aux_data_ck(new_r)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/level-imax-normalization.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "d368d5569321b717b7ec95bd1f4fa5bbd7d6e1f8d6ebdf1a0644dc8bc76bc2ec",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/loose-bvar-value.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "a702608ad2a794f5a4fbac42aa8d3894c2f1ab9707013b9e3ac57b2310a2b328",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:557:27:\nno loose bvars allowed in infer\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/nat-rec-k-lie.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "5a49d132bb0c7dca091baa481333f5e97e390fde72c8ec18c6124a690ec47d7c",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/inductive.rs:1353:21:\nassertion failed: old_r.aux_data_ck(new_r)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/nat-rec-rules.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "934e59fdc4f2a978605c4a44e90b94b57e9940f3828620c0db337b7125cdd169",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/inductive.rs:1353:21:\nassertion failed: old_r.aux_data_ck(new_r)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/nested-name-capture.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "9d38f6480b12a9061ac54dec8ea27477414a39c65301dfb7ee5cedaa8d3cffad",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:240:17:\ninfer_const: declaration _nested.Cov_1.rec was not found in the environment\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/orphan-rec.ndjson",
+   "expected": "reject",
+   "observed": "declined",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "738f28bc1175d70faf09f4b45ae7ca92e8b8d397f6c5d0183240cd695f6d7bc4",
+   "stderr_tail": "\nthread 'main' panicked at src/main.rs:18:114:\ncalled `Result::unwrap()` on an `Err` value: \"invalid inductive block at line 18: recursor 2 must list exactly the block's types without duplicates\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/pi-closure-context.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "730013454f261b1c20e3ee4600821e325715929a6ddca36779f6ce9e5f506520",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/rec-missing-ih.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "8a240552317ba17d44d175c10531e5f988f55569db5eff734701735ce598fa73",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/inductive.rs:789:21:\nassertion failed: self.which_valid_ind_app(st, ctor_type_cursor).is_some()\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/rec-rule-proof-irrel-nested.yaml",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "d2df33982cba09d68263bcfd79e0a8d582511932e5f73ba81f27dfb6830a7718",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/rec-rule-proof-irrel.yaml",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "5e9135759b5339fdabf0b081926c39061ca47b00ac45ea4b8d57e1dc21a2f8e0",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/rec-type-proof-irrel.yaml",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "21526097523b23e9da5cd0b0ba0d0f3b23e226217a384ba175b7309d8b455697",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/bugs/unit-rec-rule.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "cb6d127a5f0daa9fa2047c338e809d1ffb9cc3d8454956c30eede38091a4a969",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/corner-cases/large-elim-maybe-prop.ndjson",
+   "expected": "either",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "b060758c2795e39d33c2e2194fb0f6017828c88fbe781c9dcf3e361478196884",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/expr.rs:455:9:\nassertion `left == right` failed\n  left: 2\n right: 1\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/corner-cases/let-value-type-mismatch.ndjson",
+   "expected": "either",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "52e75d78c948d466e90fb203e7a04192dde4273c7319d44fc261fd2b3b6beeac",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:988:71:\nassertion failed: self.def_eq(u, v)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/corner-cases/positivity-whnf.ndjson",
+   "expected": "either",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "5e1c3ea262e5d57f0ffef2cbb7009a5a9020a977b648f109c0b0ab51ef3fa664",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/inductive.rs:781:25:\nnon-positive occurrence\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/corner-cases/proof-param-ok.ndjson",
+   "expected": "accept",
+   "observed": "accepted",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "7f9b3c07a64b441f8dd0f7dd2912274241fdb17118953fb089f796fdd1590af4",
+   "stderr_tail": ""
+  },
+  {
+   "fixture": "tests/corner-cases/proof-param-swap.ndjson",
+   "expected": "either",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "25cfb47d4c80ebe1ec61931898df8e6bd8d06793aebf3ee8b2a7cd00beca1abc",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/inductive.rs:931:9:\nassertion failed: self.is_valid_ind_app(st, parent_ind_name, ctor_type_cursor)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/other/extra-rec.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "eab650028a71177bd4d9fcb6a84b4e92dd91cf4e7af67023af458d18729be0e2",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/inductive.rs:178:13:\nfor inductive type False,\nexpected recursors [False.rec],\nwhile export file contained recursors [rogue, False.rec]\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/other/inductive-undeclared-universe.ndjson",
+   "expected": "reject",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "ca3ad18ba0d1bd8abc4ec86f750ec583912ca657b68389cb2e29611c2888a7c9",
+   "stderr_tail": "\nthread 'main' panicked at contracts/kernel/vendor/nanoda_lib/src/tc.rs:207:11:\nassertion failed: used_levels.is_subset(&declar_uparams)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/other/level-index-out-of-order.ndjson",
+   "expected": "accept",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": true,
+   "sha256": "7db8148079e2e8160a1a4c71258ad11b17ce18edfa84ab1e12eae937ec9538d1",
+   "stderr_tail": "Declined: Level back-reference mismatch, expected Il(1), found Il(2). Back-refs must be continuous.\n"
+  },
+  {
+   "fixture": "tests/other/orphan-ctor.ndjson",
+   "expected": "reject",
+   "observed": "declined",
+   "false_accept": false,
+   "false_reject": false,
+   "sha256": "2c9b12979ea3da11272d6eca4b0a39523a863d6fb501daf61c4edb8996a97daa",
+   "stderr_tail": "\nthread 'main' panicked at src/main.rs:18:114:\ncalled `Result::unwrap()` on an `Err` value: \"invalid inductive block at line 19: constructor 2 must belong to an inductive in the same block\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  },
+  {
+   "fixture": "tests/other/sparse-name-index.ndjson",
+   "expected": "accept",
+   "observed": "rejected",
+   "false_accept": false,
+   "false_reject": true,
+   "sha256": "3279c9c8ae24d5b3a8433ddee5d4a421c4e15e3cd84117fb4873d1284112b96d",
+   "stderr_tail": "Declined: Name back-reference mismatch, expected In(1), found In(2). Back-refs must be continuous.\n"
+  }
+ ]
+}

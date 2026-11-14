@@ -1,0 +1,27 @@
+[package]
+name = "proof-courier-factory"
+version = "0.1.0"
+edition = "2021"
+description = "Creates keyless agent wallets that run one published wallet code (a NEAR global contract) and answers, on-chain, which code an account runs"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+near-sdk = "=5.30.1"
+hex = "0.4"
+
+[dev-dependencies]
+near-sdk = { version = "=5.30.1", features = ["unit-testing"] }
+
+[profile.release]
+codegen-units = 1
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+overflow-checks = true
+
+# standalone crate, not a member of another workspace
+[workspace]

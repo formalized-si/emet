@@ -1,0 +1,309 @@
+diff -ruN nanoda/src/inductive.rs b/src/inductive.rs
+--- a/src/inductive.rs	2026-11-08 13:45:37
++++ b/src/inductive.rs	2026-11-08 12:07:38
+@@ -68,7 +68,12 @@
+         self.with_ctx(|ctx| {
+             // The **unmodified** types and constructors for all of the types in this mutual block.
+             let unmodified_tys_ctors = ctx.with_tc(env_limit, |tc| {
++                // Own admission hardening: preserve the mutual-block environment
++                // but enforce the same declared-universe premise as regular
++                // declarations during this declaration's type check.
++                tc.declar_info = Some(*d.info());
+                 tc.check_declar_info(d).unwrap();
++                tc.declar_info = None;
+                 tc.collect_unmodified_mutuals(ind)
+             });
+ 
+diff -ruN nanoda/src/parser.rs b/src/parser.rs
+--- a/src/parser.rs	2026-11-08 13:45:37
++++ b/src/parser.rs	2026-11-08 12:07:38
+@@ -381,7 +381,40 @@
+     },
+ }
+ 
+-pub(crate) fn parse_export_file<'p, R: BufRead>(
++// Own optimisation: exact canonical app lines (the dominant export record).
++// All other encodings use the unchanged serde parser. Numeric overflow, extra
++// fields, duplicates, whitespace, escapes, and reordered keys miss this path.
++fn canonical_app(line: &str) -> Option<ExportJsonObject<'_>> {
++    struct Cursor<'a> { bytes: &'a [u8], i: usize }
++    impl Cursor<'_> {
++        fn eat(&mut self, s: &[u8]) -> Option<()> {
++            if self.bytes.get(self.i..self.i + s.len())? != s { return None; }
++            self.i += s.len(); Some(())
++        }
++        fn number(&mut self) -> Option<u32> {
++            let start = self.i;
++            let mut n = 0u32;
++            while let Some(b @ b'0'..=b'9') = self.bytes.get(self.i) {
++                n = n.checked_mul(10)?.checked_add((b - b'0') as u32)?;
++                self.i += 1;
++            }
++            if self.i == start || (self.i > start + 1 && self.bytes[start] == b'0') { return None; }
++            Some(n)
++        }
++    }
++    let mut c = Cursor { bytes: line.as_bytes(), i: 0 };
++    c.eat(b"{\"app\":{\"arg\":")?;
++    let arg = c.number()?;
++    c.eat(b",\"fn\":")?;
++    let fun = c.number()?;
++    c.eat(b"},\"ie\":")?;
++    let i = c.number()?;
++    c.eat(b"}")?;
++    if c.bytes.get(c.i..) != Some(b"" as &[u8]) && c.bytes.get(c.i..) != Some(b"\n" as &[u8]) { return None; }
++    Some(ExportJsonObject { val: ExportJsonVal::ExprApp { fun, arg }, i: Some(BackRef::Ie(i)) })
++}
++
++pub fn parse_export_file<'p, R: BufRead>(
+     buf_reader: R,
+     config: Config,
+ 
+@@ -606,7 +639,7 @@
+ 
+     fn go1(&mut self, line: &str) -> Result<(), Box<dyn Error>> {
+         use ExportJsonVal::*;
+-        let ExportJsonObject {val, i: assigned_idx} = serde_json::from_str::<ExportJsonObject>(line)?;
++        let ExportJsonObject {val, i: assigned_idx} = match canonical_app(line) { Some(v) => v, None => serde_json::from_str::<ExportJsonObject>(line)? };
+         match val {
+             Metadata(json_val) => {
+                 let _ = check_semver(&json_val)?;
+@@ -1079,5 +1112,41 @@
+         for v in ok {
+             assert!(check_semver(&mk_meta(v)).is_ok())
+         }
++    }
++}
++
++#[cfg(test)]
++mod canonical_app_tests {
++    use super::*;
++    #[test]
++    fn corpus_differential() {
++        let p=std::env::var("NANODA_CORPUS").expect("NANODA_CORPUS required");
++        let corpus=std::fs::read_to_string(p).unwrap();
++        let mut fast=0;
++        for line in corpus.lines() {
++            if let Some(v)=canonical_app(line) {
++                let old:ExportJsonObject=serde_json::from_str(line).unwrap();
++                assert_eq!(v,old);fast+=1;
++            }
++        }
++        assert!(fast>1000,"corpus must exercise the real large proof");
++        println!("{fast} canonical app records match unchanged serde decoder");
++    }
++    #[test]
++    fn adversarial_encodings_fall_back() {
++        for n in [0,1,17,u32::MAX] {
++            let s=format!("{{\"app\":{{\"arg\":{n},\"fn\":{n}}},\"ie\":{n}}}");
++            assert_eq!(canonical_app(&s).unwrap(),serde_json::from_str::<ExportJsonObject>(&s).unwrap());
++        }
++        for s in [
++            "{\"app\":{\"arg\":01,\"fn\":2},\"ie\":3}",
++            "{\"app\":{\"arg\":4294967296,\"fn\":2},\"ie\":3}",
++            "{\"app\":{\"arg\":1,\"fn\":2},\"ie\":3}x",
++            "{\"app\":{\"arg\":1,\"fn\":2},\"ie\":3,\"ie\":4}",
++            "{\"app\":{\"arg\":1,\"fn\":2},\"ie\":3,\"axiom\":{}}",
++            "{\"app\":{\"arg\":-1,\"fn\":2},\"ie\":3}",
++            "{\"app\":{\"arg\":1.0,\"fn\":2},\"ie\":3}",
++            "{\"app\":{\"arg\":1e1,\"fn\":2},\"ie\":3}"
++        ] {assert!(canonical_app(s).is_none());}
+     }
+ }
+diff -ruN nanoda/src/util.rs b/src/util.rs
+--- a/src/util.rs	2026-11-08 13:45:37
++++ b/src/util.rs	2026-11-08 12:07:38
+@@ -1034,3 +1034,193 @@
+     pp_err: Option<String>
+ }
+ 
++
++// --- spike: helpers for embedding (on-chain) use ---
++impl<'p> ExportFile<'p> {
++    /// Look up a declaration by its dot-separated name, e.g. "Nat.add_comm".
++    pub fn find_declar_by_str(&self, dot_separated_name: &str) -> Option<&crate::env::Declar<'p>> {
++        let n = self.dag.find_name(dot_separated_name)?;
++        self.declars.get(&n)
++    }
++
++    /// Check every declaration serially on the current thread (no thread spawn; wasm-safe).
++    pub fn check_all_declars_current_thread(&self) {
++        for declar in self.declars.values() {
++            self.check_declar(declar);
++        }
++    }
++
++    /// Pretty print one declaration (by name) to a String.
++    pub fn pp_declar_to_string(&self, dot_separated_name: &str) -> Option<String> {
++        self.with_ctx(|ctx| {
++            let n = ctx.name_from_str(dot_separated_name);
++            ctx.with_pp(|pp| pp.pp_declar(n))
++        })
++    }
++}
++
++// --- kernel-prod: delta analysis helpers (pinned base + delta) ---
++/// What `ExportFile::analyze` learned about a base+delta environment.
++pub struct DeltaReport {
++    /// (kind, dotted name) of every declaration past the base.
++    pub new_decls: Vec<(&'static str, String)>,
++    /// insertion index of the target, if found.
++    pub target_index: Option<usize>,
++    /// kind of the target, if found.
++    pub target_kind: Option<&'static str>,
++    /// constants mentioned by the target's statement that are not base declarations.
++    pub stmt_nonbase_consts: Vec<String>,
++    /// nanoda debug print of the target's type (input to the statement hash).
++    pub stmt_debug: String,
++    /// axioms the target transitively depends on (through types and values).
++    pub axioms_used: Vec<String>,
++    /// constants the target transitively mentions that are not in the environment.
++    pub missing_consts: Vec<String>,
++}
++
++impl<'p> ExportFile<'p> {
++    /// Short kind label of a declaration.
++    pub fn declar_kind(d: &crate::env::Declar<'p>) -> &'static str {
++        use crate::env::Declar::*;
++        match d {
++            Axiom { .. } => "axiom",
++            Quot { .. } => "quot",
++            Theorem { .. } => "theorem",
++            Definition { .. } => "def",
++            Opaque { .. } => "opaque",
++            Inductive(..) => "inductive",
++            Constructor(..) => "ctor",
++            Recursor(..) => "rec",
++        }
++    }
++
++    /// Analyse the declarations at insertion index >= `base_decls` and the target theorem.
++    pub fn analyze(&self, base_decls: usize, target: &str, want_axioms: bool) -> DeltaReport {
++        use crate::env::Declar::*;
++        use crate::expr::Expr;
++        self.with_ctx(|ctx| {
++            fn nstr<'t, 'q: 't>(ctx: &TcCtx<'t, 'q>, n: NamePtr<'t>) -> String {
++                match ctx.read_name(n) {
++                    crate::name::Name::Anon => String::new(),
++                    crate::name::Name::Str(p, s, _) => {
++                        let pre = nstr(ctx, p);
++                        let s = ctx.read_string(s).to_string();
++                        if pre.is_empty() { s } else { format!("{pre}.{s}") }
++                    }
++                    crate::name::Name::Num(p, k, _) => format!("{}.{}", nstr(ctx, p), k),
++                }
++            }
++            let mut new_decls = Vec::new();
++            for i in base_decls..self.declars.len() {
++                let (n, d) = self.declars.get_index(i).unwrap();
++                new_decls.push((Self::declar_kind(d), nstr(ctx, *n)));
++            }
++            let target_name = self.dag.find_name(target);
++            let target_index = target_name.and_then(|n| self.declars.get_index_of(&n));
++            let target_decl = target_name.and_then(|n| self.declars.get(&n));
++            let target_kind = target_decl.map(Self::declar_kind);
++            let mut stmt_nonbase_consts = Vec::new();
++            let mut stmt_debug = String::new();
++            let mut axioms_used = Vec::new();
++            let mut missing_consts = Vec::new();
++            if let Some(d) = target_decl {
++                let ty = d.info().ty;
++                stmt_debug = format!("{:?}", ctx.debug_print(ty));
++                // constants in the statement
++                let mut stack = vec![ty];
++                let mut seen: FxHashSet<ExprPtr> = FxHashSet::default();
++                while let Some(e) = stack.pop() {
++                    if !seen.insert(e) { continue }
++                    match ctx.read_expr(e) {
++                        Expr::Const { name, .. } => {
++                            let idx = self.declars.get_index_of(&name);
++                            if idx.map(|i| i >= base_decls).unwrap_or(true) {
++                                let s = nstr(ctx, name);
++                                if !stmt_nonbase_consts.contains(&s) { stmt_nonbase_consts.push(s) }
++                            }
++                        }
++                        Expr::App { fun, arg, .. } => { stack.push(fun); stack.push(arg) }
++                        Expr::Pi { binder_type, body, .. } | Expr::Lambda { binder_type, body, .. } => { stack.push(binder_type); stack.push(body) }
++                        Expr::Let { binder_type, val, body, .. } => { stack.push(binder_type); stack.push(val); stack.push(body) }
++                        Expr::Proj { structure, .. } => stack.push(structure),
++                        _ => {}
++                    }
++                }
++                if want_axioms {
++                    // transitive constant closure from the target
++                    let mut names: Vec<NamePtr> = vec![target_name.unwrap()];
++                    let mut seen_names: FxHashSet<NamePtr> = FxHashSet::default();
++                    let mut seen_e: FxHashSet<ExprPtr> = FxHashSet::default();
++                    while let Some(n) = names.pop() {
++                        if !seen_names.insert(n) { continue }
++                        let mut roots: Vec<ExprPtr> = Vec::new();
++                        match self.declars.get(&n) {
++                            None => { missing_consts.push(nstr(ctx, n)); continue }
++                            Some(Axiom { info }) => { axioms_used.push(nstr(ctx, n)); roots.push(info.ty) }
++                            Some(Quot { info }) => roots.push(info.ty),
++                            Some(Theorem { info, val }) | Some(Definition { info, val, .. }) | Some(Opaque { info, val }) => { roots.push(info.ty); roots.push(*val) }
++                            Some(Inductive(data)) => roots.push(data.info.ty),
++                            Some(Constructor(c)) => { roots.push(c.info.ty); names.push(c.inductive_name) }
++                            Some(Recursor(r)) => { roots.push(r.info.ty); for rr in r.rec_rules.iter() { roots.push(rr.val) } }
++                        }
++                        while let Some(e) = roots.pop() {
++                            if !seen_e.insert(e) { continue }
++                            match ctx.read_expr(e) {
++                                Expr::Const { name, .. } => names.push(name),
++                                Expr::App { fun, arg, .. } => { roots.push(fun); roots.push(arg) }
++                                Expr::Pi { binder_type, body, .. } | Expr::Lambda { binder_type, body, .. } => { roots.push(binder_type); roots.push(body) }
++                                Expr::Let { binder_type, val, body, .. } => { roots.push(binder_type); roots.push(val); roots.push(body) }
++                                Expr::Proj { ty_name, structure, .. } => { names.push(ty_name); roots.push(structure) }
++                                _ => {}
++                            }
++                        }
++                    }
++                    axioms_used.sort();
++                }
++            }
++            DeltaReport { new_decls, target_index, target_kind, stmt_nonbase_consts, stmt_debug, axioms_used, missing_consts }
++        })
++    }
++}
++
++// --- kernel-prod: claim mode ---
++impl<'p> ExportFile<'p> {
++    /// If `claim` is a base definition of type `Prop` (sort 0), return the name of a delta
++    /// theorem (insertion index >= `base_decls`) whose type is exactly the constant `claim`.
++    /// `Ok(None)`: `claim` is not a base Prop definition (caller falls back to theorem mode).
++    /// `Err(..)`: `claim` is a base Prop definition but no delta theorem has that exact type.
++    pub fn claim_proof(&self, base_decls: usize, claim: &str) -> Result<Option<String>, String> {
++        use crate::env::Declar;
++        use crate::expr::Expr;
++        let Some(cn) = self.dag.find_name(claim) else { return Ok(None) };
++        let Some(ci) = self.declars.get_index_of(&cn) else { return Ok(None) };
++        if ci >= base_decls { return Ok(None) }
++        let Some(Declar::Definition { info, .. }) = self.declars.get(&cn) else { return Ok(None) };
++        self.with_ctx(|ctx| {
++            let is_prop = match ctx.read_expr(info.ty) {
++                Expr::Sort { level, .. } => matches!(ctx.read_level(level), crate::level::Level::Zero),
++                _ => false,
++            };
++            if !is_prop { return Ok(None) }
++            for i in base_decls..self.declars.len() {
++                let (n, d) = self.declars.get_index(i).unwrap();
++                if let Declar::Theorem { info, .. } = d {
++                    if let Expr::Const { name, levels, .. } = ctx.read_expr(info.ty) {
++                        if name == cn && ctx.read_levels(levels).is_empty() {
++                            return Ok(Some(format!("{:?}", ctx.debug_print(*n)).trim_matches('`').to_string()));
++                        }
++                    }
++                }
++            }
++            Err(format!("no theorem in the delta has type exactly `{claim}`"))
++        })
++    }
++}
++
++// Own read-only embedding accessor. Ptr index is exactly the back-reference
++// validated by parser BackRef::assert_in; no typechecking behavior changes.
++impl<'p> ExportFile<'p> {
++    pub fn declaration_name_indices(&self) -> Vec<u64> {
++        self.declars.keys().map(|n| n.idx() as u64).collect()
++    }
++}

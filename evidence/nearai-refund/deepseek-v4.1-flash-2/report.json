@@ -1,0 +1,69 @@
+{
+  "case": "cases/intents-refund",
+  "upstream_revision": "35044fd1795b0de9d1ac269c6aa28a0d6a7efdfa",
+  "upstream_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+  "started": "2026-11-12T09:33:26Z",
+  "max_rounds": 3,
+  "no_axioms_asked": false,
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 161.2,
+    "turns": 3,
+    "tool_calls": 2,
+    "solution_writes": 0,
+    "repair_rounds": 0,
+    "lean_runs": 0,
+    "lean_failures": 0,
+    "lost_responses": 0,
+    "prompt_tokens": 11518,
+    "completion_tokens": 9159,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "accepted in round 1",
+    "cost_usd": 0.0144,
+    "signed_responses": 3,
+    "responses": 3,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "expression": "(requested_refund.min(*deposited)).min(balance_left)",
+      "source_sha256": "2947c314ccccc30626af77a12695196d1d77e0f7055edca006fa56f6c529bec6",
+      "claim": "Refund.C_2947c314ccccc30626af77a12695196d1d77e0f7055edca006fa56f6c529bec6.Correct",
+      "patch": "bound",
+      "solution": "import RefundCase\n\nnamespace Solution\n\ntheorem proof : Refund.C_2947c314ccccc30626af77a12695196d1d77e0f7055edca006fa56f6c529bec6.Correct := by\n  intro a _\n  show Refund.Rule a (min (min a.requested a.deposited) a.balance)\n  have hm1 : min (min a.requested a.deposited) a.balance \u2264 a.requested :=\n    Nat.le_trans (Refund.min_le_first (min a.requested a.deposited) a.balance)\n      (Refund.min_le_first a.requested a.deposited)\n  have hm2 : min (min a.requested a.deposited) a.balance \u2264 a.deposited :=\n    Nat.le_trans (Refund.min_le_first (min a.requested a.deposited) a.balance)\n      (Refund.min_le_second a.requested a.deposited)\n  have hm3 : min (min a.requested a.deposited) a.balance \u2264 a.balance :=\n    Refund.min_le_second (min a.requested a.deposited) a.balance\n  refine \u27e8hm1, hm2, hm3, ?_\u27e9\n  rcases Nat.le_total (min a.requested a.deposited) a.balance with hlow | hlow\n  \u00b7 have hb : min (min a.requested a.deposited) a.balance = min a.requested a.deposited :=\n      Nat.min_eq_left hlow\n    rcases Nat.le_total a.requested a.deposited with hreq | hdep\n    \u00b7 left\n      rw [hb, Nat.min_eq_left hreq]\n    \u00b7 right\n      left\n      rw [hb, Refund.min_right hdep]\n  \u00b7 have hb : min (min a.requested a.deposited) a.balance = a.balance :=\n      Refund.min_right hlow\n    right\n    right\n    exact hb\n\nend Solution\n",
+      "proof": "accepted",
+      "proof_bytes": 12401,
+      "proof_sha256": "87d68e33b29189e9b7037c2838f45ce013b4fd1d16945dc8e6f85902753e5d2f",
+      "base_sha256": "f01622369c7097806d648507046aae42394ae83d5ba4ed1f1de4a2e7bd8d2f1f",
+      "axioms": [],
+      "axioms_line": "'Solution.proof' does not depend on any axioms"
+    }
+  ],
+  "accepted": true,
+  "expression": "(requested_refund.min(*deposited)).min(balance_left)",
+  "source_sha256": "2947c314ccccc30626af77a12695196d1d77e0f7055edca006fa56f6c529bec6",
+  "claim": "Refund.C_2947c314ccccc30626af77a12695196d1d77e0f7055edca006fa56f6c529bec6.Correct",
+  "proof_bytes": 12401,
+  "proof_sha256": "248e3458ed177c6c296812d8a169e7a65077c4ffc247942a90f1dd60afe6c716",
+  "base_sha256": "e06fb584d91cef9911147e911e7f453699b8b5ace0e6a93133007b88c1cff719",
+  "axioms": [],
+  "axioms_line": "'Solution.proof' does not depend on any axioms",
+  "job": {
+    "command": "python3 cases/intents-refund/propose.py --candidate evidence/nearai-refund/deepseek-v4.1-flash-2/candidate.rs --proof evidence/nearai-refund/deepseek-v4.1-flash-2/Solution.lean --side proof --out run-output/nearai-refund/deepseek-v4.1-flash-2",
+    "started": "2026-11-13T18:25:26Z",
+    "wall_seconds": 174.4,
+    "export_is_the_round's": false,
+    "code_sha256": {
+      "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+      "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+      "gate": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d"
+    }
+  }
+}

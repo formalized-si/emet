@@ -1,0 +1,186 @@
+{
+  "kernel_wasm_sha256": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+  "manifest": {
+    "base_sha256": "3accca2b4aafcc0f340fe49e8802feb99307efa3280490dda3e69d393835baaf",
+    "base_bytes": 2961932,
+    "base_decls": 1600,
+    "codec": "lz4",
+    "chunks": [
+      "chunk-0000.bin",
+      "chunk-0001.bin",
+      "chunk-0002.bin",
+      "chunk-0003.bin",
+      "chunk-0004.bin",
+      "chunk-0005.bin",
+      "chunk-0006.bin"
+    ],
+    "stored_bytes": 836021
+  },
+  "calls": [
+    {
+      "label": "upload chunk-0000.bin",
+      "ok": true,
+      "tgas": 19.272461316679
+    },
+    {
+      "label": "upload chunk-0001.bin",
+      "ok": true,
+      "tgas": 19.301123022031
+    },
+    {
+      "label": "upload chunk-0002.bin",
+      "ok": true,
+      "tgas": 18.853346582833
+    },
+    {
+      "label": "upload chunk-0003.bin",
+      "ok": true,
+      "tgas": 19.315022689951
+    },
+    {
+      "label": "upload chunk-0004.bin",
+      "ok": true,
+      "tgas": 19.591782748993
+    },
+    {
+      "label": "upload chunk-0005.bin",
+      "ok": true,
+      "tgas": 19.05228055789
+    },
+    {
+      "label": "upload chunk-0006.bin",
+      "ok": true,
+      "tgas": 5.194583254189
+    },
+    {
+      "label": "seal_base",
+      "ok": true,
+      "tgas": 462.989379939352
+    },
+    {
+      "label": "check_base_range 0..64",
+      "ok": true,
+      "tgas": 382.164639767432
+    },
+    {
+      "label": "check_base_range 64..192",
+      "ok": true,
+      "tgas": 422.972296127396
+    },
+    {
+      "label": "check_base_range 192..448",
+      "ok": true,
+      "tgas": 483.911834033777
+    },
+    {
+      "label": "check_base_range 448..704",
+      "ok": true,
+      "tgas": 507.244624846625
+    },
+    {
+      "label": "check_base_range 704..960",
+      "ok": true,
+      "tgas": 528.323116053101
+    },
+    {
+      "label": "check_base_range 960..1216",
+      "ok": true,
+      "tgas": 513.339313103177
+    },
+    {
+      "label": "check_base_range 1216..1472",
+      "ok": true,
+      "tgas": 481.050563012585
+    },
+    {
+      "label": "check_base_range 1472..1600",
+      "ok": true,
+      "tgas": 410.128339055435
+    },
+    {
+      "label": "check NearRelation.outputs_unique",
+      "ok": true,
+      "tgas": 394.617153960014
+    },
+    {
+      "label": "check NearRelation.domain",
+      "ok": true,
+      "tgas": 392.676390207635
+    },
+    {
+      "label": "check wrong on purpose: the proof of outputs_unique offered for the other claim",
+      "ok": true,
+      "tgas": 373.948074033557
+    }
+  ],
+  "cases": [
+    {
+      "label": "NearRelation.outputs_unique",
+      "claim": "Emet.Arena.OutputsUnique",
+      "delta_sha256": "b1497f1ab7eb3d91ea992f00c9a226cfaf180a4e7b56f1f5f9710aab08102683",
+      "delta_bytes": 21131,
+      "ok_call": true,
+      "tgas": 394.617153960014,
+      "verdict_ok": true,
+      "reason": null,
+      "mode": "claim",
+      "proof_theorem": "Emet.Arena.Proofs.outputs_unique",
+      "decls_checked": 6,
+      "gas_read": 43769523527157,
+      "gas_parse": 324553092306567,
+      "gas_kernel": 3086519609319,
+      "statement_hash": "4a8ae930046d375917550de2beef5e39e2912506610c7dffac2198e311010367"
+    },
+    {
+      "label": "NearRelation.domain",
+      "claim": "Emet.Arena.RelationInDomain",
+      "delta_sha256": "813c299f6e40143ee84208f2ee75d7844f3fad171606a139309a3b5c32ef6545",
+      "delta_bytes": 16603,
+      "ok_call": true,
+      "tgas": 392.676390207635,
+      "verdict_ok": true,
+      "reason": null,
+      "mode": "claim",
+      "proof_theorem": "Emet.Arena.Proofs.relation_in_domain",
+      "decls_checked": 2,
+      "gas_read": 43765798087989,
+      "gas_parse": 323867339167419,
+      "gas_kernel": 2368436273151,
+      "statement_hash": "805def12dac000831ef46927d245a6347e1eeed84c693687e126d8051fd45c33"
+    },
+    {
+      "label": "wrong on purpose: the proof of outputs_unique offered for the other claim",
+      "claim": "Emet.Arena.RelationInDomain",
+      "delta_sha256": "b1497f1ab7eb3d91ea992f00c9a226cfaf180a4e7b56f1f5f9710aab08102683",
+      "delta_bytes": 21131,
+      "ok_call": true,
+      "tgas": 373.948074033557,
+      "verdict_ok": false,
+      "reason": "statement_mismatch:no theorem in the delta has type exactly `Emet.Arena.RelationInDomain`",
+      "mode": null,
+      "proof_theorem": null,
+      "decls_checked": 0,
+      "gas_read": 43769523527157,
+      "gas_parse": 324553132621611,
+      "gas_kernel": 0,
+      "statement_hash": null
+    }
+  ],
+  "bootstrap_tgas": 4312.704706111446,
+  "bootstrap_seconds": 29.364,
+  "status": {
+    "owner": "test.near",
+    "chunks": 7,
+    "base_bytes": 2961932,
+    "stored_bytes": 835986,
+    "base_hash": "3accca2b4aafcc0f340fe49e8802feb99307efa3280490dda3e69d393835baaf",
+    "base_decls": 1600,
+    "checked_upto": 1600,
+    "sealed": true,
+    "axioms_in_base": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  }
+}

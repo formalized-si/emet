@@ -1,0 +1,115 @@
+{
+  "claim": "Wallet.Claim.SlidingTwiceCap",
+  "shelf": "shelf/wallet-v4",
+  "started": "2026-11-08T22:35:15Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "claude-code",
+    "exit": 0,
+    "seconds": 174.2,
+    "final": "DONE\n\n`Solution.proof` compiles with no errors or `sorry` warnings. `./measure.sh` reports a delta of 388,914 bytes, which is under the 400,000 limit but only by about 11 KB. If the chain's own measurement comes out even slightly larger, it could go over.\n\nHow the proof works: within one window shorter than `dayLength`, the daily counter can reset at most once. That reset is only written on an allowed payment, and the new window then starts at that payment's time, which is after `t0`. Every later request in the stretch then either comes before the new window start or is less than a day after it, so it can't trigger another reset. So the payments allowed before the reset add up to at most one daily cap, and those after it add up to at most one more.\n\nThe largest parts of the delta are my own helpers: `step_spec` (about 106 KB) and the two recursive phase lemmas (about 46\u201349 KB each). I wrote my own `sub_toNat` because the library's `UInt64.toNat_sub_of_le` alone pushed the delta to about 3.9 MB. If the margin needs to be bigger, rewriting the phase lemmas with `induction` instead of pattern-matching recursion would probably save the most.",
+    "cost_usd": 0.6916712000000002,
+    "turns": 26,
+    "permission_denials": 4,
+    "stderr_tail": "",
+    "model": "opus"
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext]\nSolution.proof : Wallet.Claim.SlidingTwiceCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec",
+    "delta_bytes": 388914,
+    "delta_sha256": "a7d44b45ffb9cfd816e1c455c1a9de065d0af47d99c1636786f71d158c1512ec",
+    "decls": 44,
+    "heaviest": [
+      {
+        "name": "Solution.step_spec",
+        "kind": "thm",
+        "bytes": 106390
+      },
+      {
+        "name": "Solution.phase1._f",
+        "kind": "def",
+        "bytes": 48764
+      },
+      {
+        "name": "Solution.phase2._f",
+        "kind": "def",
+        "bytes": 45926
+      },
+      {
+        "name": "Solution.no_roll",
+        "kind": "thm",
+        "bytes": 38158
+      },
+      {
+        "name": "Solution.phase1.match_1_1",
+        "kind": "def",
+        "bytes": 15016
+      },
+      {
+        "name": "Solution.phase2.match_1_1",
+        "kind": "def",
+        "bytes": 12787
+      },
+      {
+        "name": "Solution.sub_toNat",
+        "kind": "thm",
+        "bytes": 11458
+      },
+      {
+        "name": "Solution.roll_spec",
+        "kind": "thm",
+        "bytes": 10740
+      },
+      {
+        "name": "Solution.sum_deny",
+        "kind": "thm",
+        "bytes": 8830
+      },
+      {
+        "name": "_private.Init.Data.Nat.Basic.0.Nat.sub_le_sub_left.match_1_1",
+        "kind": "def",
+        "bytes": 8817
+      },
+      {
+        "name": "Nat.mul_comm._f",
+        "kind": "def",
+        "bytes": 8063
+      },
+      {
+        "name": "Nat.succ_mul",
+        "kind": "thm",
+        "bytes": 8051
+      },
+      {
+        "name": "Solution.add_toNat",
+        "kind": "thm",
+        "bytes": 7345
+      },
+      {
+        "name": "Nat.sub_sub",
+        "kind": "thm",
+        "bytes": 6873
+      },
+      {
+        "name": "Nat.zero_mul._f",
+        "kind": "def",
+        "bytes": 4162
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

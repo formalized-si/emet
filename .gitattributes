@@ -1,0 +1,27 @@
+# No end-of-line conversion for any file, whatever a clone's core.autocrlf says: several records are checked byte
+# for byte.
+* -text
+
+# Binary files.
+*.wasm binary
+*.png  binary
+*.mp4  binary
+*.gz   binary
+*.bin  binary
+
+# Records of runs and exported proofs are data, not source: collapse them in diffs and keep them out of the
+# language statistics.
+evidence/**                        linguist-generated
+deploy/testnet*.json               linguist-generated
+artifacts/**                       linguist-generated
+shelf/**                           linguist-generated
+proofs/**                          linguist-generated
+cases/intents-refund/shelf/**      linguist-generated
+cases/intents-refund/proofs/**     linguist-generated
+*.ndjson                           linguist-generated
+package-lock.json                  linguist-generated
+
+# Third-party code and corpora.
+contracts/kernel/vendor/**         linguist-vendored
+cases/intents-refund/upstream/**   linguist-vendored
+cheats/arena/**                    linguist-vendored

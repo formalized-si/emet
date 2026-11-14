@@ -1,0 +1,11 @@
+name = "wallet"
+defaultTargets = ["Policy", "Wallet"]
+
+# The wallet's spending policy (Policy.Core), the claims about it (Policy.Spec), two
+# independent proof sets, the byte-level wire format the contract uses, and the
+# entry points the NEAR shim calls (Wallet.Entry).
+[[lean_lib]]
+name = "Policy"
+
+[[lean_lib]]
+name = "Wallet"

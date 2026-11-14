@@ -1,0 +1,101 @@
+{
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext]\nSolution.proof : Wallet.Claim.SlidingTwiceCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 388138,
+    "delta_sha256": "96262f394e5ffe54c8bdcd857e588824507b009970aa0a11480c93f5d61eadb9",
+    "decls": 67,
+    "heaviest": [
+      {
+        "name": "Solution.step_spec",
+        "kind": "thm",
+        "bytes": 78933
+      },
+      {
+        "name": "Solution.L1",
+        "kind": "thm",
+        "bytes": 61225
+      },
+      {
+        "name": "Solution.L2",
+        "kind": "thm",
+        "bytes": 46965
+      },
+      {
+        "name": "Solution.roll_spec",
+        "kind": "thm",
+        "bytes": 14730
+      },
+      {
+        "name": "Solution.noexp",
+        "kind": "thm",
+        "bytes": 12692
+      },
+      {
+        "name": "Solution.sub_nat",
+        "kind": "thm",
+        "bytes": 12675
+      },
+      {
+        "name": "Solution.and_dec1",
+        "kind": "thm",
+        "bytes": 11304
+      },
+      {
+        "name": "Solution.sum_deny",
+        "kind": "thm",
+        "bytes": 9057
+      },
+      {
+        "name": "Prod.noConfusion",
+        "kind": "def",
+        "bytes": 8675
+      },
+      {
+        "name": "Nat.mul_comm._f",
+        "kind": "def",
+        "bytes": 8063
+      },
+      {
+        "name": "Nat.succ_mul",
+        "kind": "thm",
+        "bytes": 8051
+      },
+      {
+        "name": "Solution.dn",
+        "kind": "thm",
+        "bytes": 6679
+      },
+      {
+        "name": "Solution.add_nat",
+        "kind": "thm",
+        "bytes": 6070
+      },
+      {
+        "name": "Solution.run_cons",
+        "kind": "thm",
+        "bytes": 5351
+      },
+      {
+        "name": "Nat.add_left_cancel",
+        "kind": "thm",
+        "bytes": 5008
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

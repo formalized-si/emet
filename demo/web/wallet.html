@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="An agent finds a broken wallet rule. NEAR checks the counterexample and pays. Follow the proof and the repaired spending policy.">
+<title>Emet · prove the wallet rule</title><meta name="theme-color" content="#1a1c18"><link rel="icon" href="assets/formalized-mark.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"></head>
+<body><a class="skip" href="#story">Skip to the demo</a><div class="marks" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="tc"></i><i class="bc"></i><i class="ml"></i><i class="mr"></i></div><main>
+<div class="stage"><div class="grain" aria-hidden="true"></div>
+<header><div class="brand-line"><a class="formalized" href="https://formalized.si/" aria-label="Formalized"><img src="assets/formalized-white.svg" alt="Formalized" width="146" height="26"></a><a class="brand" href="patches.html">Emet<span>אמת</span></a></div><nav aria-label="Main"><a href="patches.html">The upgrade gate</a><a href="#story">Demo</a><a href="#live-checker">Live check</a><a class="nav-cta" href="../../README.md"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>Source</a></nav></header>
+<div class="wallet-hero">
+<p class="eyebrow">NEAR HACKATHON 2026 · A PROOF BOUNTY FOR AGENT WALLETS</p>
+<h1 id="headline">Check the wallet's<br>spending rule.</h1>
+<p class="intro">An agent found the broken spending rule. Emet checked its Lean counterexample inside a NEAR contract and paid the bounty. Then another agent proved the repair.</p>
+<div class="record-label" id="record-label">The page loads the recorded evidence…</div>
+<p class="context">This demo replays transactions on a local NEAR node. It uses our example wallet, not an exploit of the NEAR protocol.</p>
+</div></div>
+<div class="wrap">
+<div id="load-error" class="error" role="alert" hidden><h2>The page cannot load the evidence</h2><p id="error-message"></p><button id="retry">Try again</button></div>
+<section id="story" aria-label="Follow the proof" hidden>
+<div class="tabs" role="tablist" aria-label="Demo steps">
+<button id="tab-attack" role="tab" aria-selected="true" aria-controls="panel-attack">01 <span>Break the rule</span></button>
+<button id="tab-proof" role="tab" aria-selected="false" aria-controls="panel-proof" tabindex="-1">02 <span>Check the proof</span></button>
+<button id="tab-fix" role="tab" aria-selected="false" aria-controls="panel-fix" tabindex="-1">03 <span>Prove the repair</span></button>
+</div>
+<section id="panel-attack" class="story-panel" role="tabpanel" aria-labelledby="tab-attack">
+<div class="panel-top"><div><p class="eyebrow">WALLET V1 · ANCHORED WINDOW</p><h2>Spend right before the reset. Spend again after it.</h2></div><div class="amount"><strong id="replay-total">0</strong><span>NEAR allowed in this replay</span></div></div>
+<p>A fresh window resets the counter, even when the previous payments happened seconds ago.</p>
+<div class="table"><table id="bypass"></table></div>
+<div class="replay-controls"><button id="next-payment">Next payment</button><button id="show-payments" class="secondary">Show all payments</button><span id="replay-status" role="status" aria-live="polite"></span></div>
+<p class="note" id="bypassNote"></p><button class="text-button" data-step="proof">Inspect the accepted counterexample →</button>
+</section>
+<section id="panel-proof" class="story-panel" role="tabpanel" aria-labelledby="tab-proof" hidden>
+<p class="eyebrow">PROOF CHECKED IN A NEAR CONTRACT</p><h2>The counterexample earns the bounty.</h2>
+<p>The contract checks a proof of the exact statement's negation. The agent's explanation alone cannot release the reward.</p>
+<div id="proof-summary"></div><p id="freeze-note" class="limit" hidden></p><p class="note">Agents wrote the proofs in this replay before the run. The record contains the contract checks and payouts.</p>
+<div class="links"><a href="../../evidence/agent/Refute.SlidingDayCap-sonnet/Solution.lean">Read the counterexample</a><a href="../../evidence/agent/Refute.SlidingDayCap-sonnet/delta.ndjson">Download proof bytes</a></div>
+<button class="text-button" data-step="fix">Compare the proved repair →</button>
+</section>
+<section id="panel-fix" class="story-panel" role="tabpanel" aria-labelledby="tab-fix" hidden>
+<div class="panel-top"><div><p class="eyebrow">WALLET V2 · CARRY PRIOR SPENDING</p><h2>The wallet refuses the same boundary trick.</h2></div><div class="amount"><strong id="fix-cap">6</strong><span>NEAR allowed across the boundary</span></div></div>
+<div class="table"><table id="fix"></table></div><p class="note" id="fixNote"></p>
+<div class="links"><a href="../../evidence/agent/V2.SlidingDayCap-opus/Solution.lean">Read the repair proof</a><a href="../../lean/Policy/CoreV2.lean">Read the policy change</a></div>
+<p class="limit">The proof covers spending safety, not availability. Further requests can keep old spending counted and delay later payments. There is no proved maximum wait.</p>
+</section></section>
+<section id="live-checker" class="live-checker" aria-labelledby="live-title">
+<p class="eyebrow">TRY THE CHECKER</p><h2 id="live-title">Ask the contract, with real proof bytes.</h2>
+<p>The genuine proof and the forged recursor proof go through the same proof checker. Each check is a free view call on a separate local NEAR node.</p>
+<p id="checker-status" role="status">The page connects to the local checker…</p>
+<div class="replay-controls"><button id="check-genuine" disabled>Check genuine proof</button><button id="check-forged" class="secondary" disabled>Try forged proof</button><button id="connect-checker" class="secondary">Reconnect</button></div>
+<p class="note" id="checker-help">Start <code>./verify.sh --serve</code> and open the URL it prints to run these checks. The recorded demo above works without it.</p>
+<div id="check-result" hidden><strong id="check-verdict" role="status" aria-live="polite"></strong><p id="check-detail" class="note"></p><details><summary>Inspect the actual response</summary><pre id="check-json"></pre></details></div>
+</section>
+<section class="boundaries"><h2>The scope of the proof</h2><p>The proof covers the named spending rule over the Lean policy. We trust or test the compiler, the adapter, the checker and the payout contracts. A proof cannot tell you whether you chose the right rule.</p><a href="../../docs/TECHNICAL.md#what-this-does-not-prove">Read the trust boundaries →</a></section>
+<details id="evidence" class="evidence"><summary>Inspect the full transaction record</summary>
+<p class="note">Every figure below comes from <a id="record-link" href="../../evidence/demo/scenario.json">the run JSON</a>. These are recorded transactions on a local NEAR node. Run <code>./verify.sh --wallet</code> again for a new chain. <code>--offline</code> only checks files and recorded results. Source: <span id="src" class="mono"></span>.</p>
+<div class="stats" id="stats"></div>
+
+  <h2>1. The agent's wallet: every payment decision is Lean code compiled to wasm</h2>
+  <div class="card"><div class="table"><table id="wallet"></table></div>
+    <p class="note" id="walletNote"></p></div>
+
+  <h2>2. Bounties for open questions: each pays a proof, or a counterexample</h2>
+  <div class="grid" id="bounties"></div>
+
+  <h2>3. Refused: a lying agent tries to take the reward without a proof (each try forfeits a bond to the reward)</h2>
+  <div class="card"><div class="table"><table id="cheats"></table></div></div>
+
+  <h2>4. Two autonomous prover agents race, and a front-runner tries to steal</h2>
+  <div class="card"><div class="table"><table id="couriers"></table></div>
+    <p class="note" id="raceNote"></p>
+    <div class="table"><table id="frontrun"></table></div></div>
+
+  <h2>5. Money moves only with the proof, to any wallet that runs the proved code</h2>
+  <div class="card"><div class="table"><table id="money"></table></div>
+    <p class="note" id="moneyNote"></p></div>
+
+  <h2>6. The statement of the headline bounty, read back from the proof checker</h2>
+  <div class="card"><pre class="stmt" id="stmt"></pre></div>
+
+  <h2>7. Every claim of the run</h2>
+  <div class="card"><ul class="claims" id="claims"></ul>
+    <p class="note">Run it again: <span class="mono">./verify.sh --wallet</span>. The technical reference lists what we proved, tested and assumed, under "What this does not prove".</p></div>
+
+</details></div><footer><span>Emet · proof bounties on NEAR</span><a href="../../docs/TECHNICAL.md">Technical reference</a><a href="../../LICENSE">MIT license</a></footer>
+</main><script type="module" src="app.js"></script></body></html>

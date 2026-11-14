@@ -1,0 +1,130 @@
+{
+  "claim": "Wallet.Claim.PerTxCapAlways",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-11T18:56:48Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 929.0,
+    "turns": 24,
+    "tool_calls": 25,
+    "solution_writes": 10,
+    "repair_rounds": 9,
+    "lean_runs": 8,
+    "lean_failures": 7,
+    "lost_responses": 0,
+    "prompt_tokens": 217292,
+    "completion_tokens": 28320,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "itting the decision tree, an `.allow` state forces `\u00ac (perTxCap < amount)`, hence `amount \u2264 perTxCap` via `UInt64.not_lt`.\n- `run_snd_cons`: a `rfl`-level unfolding of `run` plus the step equation, giving the verdict list of a run on a cons cell.\n- `key`: structural induction on the request list, generalizing the state, using the verdict-list equation to split `acceptedReqs` membership into head (allowed request \u21d2 cap) or tail (induction hypothesis); deny verdicts immediately fall through.\n\nDONE",
+    "cost_usd": 0.0992,
+    "signed_responses": 24,
+    "responses": 24,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext]\nSolution.proof : Wallet.Claim.PerTxCapAlways\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 169374,
+    "delta_sha256": "b1609ad0c399dbcf7ebf1c1075a5d49a8264427671ad70893bbd9b9390ced6cd",
+    "decls": 17,
+    "heaviest": [
+      {
+        "name": "Solution.key",
+        "kind": "thm",
+        "bytes": 62522
+      },
+      {
+        "name": "Solution.step_allow_cap",
+        "kind": "thm",
+        "bytes": 35371
+      },
+      {
+        "name": "Wallet.acceptedReqs.eq_def",
+        "kind": "thm",
+        "bytes": 19766
+      },
+      {
+        "name": "Solution.run_snd_cons",
+        "kind": "thm",
+        "bytes": 14403
+      },
+      {
+        "name": "Prod.noConfusion",
+        "kind": "def",
+        "bytes": 8547
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "Prod.mk.noConfusion",
+        "kind": "def",
+        "bytes": 3920
+      },
+      {
+        "name": "List.Mem.casesOn",
+        "kind": "def",
+        "bytes": 3346
+      },
+      {
+        "name": "Prod.noConfusionType",
+        "kind": "def",
+        "bytes": 3199
+      },
+      {
+        "name": "List.cons.noConfusion",
+        "kind": "def",
+        "bytes": 3175
+      },
+      {
+        "name": "List.noConfusionType",
+        "kind": "def",
+        "bytes": 3026
+      },
+      {
+        "name": "List.brecOn.eq",
+        "kind": "thm",
+        "bytes": 3018
+      },
+      {
+        "name": "List.ctorIdx",
+        "kind": "def",
+        "bytes": 1140
+      },
+      {
+        "name": "Wallet.Verdict.ctorIdx",
+        "kind": "def",
+        "bytes": 957
+      },
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 772
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

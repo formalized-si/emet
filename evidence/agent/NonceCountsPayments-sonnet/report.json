@@ -1,0 +1,203 @@
+{
+  "claim": "Wallet.Claim.NonceCountsPayments",
+  "shelf": "shelf/wallet-v4",
+  "started": "2026-11-08T21:50:23Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "claude-code",
+    "exit": 0,
+    "seconds": 943.2,
+    "final": "DONE. `Solution.proof` in `Solution.lean` compiles with `lake env lean` and no `sorry`. `./measure.sh` reports a delta of 340,788 bytes, OK against the 400,000 limit.",
+    "cost_usd": 0.40199129999999994,
+    "turns": 27,
+    "permission_denials": 8,
+    "stderr_tail": "",
+    "model": "sonnet"
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext]\nSolution.proof : Wallet.Claim.NonceCountsPayments\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "49ef90d3d6e5b35b5856eaa5ac07e054e2cfb208d4a7e40a06127e240601a8ec",
+    "delta_bytes": 340708,
+    "delta_sha256": "d9763383b270b4f11bce4ad69c00b1abba71fe1755b0c174cb8dd415a4cacca3",
+    "decls": 27,
+    "heaviest": [
+      {
+        "name": "Solution.step_nonce",
+        "kind": "thm",
+        "bytes": 174115
+      },
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 74545
+      },
+      {
+        "name": "Wallet.run.eq_def",
+        "kind": "thm",
+        "bytes": 24738
+      },
+      {
+        "name": "_private.Init.Data.UInt.Lemmas.0.UInt64.toNat.inj.match_1_1",
+        "kind": "def",
+        "bytes": 18701
+      },
+      {
+        "name": "Prod.noConfusion",
+        "kind": "def",
+        "bytes": 8675
+      },
+      {
+        "name": "Prod.mk.noConfusion",
+        "kind": "def",
+        "bytes": 4135
+      },
+      {
+        "name": "noConfusionEnum",
+        "kind": "def",
+        "bytes": 3677
+      },
+      {
+        "name": "Prod.noConfusionType",
+        "kind": "def",
+        "bytes": 3325
+      },
+      {
+        "name": "List.brecOn.eq",
+        "kind": "thm",
+        "bytes": 3018
+      },
+      {
+        "name": "_private.Init.Data.Nat.Basic.0.Nat.le_antisymm_iff.match_1_1",
+        "kind": "def",
+        "bytes": 2854
+      },
+      {
+        "name": "Iff.trans",
+        "kind": "thm",
+        "bytes": 2270
+      },
+      {
+        "name": "Nat.le_antisymm_iff",
+        "kind": "thm",
+        "bytes": 1991
+      },
+      {
+        "name": "noConfusionEnum._proof_1",
+        "kind": "thm",
+        "bytes": 1731
+      },
+      {
+        "name": "UInt64.toNat_inj",
+        "kind": "thm",
+        "bytes": 1662
+      },
+      {
+        "name": "UInt64.toNat.inj",
+        "kind": "thm",
+        "bytes": 1590
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true,
+  "export_v3": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "bf70d9ca32119086fbb0fe73f414eb3c8b5701c93104f298ac9d41a925411f73",
+    "delta_bytes": 340788,
+    "delta_sha256": "13d7822b16a9e7c9ffd2b49b3139905722e7bd0f0622789acab133d2d761e2f8",
+    "decls": 27,
+    "heaviest": [
+      {
+        "name": "Solution.step_nonce",
+        "kind": "thm",
+        "bytes": 174115
+      },
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 74585
+      },
+      {
+        "name": "Wallet.run.eq_def",
+        "kind": "thm",
+        "bytes": 24738
+      },
+      {
+        "name": "_private.Init.Data.UInt.Lemmas.0.UInt64.toNat.inj.match_1_1",
+        "kind": "def",
+        "bytes": 18701
+      },
+      {
+        "name": "Prod.noConfusion",
+        "kind": "def",
+        "bytes": 8675
+      },
+      {
+        "name": "Prod.mk.noConfusion",
+        "kind": "def",
+        "bytes": 4135
+      },
+      {
+        "name": "noConfusionEnum",
+        "kind": "def",
+        "bytes": 3677
+      },
+      {
+        "name": "Prod.noConfusionType",
+        "kind": "def",
+        "bytes": 3325
+      },
+      {
+        "name": "List.brecOn.eq",
+        "kind": "thm",
+        "bytes": 3018
+      },
+      {
+        "name": "_private.Init.Data.Nat.Basic.0.Nat.le_antisymm_iff.match_1_1",
+        "kind": "def",
+        "bytes": 2854
+      },
+      {
+        "name": "Iff.trans",
+        "kind": "thm",
+        "bytes": 2270
+      },
+      {
+        "name": "Nat.le_antisymm_iff",
+        "kind": "thm",
+        "bytes": 1991
+      },
+      {
+        "name": "noConfusionEnum._proof_1",
+        "kind": "thm",
+        "bytes": 1731
+      },
+      {
+        "name": "UInt64.toNat_inj",
+        "kind": "thm",
+        "bytes": 1662
+      },
+      {
+        "name": "UInt64.le_antisymm",
+        "kind": "thm",
+        "bytes": 1617
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "note": "The agent wrote Solution.lean against shelf v3 (same Core, Spec and claim); it was re-checked and re-exported unchanged against shelf v4."
+}

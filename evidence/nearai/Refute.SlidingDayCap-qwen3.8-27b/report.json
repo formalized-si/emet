@@ -1,0 +1,127 @@
+{
+  "claim": "Wallet.Claim.Refute.SlidingDayCap",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-11T18:21:13Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "Qwen/Qwen3.8-27B",
+    "model_owner": "nearai",
+    "seconds": 1150.2,
+    "turns": 21,
+    "tool_calls": 25,
+    "solution_writes": 8,
+    "repair_rounds": 7,
+    "lean_runs": 4,
+    "lean_failures": 3,
+    "prompt_tokens": 193328,
+    "completion_tokens": 76111,
+    "usd_per_token": {
+      "prompt": 4e-08,
+      "completion": 1.35e-06
+    },
+    "final": "n't expired, so the first payment of 1 is allowed. At `t = 10` the window **expires inside the stretch**, the roll resets `spentToday` to 0, and a second payment of 1 is allowed.\n- Total allowed = **2 > 1 = perDayCap** \u2014 the \"sliding day\" claim fails because the window is anchored at the first spend, not sliding.\n\nAll small numeric facts are closed with `decide` (no `omega`/`simp_arith`); the heaviest items are just the `List` no-confusion machinery from the two `cases` on list membership.\n\nDONE",
+    "cost_usd": 0.1105,
+    "signed_responses": 21,
+    "responses": 21,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' does not depend on any axioms\nSolution.proof : Wallet.Claim.Refute.SlidingDayCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+    "forbidden_in_delta": [],
+    "delta_bytes": 61735,
+    "delta_sha256": "7258b937c2c692802760906c24baa8482a0dd0f069167af7e46ba1b68a2c1a1d",
+    "decls": 16,
+    "heaviest": [
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 39562
+      },
+      {
+        "name": "List.noConfusion",
+        "kind": "def",
+        "bytes": 5564
+      },
+      {
+        "name": "List.Mem.casesOn",
+        "kind": "def",
+        "bytes": 3346
+      },
+      {
+        "name": "List.cons.noConfusion",
+        "kind": "def",
+        "bytes": 3175
+      },
+      {
+        "name": "List.noConfusionType",
+        "kind": "def",
+        "bytes": 3161
+      },
+      {
+        "name": "instDecidableNot._proof_1",
+        "kind": "thm",
+        "bytes": 1388
+      },
+      {
+        "name": "Solution.pC",
+        "kind": "def",
+        "bytes": 1040
+      },
+      {
+        "name": "List.ctorIdx",
+        "kind": "def",
+        "bytes": 1005
+      },
+      {
+        "name": "Solution.reqsC",
+        "kind": "def",
+        "bytes": 794
+      },
+      {
+        "name": "instDecidableNot",
+        "kind": "def",
+        "bytes": 751
+      },
+      {
+        "name": "UInt8.instOfNat",
+        "kind": "def",
+        "bytes": 609
+      },
+      {
+        "name": "UInt8.ofNat",
+        "kind": "def",
+        "bytes": 437
+      },
+      {
+        "name": "Solution.sC",
+        "kind": "def",
+        "bytes": 373
+      },
+      {
+        "name": "instDecidableNot.match_1",
+        "kind": "def",
+        "bytes": 212
+      },
+      {
+        "name": "Solution.accC",
+        "kind": "def",
+        "bytes": 160
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

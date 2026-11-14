@@ -1,0 +1,41 @@
+{
+  "claim": "Wallet.Claim.AllowedReceiversOnly",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-11T18:28:18Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 608.6,
+    "turns": 4,
+    "tool_calls": 6,
+    "solution_writes": 0,
+    "repair_rounds": 0,
+    "lean_runs": 0,
+    "lean_failures": 0,
+    "prompt_tokens": 10997,
+    "completion_tokens": 262,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "HTTP 0: {\"error\": {\"message\": \"network: RemoteDisconnected: Remote end closed connection without response\"}}",
+    "cost_usd": 0.0036,
+    "signed_responses": 3,
+    "responses": 3,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "sorryAx"
+    ],
+    "axioms_allowed": false,
+    "mentions_sorry": true,
+    "log": "'Solution.proof' depends on axioms: [sorryAx]\nSolution.proof : Wallet.Claim.AllowedReceiversOnly\n"
+  },
+  "ready_to_claim": false
+}

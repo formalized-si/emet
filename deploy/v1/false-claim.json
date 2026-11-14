@@ -1,0 +1,52 @@
+{
+ "schema": "emet-false-claim/1",
+ "network": "testnet",
+ "rpc": "https://test.rpc.fastnear.com",
+ "explorer": "https://testnet.nearblocks.io",
+ "at": "2026-11-13T17:47:22.501Z",
+ "account": "emet.testnet",
+ "board": "board.v1.emet.testnet",
+ "kernel": "kernel.v1.emet.testnet",
+ "kernel_broken_by": null,
+ "bounty": {
+  "id": "2",
+  "reward_near": 1,
+  "deadline": "1797074938926113407"
+ },
+ "delta": {
+  "file": "cases/intents-refund/forged/builtinGcd.ndjson",
+  "bytes": 2770,
+  "sha256": "c16d228e99d2ca5ce3a5c77c6d07887a2f07f175ab94a53fa0738f45aacf7d86",
+  "theorem": "builtinGcd.absurd"
+ },
+ "free_check": {
+  "ok": true,
+  "mode": "theorem",
+  "reason": null,
+  "statement": "theorem builtinGcd.absurd : False := _"
+ },
+ "commit": {
+  "hash": "DkhF6aM3fBxqYjJycm4VLyP64NF6DtYNMKXRYPC7jbo7",
+  "ok": true,
+  "gas_burnt_tgas": 2.499,
+  "logs": [
+   "EVENT_JSON:{\"standard\":\"proof-courier\",\"version\":\"2.0.0\",\"event\":\"committed\",\"data\":[{\"id\":\"2\",\"claimer\":\"emet.testnet\"}]}"
+  ]
+ },
+ "reveal": {
+  "hash": "1wj8Hk3PLSNBdTaNRqnrXeJWhh7wSTWyt6E4E2TwVHM",
+  "ok": true,
+  "gas_burnt_tgas": 128.195,
+  "logs": [
+   "EVENT_JSON:{\"standard\":\"proof-courier\",\"version\":\"2.0.0\",\"event\":\"revealed\",\"data\":[{\"id\":\"2\",\"claimer\":\"emet.testnet\",\"side\":\"proof\",\"delta_sha256\":\"c16d228e99d2ca5ce3a5c77c6d07887a2f07f175ab94a53fa0738f45aacf7d86\",\"delta_bytes\":2770,\"block_height\":\"277542599\",\"in_flight\":1}]}",
+   "EVENT_JSON:{\"standard\":\"proof-courier\",\"version\":\"2.0.0\",\"event\":\"proof_accepted\",\"data\":[{\"id\":\"2\",\"certificate\":{\"claimer\":\"emet.testnet\",\"side\":\"proof\",\"proved\":\"False\",\"proof_theorem\":\"builtinGcd.absurd\",\"statement_hash\":\"a230a46ca5e70a1b2eec0ce060880d354617123df53bfbfbdc4c84823b6e317e\",\"base_hash\":\"72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf\",\"axioms\":[],\"decls_checked\":4,\"delta_sha256\":\"c16d228e99d2ca5ce3a5c77c6d07887a2f07f175ab94a53fa0738f45aacf7d86\",\"block_height\":\"277542601\",\"timestamp\":\"1794592039048781203\"}}]}",
+   "EVENT_JSON:{\"standard\":\"proof-courier\",\"version\":\"2.0.0\",\"event\":\"kernel_broken\",\"data\":[{\"id\":\"2\",\"kernel\":\"kernel.v1.emet.testnet\"}]}",
+   "EVENT_JSON:{\"standard\":\"proof-courier\",\"version\":\"2.0.0\",\"event\":\"paid\",\"data\":[{\"id\":\"2\",\"to\":\"emet.testnet\",\"amount\":\"1010000000000000000000000\"}]}"
+  ]
+ },
+ "after": {
+  "kernel_broken_by": "2",
+  "bounty_phase": "Paid",
+  "winner": "emet.testnet"
+ }
+}

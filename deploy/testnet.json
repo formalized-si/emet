@@ -1,0 +1,1956 @@
+{
+  "schema": "emet-live-refund/1",
+  "network": "testnet",
+  "rpc": "https://test.rpc.fastnear.com",
+  "explorer": "https://testnet.nearblocks.io",
+  "started_at": "2026-11-13T17:48:49.021Z",
+  "upstream": "https://github.com/near/intents.git",
+  "upstream_revision": "35044fd1795b0de9d1ac269c6aa28a0d6a7efdfa",
+  "accounts": {
+    "root": "v2.emet.testnet",
+    "kernel": "kernel.v2.emet.testnet",
+    "board": "board.v2.emet.testnet",
+    "gate": "gate.v2.emet.testnet",
+    "intents": "intents.v2.emet.testnet",
+    "receiver": "receiver.v2.emet.testnet",
+    "prover": "prover.v2.emet.testnet",
+    "issuer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+    "ledger": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+    "guardian": "guardian.v2.emet.testnet"
+  },
+  "base_sha256": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+  "base_declarations": 534,
+  "code_sha256": {
+    "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+    "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+    "gate": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d",
+    "intents_before": "ef7346022ea75975d584362ce0aba0b8f2b5eae010088c958142b7edf14afdac",
+    "intents_after": "f24d072edcb76a81ef68471096b1e7756b948e5543f739421c71f20bfb6e0ce0",
+    "receiver": "89a2a72174da01ae8ee0c9341ebdb92d084b47225a09c0bb0b216e55e1d630f4",
+    "ledger": "f24d072edcb76a81ef68471096b1e7756b948e5543f739421c71f20bfb6e0ce0"
+  },
+  "candidates": {
+    "original": {
+      "source_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+      "wasm_sha256": "ef7346022ea75975d584362ce0aba0b8f2b5eae010088c958142b7edf14afdac",
+      "claim": "Refund.C_72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e.Correct",
+      "bounty_id": "0",
+      "expression": "balance_left.min(requested_refund)"
+    },
+    "repair": {
+      "source_sha256": "9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1",
+      "wasm_sha256": "f24d072edcb76a81ef68471096b1e7756b948e5543f739421c71f20bfb6e0ce0",
+      "claim": "Refund.C_9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1.Correct",
+      "bounty_id": "1",
+      "expression": "requested_refund.min(*deposited).min(balance_left)"
+    }
+  },
+  "done": {
+    "accounts": "2026-11-13T17:49:56.868Z",
+    "kernel": "2026-11-13T17:50:56.495Z",
+    "board": "2026-11-13T17:51:04.259Z",
+    "bounties": "2026-11-13T17:51:27.302Z",
+    "gate": "2026-11-13T17:51:34.898Z",
+    "intents": "2026-11-13T17:51:44.568Z",
+    "receiver": "2026-11-13T17:51:52.209Z",
+    "ledger": "2026-11-13T17:52:00.788Z",
+    "stage": "2026-11-13T17:52:40.027Z",
+    "old_code": "2026-11-13T17:53:17.581Z",
+    "emergency": "2026-11-13T17:53:30.068Z",
+    "refused": "2026-11-13T17:53:49.055Z",
+    "refutation": "2026-11-13T17:54:09.323Z",
+    "proof": "2026-11-13T17:54:27.308Z",
+    "upgrade": "2026-11-13T17:54:37.278Z",
+    "new_code": "2026-11-13T17:55:05.516Z",
+    "open_bounties": "2026-11-13T17:55:30.829Z"
+  },
+  "story": {
+    "kernel_bounty": {
+      "label": "post a standing bounty for a proof of False",
+      "hash": "HDr7NT5APtgL4tu8uop9nUdBsBYtRbLi89EJmwth4zZf",
+      "explorer": "https://testnet.nearblocks.io/txns/HDr7NT5APtgL4tu8uop9nUdBsBYtRbLi89EJmwth4zZf",
+      "signer": "v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "post_bounty"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 122.03,
+      "tokens_burnt_near": 0.012158
+    },
+    "old_refund": {
+      "label": "deposit 1; the receiver asks for 100 back",
+      "hash": "uYYMCt5TLty6oWveAKaz5Q1xqqPHgQxWoBcJ7Nc68Dg",
+      "explorer": "https://testnet.nearblocks.io/txns/uYYMCt5TLty6oWveAKaz5Q1xqqPHgQxWoBcJ7Nc68Dg",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "mt_on_transfer"
+      ],
+      "ok": true,
+      "value": [
+        "100"
+      ],
+      "gas_burnt_tgas": 10.669,
+      "tokens_burnt_near": 0.001022
+    },
+    "old_batch": {
+      "label": "80 transfers of 1 through the ledger; the receiver asks for 1e35 back on each",
+      "hash": "6Z8vL3zyMeez2qvCM8Zgde1AwDMxSQ7qZhDrhEAF77jh",
+      "explorer": "https://testnet.nearblocks.io/txns/6Z8vL3zyMeez2qvCM8Zgde1AwDMxSQ7qZhDrhEAF77jh",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "methods": [
+        "mt_batch_transfer_call"
+      ],
+      "ok": false,
+      "value": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "gas_burnt_tgas": 52.492,
+      "tokens_burnt_near": 0.00516,
+      "failures": [
+        {
+          "executor": "intents.v2.emet.testnet",
+          "error": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "The length of a log message 17519 exceeds the limit 16384"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "before": {
+        "backing": "10000000000000000000000000000000000000",
+        "credit": "10000000000000000000000000000000000000",
+        "sender": "160"
+      },
+      "after": {
+        "backing": "10000000000000000000000000000000000000",
+        "credit": "10000000000000000000000000000000000080",
+        "sender": "160"
+      },
+      "unbacked_added": "80"
+    },
+    "paused": {
+      "label": "the guardian pauses deposits",
+      "hash": "629p34LSNQEZ2rdiSLNe6k3B8fbXG51dnMkeWocmJKig",
+      "explorer": "https://testnet.nearblocks.io/txns/629p34LSNQEZ2rdiSLNe6k3B8fbXG51dnMkeWocmJKig",
+      "signer": "guardian.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "pa_pause_feature"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 3.5,
+      "tokens_burnt_near": 0.00035
+    },
+    "deposit_while_paused": {
+      "label": "a deposit while deposits are paused",
+      "hash": "Ez337gosm7dXzuzRyWJLGXokMjtGZGb2VF282vJYQPUf",
+      "explorer": "https://testnet.nearblocks.io/txns/Ez337gosm7dXzuzRyWJLGXokMjtGZGb2VF282vJYQPUf",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "mt_on_transfer"
+      ],
+      "ok": false,
+      "value": null,
+      "gas_burnt_tgas": 3.04,
+      "tokens_burnt_near": 0.000304,
+      "failures": [
+        {
+          "executor": "intents.v2.emet.testnet",
+          "error": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: Pausable: Method is paused"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "upgrade_refused": {
+      "label": "try to install the repair before any proof exists",
+      "hash": "8gtRgk2vp1Lq2c8X1Qgd4WeDfAwq6MxrpaHjVqAh87ar",
+      "explorer": "https://testnet.nearblocks.io/txns/8gtRgk2vp1Lq2c8X1Qgd4WeDfAwq6MxrpaHjVqAh87ar",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "apply_patch"
+      ],
+      "ok": true,
+      "value": false,
+      "gas_burnt_tgas": 74.32,
+      "tokens_burnt_near": 0.007365
+    },
+    "binary_refused": {
+      "label": "offer the gate a binary that differs in one bit",
+      "hash": "43pkLyLdrRE2LvF45b4bVKRoKNJAjH4fW4votfFQebMd",
+      "explorer": "https://testnet.nearblocks.io/txns/43pkLyLdrRE2LvF45b4bVKRoKNJAjH4fW4votfFQebMd",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "stage_code"
+      ],
+      "ok": false,
+      "value": null,
+      "gas_burnt_tgas": 50.658,
+      "tokens_burnt_near": 0.005065,
+      "failures": [
+        {
+          "executor": "gate.v2.emet.testnet",
+          "error": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: chunk_mismatch"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "refutation_paid": {
+      "label": "reveal the refutation; the kernel checks it",
+      "hash": "8hffZLs47Ms7mRpgZRx14Gw4t8AQj2T75nFyx3gUve4b",
+      "explorer": "https://testnet.nearblocks.io/txns/8hffZLs47Ms7mRpgZRx14Gw4t8AQj2T75nFyx3gUve4b",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "reveal"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 140.954,
+      "tokens_burnt_near": 0.014006,
+      "proof_bytes": 16820,
+      "proof_sha256": "984768705ce3cb49bcd463dc6b864c0a514c6656a1dccebd1e683411833b0b66",
+      "certificate": {
+        "claimer": "prover.v2.emet.testnet",
+        "side": "refutation",
+        "proved": "Refund.C_72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e.Refute",
+        "proof_theorem": "Refund.original",
+        "statement_hash": "420f472d18647c9314cf23793ef70a5fac2b3f7733b2a70a1a3bb518407aa459",
+        "base_hash": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+        "axioms": [],
+        "decls_checked": 7,
+        "delta_sha256": "984768705ce3cb49bcd463dc6b864c0a514c6656a1dccebd1e683411833b0b66",
+        "block_height": "277543281",
+        "timestamp": "1794592441936649583"
+      }
+    },
+    "proof_paid": {
+      "label": "reveal the proof; the kernel checks it",
+      "hash": "GrpZSfrnVaxt5EGcbsXdacagFq3KjeimPPPrgYCtNSaf",
+      "explorer": "https://testnet.nearblocks.io/txns/GrpZSfrnVaxt5EGcbsXdacagFq3KjeimPPPrgYCtNSaf",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "reveal"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 137.07,
+      "tokens_burnt_near": 0.013617,
+      "proof_bytes": 13942,
+      "proof_sha256": "49b7600c0a80ad6490a4f7557584f815869dd73720ed4230a490d797d89ffeb4",
+      "certificate": {
+        "claimer": "prover.v2.emet.testnet",
+        "side": "proof",
+        "proved": "Refund.C_9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1.Correct",
+        "proof_theorem": "Refund.repair",
+        "statement_hash": "fd0e104a6647e7460dbc4bb8788b46c9c37b958fb7de30c300046a65d2976dd4",
+        "base_hash": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+        "axioms": [],
+        "decls_checked": 1,
+        "delta_sha256": "49b7600c0a80ad6490a4f7557584f815869dd73720ed4230a490d797d89ffeb4",
+        "block_height": "277543313",
+        "timestamp": "1794592460856737039"
+      }
+    },
+    "upgrade_applied": {
+      "label": "install the repair: the gate reads the certificate and upgrades the contract",
+      "hash": "8QaELsm36m21ij3AW7QuZjcrB8dT4CqT3VCE2qLtucc1",
+      "explorer": "https://testnet.nearblocks.io/txns/8QaELsm36m21ij3AW7QuZjcrB8dT4CqT3VCE2qLtucc1",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "apply_patch"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 352.077,
+      "tokens_burnt_near": 0.035073
+    },
+    "unpaused": {
+      "label": "the guardian lets deposits resume",
+      "hash": "G2C131ke3srjttiZti2xu6raCHZPMa9ihp1gJQzjAAr2",
+      "explorer": "https://testnet.nearblocks.io/txns/G2C131ke3srjttiZti2xu6raCHZPMa9ihp1gJQzjAAr2",
+      "signer": "guardian.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "pa_unpause_feature"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 3.507,
+      "tokens_burnt_near": 0.00035
+    },
+    "new_refund": {
+      "label": "the same deposit of 1 on the same account",
+      "hash": "AZapRDGSvUyuEBjbvMViQsQwu9EtPsoqCnoTGFdC26AB",
+      "explorer": "https://testnet.nearblocks.io/txns/AZapRDGSvUyuEBjbvMViQsQwu9EtPsoqCnoTGFdC26AB",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "mt_on_transfer"
+      ],
+      "ok": true,
+      "value": [
+        "1"
+      ],
+      "gas_burnt_tgas": 10.687,
+      "tokens_burnt_near": 0.001024
+    },
+    "new_batch": {
+      "label": "the same 80 transfers through the ledger",
+      "hash": "HREKnogCDfHWDW1Ksjf6AT9XJwGR9ufFgDhC8S1h75R3",
+      "explorer": "https://testnet.nearblocks.io/txns/HREKnogCDfHWDW1Ksjf6AT9XJwGR9ufFgDhC8S1h75R3",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "methods": [
+        "mt_batch_transfer_call"
+      ],
+      "ok": true,
+      "value": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "gas_burnt_tgas": 57.68,
+      "tokens_burnt_near": 0.005678,
+      "before": {
+        "backing": "10000000000000000000000000000000000000",
+        "credit": "10000000000000000000000000000000000080",
+        "sender": "160"
+      },
+      "after": {
+        "backing": "10000000000000000000000000000000000000",
+        "credit": "10000000000000000000000000000000000080",
+        "sender": "160"
+      },
+      "unbacked_added": "0"
+    }
+  },
+  "transactions": [
+    {
+      "label": "create v2.emet.testnet",
+      "hash": "FD1G1ocqyRMe3uvLTCuNLwBccPapPBYMGnkpDhJseahU",
+      "explorer": "https://testnet.nearblocks.io/txns/FD1G1ocqyRMe3uvLTCuNLwBccPapPBYMGnkpDhJseahU",
+      "signer": "emet.testnet",
+      "receiver": "v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "create kernel.v2.emet.testnet",
+      "hash": "9FA8xjp7VpoJxRaS621aB4Bhf3LxZDtthECn3ZMNtENK",
+      "explorer": "https://testnet.nearblocks.io/txns/9FA8xjp7VpoJxRaS621aB4Bhf3LxZDtthECn3ZMNtENK",
+      "signer": "v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "create board.v2.emet.testnet",
+      "hash": "iPC25Q4xSHeVTxCWkMqRqj6nYCsUTNLsxebx7LFA6ym",
+      "explorer": "https://testnet.nearblocks.io/txns/iPC25Q4xSHeVTxCWkMqRqj6nYCsUTNLsxebx7LFA6ym",
+      "signer": "v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "create gate.v2.emet.testnet",
+      "hash": "3YayZ9FchY7bC7Te7rWE2qme7eSrtBHSu2tDsiQnoHnx",
+      "explorer": "https://testnet.nearblocks.io/txns/3YayZ9FchY7bC7Te7rWE2qme7eSrtBHSu2tDsiQnoHnx",
+      "signer": "v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "create intents.v2.emet.testnet",
+      "hash": "8Pbts56e854vVPofkxY9theyNjYpdgjuQyzDFNaGhfx7",
+      "explorer": "https://testnet.nearblocks.io/txns/8Pbts56e854vVPofkxY9theyNjYpdgjuQyzDFNaGhfx7",
+      "signer": "v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "create receiver.v2.emet.testnet",
+      "hash": "QhVmjMHfnL3iTpqefnDVXgz5DjFLCgrM7SMbp1KUmFm",
+      "explorer": "https://testnet.nearblocks.io/txns/QhVmjMHfnL3iTpqefnDVXgz5DjFLCgrM7SMbp1KUmFm",
+      "signer": "v2.emet.testnet",
+      "receiver": "receiver.v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "create prover.v2.emet.testnet",
+      "hash": "7bv6tJQD7jLpxsXhwz5QTw3LktFfuHtnWkU9CiZ4XidX",
+      "explorer": "https://testnet.nearblocks.io/txns/7bv6tJQD7jLpxsXhwz5QTw3LktFfuHtnWkU9CiZ4XidX",
+      "signer": "v2.emet.testnet",
+      "receiver": "prover.v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "create aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "hash": "DY9nszep6XQoduxTThKafZPVLT2JWs72jViokr91918",
+      "explorer": "https://testnet.nearblocks.io/txns/DY9nszep6XQoduxTThKafZPVLT2JWs72jViokr91918",
+      "signer": "v2.emet.testnet",
+      "receiver": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "create bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "hash": "Ar3e6Qtyc67qCVMyzEr6uZMA1RPTdsSrZpmwmi6STjBM",
+      "explorer": "https://testnet.nearblocks.io/txns/Ar3e6Qtyc67qCVMyzEr6uZMA1RPTdsSrZpmwmi6STjBM",
+      "signer": "v2.emet.testnet",
+      "receiver": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "create guardian.v2.emet.testnet",
+      "hash": "92P3xhetbxe1hWbjw863649DMDc3czBPJ42MxVRAph1J",
+      "explorer": "https://testnet.nearblocks.io/txns/92P3xhetbxe1hWbjw863649DMDc3czBPJ42MxVRAph1J",
+      "signer": "v2.emet.testnet",
+      "receiver": "guardian.v2.emet.testnet",
+      "methods": [
+        "createAccount",
+        "transfer",
+        "addKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 8.349,
+      "tokens_burnt_near": 0.007114
+    },
+    {
+      "label": "deploy kernel.v2.emet.testnet and delete its key",
+      "hash": "3V4QBQdKPWYc1HnSi14cVnTQQ4oDg6yYPm66eMgEujVF",
+      "explorer": "https://testnet.nearblocks.io/txns/3V4QBQdKPWYc1HnSi14cVnTQQ4oDg6yYPm66eMgEujVF",
+      "signer": "kernel.v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "deployContract",
+        "init",
+        "deleteKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 57.147,
+      "tokens_burnt_near": 0.005714
+    },
+    {
+      "label": "upload chunk-0000.bin",
+      "hash": "EogSn2iCeoLTfJbPSvPa146SzggpTmR8buPRwDobXdaB",
+      "explorer": "https://testnet.nearblocks.io/txns/EogSn2iCeoLTfJbPSvPa146SzggpTmR8buPRwDobXdaB",
+      "signer": "v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "load_base_chunk"
+      ],
+      "ok": true,
+      "value": 479974,
+      "gas_burnt_tgas": 19.562,
+      "tokens_burnt_near": 0.001956
+    },
+    {
+      "label": "upload chunk-0001.bin",
+      "hash": "2L5hmuWJBNUhpJDyyXpt3P9weEJAMReRwWunnZt12qCk",
+      "explorer": "https://testnet.nearblocks.io/txns/2L5hmuWJBNUhpJDyyXpt3P9weEJAMReRwWunnZt12qCk",
+      "signer": "v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "load_base_chunk"
+      ],
+      "ok": true,
+      "value": 877505,
+      "gas_burnt_tgas": 16.429,
+      "tokens_burnt_near": 0.001642
+    },
+    {
+      "label": "seal the environment",
+      "hash": "9XKW7pn4tmjyuHoc1TSwZZN4kRXK7d5EU7FL3cCPRDy2",
+      "explorer": "https://testnet.nearblocks.io/txns/9XKW7pn4tmjyuHoc1TSwZZN4kRXK7d5EU7FL3cCPRDy2",
+      "signer": "v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "seal_base"
+      ],
+      "ok": true,
+      "value": {
+        "owner": "v2.emet.testnet",
+        "chunks": 2,
+        "base_bytes": 877505,
+        "stored_bytes": 250000,
+        "base_hash": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+        "base_decls": 534,
+        "checked_upto": 0,
+        "sealed": false,
+        "axioms_in_base": []
+      },
+      "gas_burnt_tgas": 144.694,
+      "tokens_burnt_near": 0.014469
+    },
+    {
+      "label": "type-check declarations 1 to 128",
+      "hash": "9NWVhLE95cXcSMyrJ2fBeP5vXi2CdkWnk4rim4JFUQXE",
+      "explorer": "https://testnet.nearblocks.io/txns/9NWVhLE95cXcSMyrJ2fBeP5vXi2CdkWnk4rim4JFUQXE",
+      "signer": "v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "check_base_range"
+      ],
+      "ok": true,
+      "value": {
+        "checked_from": 0,
+        "checked_to": 128,
+        "base_decls": 534,
+        "sealed": false,
+        "gas_read": 13078857350931,
+        "gas_parse": 101135341082031,
+        "gas_check": 51357222497463
+      },
+      "gas_burnt_tgas": 168.346,
+      "tokens_burnt_near": 0.016834
+    },
+    {
+      "label": "type-check declarations 129 to 256",
+      "hash": "J65EF15r93w2k3LhsFBk7qAmd3Zrbonwv1xx6knq2XTp",
+      "explorer": "https://testnet.nearblocks.io/txns/J65EF15r93w2k3LhsFBk7qAmd3Zrbonwv1xx6knq2XTp",
+      "signer": "v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "check_base_range"
+      ],
+      "ok": true,
+      "value": {
+        "checked_from": 128,
+        "checked_to": 256,
+        "base_decls": 534,
+        "sealed": false,
+        "gas_read": 13078857350931,
+        "gas_parse": 101135341082031,
+        "gas_check": 46302358552299
+      },
+      "gas_burnt_tgas": 163.292,
+      "tokens_burnt_near": 0.016329
+    },
+    {
+      "label": "type-check declarations 257 to 384",
+      "hash": "EhRYCkg4to1NJAr3cLWVz1Vffdd79ZB4zSGUtE3QdZzZ",
+      "explorer": "https://testnet.nearblocks.io/txns/EhRYCkg4to1NJAr3cLWVz1Vffdd79ZB4zSGUtE3QdZzZ",
+      "signer": "v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "check_base_range"
+      ],
+      "ok": true,
+      "value": {
+        "checked_from": 256,
+        "checked_to": 384,
+        "base_decls": 534,
+        "sealed": false,
+        "gas_read": 13078857350931,
+        "gas_parse": 101135341082031,
+        "gas_check": 62799055704003
+      },
+      "gas_burnt_tgas": 179.788,
+      "tokens_burnt_near": 0.017978
+    },
+    {
+      "label": "type-check declarations 385 to 512",
+      "hash": "FfmuR8qpuWmu9vroyFUcF68A6CNLjjdSsFvU18RMQC2C",
+      "explorer": "https://testnet.nearblocks.io/txns/FfmuR8qpuWmu9vroyFUcF68A6CNLjjdSsFvU18RMQC2C",
+      "signer": "v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "check_base_range"
+      ],
+      "ok": true,
+      "value": {
+        "checked_from": 384,
+        "checked_to": 512,
+        "base_decls": 534,
+        "sealed": false,
+        "gas_read": 13078857350931,
+        "gas_parse": 101135341082031,
+        "gas_check": 55937895135807
+      },
+      "gas_burnt_tgas": 172.927,
+      "tokens_burnt_near": 0.017292
+    },
+    {
+      "label": "type-check declarations 513 to 534",
+      "hash": "3BsCNbo83qGX7aXw4JxuAUcQ9LN6RG6855NsCEVYU2hz",
+      "explorer": "https://testnet.nearblocks.io/txns/3BsCNbo83qGX7aXw4JxuAUcQ9LN6RG6855NsCEVYU2hz",
+      "signer": "v2.emet.testnet",
+      "receiver": "kernel.v2.emet.testnet",
+      "methods": [
+        "check_base_range"
+      ],
+      "ok": true,
+      "value": {
+        "checked_from": 512,
+        "checked_to": 534,
+        "base_decls": 534,
+        "sealed": true,
+        "gas_read": 13078857350931,
+        "gas_parse": 101135341082031,
+        "gas_check": 55590424708107
+      },
+      "gas_burnt_tgas": 172.58,
+      "tokens_burnt_near": 0.017258
+    },
+    {
+      "label": "deploy board.v2.emet.testnet and delete its key",
+      "hash": "DeUtgoQ6kXud5aAkMKmc1uQDbaNxcmMGoyZVyvtRmEsA",
+      "explorer": "https://testnet.nearblocks.io/txns/DeUtgoQ6kXud5aAkMKmc1uQDbaNxcmMGoyZVyvtRmEsA",
+      "signer": "board.v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "deployContract",
+        "new",
+        "deleteKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 23.057,
+      "tokens_burnt_near": 0.002305
+    },
+    {
+      "label": "post the bounty on original",
+      "hash": "7A9BDTwhnNL1Bs2SAQojrvzz2Ji4koxUrqTt1sVKppPP",
+      "explorer": "https://testnet.nearblocks.io/txns/7A9BDTwhnNL1Bs2SAQojrvzz2Ji4koxUrqTt1sVKppPP",
+      "signer": "v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "post_bounty"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 239.536,
+      "tokens_burnt_near": 0.023886
+    },
+    {
+      "label": "post the bounty on repair",
+      "hash": "BVGZUn1q1SiZ66mUcFzNHecYXK8Dbn6fuhgA1UZrDu6U",
+      "explorer": "https://testnet.nearblocks.io/txns/BVGZUn1q1SiZ66mUcFzNHecYXK8Dbn6fuhgA1UZrDu6U",
+      "signer": "v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "post_bounty"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 239.575,
+      "tokens_burnt_near": 0.02389
+    },
+    {
+      "label": "post a standing bounty for a proof of False",
+      "hash": "HDr7NT5APtgL4tu8uop9nUdBsBYtRbLi89EJmwth4zZf",
+      "explorer": "https://testnet.nearblocks.io/txns/HDr7NT5APtgL4tu8uop9nUdBsBYtRbLi89EJmwth4zZf",
+      "signer": "v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "post_bounty"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 122.03,
+      "tokens_burnt_near": 0.012158
+    },
+    {
+      "label": "deploy gate.v2.emet.testnet and delete its key",
+      "hash": "AvxxkK4kN6phciJzwbdx4bh83PRP3W4s5i6XhWGE33sx",
+      "explorer": "https://testnet.nearblocks.io/txns/AvxxkK4kN6phciJzwbdx4bh83PRP3W4s5i6XhWGE33sx",
+      "signer": "gate.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "deployContract",
+        "new",
+        "deleteKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 14.695,
+      "tokens_burnt_near": 0.001469
+    },
+    {
+      "label": "deploy intents.v2.emet.testnet and delete its key",
+      "hash": "77KMUauqJg8xN8ne5RnPM3UHpLUGfiiwhz2YEk68FXHG",
+      "explorer": "https://testnet.nearblocks.io/txns/77KMUauqJg8xN8ne5RnPM3UHpLUGfiiwhz2YEk68FXHG",
+      "signer": "intents.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "deployContract",
+        "new",
+        "deleteKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 113.21,
+      "tokens_burnt_near": 0.011321
+    },
+    {
+      "label": "deploy receiver.v2.emet.testnet",
+      "hash": "EBjN1M85KdAEFdvAiV5WWrwMuMRPrCFGbrgaScs74W9A",
+      "explorer": "https://testnet.nearblocks.io/txns/EBjN1M85KdAEFdvAiV5WWrwMuMRPrCFGbrgaScs74W9A",
+      "signer": "receiver.v2.emet.testnet",
+      "receiver": "receiver.v2.emet.testnet",
+      "methods": [
+        "deployContract"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 23.36,
+      "tokens_burnt_near": 0.002336
+    },
+    {
+      "label": "deploy bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet and delete its key",
+      "hash": "7juKACjeNVQy1hBAKTuUnXPJcHGPbEMhYtKZKuJ27ZYa",
+      "explorer": "https://testnet.nearblocks.io/txns/7juKACjeNVQy1hBAKTuUnXPJcHGPbEMhYtKZKuJ27ZYa",
+      "signer": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "receiver": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "methods": [
+        "deployContract",
+        "new",
+        "deleteKey"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 110.346,
+      "tokens_burnt_near": 0.011034
+    },
+    {
+      "label": "stage repair, part 1",
+      "hash": "dsnEKonQQ7eJk1mUyrf6TY2nuytwdUZtG5Pp6SrXig1",
+      "explorer": "https://testnet.nearblocks.io/txns/dsnEKonQQ7eJk1mUyrf6TY2nuytwdUZtG5Pp6SrXig1",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "stage_code"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 61.755,
+      "tokens_burnt_near": 0.006175
+    },
+    {
+      "label": "stage repair, part 2",
+      "hash": "4dNU5KyitKrNSmCmMkTn1anm69ZH55HhjhE6i6Kfpi1i",
+      "explorer": "https://testnet.nearblocks.io/txns/4dNU5KyitKrNSmCmMkTn1anm69ZH55HhjhE6i6Kfpi1i",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "stage_code"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 61.764,
+      "tokens_burnt_near": 0.006176
+    },
+    {
+      "label": "stage repair, part 3",
+      "hash": "9nuEdS6kJRPS3wKfQG58dzFNbNAFjtoBj5XAfbx23Rcq",
+      "explorer": "https://testnet.nearblocks.io/txns/9nuEdS6kJRPS3wKfQG58dzFNbNAFjtoBj5XAfbx23Rcq",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "stage_code"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 61.766,
+      "tokens_burnt_near": 0.006176
+    },
+    {
+      "label": "stage repair, part 4",
+      "hash": "5w6C95aFYxMdUMsStHZo77MKvRYTWijd3pCq6rYBXnA5",
+      "explorer": "https://testnet.nearblocks.io/txns/5w6C95aFYxMdUMsStHZo77MKvRYTWijd3pCq6rYBXnA5",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "stage_code"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 61.766,
+      "tokens_burnt_near": 0.006176
+    },
+    {
+      "label": "stage repair, part 5",
+      "hash": "Fa38PkHZSyYcdLkZMTTRTVNTRVtFkXqRm3eMkxsKnx4t",
+      "explorer": "https://testnet.nearblocks.io/txns/Fa38PkHZSyYcdLkZMTTRTVNTRVtFkXqRm3eMkxsKnx4t",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "stage_code"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 60.323,
+      "tokens_burnt_near": 0.006032
+    },
+    {
+      "label": "give the receiver a balance of 1000",
+      "hash": "4qsEd9C4yVQ3bTFSULwViyC2DLLnZThJM7whBSBhGcMe",
+      "explorer": "https://testnet.nearblocks.io/txns/4qsEd9C4yVQ3bTFSULwViyC2DLLnZThJM7whBSBhGcMe",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "mt_on_transfer"
+      ],
+      "ok": true,
+      "value": [
+        "0"
+      ],
+      "gas_burnt_tgas": 4.331,
+      "tokens_burnt_near": 0.000433
+    },
+    {
+      "label": "deposit 1; the receiver asks for 100 back",
+      "hash": "uYYMCt5TLty6oWveAKaz5Q1xqqPHgQxWoBcJ7Nc68Dg",
+      "explorer": "https://testnet.nearblocks.io/txns/uYYMCt5TLty6oWveAKaz5Q1xqqPHgQxWoBcJ7Nc68Dg",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "mt_on_transfer"
+      ],
+      "ok": true,
+      "value": [
+        "100"
+      ],
+      "gas_burnt_tgas": 10.669,
+      "tokens_burnt_near": 0.001022
+    },
+    {
+      "label": "mint test tokens on the ledger",
+      "hash": "BTXwpmFkWD6nna9w38sFozXRShTatN8BLczLbYitwPQA",
+      "explorer": "https://testnet.nearblocks.io/txns/BTXwpmFkWD6nna9w38sFozXRShTatN8BLczLbYitwPQA",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "methods": [
+        "mt_on_transfer"
+      ],
+      "ok": true,
+      "value": [
+        "0"
+      ],
+      "gas_burnt_tgas": 4.306,
+      "tokens_burnt_near": 0.00043
+    },
+    {
+      "label": "move 1e37 of them into the contract for the receiver",
+      "hash": "4shyF3coxXsuvd3koQogQd7wcw79aCrxjbtdYQxCdcnj",
+      "explorer": "https://testnet.nearblocks.io/txns/4shyF3coxXsuvd3koQogQd7wcw79aCrxjbtdYQxCdcnj",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "methods": [
+        "mt_transfer_call"
+      ],
+      "ok": true,
+      "value": [
+        "10000000000000000000000000000000000000"
+      ],
+      "gas_burnt_tgas": 13.093,
+      "tokens_burnt_near": 0.001264
+    },
+    {
+      "label": "80 transfers of 1 through the ledger; the receiver asks for 1e35 back on each",
+      "hash": "6Z8vL3zyMeez2qvCM8Zgde1AwDMxSQ7qZhDrhEAF77jh",
+      "explorer": "https://testnet.nearblocks.io/txns/6Z8vL3zyMeez2qvCM8Zgde1AwDMxSQ7qZhDrhEAF77jh",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "methods": [
+        "mt_batch_transfer_call"
+      ],
+      "ok": false,
+      "value": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "gas_burnt_tgas": 52.492,
+      "tokens_burnt_near": 0.00516,
+      "failures": [
+        {
+          "executor": "intents.v2.emet.testnet",
+          "error": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "The length of a log message 17519 exceeds the limit 16384"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "before": {
+        "backing": "10000000000000000000000000000000000000",
+        "credit": "10000000000000000000000000000000000000",
+        "sender": "160"
+      },
+      "after": {
+        "backing": "10000000000000000000000000000000000000",
+        "credit": "10000000000000000000000000000000000080",
+        "sender": "160"
+      },
+      "unbacked_added": "80"
+    },
+    {
+      "label": "the guardian pauses deposits",
+      "hash": "629p34LSNQEZ2rdiSLNe6k3B8fbXG51dnMkeWocmJKig",
+      "explorer": "https://testnet.nearblocks.io/txns/629p34LSNQEZ2rdiSLNe6k3B8fbXG51dnMkeWocmJKig",
+      "signer": "guardian.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "pa_pause_feature"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 3.5,
+      "tokens_burnt_near": 0.00035
+    },
+    {
+      "label": "a deposit while deposits are paused",
+      "hash": "Ez337gosm7dXzuzRyWJLGXokMjtGZGb2VF282vJYQPUf",
+      "explorer": "https://testnet.nearblocks.io/txns/Ez337gosm7dXzuzRyWJLGXokMjtGZGb2VF282vJYQPUf",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "mt_on_transfer"
+      ],
+      "ok": false,
+      "value": null,
+      "gas_burnt_tgas": 3.04,
+      "tokens_burnt_near": 0.000304,
+      "failures": [
+        {
+          "executor": "intents.v2.emet.testnet",
+          "error": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: Pausable: Method is paused"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "try to install the repair before any proof exists",
+      "hash": "8gtRgk2vp1Lq2c8X1Qgd4WeDfAwq6MxrpaHjVqAh87ar",
+      "explorer": "https://testnet.nearblocks.io/txns/8gtRgk2vp1Lq2c8X1Qgd4WeDfAwq6MxrpaHjVqAh87ar",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "apply_patch"
+      ],
+      "ok": true,
+      "value": false,
+      "gas_burnt_tgas": 74.32,
+      "tokens_burnt_near": 0.007365
+    },
+    {
+      "label": "offer the gate a binary that differs in one bit",
+      "hash": "43pkLyLdrRE2LvF45b4bVKRoKNJAjH4fW4votfFQebMd",
+      "explorer": "https://testnet.nearblocks.io/txns/43pkLyLdrRE2LvF45b4bVKRoKNJAjH4fW4votfFQebMd",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "stage_code"
+      ],
+      "ok": false,
+      "value": null,
+      "gas_burnt_tgas": 50.658,
+      "tokens_burnt_near": 0.005065,
+      "failures": [
+        {
+          "executor": "gate.v2.emet.testnet",
+          "error": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: chunk_mismatch"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "commit to a refutation of the original claim",
+      "hash": "EQvqt4J94cQrERQHrEwWpkRkNcYCSAM7PE8TqBwniTeW",
+      "explorer": "https://testnet.nearblocks.io/txns/EQvqt4J94cQrERQHrEwWpkRkNcYCSAM7PE8TqBwniTeW",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "commit"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 2.637,
+      "tokens_burnt_near": 0.000263
+    },
+    {
+      "label": "reveal the refutation; the kernel checks it",
+      "hash": "8hffZLs47Ms7mRpgZRx14Gw4t8AQj2T75nFyx3gUve4b",
+      "explorer": "https://testnet.nearblocks.io/txns/8hffZLs47Ms7mRpgZRx14Gw4t8AQj2T75nFyx3gUve4b",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "reveal"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 140.954,
+      "tokens_burnt_near": 0.014006,
+      "proof_bytes": 16820,
+      "proof_sha256": "984768705ce3cb49bcd463dc6b864c0a514c6656a1dccebd1e683411833b0b66",
+      "certificate": {
+        "claimer": "prover.v2.emet.testnet",
+        "side": "refutation",
+        "proved": "Refund.C_72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e.Refute",
+        "proof_theorem": "Refund.original",
+        "statement_hash": "420f472d18647c9314cf23793ef70a5fac2b3f7733b2a70a1a3bb518407aa459",
+        "base_hash": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+        "axioms": [],
+        "decls_checked": 7,
+        "delta_sha256": "984768705ce3cb49bcd463dc6b864c0a514c6656a1dccebd1e683411833b0b66",
+        "block_height": "277543281",
+        "timestamp": "1794592441936649583"
+      }
+    },
+    {
+      "label": "commit to a proof of the repair claim",
+      "hash": "S81Z1AyVb8vowLUPs52FL6mZYKawPADPBf5fqN4fZCR",
+      "explorer": "https://testnet.nearblocks.io/txns/S81Z1AyVb8vowLUPs52FL6mZYKawPADPBf5fqN4fZCR",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "commit"
+      ],
+      "ok": true,
+      "value": null,
+      "gas_burnt_tgas": 2.642,
+      "tokens_burnt_near": 0.000264
+    },
+    {
+      "label": "reveal the proof; the kernel checks it",
+      "hash": "GrpZSfrnVaxt5EGcbsXdacagFq3KjeimPPPrgYCtNSaf",
+      "explorer": "https://testnet.nearblocks.io/txns/GrpZSfrnVaxt5EGcbsXdacagFq3KjeimPPPrgYCtNSaf",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "reveal"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 137.07,
+      "tokens_burnt_near": 0.013617,
+      "proof_bytes": 13942,
+      "proof_sha256": "49b7600c0a80ad6490a4f7557584f815869dd73720ed4230a490d797d89ffeb4",
+      "certificate": {
+        "claimer": "prover.v2.emet.testnet",
+        "side": "proof",
+        "proved": "Refund.C_9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1.Correct",
+        "proof_theorem": "Refund.repair",
+        "statement_hash": "fd0e104a6647e7460dbc4bb8788b46c9c37b958fb7de30c300046a65d2976dd4",
+        "base_hash": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+        "axioms": [],
+        "decls_checked": 1,
+        "delta_sha256": "49b7600c0a80ad6490a4f7557584f815869dd73720ed4230a490d797d89ffeb4",
+        "block_height": "277543313",
+        "timestamp": "1794592460856737039"
+      }
+    },
+    {
+      "label": "install the repair: the gate reads the certificate and upgrades the contract",
+      "hash": "8QaELsm36m21ij3AW7QuZjcrB8dT4CqT3VCE2qLtucc1",
+      "explorer": "https://testnet.nearblocks.io/txns/8QaELsm36m21ij3AW7QuZjcrB8dT4CqT3VCE2qLtucc1",
+      "signer": "prover.v2.emet.testnet",
+      "receiver": "gate.v2.emet.testnet",
+      "methods": [
+        "apply_patch"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 352.077,
+      "tokens_burnt_near": 0.035073
+    },
+    {
+      "label": "the guardian lets deposits resume",
+      "hash": "G2C131ke3srjttiZti2xu6raCHZPMa9ihp1gJQzjAAr2",
+      "explorer": "https://testnet.nearblocks.io/txns/G2C131ke3srjttiZti2xu6raCHZPMa9ihp1gJQzjAAr2",
+      "signer": "guardian.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "pa_unpause_feature"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 3.507,
+      "tokens_burnt_near": 0.00035
+    },
+    {
+      "label": "the same deposit of 1 on the same account",
+      "hash": "AZapRDGSvUyuEBjbvMViQsQwu9EtPsoqCnoTGFdC26AB",
+      "explorer": "https://testnet.nearblocks.io/txns/AZapRDGSvUyuEBjbvMViQsQwu9EtPsoqCnoTGFdC26AB",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "intents.v2.emet.testnet",
+      "methods": [
+        "mt_on_transfer"
+      ],
+      "ok": true,
+      "value": [
+        "1"
+      ],
+      "gas_burnt_tgas": 10.687,
+      "tokens_burnt_near": 0.001024
+    },
+    {
+      "label": "the same 80 transfers through the ledger",
+      "hash": "HREKnogCDfHWDW1Ksjf6AT9XJwGR9ufFgDhC8S1h75R3",
+      "explorer": "https://testnet.nearblocks.io/txns/HREKnogCDfHWDW1Ksjf6AT9XJwGR9ufFgDhC8S1h75R3",
+      "signer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet",
+      "receiver": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet",
+      "methods": [
+        "mt_batch_transfer_call"
+      ],
+      "ok": true,
+      "value": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "gas_burnt_tgas": 57.68,
+      "tokens_burnt_near": 0.005678,
+      "before": {
+        "backing": "10000000000000000000000000000000000000",
+        "credit": "10000000000000000000000000000000000080",
+        "sender": "160"
+      },
+      "after": {
+        "backing": "10000000000000000000000000000000000000",
+        "credit": "10000000000000000000000000000000000080",
+        "sender": "160"
+      },
+      "unbacked_added": "0"
+    },
+    {
+      "label": "post an open bounty on deposit_only",
+      "hash": "Cf5HQ95S11FH9Aj7xYyeiTHe8EHQXYXwt2bgM9mBJbCV",
+      "explorer": "https://testnet.nearblocks.io/txns/Cf5HQ95S11FH9Aj7xYyeiTHe8EHQXYXwt2bgM9mBJbCV",
+      "signer": "v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "post_bounty"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 239.567,
+      "tokens_burnt_near": 0.023889
+    },
+    {
+      "label": "post an open bounty on ignore_request",
+      "hash": "BV2TWqrDrWiAihRF3cKaB3QPjqjfgsb1iFzo9VZibdbA",
+      "explorer": "https://testnet.nearblocks.io/txns/BV2TWqrDrWiAihRF3cKaB3QPjqjfgsb1iFzo9VZibdbA",
+      "signer": "v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "post_bounty"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 239.576,
+      "tokens_burnt_near": 0.02389
+    },
+    {
+      "label": "post an open bounty on zero_refund",
+      "hash": "5CBr66tUbEoL9K1BhuqVVFNM23bNBHkNxc47icGmMEJW",
+      "explorer": "https://testnet.nearblocks.io/txns/5CBr66tUbEoL9K1BhuqVVFNM23bNBHkNxc47icGmMEJW",
+      "signer": "v2.emet.testnet",
+      "receiver": "board.v2.emet.testnet",
+      "methods": [
+        "post_bounty"
+      ],
+      "ok": true,
+      "value": true,
+      "gas_burnt_tgas": 239.572,
+      "tokens_burnt_near": 0.02389
+    }
+  ],
+  "checks": [
+    {
+      "name": "The kernel type-checked every declaration of the pinned environment",
+      "ok": true,
+      "detail": {
+        "checked": 534,
+        "of": 534
+      }
+    },
+    {
+      "name": "A bounty for a proof of False is open on the board, and its kernel is not recorded broken",
+      "ok": true,
+      "detail": {
+        "phase": "Open",
+        "kernel_broken_by": null
+      }
+    },
+    {
+      "name": "On the upstream contract only the gate may upgrade and only the guardian may pause; nobody holds any other role",
+      "ok": true,
+      "detail": {
+        "super_admins": [],
+        "roles": {
+          "DAO": {
+            "admins": [],
+            "grantees": []
+          },
+          "UnpauseManager": {
+            "admins": [],
+            "grantees": [
+              "guardian.v2.emet.testnet"
+            ]
+          },
+          "GarbageCollector": {
+            "admins": [],
+            "grantees": []
+          },
+          "RelayerKeysManager": {
+            "admins": [],
+            "grantees": []
+          },
+          "PauseManager": {
+            "admins": [],
+            "grantees": [
+              "guardian.v2.emet.testnet"
+            ]
+          },
+          "FeesManager": {
+            "admins": [],
+            "grantees": []
+          },
+          "UnrestrictedAccountUnlocker": {
+            "admins": [],
+            "grantees": []
+          },
+          "SaltManager": {
+            "admins": [],
+            "grantees": []
+          },
+          "UnrestrictedAccountLocker": {
+            "admins": [],
+            "grantees": []
+          },
+          "Upgrader": {
+            "admins": [],
+            "grantees": [
+              "gate.v2.emet.testnet"
+            ]
+          },
+          "UnrestrictedAccountManager": {
+            "admins": [],
+            "grantees": []
+          },
+          "UnrestrictedWithdrawer": {
+            "admins": [],
+            "grantees": []
+          }
+        }
+      }
+    },
+    {
+      "name": "The old code answers 100 to a deposit of 1",
+      "ok": true,
+      "detail": [
+        "100"
+      ]
+    },
+    {
+      "name": "Through a real token contract, the old code ends that batch with 80 credits that no token backs",
+      "ok": true,
+      "detail": {
+        "before": {
+          "backing": "10000000000000000000000000000000000000",
+          "credit": "10000000000000000000000000000000000000",
+          "sender": "160"
+        },
+        "after": {
+          "backing": "10000000000000000000000000000000000000",
+          "credit": "10000000000000000000000000000000000080",
+          "sender": "160"
+        },
+        "failures": [
+          {
+            "executor": "intents.v2.emet.testnet",
+            "error": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "The length of a log message 17519 exceeds the limit 16384"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "The guardian pauses deposits in one transaction, and a deposit is then refused",
+      "ok": true,
+      "detail": {
+        "failures": [
+          {
+            "executor": "intents.v2.emet.testnet",
+            "error": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: Pausable: Method is paused"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "The upstream contract runs the old binary",
+      "ok": true
+    },
+    {
+      "name": "Without a proof the gate installs nothing",
+      "ok": true,
+      "detail": {
+        "phase": "Open",
+        "last_error": "no_matching_positive_certificate"
+      }
+    },
+    {
+      "name": "A binary that differs in one bit is refused by its hash",
+      "ok": true
+    },
+    {
+      "name": "The old expression earns a paid refutation, not a certificate of correctness",
+      "ok": true,
+      "detail": {
+        "phase": "Paid",
+        "side": "refutation"
+      }
+    },
+    {
+      "name": "The proof of the repair is checked by the kernel and its author is paid",
+      "ok": true,
+      "detail": {
+        "phase": "Paid",
+        "proved": "Refund.C_9ceacc45c79c529b7c5176cb562c983378487348c42bcd1dfbd8c90c42d77bb1.Correct"
+      }
+    },
+    {
+      "name": "The gate installed exactly the binary registered for that claim",
+      "ok": true,
+      "detail": {
+        "phase": "Applied",
+        "candidate": "repair",
+        "generation": "2"
+      }
+    },
+    {
+      "name": "The upgrade kept the balances",
+      "ok": true,
+      "detail": {
+        "before": "901",
+        "after": "901"
+      }
+    },
+    {
+      "name": "The same account now answers 1 to a deposit of 1",
+      "ok": true,
+      "detail": [
+        "1"
+      ]
+    },
+    {
+      "name": "After the upgrade the same batch completes and adds no unbacked credit",
+      "ok": true,
+      "detail": {
+        "before": {
+          "backing": "10000000000000000000000000000000000000",
+          "credit": "10000000000000000000000000000000000080",
+          "sender": "160"
+        },
+        "after": {
+          "backing": "10000000000000000000000000000000000000",
+          "credit": "10000000000000000000000000000000000080",
+          "sender": "160"
+        }
+      }
+    },
+    {
+      "name": "No access key exists on the kernel, the board, the gate, the upstream contract or the ledger",
+      "ok": true,
+      "detail": {
+        "kernel.v2.emet.testnet": 0,
+        "board.v2.emet.testnet": 0,
+        "gate.v2.emet.testnet": 0,
+        "intents.v2.emet.testnet": 0,
+        "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet": 0
+      }
+    }
+  ],
+  "salts": {
+    "original": "b9e656e02db6403d7e4f9753053b2b3d",
+    "repair": "174c0890f077b038b9dbad9eaeccde0a"
+  },
+  "marks": {
+    "position_before_old_batch": "{\"backing\":\"10000000000000000000000000000000000000\",\"credit\":\"10000000000000000000000000000000000000\",\"sender\":\"160\"}",
+    "asset_balance_before_upgrade": "901",
+    "position_before_new_batch": "{\"backing\":\"10000000000000000000000000000000000000\",\"credit\":\"10000000000000000000000000000000000080\",\"sender\":\"160\"}"
+  },
+  "kernel_bounty": {
+    "id": "2",
+    "reward_near": 1,
+    "phase": "Open"
+  },
+  "roles": {
+    "super_admins": [],
+    "roles": {
+      "DAO": {
+        "admins": [],
+        "grantees": []
+      },
+      "UnpauseManager": {
+        "admins": [],
+        "grantees": [
+          "guardian.v2.emet.testnet"
+        ]
+      },
+      "GarbageCollector": {
+        "admins": [],
+        "grantees": []
+      },
+      "RelayerKeysManager": {
+        "admins": [],
+        "grantees": []
+      },
+      "PauseManager": {
+        "admins": [],
+        "grantees": [
+          "guardian.v2.emet.testnet"
+        ]
+      },
+      "FeesManager": {
+        "admins": [],
+        "grantees": []
+      },
+      "UnrestrictedAccountUnlocker": {
+        "admins": [],
+        "grantees": []
+      },
+      "SaltManager": {
+        "admins": [],
+        "grantees": []
+      },
+      "UnrestrictedAccountLocker": {
+        "admins": [],
+        "grantees": []
+      },
+      "Upgrader": {
+        "admins": [],
+        "grantees": [
+          "gate.v2.emet.testnet"
+        ]
+      },
+      "UnrestrictedAccountManager": {
+        "admins": [],
+        "grantees": []
+      },
+      "UnrestrictedWithdrawer": {
+        "admins": [],
+        "grantees": []
+      }
+    }
+  },
+  "tokens": {
+    "on_ledger": "nep245:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "in_contract": "nep245:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet:nep245:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.v2.emet.testnet:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  },
+  "balance_before_upgrade": "901",
+  "gate": {
+    "phase": "Applied",
+    "candidate": "repair",
+    "generation": "2"
+  },
+  "balance_after_upgrade": "901",
+  "open_bounties": [
+    {
+      "id": "3",
+      "label": "deposit_only",
+      "expression": "requested_refund.min(*deposited)",
+      "claim": "Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Correct",
+      "counter_claim": "Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Refute",
+      "settles_with": "Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Refute",
+      "proof_file": "cases/intents-refund/proofs/deposit_only.ndjson",
+      "reward_near": 0.3,
+      "posted": "Cf5HQ95S11FH9Aj7xYyeiTHe8EHQXYXwt2bgM9mBJbCV",
+      "explorer": "https://testnet.nearblocks.io/txns/Cf5HQ95S11FH9Aj7xYyeiTHe8EHQXYXwt2bgM9mBJbCV"
+    },
+    {
+      "id": "4",
+      "label": "ignore_request",
+      "expression": "(*deposited).min(balance_left)",
+      "claim": "Refund.C_6641e563c26dbb57124c0650e7346e620d729c48e6efca343c9a7fea8316a0da.Correct",
+      "counter_claim": "Refund.C_6641e563c26dbb57124c0650e7346e620d729c48e6efca343c9a7fea8316a0da.Refute",
+      "settles_with": "Refund.C_6641e563c26dbb57124c0650e7346e620d729c48e6efca343c9a7fea8316a0da.Refute",
+      "proof_file": "cases/intents-refund/proofs/ignore_request.ndjson",
+      "reward_near": 0.3,
+      "posted": "BV2TWqrDrWiAihRF3cKaB3QPjqjfgsb1iFzo9VZibdbA",
+      "explorer": "https://testnet.nearblocks.io/txns/BV2TWqrDrWiAihRF3cKaB3QPjqjfgsb1iFzo9VZibdbA"
+    },
+    {
+      "id": "5",
+      "label": "zero_refund",
+      "expression": "0u128",
+      "claim": "Refund.C_c196307c0e68c8b8632bad817235cd14d544cb0ac666a64e28979ebb1e50b878.Correct",
+      "counter_claim": "Refund.C_c196307c0e68c8b8632bad817235cd14d544cb0ac666a64e28979ebb1e50b878.Refute",
+      "settles_with": "Refund.C_c196307c0e68c8b8632bad817235cd14d544cb0ac666a64e28979ebb1e50b878.Refute",
+      "proof_file": "cases/intents-refund/proofs/zero_refund.ndjson",
+      "reward_near": 0.3,
+      "posted": "5CBr66tUbEoL9K1BhuqVVFNM23bNBHkNxc47icGmMEJW",
+      "explorer": "https://testnet.nearblocks.io/txns/5CBr66tUbEoL9K1BhuqVVFNM23bNBHkNxc47icGmMEJW"
+    }
+  ],
+  "access_keys": {
+    "kernel.v2.emet.testnet": 0,
+    "board.v2.emet.testnet": 0,
+    "gate.v2.emet.testnet": 0,
+    "intents.v2.emet.testnet": 0,
+    "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.v2.emet.testnet": 0
+  },
+  "storage_bytes": {
+    "kernel": 1031422,
+    "board": 296757,
+    "gate": 1667990,
+    "intents": 1496219,
+    "receiver": 319256,
+    "ledger": 1495157
+  },
+  "ok": true,
+  "finished_at": "2026-11-13T17:55:34.791Z",
+  "spent_near": 0.4631
+}

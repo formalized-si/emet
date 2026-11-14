@@ -1,0 +1,35 @@
+{
+  "case": "cases/intents-refund",
+  "upstream_revision": "35044fd1795b0de9d1ac269c6aa28a0d6a7efdfa",
+  "upstream_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+  "started": "2026-11-12T09:55:12Z",
+  "max_rounds": 3,
+  "no_axioms_asked": false,
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "z-ai/glm-5.3-flash",
+    "model_owner": "nearai",
+    "seconds": 2027.5,
+    "turns": 4,
+    "tool_calls": 1,
+    "solution_writes": 0,
+    "repair_rounds": 0,
+    "lean_runs": 0,
+    "lean_failures": 0,
+    "lost_responses": 1,
+    "prompt_tokens": 8991,
+    "completion_tokens": 11007,
+    "usd_per_token": {
+      "prompt": 8e-08,
+      "completion": 5e-07
+    },
+    "final": "",
+    "cost_usd": 0.0097,
+    "signed_responses": 3,
+    "responses": 3,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "rounds": [],
+  "accepted": false
+}

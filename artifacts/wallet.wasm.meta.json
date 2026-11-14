@@ -1,0 +1,32 @@
+{
+  "wasm": "wallet.wasm",
+  "size": 75312,
+  "sha256": "21e30c4fb06676502c94246fd72904959941d46757c21e1713bf0333c37450b3",
+  "lean_src_sha256": "b37bda88de09a5c85854a4b33140369faf0ac9e08f44dc683cc27dab94165abe",
+  "lean_src_files": 18,
+  "toolchain": "Lean (version 4.35.0, arm64-apple-darwin24.6.0, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "runtime": "A",
+  "runtime_sha256": "56ec24d3f909215ca4659528f429b2b0021dd36f796b7196b70dc5e49b163835",
+  "shim": "near_entry.c",
+  "shim_sha256": "13a228c410cbf6a24aebe78fccf03342609bc729caab67ddd87994c04585aed7",
+  "shim_defines": [],
+  "lean_c_files": 15,
+  "init_modules_linked": [],
+  "mvp_valid": true,
+  "imports": [
+    "current_account_id",
+    "register_len",
+    "read_register",
+    "predecessor_account_id",
+    "storage_read",
+    "input",
+    "block_timestamp",
+    "storage_write",
+    "log_utf8",
+    "value_return",
+    "panic_utf8",
+    "promise_batch_create",
+    "promise_batch_action_transfer"
+  ],
+  "lean_near": "0.1.0"
+}

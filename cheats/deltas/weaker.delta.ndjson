@@ -1,0 +1,10 @@
+{"in":3222,"str":{"pre":0,"str":"Cheat"}}
+{"in":3223,"str":{"pre":3222,"str":"weaker"}}
+{"forallE":{"binderInfo":"default","body":4489,"name":20,"type":16081},"ie":16409}
+{"in":3224,"str":{"pre":97,"str":"Cheats"}}
+{"in":3225,"num":{"i":2393374867,"pre":3224}}
+{"in":3226,"str":{"pre":3225,"str":"_hygCtx"}}
+{"in":3227,"str":{"pre":3226,"str":"_hyg"}}
+{"in":3228,"num":{"i":7,"pre":3227}}
+{"ie":16410,"lam":{"binderInfo":"default","body":11107,"name":3228,"type":16081}}
+{"thm":{"all":[3223],"levelParams":[],"name":3223,"type":16409,"value":16410}}

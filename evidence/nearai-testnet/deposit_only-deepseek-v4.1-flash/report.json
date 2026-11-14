@@ -1,0 +1,63 @@
+{
+  "claim": "Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Refute",
+  "shelf": "cases/intents-refund/shelf",
+  "started": "2026-11-12T12:06:35Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 803.2,
+    "turns": 29,
+    "tool_calls": 29,
+    "solution_writes": 12,
+    "repair_rounds": 11,
+    "lean_runs": 10,
+    "lean_failures": 10,
+    "lost_responses": 0,
+    "prompt_tokens": 181892,
+    "completion_tokens": 25192,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "Compiles cleanly with no warnings, and `measure.sh` reports a 5,095-byte delta (only 2 declarations) \u2014 far under budget.\n\nThe counterexample: take `requested = 2`, `deposited = 3`, `balance = 1` (all well within `maxU128`). The expression `least requested deposited` evaluates to `min 2 3 = 2`, but the refund rule requires `r \u2264 balance`, i.e. `2 \u2264 1` \u2014 false.\n\nDONE",
+    "cost_usd": 0.0848,
+    "signed_responses": 29,
+    "responses": 29,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' does not depend on any axioms\nSolution.proof : Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Refute\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+    "forbidden_in_delta": [],
+    "delta_bytes": 5095,
+    "delta_sha256": "d72c631c18d0bdc57d7915d01bd3580dd851d07e6693ed9274b655f01c5274b7",
+    "decls": 2,
+    "heaviest": [
+      {
+        "name": "Solution.proof",
+        "kind": "thm",
+        "bytes": 4794
+      },
+      {
+        "name": "Nat.min",
+        "kind": "def",
+        "bytes": 301
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

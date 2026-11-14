@@ -1,0 +1,69 @@
+{
+  "case": "cases/intents-refund",
+  "upstream_revision": "35044fd1795b0de9d1ac269c6aa28a0d6a7efdfa",
+  "upstream_sha256": "72245952a41246be823dfbe992b2ff76be05461008b4257b6ad0cb20954fc37e",
+  "started": "2026-11-12T10:29:06Z",
+  "max_rounds": 3,
+  "no_axioms_asked": true,
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 153.4,
+    "turns": 2,
+    "tool_calls": 2,
+    "solution_writes": 0,
+    "repair_rounds": 0,
+    "lean_runs": 0,
+    "lean_failures": 0,
+    "lost_responses": 0,
+    "prompt_tokens": 7157,
+    "completion_tokens": 5264,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "accepted in round 1",
+    "cost_usd": 0.0085,
+    "signed_responses": 2,
+    "responses": 2,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "expression": "requested_refund.min(*deposited).min(balance_left)",
+      "source_sha256": "63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f",
+      "claim": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+      "patch": "bound",
+      "solution": "import RefundCase\n\nnamespace Solution\n\ntheorem min_pick (x y : Nat) : min x y = x \u2228 min x y = y := by\n  cases Nat.le_total x y with\n  | inl h => exact Or.inl (Nat.min_eq_left h)\n  | inr h => exact Or.inr (Refund.min_right h)\n\ntheorem proof : Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct := by\n  intro a _\n  show Refund.Rule a (min (min a.requested a.deposited) a.balance)\n  refine \u27e8?_, ?_, ?_, ?_\u27e9\n  \u00b7 exact Nat.le_trans (Refund.min_le_first (min a.requested a.deposited) a.balance)\n      (Refund.min_le_first a.requested a.deposited)\n  \u00b7 exact Nat.le_trans (Refund.min_le_first (min a.requested a.deposited) a.balance)\n      (Refund.min_le_second a.requested a.deposited)\n  \u00b7 exact Refund.min_le_second (min a.requested a.deposited) a.balance\n  \u00b7 cases Nat.le_total (min a.requested a.deposited) a.balance with\n    | inl h =>\n      rw [Nat.min_eq_left h]\n      cases min_pick a.requested a.deposited with\n      | inl h2 => exact Or.inl h2\n      | inr h2 => exact Or.inr (Or.inl h2)\n    | inr h =>\n      rw [Refund.min_right h]\n      exact Or.inr (Or.inr rfl)\n\nend Solution\n",
+      "proof": "accepted",
+      "proof_bytes": 14189,
+      "proof_sha256": "beb411def46e643693f2b32a1321acfea83a05f239b25a771c2d1b1a25e7fc4b",
+      "base_sha256": "9463928eb2d59fdb321e6e35f1ec7a33ad3d73e9b5389b78ed2ce21fa840e44e",
+      "axioms": [],
+      "axioms_line": "'Solution.proof' does not depend on any axioms"
+    }
+  ],
+  "accepted": true,
+  "expression": "requested_refund.min(*deposited).min(balance_left)",
+  "source_sha256": "63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f",
+  "claim": "Refund.C_63721259eb182e5e0c4c97d1d21c898759b05f3d91819379c6251573ce4c426f.Correct",
+  "proof_bytes": 14189,
+  "proof_sha256": "0e1229ebb3187dbb55f57a97e3d363717b755c8d597c02872d9741605a119c36",
+  "base_sha256": "19df256217ece38d8d52bc4918f7cfecfaf44c826b67443676e7051720c7e80b",
+  "axioms": [],
+  "axioms_line": "'Solution.proof' does not depend on any axioms",
+  "job": {
+    "command": "python3 cases/intents-refund/propose.py --candidate evidence/nearai-refund/deepseek-v4.1-flash-noaxioms/candidate.rs --proof evidence/nearai-refund/deepseek-v4.1-flash-noaxioms/Solution.lean --side proof --out run-output/nearai-refund/deepseek-v4.1-flash-noaxioms",
+    "started": "2026-11-13T18:31:13Z",
+    "wall_seconds": 173.0,
+    "export_is_the_round's": false,
+    "code_sha256": {
+      "kernel": "6dd4f5f42d3a7b49e70c2934420eee541e026fe14402e84e49625b389a3369f2",
+      "board": "bd4c84594c4ce8732bfe5f3f65e5181d0092b8af6b8f2080b2b0631bf6005d09",
+      "gate": "259301010dd6ef744c66785cd77cceecdaadfc764446ad179036ccc9d348c06d"
+    }
+  }
+}

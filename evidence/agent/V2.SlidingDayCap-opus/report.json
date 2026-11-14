@@ -1,0 +1,117 @@
+{
+  "claim": "Wallet.Claim.V2.SlidingDayCap",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-09T08:56:38Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "claude-code",
+    "exit": 0,
+    "seconds": 352.3,
+    "final": "DONE \u2014 `Solution.proof` proves `Wallet.Claim.V2.SlidingDayCap`. It compiles with no errors and no `sorry`, and uses only the axioms propext, Classical.choice and Quot.sound. `./measure.sh` reports a delta of 387,050 bytes, under the 400,000 limit (OK).",
+    "cost_usd": 1.4981966000000004,
+    "turns": 51,
+    "permission_denials": 9,
+    "stderr_tail": "",
+    "model": "opus"
+  },
+  "check": {
+    "compiles": true,
+    "type_is_claim": true,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "'Solution.proof' depends on axioms: [propext, Classical.choice, Quot.sound]\nSolution.proof : Wallet.Claim.V2.SlidingDayCap\n"
+  },
+  "export": {
+    "exported": true,
+    "shelf_head_matches": true,
+    "shelf_sha256": "19cfd9dba9855ee894c7e00aebf94d816ea4af9c99619a2b6005709d5e9acd27",
+    "delta_bytes": 387050,
+    "delta_sha256": "b2212883db08dc99e7b8509ca87c55f01654b364cdbbf2d487b6ab302f0b278f",
+    "decls": 93,
+    "heaviest": [
+      {
+        "name": "Solution.step_spec",
+        "kind": "thm",
+        "bytes": 65017
+      },
+      {
+        "name": "Solution.lemA",
+        "kind": "thm",
+        "bytes": 63252
+      },
+      {
+        "name": "Solution.K",
+        "kind": "thm",
+        "bytes": 31410
+      },
+      {
+        "name": "Solution.roll_start",
+        "kind": "thm",
+        "bytes": 15119
+      },
+      {
+        "name": "Classical.em",
+        "kind": "thm",
+        "bytes": 13889
+      },
+      {
+        "name": "Solution.roll_spent",
+        "kind": "thm",
+        "bytes": 11748
+      },
+      {
+        "name": "Solution.N2",
+        "kind": "thm",
+        "bytes": 9819
+      },
+      {
+        "name": "Solution.deny_sum",
+        "kind": "thm",
+        "bytes": 9324
+      },
+      {
+        "name": "Solution.sub_toNat",
+        "kind": "thm",
+        "bytes": 7601
+      },
+      {
+        "name": "instDecidableIff.match_1",
+        "kind": "def",
+        "bytes": 7564
+      },
+      {
+        "name": "Solution.run_cons",
+        "kind": "thm",
+        "bytes": 7146
+      },
+      {
+        "name": "_private.Init.Classical.0.Classical.em.match_1_1",
+        "kind": "def",
+        "bytes": 7079
+      },
+      {
+        "name": "Solution.and_l",
+        "kind": "thm",
+        "bytes": 6382
+      },
+      {
+        "name": "funext",
+        "kind": "thm",
+        "bytes": 4777
+      },
+      {
+        "name": "Solution.N3",
+        "kind": "thm",
+        "bytes": 4647
+      }
+    ],
+    "within_target": true,
+    "within_limit": true
+  },
+  "ready_to_claim": true
+}

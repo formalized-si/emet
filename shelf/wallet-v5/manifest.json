@@ -1,0 +1,25 @@
+{
+ "base_sha256": "d816b410488e0041b5ee66379e428d380882908680ee37aa7e3c8eab4fe55316",
+ "base_bytes": 1093131,
+ "base_decls": 623,
+ "codec": "lz4",
+ "chunks": [
+  "chunks/chunk-0000.bin",
+  "chunks/chunk-0001.bin",
+  "chunks/chunk-0002.bin"
+ ],
+ "stored_bytes": 310293,
+ "exported_from": {
+  "module": "Policy.Bounties",
+  "files_sha256": {
+   "lean/Policy/Core.lean": "d008b9eae4e06eb9ca69af9465854844e72e5d5c82c5cfe20a8d7dcbeda5c9fd",
+   "lean/Policy/CoreV2.lean": "994d32daaafdcd9e7afcb594523c041d0e147b2e404f283f66ecb1e9127387df",
+   "lean/Policy/Spec.lean": "e0c9151ace69cfd158c1a81c1fe17b619b50059cfa5875bffebdf28f574ee90b",
+   "lean/Policy/Bounties.lean": "8fda2580010e1788d461dced4459d968e46ed812348f76c7c2f61c8709d05cf6",
+   "lean/lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+  },
+  "lean": "4.35.0",
+  "lean4export_commit": "5a9a355dc6c5fd82b69058d433e2ae2e8dfbf8fe",
+  "roots": "shelf/wallet-v5/base_roots.txt"
+ }
+}

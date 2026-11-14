@@ -1,0 +1,87 @@
+{
+ "schema": "emet-model-claim/1",
+ "network": "testnet",
+ "rpc": "https://test.rpc.fastnear.com",
+ "explorer": "https://testnet.nearblocks.io",
+ "board": "board.v2.emet.testnet",
+ "kernel": "kernel.v2.emet.testnet",
+ "bounty": "3",
+ "expression": "requested_refund.min(*deposited)",
+ "claim": "Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Refute",
+ "side": "refutation",
+ "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+ "served_by": "NEAR AI Cloud",
+ "attempt": "deposit_only-deepseek-v4.1-flash",
+ "counterexample": {
+  "requested": 2,
+  "deposited": 3,
+  "balance": 1,
+  "the_patch_returns": 2,
+  "breaks": "more than the balance left on the receiver"
+ },
+ "model_run": {
+  "started": "2026-11-12T12:06:35Z",
+  "seconds": 803.2,
+  "requests": 29,
+  "solution_writes": 12,
+  "lean_runs": 10,
+  "lean_runs_with_an_error": 6,
+  "prompt_tokens": 181892,
+  "completion_tokens": 25192,
+  "usd_at_list_price": 0.0848,
+  "axioms": []
+ },
+ "proof": {
+  "file": "evidence/nearai-testnet/deposit_only-deepseek-v4.1-flash/delta.ndjson",
+  "bytes": 5095,
+  "sha256": "d72c631c18d0bdc57d7915d01bd3580dd851d07e6693ed9274b655f01c5274b7",
+  "lean": "evidence/nearai-testnet/deposit_only-deepseek-v4.1-flash/Solution.lean"
+ },
+ "account": "courier.emet.testnet",
+ "who_signed": "agent/courier.cjs with the key of courier.emet.testnet, an account this project created and funded. The model wrote Solution.lean and holds no key.",
+ "commit": {
+  "hash": "777RRUW4Y1Ds673K4MAiNKYpm8BpxCp7TofXk45NokgZ",
+  "explorer": "https://testnet.nearblocks.io/txns/777RRUW4Y1Ds673K4MAiNKYpm8BpxCp7TofXk45NokgZ",
+  "signer": "courier.emet.testnet",
+  "receiver": "board.v2.emet.testnet",
+  "actions": [
+   "FunctionCall"
+  ],
+  "ok": true,
+  "gas_burnt_tgas": 2.863,
+  "tokens_burnt_near": 0.000264
+ },
+ "reveal": {
+  "hash": "3cpPvWLdChwgP6yE95eMn63Lm6yknzeLwXXSpVGFqawy",
+  "explorer": "https://testnet.nearblocks.io/txns/3cpPvWLdChwgP6yE95eMn63Lm6yknzeLwXXSpVGFqawy",
+  "signer": "courier.emet.testnet",
+  "receiver": "board.v2.emet.testnet",
+  "actions": [
+   "FunctionCall"
+  ],
+  "ok": true,
+  "gas_burnt_tgas": 133.944,
+  "tokens_burnt_near": 0.013283,
+  "kernel_tgas": 122.267
+ },
+ "received_near": 0.31,
+ "reward_near": 0.3,
+ "bond_returned_near": 0.01,
+ "bounty_after": {
+  "phase": "Paid",
+  "winner": "courier.emet.testnet",
+  "certificate": {
+   "claimer": "courier.emet.testnet",
+   "side": "refutation",
+   "proved": "Refund.C_31fecb00c80d90f28032c8918c20cbc10ce18781f1463ef9633e028af599e149.Refute",
+   "proof_theorem": "Solution.proof",
+   "statement_hash": "68815e22743f78d1eeb0c92b79c053c22bc82a795be22a4eeb191c8346fc4e96",
+   "base_hash": "72efd27b1481acad3d46d2960b9c9397a9d279ca29bf4e78ba7595e102ff44cf",
+   "axioms": [],
+   "decls_checked": 2,
+   "delta_sha256": "d72c631c18d0bdc57d7915d01bd3580dd851d07e6693ed9274b655f01c5274b7",
+   "block_height": "277544138",
+   "timestamp": "1794592932831337082"
+  }
+ }
+}

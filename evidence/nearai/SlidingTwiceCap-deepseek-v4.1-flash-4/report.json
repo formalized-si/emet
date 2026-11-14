@@ -1,0 +1,40 @@
+{
+  "claim": "Wallet.Claim.SlidingTwiceCap",
+  "shelf": "shelf/wallet-v5",
+  "started": "2026-11-11T20:14:25Z",
+  "workspace": "a fresh temporary directory outside the repository (deleted afterwards)",
+  "agent": {
+    "backend": "near-ai-cloud",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "model_owner": "nearai",
+    "seconds": 4534.9,
+    "turns": 20,
+    "tool_calls": 16,
+    "solution_writes": 4,
+    "repair_rounds": 3,
+    "lean_runs": 3,
+    "lean_failures": 1,
+    "lost_responses": 1,
+    "prompt_tokens": 141778,
+    "completion_tokens": 72939,
+    "usd_per_token": {
+      "prompt": 3e-07,
+      "completion": 1.2e-06
+    },
+    "final": "",
+    "cost_usd": 0.1423,
+    "signed_responses": 19,
+    "responses": 19,
+    "attestation_http": 200,
+    "permission_denials": 0
+  },
+  "check": {
+    "compiles": false,
+    "type_is_claim": false,
+    "axioms": [],
+    "axioms_allowed": true,
+    "mentions_sorry": false,
+    "log": "Check.lean:2:14: error(lean.unknownIdentifier): Unknown constant `Solution.proof`\nCheck.lean:3:8: error(lean.unknownIdentifier): Unknown identifier `Solution.proof`\n"
+  },
+  "ready_to_claim": false
+}

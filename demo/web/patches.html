@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Emet · no proof, no upgrade</title>
+<meta name="description" content="A Lean proof checker runs inside a NEAR contract. A second contract holds the only right to upgrade a third, and uses it only after the checker accepts a proof for the patch.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Emet · no proof, no upgrade">
+<meta property="og:description" content="A Lean proof checker inside a NEAR contract decides whether a contract can upgrade. Live on NEAR testnet: ask the contract from your browser, with no wallet.">
+<meta property="og:url" content="https://formalized-si.github.io/emet/">
+<meta property="og:image" content="https://formalized-si.github.io/emet/docs/assets/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1a1c18">
+<link rel="icon" href="assets/formalized-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="patches.css">
+</head>
+<body>
+<a class="skip" href="#try">Skip to the checker</a>
+<div class="marks" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="tc"></i><i class="bc"></i><i class="ml"></i><i class="mr"></i></div>
+<main>
+<div class="stage">
+<div class="grain" aria-hidden="true"></div>
+<header>
+  <div class="brand-line"><a class="formalized" href="https://formalized.si/" aria-label="Formalized"><img src="assets/formalized-white.svg" alt="Formalized" width="146" height="26"></a><a class="brand" href="patches.html">Emet<span>אמת</span></a></div>
+  <nav aria-label="Main"><a href="#case">The case</a><a href="#upgrade">The upgrade</a><a href="#agent" id="agent-link" hidden>The agent</a><a href="../../docs/assets/demo.mp4">Video</a><a class="nav-cta" href="../../README.md" id="source-link"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>Source</a></nav>
+</header>
+
+<div class="stage-grid">
+<section class="patch-hero">
+  <p class="eyebrow" id="network-line">PROOF-GATED CONTRACT UPGRADES · NEAR</p>
+  <h1>No proof,<br><span>no upgrade.</span></h1>
+  <p class="lead">AI agents will write contract patches. Emet lets a contract take one only with a machine-checked proof. A Lean proof checker runs inside a NEAR contract. A second contract holds the only right to upgrade a third, and uses it only after the checker accepts a proof for the patch. Anyone can supply the proof, an AI agent included. Nobody can upgrade without it, us included.</p>
+  <div class="actions"><a class="button" href="#try-title">Ask the contract <svg class="ui-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11"/></svg></a><a class="button ghost" href="../../docs/assets/demo.mp4">Watch the video</a><a class="button ghost" href="#case">Read the case</a><span class="license">MIT · NEAR HACKATHON 2026</span></div>
+</section>
+
+<section class="try-card" id="try" aria-labelledby="try-title">
+  <p class="eyebrow">ASK THE CONTRACT</p>
+  <h2 id="try-title">Pick a patch for one line of NEAR Intents.</h2>
+  <p>The line computes how much of a deposit goes back when the receiver asks for a refund. The proof checker gets a proof that the patch meets the <a href="#rule-title">refund rule</a>, or a counterexample.</p>
+  <label for="candidate">Refund expression</label>
+  <select id="candidate">
+    <option value="original">The deployed code of 1 October</option>
+    <option value="deposit_only">Cap by the deposit only</option>
+    <option value="ignore_request">Cap by the balance only</option>
+    <option value="zero_refund">Always refund zero</option>
+    <option value="repair" selected>The NEAR Intents team's own fix</option>
+  </select>
+  <pre id="expression" aria-label="Candidate source"></pre>
+  <label class="damage" id="damage-row" hidden><input type="checkbox" id="damage"> Damage the proof before the page sends it: its last line then points at another term</label>
+  <button id="check-patch" disabled>Check this patch on NEAR</button>
+  <p id="patch-status" role="status" aria-live="polite">The page looks for a proof checker…</p>
+  <div id="patch-result" hidden>
+    <h3 id="decision"></h3>
+    <p id="explanation"></p>
+    <div id="counterexample"></div>
+    <details><summary>The answer of the contract</summary><pre id="proof-response"></pre></details>
+  </div>
+  <p class="muted small" id="check-note"></p>
+  <p class="mono hash" id="source-hash"></p>
+  <dl class="live-strip" id="live-strip" hidden></dl>
+</section>
+</div>
+</div>
+
+<section class="pj-facts" aria-label="Key numbers">
+  <div class="facts">
+    <div class="fact"><b>52</b><span>transactions on NEAR testnet</span></div>
+    <div class="fact"><b>137</b><span>TGas for the check of the fix</span></div>
+    <div class="fact"><b>5</b><span>contracts with no access key</span></div>
+    <div class="fact"><b>98</b><span>invalid proofs sent, none admitted</span></div>
+    <div class="fact"><b>2</b><span>theorems of NEAR Proof Arena accepted</span></div>
+  </div>
+</section>
+
+<section class="patch-card" id="case" aria-labelledby="failure-title">
+  <p class="eyebrow">01 · THE CASE</p>
+  <h2 id="failure-title">Eighty credits with nothing behind them.</h2>
+  <div id="failure" hidden>
+    <div class="patch-comparison">
+      <div><span class="muted">Sent through the token contract</span><strong>80 × 1</strong></div>
+      <div><span class="muted">Left without backing, old code</span><strong class="bad" id="old-gap"></strong></div>
+      <div><span class="muted">After the upgrade</span><strong class="good" id="new-gap"></strong></div>
+    </div>
+  </div>
+  <p>The incident of 29 September to 1 October 2026 was an exploit of NEAR Intents through its deposit notifications. Its team found the cause, recovered the funds, fixed the contract and published a post-mortem (<a href="https://thedefiant.io/news/security/near-intents-postmortem-links-3-8-million-exploit-to-deposit-bug" target="_blank" rel="noopener">coverage</a>). <strong>Emet found none of this.</strong> It uses that code as a test subject for a gate.</p>
+  <p>To reproduce the failure, a NEAR Intents engineer pushed a temporary commit to the branch of pull request <a href="https://github.com/near/intents/pull/362" target="_blank" rel="noopener">#362</a>. The commit is <a href="https://github.com/near/intents/commit/35044fd1795b0de9d1ac269c6aa28a0d6a7efdfa" target="_blank" rel="noopener">35044fd</a>, “TEMP change that reflects deployed state”. It puts the deployed refund expression, <code>balance_left.min(requested_refund)</code>, back on top of the main branch. With that expression the regression test of the pull request fails as production did. The team reverted the commit 26 minutes later. The main branch capped the refund from 23 March (<a href="https://github.com/near/intents/pull/240" target="_blank" rel="noopener">#240</a>).</p>
+  <p>The old and the fixed contract here are builds of those two commits, unmodified: the temporary one, and its parent. A batch in the shape of that regression test has eighty transfers of 1 that each ask for 10<sup>35</sup> back. On the old code the refund event of that batch outgrows the 16,384-byte log limit, and the callback fails. The token contract returns the tokens to the sender, and the credit made on deposit stays.</p>
+  <p id="backing-fact" class="muted"></p>
+  <p class="muted small">The team's response went further than this one line. The same day it limited a batch to ten tokens (<a href="https://github.com/near/intents/pull/364" target="_blank" rel="noopener">#364</a>). On 7 October it removed deposit notifications (<a href="https://github.com/near/intents/pull/374" target="_blank" rel="noopener">#374</a>). We model neither change here.</p>
+</section>
+
+<section class="patch-card" id="rule-card" aria-labelledby="rule-title">
+  <p class="eyebrow">02 · THE RULE</p>
+  <h2 id="rule-title">The comment, written as a theorem.</h2>
+  <p>The contract sizes the refund event when a deposit arrives. It assumes that a refund is never larger than the deposit. In November 2025 one pull request (<a href="https://github.com/near/intents/pull/150" target="_blank" rel="noopener">#150</a>) added a comment above the expression: <code>refunds are capped by deposited amounts</code>. It also added an expression that did not cap them (<a href="https://github.com/near/intents/blob/defuse/v0.4.2/defuse/src/contract/tokens/mod.rs#L190-L193" target="_blank" rel="noopener">release v0.4.2</a> shows both lines). A compiler cannot refuse a comment. Here that comment is the second line of a Lean statement, and the proof checker refuses the old expression with a counterexample:</p>
+  <pre id="rule" aria-label="The refund rule, as written in Lean">def Rule (a : Args) (r : Nat) : Prop :=
+  r ≤ a.requested ∧
+  r ≤ a.deposited ∧
+  r ≤ a.balance ∧
+  (r = a.requested ∨ r = a.deposited ∨ r = a.balance)</pre>
+  <p class="muted" id="rule-note">It holds for every request, deposit and balance that fits in a <code>u128</code>. The four lines leave one answer and no other: the smallest of the three amounts.</p>
+  <h3>The property that failed</h3>
+  <p>The same environment holds a second theorem, about the event itself. Take any patch that meets the rule and any batch of tokens. The two lists of the refund event are then not longer than those of the deposit event, which the contract checked on deposit. The old expression has no such bound.</p>
+  <pre aria-label="The log-budget theorem">theorem refund_event_fits (e : Expr) (h : meetsRule e) (xs : List Item)
+    (hx : ∀ x ∈ xs, InRange x.inputs) : burnBytes e xs ≤ mintBytes xs</pre>
+  <p class="muted">The theorem is about a model of two JSON lists, not about the contract. The model gives the real length of every recorded event to the byte. The refund event of the batch that a local node refused has 17,353 bytes. For the same batch on testnet it has 17,519 bytes. <a href="../../cases/intents-refund/LOG-BUDGET.md">The content and the limits of the theorem →</a></p>
+</section>
+
+<section class="patch-card" id="upgrade" aria-labelledby="upgrade-title">
+  <p class="eyebrow">03 · THE GATE</p>
+  <h2 id="upgrade-title">The same account, before and after.</h2>
+  <div id="upgrade-evidence"><p>The page loads the upgrade record…</p></div>
+</section>
+
+<section class="patch-card" id="agent" aria-labelledby="agent-title" hidden>
+  <p class="eyebrow">04 · THE AGENT</p>
+  <h2 id="agent-title"></h2>
+  <div id="agent-evidence"></div>
+</section>
+
+<section class="patch-card" id="arena" aria-labelledby="arena-title" hidden>
+  <p class="eyebrow">05 · A LARGER STATEMENT</p>
+  <h2 id="arena-title">Two theorems of NEAR Proof Arena, checked on testnet.</h2>
+  <div id="arena-evidence"></div>
+</section>
+
+<section class="patch-card limits-card" aria-labelledby="limits-title">
+  <p class="eyebrow">WHAT THIS IS NOT</p>
+  <div class="callout">
+  <h2 id="limits-title">A proof about one expression.</h2>
+  <ul>
+    <li>The proof is about a Lean expression that a small extractor reads from one line of Rust. It is not a proof about the binary, the callback, or the NEAR Intents contract.</li>
+    <li>The gate's deployer registers the binaries that the gate can install, and pairs each with its source. The chain checks the proof and does not check that pairing. The binaries here rebuild to the same bytes on macOS and Linux, so anyone can check the pairing.</li>
+    <li>One gate installs one upgrade. The gate cannot install a patch that nobody registered, whoever proves it.</li>
+    <li>With the comment as its rule, a gate refuses that code at the first attempt to install it. A gate does not write the rule. It also does not deploy the March fix sooner. A gate is not the emergency path: that path is the guardian's pause, shown above.</li>
+    <li>We trust or test the compiler, the extractor, the proof checker and the gate's own code. We did not prove them.</li>
+  </ul>
+  <a class="button" href="../../docs/TECHNICAL.md">Technical reference <svg class="ui-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11"/></svg></a>
+  </div>
+</section>
+
+<footer><span>Emet · NEAR HACKATHON 2026</span><a href="wallet.html">Wallet policy example</a><a href="../../cases/intents-refund/candidates.json">Source-bound candidates</a><a href="../../docs/TECHNICAL.md">Technical reference</a></footer>
+</main>
+<script type="module" src="patches.js"></script>
+</body>
+</html>
