@@ -9,6 +9,8 @@ This file lists the changes by day. We wrote the project for NEAR HACKATHON 2026
 - The README says when we wrote the earlier prototype that the proof checker contract came from: after the
   hackathon's announcement of 19 October 2026.
 - The README gave 96 as the number of invalid proofs in one place. The number is 98.
+- The page is at https://emet.formalized.si/. The earlier address, formalized-si.github.io/emet, redirects to it:
+  a browser that knows formalized.si showed a warning about a look-alike address there.
 
 ## 13 November 2026
 

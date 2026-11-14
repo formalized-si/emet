@@ -11,7 +11,7 @@
 [![Lean 4.35.0](https://img.shields.io/badge/Lean-4.35.0-3b6ea5?style=flat-square)](cases/intents-refund/RefundCase.lean)
 [![MIT license](https://img.shields.io/badge/license-MIT-f4c430?style=flat-square)](LICENSE)
 
-**[Open the page](https://formalized-si.github.io/emet/) · [Watch the demonstration](https://formalized-si.github.io/emet/docs/assets/demo.mp4)**
+**[Open the page](https://emet.formalized.si/) · [Watch the demonstration](https://emet.formalized.si/docs/assets/demo.mp4)**
 
 [Try it](#try-it) · [On testnet](#what-happened-on-testnet) · [The rule](#the-rule) · [How it works](#how-it-works) · [Why NEAR](#why-near) · [FAQ](#faq) · [Documentation](#documentation)
 
@@ -37,7 +37,7 @@ Here the comment is a Lean statement. The proof checker refutes the code that ca
 
 | Do | See |
 |---|---|
-| Open [the page](https://formalized-si.github.io/emet/). Pick "The deployed code of 1 October" and press **Check this patch on NEAR**. | `Refuted`, with the inputs: the receiver asks for 100 back on a deposit of 1, and the patch returns 100. Your browser sent a counterexample to the proof checker contract, [`kernel.v2.emet.testnet`](https://testnet.nearblocks.io/address/kernel.v2.emet.testnet), as a read-only call. You need no wallet and no key. |
+| Open [the page](https://emet.formalized.si/). Pick "The deployed code of 1 October" and press **Check this patch on NEAR**. | `Refuted`, with the inputs: the receiver asks for 100 back on a deposit of 1, and the patch returns 100. Your browser sent a counterexample to the proof checker contract, [`kernel.v2.emet.testnet`](https://testnet.nearblocks.io/address/kernel.v2.emet.testnet), as a read-only call. You need no wallet and no key. |
 | Pick "The NEAR Intents team's own fix" and press again. | `Proved`, and the block at which the contract answered. |
 | `./verify.sh` (Python 3 and nothing else, about a minute) | The offline checks of every recorded run, then 36 `PASS` lines that the script reads from testnet now, and `all checks passed: 35 read-only RPC calls`. The lines show four things. The binaries on the chain are the binaries in `artifacts/`, which `./verify.sh --lean` and `--refund` rebuild from the sources here. Five contracts have no access key. The gate installed the fix on a proof certificate. The checker accepts five real proofs and refuses four wrong ones. |
 | `./verify.sh --rehearse` (Node 20+, about 4 minutes) | The whole story as real transactions on a fresh local node. The run ends with `18/18 checks passed.` |

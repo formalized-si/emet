@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/formalized-si/emet.git"
   },
-  "homepage": "https://formalized-si.github.io/emet/",
+  "homepage": "https://emet.formalized.si/",
   "engines": {
     "node": ">=20.15.0"
   },
