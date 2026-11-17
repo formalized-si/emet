@@ -2,6 +2,8 @@
 
 # Emet
 
+[Research page: results, evidence and limitations](https://formalized.si/projects/emet/)
+
 ### No proof, no upgrade.
 
 **A Lean proof checker inside a NEAR contract decides whether a contract can upgrade.**
